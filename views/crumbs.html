@@ -1,0 +1,42 @@
+<div>
+    {% if s.decision %}
+        <a href="/">Decision: {{ s.decision }}</a>
+    {% else %}
+        Decision
+    {% endif %}
+</div>
+<div>
+    {% if s.critical_concepts %}
+        <a href="/critical_concepts">Critical Concepts: {{ s.critical_concepts }}</a>
+    {% else %}
+        Critical Concepts
+    {% endif %}
+</div>
+<div>
+    {% if s.edges or s.pitfalls %}
+        <a href="/edges_pitfalls">Edges: {{ s.edges|join:", " }} / Pitfalls: {{ s.pitfalls|join:", " }} </a>
+    {% else %}
+        Edges / Pitfalls
+    {% endif %}
+</div>
+<div>
+    {% if s.cognitive_biases %}
+        <a href="/cognitive_biases">Cognitive Biases: {% for item in s.cognitive_biases|slice:":3" %}{{ item.bias }}, {% endfor %}</a>
+    {% else %}
+        Cognitive Biases
+    {% endif %}
+</div>
+<div>
+    {% if s.cheetah_sheets %}
+        <a href="/cheetah_sheets">Cheetah Sheets: {% for item in s.cheetah_sheets|slice:":3" %}{{ item.0 }}, {% endfor %}</a>
+    {% else %}
+        Cheetah Sheets
+    {% endif %}
+</div>
+<div>
+    {% if s.summary %}
+        <a href="/summary">Summary</a>
+    {% else %}
+        Summary
+    {% endif %}
+</div>

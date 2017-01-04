@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}{% block h1 %}Critical Concepts{% endblock %}{% endblock %}
+{% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
+{% block content %}
+    <form action="{{ request.path }}" method="post" style="margin: 50px;">
+        {% csrf_token %}
+
+    <div>
+        What constitutes a good outcome to you?  Why?
+        <br/>
+        <textarea name="good_outcome" cols="80" rows="3" placeholder="">{{ request.session.good_outcome }}</textarea>
+    </div>
+
+    <div>
+        What issues (e.g., tradeoffs, key considerations, unknowns) do you need to resolve to get that outcome?
+        <br/>
+        <textarea name="issues" cols="80" rows="3" placeholder="">{{ request.session.issues }}</textarea>
+    </div>
+
+    <div>
+        How will you know the decision has succeeded for you?
+        <br/>
+        <textarea name="how_to_know" cols="80" rows="3" placeholder="">{{ request.session.how_to_know }}</textarea>
+    </div>
+
+    <div>
+        What matters less to you or not at all? (Like a poker player you don’t need the best hand. You just need a better hand than the other people playing.)
+        <br/>
+        <textarea name="matters_less" cols="80" rows="3" placeholder="">{{ request.session.matters_less }}</textarea>
+    </div>
+
+    <div>
+        Using the above, what are your top 3 Critical Concepts?
+        <ol>
+            <li><input type="text" name="critical_concept_1" value="{{ request.session.critical_concept_1 }}" size="75" /></li>
+            <li><input type="text" name="critical_concept_2" value="{{ request.session.critical_concept_2 }}" size="75" /></li>
+            <li><input type="text" name="critical_concept_3" value="{{ request.session.critical_concept_3 }}" size="75" /></li>
+        </ol>
+    </div>
+
+    <div>
+        <input type="submit" class="btn btn-large" style="margin-top: 50px;" name="submit" value="Continue" />
+    </div>
+    </form>
+{% endblock %}

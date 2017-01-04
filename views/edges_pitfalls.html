@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Edges / Pitfalls{% endblock %}{% endblock %}
+{% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
+{% block content %}
+    <form action="{{ request.path }}" method="post">
+        {% csrf_token %}
+        {% for category, details in attributes %}
+            <h3>{{ category }}</h3>
+            <div>{{ details.description }}</div>
+            {% for attribute in details.attributes %}
+                <div style="margin-top: 30px;">
+                    <input id="{{ attribute }}" class="slider" name="{{ attribute }}" type="text" data-slider-id="{{ attribute }}" data-slider-min="-5" data-slider-max="5" data-slider-step="1"
+                        data-slider-value="{{ request.session.attributes|get_entry:attribute }}" />
+                    {{ attribute }}<span>: <input type="text" name="{{ attribute }}_explain" size="50" value="{{ request.session.explains|get_explain:attribute }}" placeholder="Explain" /></span>
+                </div>
+                <div>
+                Explain:
+                </div>
+            {% endfor %}
+        {% endfor %}
+        <div>
+            <input type="submit" class="btn btn-large" style="margin-top: 50px;" name="submit" value="Continue" />
+        </div>
+    </form>
+
+    <script type="text/javascript">
+        $('.slider').slider({
+            formatter: function(value) {
+                if (value > 0) {
+                    return 'Edge: ' + value;
+                }
+                if (value < 0) {
+                    return 'Pitfall: ' + (0 - value);
+                }
+                return 'Neutral';
+            }
+        });
+    </script>
+{% endblock %}

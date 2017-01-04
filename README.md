@@ -1,2 +1,2 @@
 # area
-Area Method
+The Area Method Application for Making Important Decisions

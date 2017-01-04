@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}{% block h1 %}Cheetah Sheets{% endblock %}{% endblock %}
+{% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
+{% block content %}
+    <div>
+        {% for cheetah, weight in attribute_cheetahs|slice:":3" %}
+            <h4>{{ cheetah }} <span style="font-size: small; color: lightgray;">{{ weight }}</span></h4>
+            <pre>{% with 'cheetah/'|add:cheetah|add:'.html' as path %}{% include path %}{% endwith %}</pre>
+        {% endfor %}
+    <a href="/summary" class="btn btn-lg" role="button">Continue to Summary</a>
+    </div>
+{% endblock %}

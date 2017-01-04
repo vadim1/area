@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}{% block h1 %}Cognitive Biases{% endblock %}{% endblock %}
+{% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
+{% block content %}
+    <div>
+    {% for bias in biases|slice:":3" %}
+        <h4>{{ bias.bias }} <span style="font-size: small; color: lightgray;">{{ bias.weight }}</span></h4>
+        <div>{{ bias.description }}</div>
+    {% endfor %}
+    </div>
+    <div>
+    <h2>TODO - Login / Sign Up to see Cheetah Sheets and Template</h2>
+    <a href="/cheetah_sheets" class="btn btn-lg" role="button">Continue to Cheetah Sheets</a>
+    </div>
+{% endblock %}

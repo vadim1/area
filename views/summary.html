@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %}{% block h1 %}Summary{% endblock %}{% endblock %}
+{% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
+{% block content %}
+    <div class="container">
+        <table class="table">
+            <tr>
+                <th>Decision</th>
+                <td>{{ request.session.decision }}</td>
+            </tr>
+            <tr>
+                <th>Personal / Professional</th>
+                <td>{{ personal_professional }}</td>
+            </tr>
+            <tr>
+                <th>Good Outcome</th>
+                <td>{{ request.session.good_outcome }}</td>
+            </tr>
+            <tr>
+                <th>Issues to Resolve</th>
+                <td>{{ request.session.issues }}</td>
+            </tr>
+            <tr>
+                <th>Success Factors</th>
+                <td>{{ request.session.how_to_know }}</td>
+            </tr>
+            <tr>
+                <th>Matters Less</th>
+                <td>{{ request.session.matters_less }}</td>
+            </tr>
+            <tr>
+                <th>Critical Concepts</th>
+                <td>
+                    <div>{{ request.session.critical_concept_1 }}</div>
+                    <div>{{ request.session.critical_concept_2 }}</div>
+                    <div>{{ request.session.critical_concept_3 }}</div>
+                </td>
+            </tr>
+            <tr>
+                <th>Edges</th>
+                <td>
+                    {% for edge in edges %}
+                        <div>{{ edge }}</div>
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>Pitfalls</th>
+                <td>
+                    {% for pitfall in pitfalls %}
+                        <div>{{ pitfall }}</div>
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>Cognitive Biases</th>
+                <td>
+                    {% for bias in request.session.cognitive_biases|slice:":3" %}
+                        <h4>{{ bias.bias }} <span style="font-size: small; color: lightgray;">{{ bias.weight }}</span></h4>
+                        <div>{{ bias.description }}</div>
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>Cheetah Sheets</th>
+                <td>
+                    {% for cheetah, weight in request.session.cheetah_sheets|slice:":3" %}
+                        <h4>{{ cheetah }} <span style="font-size: small; color: lightgray;">{{ weight }}</span></h4>
+                        <pre>{% with 'cheetah/'|add:cheetah|add:'.html' as path %}{% include path %}{% endwith %}</pre>
+                    {% endfor %}
+                </td>
+            </tr>
+        </table>
+        <a href="/restart" class="btn btn-lg" role="button" onclick="return(confirm('Are you sure you want to discard your work?'))">New Decision</a>
+    </div>
+{% endblock %}
