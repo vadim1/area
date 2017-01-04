@@ -120,7 +120,9 @@ def summary(request):
     attributes_sorted = request.session['attributes_sorted']
     edges = []
     pitfalls = []
-    explains = request.session['explains']
+    explains = {}
+    if 'explains' in request.session:
+        explains = request.session['explains']
     for attribute, weight in attributes_sorted:
         explain = ''
         if attribute+'_explain' in explains:
