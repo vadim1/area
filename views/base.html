@@ -67,7 +67,10 @@
         <h1>{% block h1 %}{% endblock %}</h1>
         {% block post_title %}{% endblock %}
     </div>
+    <form action="{{ request.path }}" method="post" style="margin: 50px;">
+        {% csrf_token %}
     {% block content %}
+    </form>
     {% endblock %}
 </div>
 <footer class="footer">

@@ -9,6 +9,6 @@
             <h4>{{ cheetah }} <span style="font-size: small; color: lightgray;">{{ weight }}</span></h4>
             <pre>{% with 'cheetah/'|add:cheetah|add:'.html' as path %}{% include path %}{% endwith %}</pre>
         {% endfor %}
-    <a href="/summary" class="btn btn-lg" role="button">Continue to Summary</a>
+    {% include 'buttons.html' %}
     </div>
 {% endblock %}

@@ -2,8 +2,6 @@
 {% block title %}{% block h1 %}Critical Concepts{% endblock %}{% endblock %}
 {% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
 {% block content %}
-    <form action="{{ request.path }}" method="post" style="margin: 50px;">
-        {% csrf_token %}
     <div class="q">Do we vary the questions here based on what said on the Decisions page?  How?</div>
 
     <div class="q">Can we do this as choices?  What choices if so?</div>
@@ -65,8 +63,5 @@
         </ol>
     </div>
 
-    <div>
-        <input type="submit" class="btn btn-large" style="margin-top: 50px;" name="submit" value="Continue" />
-    </div>
-    </form>
+    {% include 'buttons.html' %}
 {% endblock %}

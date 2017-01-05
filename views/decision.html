@@ -2,8 +2,6 @@
 {% block title %}{% block h1 %}Decision{% endblock %}{% endblock %}
 {% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
 {% block content %}
-    <form action="{{ request.path }}" method="post" style="margin: 50px;">
-        {% csrf_token %}
     <h1>What's your decision?</h1>
     <div class="q">Good examples / guidance?</div>
     <div style="margin-top: 30px;">
@@ -29,10 +27,7 @@
         &nbsp; Friends
     </div>
     <div class="q">Are these sliders or just checkboxes?</div>
-    <div>
-        <input type="submit" class="btn btn-large" style="margin-top: 50px;" name="submit" value="Continue" />
-    </div>
-    </form>
+    {% include 'buttons.html' %}
 
     <script type="text/javascript">
         $('.slider').slider({

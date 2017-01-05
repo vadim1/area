@@ -10,6 +10,7 @@ def restart_session(request):
 
 def home(request):
     if request.method == 'POST':
+        if request.POST['submit'] == 'Back': return redirect('/home')
         return redirect('/decision')
     return render(request, 'home.html', {
     })
@@ -17,6 +18,7 @@ def home(request):
 
 def decision(request):
     if request.method == 'POST':
+        if request.POST['submit'] == 'Back': return redirect('/')
         request.session['personal_professional'] = request.POST['personal_professional']
         decision = request.POST['decision']
         request.session['decision'] = decision
@@ -27,6 +29,7 @@ def decision(request):
 
 def critical_concepts(request):
     if request.method == 'POST':
+        if request.POST['submit'] == 'Back': return redirect('/decision')
         request.session['good_outcome'] = request.POST['good_outcome']
         request.session['issues'] = request.POST['issues']
         request.session['how_to_know'] = request.POST['how_to_know']
@@ -54,6 +57,7 @@ def critical_concepts(request):
 
 def edges_pitfalls(request):
     if request.method == 'POST':
+        if request.POST['submit'] == 'Back': return redirect('/critical_concepts')
         attributes = {}
         for attribute in request.POST:
             if attribute == 'csrfmiddlewaretoken' or attribute == 'submit':
@@ -90,6 +94,9 @@ def edges_pitfalls(request):
 
 
 def cognitive_biases(request):
+    if request.method == 'POST':
+        if request.POST['submit'] == 'Back': return redirect('/edges_pitfalls')
+        return redirect('/cheetah_sheets')
     attributes = request.session['attributes']
     attribute_biases = biases.get_top(attributes, biases.attribute_biases)
     top_biases = []
@@ -105,6 +112,9 @@ def cognitive_biases(request):
 
 
 def cheetah_sheets(request):
+    if request.method == 'POST':
+        if request.POST['submit'] == 'Back': return redirect('/cognitive_biases')
+        return redirect('/summary')
     attributes = request.session['attributes']
     attribute_cheetahs = biases.get_top(attributes, biases.attribute_cheetahs)
     request.session['cheetah_sheets'] = attribute_cheetahs
@@ -114,7 +124,6 @@ def cheetah_sheets(request):
 
 
 def summary(request):
-    attributes = request.session['attributes']
     request.session['summary'] = 1
     personal_professional = request.session['personal_professional']
     personal_professional_summary = 'Neutral'
