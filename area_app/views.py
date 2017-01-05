@@ -8,6 +8,13 @@ def restart_session(request):
     return redirect('/decision')
 
 
+def home(request):
+    if request.method == 'POST':
+        return redirect('/decision')
+    return render(request, 'home.html', {
+    })
+
+
 def decision(request):
     if request.method == 'POST':
         request.session['personal_professional'] = request.POST['personal_professional']

@@ -5,6 +5,11 @@
     <form action="{{ request.path }}" method="post" style="margin: 50px;">
         {% csrf_token %}
     <h1>What's your decision?</h1>
+    <div class="q">Good examples / guidance?</div>
+    <div style="margin-top: 30px;">
+        <textarea name="decision" cols="80" rows="4" placeholder="What are you trying to decide?">{{ request.session.decision }}</textarea>
+    </div>
+    <div class="q">What axes / questions / attributes are relevant?</div>
     <div style="margin-top: 30px;">
         Personal &nbsp;
         <input id="personal_professional" class="slider" name="personal_professional" type="text" data-slider-id="personal_professional" data-slider-min="-5" data-slider-max="5" data-slider-step="1"
@@ -12,11 +17,21 @@
         &nbsp; Professional
     </div>
     <div style="margin-top: 30px;">
-        <textarea name="decision" cols="80" rows="4" placeholder="What are you trying to decide?">{{ request.session.decision }}</textarea>
+        School &nbsp;
+        <input id="todo" class="slider" name="todo" type="text" data-slider-id="todo" data-slider-min="-5" data-slider-max="5" data-slider-step="1"
+               data-slider-value="{% if request.session.personal_professional %}{{ request.session.personal_professional }}{% else %}0{% endif %}" />
+        &nbsp; Home
     </div>
-        <div>
-            <input type="submit" class="btn btn-large" style="margin-top: 50px;" name="submit" value="Continue" />
-        </div>
+    <div style="margin-top: 30px;">
+        Family &nbsp;
+        <input id="todo2" class="slider" name="todo2" type="text" data-slider-id="todo2" data-slider-min="-5" data-slider-max="5" data-slider-step="1"
+               data-slider-value="{% if request.session.personal_professional %}{{ request.session.personal_professional }}{% else %}0{% endif %}" />
+        &nbsp; Friends
+    </div>
+    <div class="q">Are these sliders or just checkboxes?</div>
+    <div>
+        <input type="submit" class="btn btn-large" style="margin-top: 50px;" name="submit" value="Continue" />
+    </div>
     </form>
 
     <script type="text/javascript">

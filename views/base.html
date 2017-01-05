@@ -28,28 +28,37 @@
     </script>
 
     <style type="text/css">
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  background-color: #f5f5f5;
-}
+        /* Sticky footer styles
+        -------------------------------------------------- */
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+        body {
+            /* Margin bottom by footer height */
+            margin-bottom: 100px;
+        }
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            /* Set the fixed height of the footer here */
+            height: 60px;
+            background-color: #f5f5f5;
+        }
 
-.container .text-muted {
-  margin: 20px 0;
-}
+        .container .text-muted {
+            margin: 20px 0;
+        }
+
+        .q {
+            font-size: large;
+            background-color: lightgoldenrodyellow;
+            border: 1px solid yellow;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -58,13 +67,13 @@ body {
         <h1>{% block h1 %}{% endblock %}</h1>
         {% block post_title %}{% endblock %}
     </div>
-{% block content %}
-{% endblock %}
+    {% block content %}
+    {% endblock %}
 </div>
-    <footer class="footer">
+<footer class="footer">
     <div class="container">
         <p class="text-muted">&copy; 2017 The Area Method</p>
     </div>
-    </footer>
+</footer>
 </body>
 </html>

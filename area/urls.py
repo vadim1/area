@@ -19,7 +19,7 @@ from area_app import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.decision, name='Decision'),
+    url(r'^$', views.home, name='Home'),
     url(r'^decision$', views.decision, name='Decision'),
     url(r'^critical_concepts$', views.critical_concepts, name='Critical Concepts'),
     url(r'^edges_pitfalls$', views.edges_pitfalls, name='Edges and Pitfalls'),

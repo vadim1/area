@@ -5,6 +5,7 @@
 {% block content %}
     <form action="{{ request.path }}" method="post">
         {% csrf_token %}
+    <div class="q">Can we remove the Explain boxes?  Can this be done as an interview / scenarios / what-if's (Meyers-Briggs style)?</div>
         {% for category, details in attributes %}
             <h3>{{ category }}</h3>
             <div>{{ details.description }}</div>
@@ -13,9 +14,6 @@
                     <input id="{{ attribute }}" class="slider" name="{{ attribute }}" type="text" data-slider-id="{{ attribute }}" data-slider-min="-5" data-slider-max="5" data-slider-step="1"
                         data-slider-value="{{ request.session.attributes|get_entry:attribute }}" />
                     {{ attribute }}<span>: <input type="text" name="{{ attribute }}_explain" size="50" value="{{ request.session.explains|get_explain:attribute }}" placeholder="Explain" /></span>
-                </div>
-                <div>
-                Explain:
                 </div>
             {% endfor %}
         {% endfor %}

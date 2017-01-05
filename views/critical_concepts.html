@@ -4,9 +4,18 @@
 {% block content %}
     <form action="{{ request.path }}" method="post" style="margin: 50px;">
         {% csrf_token %}
+    <div class="q">Do we vary the questions here based on what said on the Decisions page?  How?</div>
 
+    <div class="q">Can we do this as choices?  What choices if so?</div>
     <div>
         What constitutes a good outcome to you?  Why?
+        <br/>
+        <label><input type="checkbox" />Thing 1</label>
+        <label><input type="checkbox" />Thing 2</label>
+        <label><input type="checkbox" />Thing 3</label>
+        <label><input type="checkbox" />Other:</label>
+        <input type="text" placeholder="details of other?" />
+        ...
         <br/>
         <textarea name="good_outcome" cols="80" rows="3" placeholder="">{{ request.session.good_outcome }}</textarea>
     </div>
@@ -14,11 +23,21 @@
     <div>
         What issues (e.g., tradeoffs, key considerations, unknowns) do you need to resolve to get that outcome?
         <br/>
+        <label><input type="checkbox" />Thing 1</label>
+        <label><input type="checkbox" />Thing 2</label>
+        <label><input type="checkbox" />Thing 3</label>
+        ...
+        <br/>
         <textarea name="issues" cols="80" rows="3" placeholder="">{{ request.session.issues }}</textarea>
     </div>
 
     <div>
         How will you know the decision has succeeded for you?
+        <br/>
+        <label><input type="checkbox" />Thing 1</label>
+        <label><input type="checkbox" />Thing 2</label>
+        <label><input type="checkbox" />Thing 3</label>
+        ...
         <br/>
         <textarea name="how_to_know" cols="80" rows="3" placeholder="">{{ request.session.how_to_know }}</textarea>
     </div>
@@ -26,9 +45,17 @@
     <div>
         What matters less to you or not at all? (Like a poker player you don’t need the best hand. You just need a better hand than the other people playing.)
         <br/>
+        <label><input type="checkbox" />Thing 1</label>
+        <label><input type="checkbox" />Thing 2</label>
+        <label><input type="checkbox" />Thing 3</label>
+        ...
+        <br/>
         <textarea name="matters_less" cols="80" rows="3" placeholder="">{{ request.session.matters_less }}</textarea>
     </div>
 
+            <div class="q">Maybe ask why they care so much about their decision?</div>
+
+    <div class="q">Can we help recommend / auto-generate some critical concepts from the above?  How?  Should Critical Concepts be explained / exampled?</div>
     <div>
         Using the above, what are your top 3 Critical Concepts?
         <ol>

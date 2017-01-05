@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}{% block h1 %}The Area Method{% endblock %}{% endblock %}
+{% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
+{% block content %}
+    <form action="{{ request.path }}" method="post" style="margin: 50px;">
+        {% csrf_token %}
+        <div style="margin-top: 30px;" class="q">
+            What's on the landing page?  Messaging?  Calls to action?  Examples?
+        </div>
+        <div class="q">Maybe allow log in / pull up saves decisions / etc.?</div>
+        <div>
+            <input type="submit" class="btn btn-large" style="margin-top: 50px;" name="submit" value="Get Started!" />
+        </div>
+    </form>
+
+    <script type="text/javascript">
+        $('.slider').slider({
+            formatter: function(value) {
+                if (value > 0) {
+                    return 'Professional: ' + value;
+                }
+                if (value < 0) {
+                    return 'Personal: ' + (0 - value);
+                }
+                return 'Neutral';
+            }
+        });
+    </script>
+{% endblock %}
