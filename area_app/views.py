@@ -19,7 +19,7 @@ def home(request):
 def decision(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/')
-        request.session['personal_professional'] = request.POST['personal_professional']
+        # request.session['personal'] = request.POST['personal']
         decision = request.POST['decision']
         request.session['decision'] = decision
         return redirect('/critical_concepts')
@@ -32,8 +32,8 @@ def critical_concepts(request):
         if request.POST['submit'] == 'Back': return redirect('/decision')
         request.session['good_outcome'] = request.POST['good_outcome']
         request.session['issues'] = request.POST['issues']
-        request.session['how_to_know'] = request.POST['how_to_know']
-        request.session['matters_less'] = request.POST['matters_less']
+        #request.session['how_to_know'] = request.POST['how_to_know']
+        #request.session['matters_less'] = request.POST['matters_less']
         request.session['critical_concept_1'] = request.POST['critical_concept_1']
         request.session['critical_concept_2'] = request.POST['critical_concept_2']
         request.session['critical_concept_3'] = request.POST['critical_concept_3']
@@ -125,14 +125,6 @@ def cheetah_sheets(request):
 
 def summary(request):
     request.session['summary'] = 1
-    personal_professional = request.session['personal_professional']
-    personal_professional_summary = 'Neutral'
-    if personal_professional:
-        personal_professional = int(personal_professional)
-        if personal_professional < 0:
-            personal_professional_summary = 'Personal: ' + str(0-personal_professional)
-        if personal_professional > 0:
-            personal_professional_summary = 'Professional: ' + str(personal_professional)
     attributes_sorted = request.session['attributes_sorted']
     edges = []
     pitfalls = []
@@ -151,7 +143,6 @@ def summary(request):
             pitfalls.append(desc)
 
     return render(request, 'summary.html', {
-        'personal_professional': personal_professional_summary,
         'edges': edges,
         'pitfalls': pitfalls,
     })
