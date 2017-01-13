@@ -3,7 +3,7 @@
 </div>
 <div>
     {% if s.decision %}
-        <a href="/decision">Decision: {{ s.decision }}</a>
+        <a href="/decision">Decision: {{ s.decision }} ({{ s.decision_type }})</a>
     {% else %}
         Decision
     {% endif %}

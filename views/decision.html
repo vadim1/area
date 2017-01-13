@@ -3,34 +3,48 @@
 {% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
 {% block content %}
     <p>Whether you are deciding between colleges, navigating a career decision, helping your aging parents find the right housing, or expanding your business, the AREA Method will guide your to make complex personal and professional decisions with confidence and conviction.</p>
+    <h1>What kind of decision are you making?  Choose one or more.</h1>
+    <div style="margin-top: 30px;" id="decision_types">
+        <div>
+            <label><input type="checkbox" name="decision_type[]" value="Financial" /> Financial</label>
+            (examples)
+        </div>
+        <div>
+            <label><input type="checkbox" name="decision_type[]" value="Academic" /> Academic</label>
+            (examples)
+        </div>
+        <div>
+            <label><input type="checkbox" name="decision_type[]" value="Friends" /> Friends</label>
+            (examples)
+        </div>
+        <div>
+            <label><input type="checkbox" name="decision_type[]" value="Family" /> Family</label>
+            (examples)
+        </div>
+        <div>
+            <label><input type="checkbox" name="decision_type[]" value="School" /> School</label>
+            (examples)
+        </div>
+        <div>
+            <label><input type="checkbox" name="decision_type[]" value="After School" /> After School</label>
+            (examples)
+        </div>
+        <div>
+            <label><input type="checkbox" name="decision_type[]" value="Identity" /> Identity</label>
+            (examples)
+        </div>
+        <div>
+            <label><input type="checkbox" name="decision_type[]" value="Health" /> Health</label>
+            (examples)
+        </div>
+        <div>
+            <label><input type="checkbox" name="decision_type[]" value="Other" /> Other: </label>
+            <input type="text" name="decision_type_other" size="20" />
+        </div>
+    </div>
     <h1>What's your decision?</h1>
-    <div class="q">Good examples / guidance?</div>
     <div style="margin-top: 30px;">
         <textarea name="decision" cols="80" rows="4" placeholder="What are you trying to decide?">{{ request.session.decision }}</textarea>
     </div>
-    <div class="q">What axes / questions / attributes are relevant?</div>
-    <div style="margin-top: 30px;">
-        <label><input type="checkbox" name="personal" value="personal" />Personal</label>
-        <label><input type="checkbox" name="professional" value="professional" />Professional</label>
-        <label><input type="checkbox" name="school" value="school" />School</label>
-        <label><input type="checkbox" name="home" value="home" />Home</label>
-        <label><input type="checkbox" name="family" value="family" />Family</label>
-        <label><input type="checkbox" name="friends" value="friends" />Friends</label>
-    </div>
-    <div class="q">Are these sliders or just checkboxes?</div>
     {% include 'buttons.html' %}
-
-    <script type="text/javascript">
-        $('.slider').slider({
-            formatter: function(value) {
-                if (value > 0) {
-                    return 'Professional: ' + value;
-                }
-                if (value < 0) {
-                    return 'Personal: ' + (0 - value);
-                }
-                return 'Neutral';
-            }
-        });
-    </script>
 {% endblock %}

@@ -19,7 +19,7 @@
         </ol>
     </div>
     <div>
-        What constitutes a good outcome to you? Why?
+        What does success look like?
         <br/>
         <label><input type="checkbox"/>Thing 1</label>
         <label><input type="checkbox"/>Thing 2</label>
@@ -28,18 +28,31 @@
         <input type="text" placeholder="details of other?"/>
         ...
         <br/>
-        <textarea name="good_outcome" cols="80" rows="3" placeholder="">{{ request.session.good_outcome }}</textarea>
+        <textarea name="success" cols="80" rows="3" placeholder="">{{ request.session.success }}</textarea>
     </div>
-
     <div>
-        What issues (e.g., tradeoffs, key considerations, unknowns) do you need to resolve to get that outcome?
+        How do you know if your decision is successful?
         <br/>
         <label><input type="checkbox"/>Thing 1</label>
         <label><input type="checkbox"/>Thing 2</label>
         <label><input type="checkbox"/>Thing 3</label>
+        <label><input type="checkbox"/>Other:</label>
+        <input type="text" placeholder="details of other?"/>
         ...
         <br/>
-        <textarea name="issues" cols="80" rows="3" placeholder="">{{ request.session.issues }}</textarea>
+        <textarea name="how_to_know" cols="80" rows="3" placeholder="">{{ request.session.how_to_know }}</textarea>
+    </div>
+    <div>
+        Who or what is involved in that success?
+        <br/>
+        <label><input type="checkbox"/>Thing 1</label>
+        <label><input type="checkbox"/>Thing 2</label>
+        <label><input type="checkbox"/>Thing 3</label>
+        <label><input type="checkbox"/>Other:</label>
+        <input type="text" placeholder="details of other?"/>
+        ...
+        <br/>
+        <textarea name="involved" cols="80" rows="3" placeholder="">{{ request.session.involved }}</textarea>
     </div>
 
     <div class="q">Maybe ask why they care so much about their decision?</div>
@@ -47,17 +60,5 @@
     <div class="q">Can we help recommend / auto-generate some critical concepts from the above? How? Should Critical
         Concepts be explained / exampled?
     </div>
-    <div>
-        Using the above, what are your top 3 Critical Concepts?
-        <ol>
-            <li><input type="text" name="critical_concept_1" value="{{ request.session.critical_concept_1 }}"
-                       size="75"/></li>
-            <li><input type="text" name="critical_concept_2" value="{{ request.session.critical_concept_2 }}"
-                       size="75"/></li>
-            <li><input type="text" name="critical_concept_3" value="{{ request.session.critical_concept_3 }}"
-                       size="75"/></li>
-        </ol>
-    </div>
-
     {% include 'buttons.html' %}
 {% endblock %}

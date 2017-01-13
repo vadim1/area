@@ -14,6 +14,22 @@
     <div class="q">Can this be done as an interview / scenarios / what-if's
         (Meyers-Briggs style)?
     </div>
+    <div class="q">New style randomized.  Need to turn each into a question.  Need to randomize positive / negative.</div>
+    <table>
+    {% for attribute in attrs %}
+                <tr>
+                    <td>Weaker {{ attribute }}</td>
+                    <td>
+                        <input id="{{ attribute }}" class="slider" name="{{ attribute }}" type="text"
+                               data-slider-id="{{ attribute }}" data-slider-min="-5" data-slider-max="5"
+                               data-slider-step="1"
+                               data-slider-value="{{ request.session.attributes|get_entry:attribute }}"/>
+                    </td>
+                    <td>Stronger {{ attribute }}</td>
+                </tr>
+    {% endfor %}
+    </table>
+    <div class="q">Old style by category:</div>
     {% for category, details in attributes %}
         <h3>{{ category }}</h3>
         <div>{{ details.description }}</div>

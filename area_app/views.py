@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 import biases
+import random
 
 
 def restart_session(request):
@@ -19,7 +20,7 @@ def home(request):
 def decision(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/')
-        # request.session['personal'] = request.POST['personal']
+        request.session['decision_type'] = request.POST['decision_type[]']
         decision = request.POST['decision']
         request.session['decision'] = decision
         return redirect('/critical_concepts')
@@ -30,8 +31,11 @@ def decision(request):
 def critical_concepts(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/decision')
-        request.session['good_outcome'] = request.POST['good_outcome']
-        request.session['issues'] = request.POST['issues']
+        request.session['success'] = request.POST['success']
+        request.session['how_to_know'] = request.POST['how_to_know']
+        request.session['involved'] = request.POST['involved']
+        return redirect('/edges_pitfalls')
+        # TODO - remove
         #request.session['how_to_know'] = request.POST['how_to_know']
         #request.session['matters_less'] = request.POST['matters_less']
         request.session['critical_concept_1'] = request.POST['critical_concept_1']
@@ -49,7 +53,6 @@ def critical_concepts(request):
             summary += request.session['critical_concept_3']
         request.session['critical_concepts'] = summary
 
-        return redirect('/edges_pitfalls')
 
     return render(request, 'critical_concepts.html', {
     })
@@ -88,7 +91,14 @@ def edges_pitfalls(request):
         request.session['edges'] = edges
         request.session['pitfalls'] = pitfalls
         return redirect('/cognitive_biases')
+    # Randomize the order or attributes
+    random_order_attributes = []
+    for category, details in biases.attributes.items():
+        for attr in details['attributes']:
+            random_order_attributes.append(attr)
+    random.shuffle(random_order_attributes)
     return render(request, 'edges_pitfalls.html', {
+        'attrs': random_order_attributes,
         'attributes': biases.attributes.items(),
     })
 
