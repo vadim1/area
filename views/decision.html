@@ -1,50 +1,87 @@
 {% extends 'base.html' %}
-{% block title %}{% block h1 %}Decision{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}What's your Decision?s{% endblock %}{% endblock %}
 {% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
 {% block content %}
-    <p>Whether you are deciding between colleges, navigating a career decision, helping your aging parents find the right housing, or expanding your business, the AREA Method will guide your to make complex personal and professional decisions with confidence and conviction.</p>
-    <h1>What kind of decision are you making?  Choose one or more.</h1>
-    <div style="margin-top: 30px;" id="decision_types">
-        <div>
-            <label><input type="checkbox" name="decision_type[]" value="Financial" /> Financial</label>
-            (examples)
+    <h3>What type of decision are you making? Click all that apply.</h3>
+    <div style="margin-top: 20px;" id="decision_types" class="row">
+        <div class="col-sm-4">
+            <div>
+                <label><input type="checkbox" name="decision_type[]" value="Financial"/> Financial</label>
+            </div>
+            <div>
+                <label><input type="checkbox" name="decision_type[]" value="Academic"/> Academic</label>
+            </div>
+            <div>
+                <label><input type="checkbox" name="decision_type[]" value="Friends"/> Friends</label>
+            </div>
         </div>
-        <div>
-            <label><input type="checkbox" name="decision_type[]" value="Academic" /> Academic</label>
-            (examples)
+        <div class="col-sm-4">
+            <div>
+                <label><input type="checkbox" name="decision_type[]" value="Family"/> Family</label>
+            </div>
+            <div>
+                <label><input type="checkbox" name="decision_type[]" value="School"/> School</label>
+            </div>
+            <div>
+                <label><input type="checkbox" name="decision_type[]" value="After School"/> After School</label>
+            </div>
         </div>
-        <div>
-            <label><input type="checkbox" name="decision_type[]" value="Friends" /> Friends</label>
-            (examples)
-        </div>
-        <div>
-            <label><input type="checkbox" name="decision_type[]" value="Family" /> Family</label>
-            (examples)
-        </div>
-        <div>
-            <label><input type="checkbox" name="decision_type[]" value="School" /> School</label>
-            (examples)
-        </div>
-        <div>
-            <label><input type="checkbox" name="decision_type[]" value="After School" /> After School</label>
-            (examples)
-        </div>
-        <div>
-            <label><input type="checkbox" name="decision_type[]" value="Identity" /> Identity</label>
-            (examples)
-        </div>
-        <div>
-            <label><input type="checkbox" name="decision_type[]" value="Health" /> Health</label>
-            (examples)
-        </div>
-        <div>
-            <label><input type="checkbox" name="decision_type[]" value="Other" /> Other: </label>
-            <input type="text" name="decision_type_other" size="20" />
+        <div class="col-sm-4">
+            <div>
+                <label><input type="checkbox" name="decision_type[]" value="Identity"/> Identity</label>
+            </div>
+            <div>
+                <label><input type="checkbox" name="decision_type[]" value="Health"/> Health</label>
+            </div>
+            <div>
+                <label><input type="checkbox" name="decision_type[]" value="Other"/> Other: </label>
+                <input type="text" name="decision_type_other" id="decision_type_other" size="20"/>
+            </div>
         </div>
     </div>
-    <h1>What's your decision?</h1>
-    <div style="margin-top: 30px;">
-        <textarea name="decision" cols="80" rows="4" placeholder="What are you trying to decide?">{{ request.session.decision }}</textarea>
-    </div>
+    <h3>What's your decision?</h3>
+    <h4>
+        I am facing a<span id="types_starts_with_vowel" style="display:none">s</span> <span id="types">[select type above]</span> challenge.
+        <br/>
+        I need to decide <input type="text" size="40" name="decision" placeholder="what's your decision?"
+                                value="{{ request.session.decision }}"/>.
+        <br/>
+        I have these options: <input type="text" size="40" name="options" placeholder="what are your options?"
+                                     value="{{ request.session.options }}"/>.
+        <br/>
+        I need to decide <select name="timeframe">
+        <option value="">when?</option>
+        <option value="day">today</option>
+        <option value="week">this week</option>
+        <option value="month">this month</option>
+        <option value="year">this year</option>
+        <option value="sometime">sometime</option>
+    </select>.
+    </h4>
     {% include 'buttons.html' %}
+    <script type="text/javascript">
+    $(':checkbox').click(function(){
+        var types = '';
+        $(':checkbox').each(function(){
+            if ($(this).is(":checked")) {
+                var val = $(this).attr('value');
+                if (types) {
+                    types += ' and ';
+                } else {
+                    if (val.startsWith('A') || val.startsWith('I')) {
+                        $('types_starts_with_vowel').show();
+                    } else {
+                        $('types_starts_with_vowel').hide();
+                    }
+                }
+                if (val == 'Other') {
+                    types += $('#decision_type_other').val();
+                } else {
+                    types += val;
+                }
+            }
+        });
+        $('#types').text(types);
+    });
+    </script>
 {% endblock %}

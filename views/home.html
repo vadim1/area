@@ -1,41 +1,25 @@
 {% extends 'base.html' %}
-{% block title %}{% block h1 %}The Area Method{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}Problem Solved!{% endblock %}{% endblock %}
 {% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
 {% block content %}
     <form action="{{ request.path }}" method="post" style="margin: 50px;">
         {% csrf_token %}
-        <div style="margin-top: 30px;" class="q">
-            TODO: Video(s) here
+        <h3>You've got a problem to solve. We're here to help.</h3>
+        <h3>By using Problem Solved!, you will...</h3>
+        <h3>
+            <ul>
+                <li>Learn about how you make decisions</li>
+                <li>Get clear action steps to solve your problem</li>
+                <li>Connect with other decision makers like you</li>
+            </ul>
+        </h3>
+        <h3>Are you ready to be a better problem solver?</h3>
+        <div style="margin: 50px;">
+            <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Get started!"/>
         </div>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/SbJIi6nUs2s?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>
-        <div class="q">Allow log in / pull up saves decisions / etc.?</div>
-        <div style="font-size: large;">
-            <p>By completing the questions on this app you will create a personalized roadmap of the decision you are working through. Your roadmap will have:</p>
-            <ol>
-                <li>Your decision problem</li>
-                <li>Your picture of success and key considerations</li>
-                <li>Your expectations for how and where your research will be easy and where you might run into problems</li>
-                <li>Mental shortcuts and biases that might plague your work</li>
-                <li>Cheetah Sheets that may be most relevant to solving your problem</li>
-            </ol>
-            <p>To learn more about the AREA Method and see a few examples of AREA at work check out <a href="http://areamethod.com">areamethod.com</a></p>
-        </div>
-        <div style="margin-top: 50px;">
-    <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Get Started!" />
-        </div>
-    </form>
 
-    <script type="text/javascript">
-        $('.slider').slider({
-            formatter: function(value) {
-                if (value > 0) {
-                    return 'Professional: ' + value;
-                }
-                if (value < 0) {
-                    return 'Personal: ' + (0 - value);
-                }
-                return 'Neutral';
-            }
-        });
-    </script>
+        <div class="q">Allow log in / pull up saves decisions / etc.?</div>
+        <p>To learn more about the AREA Method and see a few examples of AREA at work check out <a
+                href="http://areamethod.com">areamethod.com</a></p>
+    </form>
 {% endblock %}

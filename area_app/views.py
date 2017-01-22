@@ -32,27 +32,7 @@ def critical_concepts(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/decision')
         request.session['success'] = request.POST['success']
-        request.session['how_to_know'] = request.POST['how_to_know']
-        request.session['involved'] = request.POST['involved']
         return redirect('/edges_pitfalls')
-        # TODO - remove
-        #request.session['how_to_know'] = request.POST['how_to_know']
-        #request.session['matters_less'] = request.POST['matters_less']
-        request.session['critical_concept_1'] = request.POST['critical_concept_1']
-        request.session['critical_concept_2'] = request.POST['critical_concept_2']
-        request.session['critical_concept_3'] = request.POST['critical_concept_3']
-
-        summary = request.session['critical_concept_1']
-        if request.session['critical_concept_2']:
-            if summary:
-                summary += ', '
-            summary += request.session['critical_concept_2']
-        if request.session['critical_concept_3']:
-            if summary:
-                summary += ', '
-            summary += request.session['critical_concept_3']
-        request.session['critical_concepts'] = summary
-
 
     return render(request, 'critical_concepts.html', {
     })
