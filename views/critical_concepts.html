@@ -41,6 +41,10 @@
     {% include 'buttons.html' %}
 
     <script type="text/javascript">
+        $(document).ready(function(){
+            $('[name="success"][value="{{ request.session.success }}"]').click();
+        });
+
         function validate() {
             var selected = false;
             $(':radio:checked').each(function () {

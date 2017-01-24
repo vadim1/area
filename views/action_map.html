@@ -13,7 +13,7 @@
         {% endfor %}
     <h3>
         I commit to solving my problem by
-        <input type="text" size="40" name="commitment" id="commitment" placeholder="what will you do?" />
+        <input type="text" size="40" name="commitment" id="commitment" placeholder="what will you do?" value="{{ request.session.commitment }}" />
         in the next
         <select name="days" id="days">
             <option value=""></option>
@@ -36,6 +36,7 @@
     $(document).ready(function(){
         var decision_text = get_decision_text('{{ type }}', '{{ decision }}', '{{ options }}', '{{ timeframe }}');
         $('#decision_text').text(decision_text);
+        $('#days').val('{{ request.session.commitment_days }}');
     });
 
     function validate() {

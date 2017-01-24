@@ -43,7 +43,7 @@
             </div>
             <div>
                 <label><input type="checkbox" name="decision_type[]" value="other"/> Other: </label>
-                <input type="text" name="decision_type_other" id="decision_type_other" size="20"/>
+                <input type="text" name="decision_type_other" id="decision_type_other" size="20" value="{{ request.session.decision_type_other }}"/>
             </div>
         </div>
     </div>
@@ -71,6 +71,14 @@
     {% include 'buttons.html' %}
 
     <script type="text/javascript">
+        $(document).ready(function(){
+            $('#timeframe').val('{{ request.session.timeframe }}');
+            var decision_types = '{{ decision_types }}'.split(',');
+            for (var i = 0; i < decision_types.length; i++) {
+                $('[name="decision_type[]"][value="' + decision_types[i] + '"]').click();
+            }
+        });
+
         var type_none = '[select type above]';
         $('#types').text(type_none);
 

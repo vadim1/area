@@ -17,6 +17,13 @@
     {% include 'buttons.html' %}
 
     <script type="text/javascript">
+        $(document).ready(function(){
+            var question = "";
+            {% for question in questions_yes %}
+                question = "{{ question }}".replace('\'', '\\\'').replace('&#39;', '\\\'');
+                $('[name="question[]"][value="' + question + '"]').click();
+            {% endfor %}
+        });
         function validate() {
             var selected = false;
             $(':checkbox:checked').each(function () {

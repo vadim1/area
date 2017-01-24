@@ -21,12 +21,26 @@ def home(request):
 def decision(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/')
-        request.session['decision_type'] = request.POST['decision_type[]']
+        decision_types = request.POST.getlist('decision_type[]')
+        request.session['decision_types'] = decision_types
+        decision_type_text = ''
+        for decision_type in decision_types:
+            if decision_type_text:
+               decision_type_text += ' and '
+            if decision_type == 'other':
+                decision_type = request.POST['decision_type_other']
+            decision_type_text += decision_type
+        request.session['decision_type'] = decision_type_text
         request.session['decision'] = request.POST['decision']
         request.session['options'] = request.POST['options']
         request.session['timeframe'] = request.POST['timeframe']
+        request.session['decision_type_other'] = request.POST['decision_type_other']
         return redirect('/critical_concepts')
+    decision_types_comma_delimited = ''
+    for decision_type in request.session['decision_types']:
+        decision_types_comma_delimited += decision_type + ','
     return render(request, 'decision.html', {
+        'decision_types': decision_types_comma_delimited
     })
 
 
@@ -53,9 +67,10 @@ def edges_pitfalls(request):
     for question, weights in archetypes.edges_pitfalls.items():
         random_order_questions.append(question)
     random.shuffle(random_order_questions)
+    questions_yes = request.session['questions_yes']
     return render(request, 'edges_pitfalls.html', {
         'questions': random_order_questions,
-        'questions_yes': request.session['questions_yes']
+        'questions_yes': questions_yes,
     })
 
 
