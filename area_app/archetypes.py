@@ -104,6 +104,6 @@ archetype_cheetah_sheets = {
     'intuitive': ['Scenario Analysis', 'Pro Con'],
     'thinker': ['Getting Help with Your Search', 'Great Questions Roadmap'],
     'detective': ['Competing Alternative Hypothesis', 'Pre Mortem'],
-    'listener': ['Scenario Analysis', 'Pre Mortem'],
+    'listener': ['Deep Dive Resources', 'Pre Mortem'],
     'architect': ['Great Questions Direct Broad and Theoretical', 'Scenario Analysis'],
 }
