@@ -22,8 +22,9 @@ def decision(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/')
         request.session['decision_type'] = request.POST['decision_type[]']
-        decision = request.POST['decision']
-        request.session['decision'] = decision
+        request.session['decision'] = request.POST['decision']
+        request.session['options'] = request.POST['options']
+        request.session['timeframe'] = request.POST['timeframe']
         return redirect('/critical_concepts')
     return render(request, 'decision.html', {
     })
@@ -45,7 +46,7 @@ def edges_pitfalls(request):
         questions_yes = request.POST.getlist('question[]')
         request.session['questions_yes'] = questions_yes
         top_archetypes = archetypes.get_top_archetypes(questions_yes)
-        request.session['archetypes'] = top_archetypes
+        request.session['archetype'] = top_archetypes
         return redirect('/cognitive_biases')
     # Randomize the order of questions
     random_order_questions = []
@@ -61,7 +62,7 @@ def edges_pitfalls(request):
 def cognitive_biases(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/edges_pitfalls')
-        return redirect('/cheetah_sheets')
+        return redirect('/action_map')
     attributes = request.session['attributes']
     attribute_biases = biases.get_top(attributes, biases.attribute_biases)
     top_biases = []
@@ -73,6 +74,7 @@ def cognitive_biases(request):
     request.session['cognitive_biases'] = top_biases
     top_archetypes = request.session['archetypes']
     top_archetype = top_archetypes[0]
+    request.session['top_archectype'] = top_archetype[0]
     return render(request, 'cognitive_biases.html', {
         'biases': top_biases,
         'archetype': top_archetype[0],
@@ -92,27 +94,35 @@ def cheetah_sheets(request):
     })
 
 
+def action_map(request):
+    if request.method == 'POST':
+        if request.POST['submit'] == 'Back': return redirect('/cognitive_biases')
+        request.session['commitment'] = request.POST['commitment']
+        request.session['commitment_days'] = request.POST['days']
+        return redirect('/summary')
+    archetype = request.session['top_archectype']
+    archetype_cheetahs = archetypes.archetype_cheetah_sheets[archetype]
+    request.session['cheetah_sheets'] = archetype_cheetahs
+    return render(request, 'action_map.html', {
+        'type': request.session['decision_type'],
+        'decision': request.session['decision'],
+        'options': request.session['options'],
+        'timeframe': request.session['timeframe'],
+        'archetype': archetype,
+        'cheetahs': archetype_cheetahs,
+    })
+
+
 def summary(request):
     request.session['summary'] = 1
-    attributes_sorted = request.session['attributes_sorted']
-    edges = []
-    pitfalls = []
-    explains = {}
-    if 'explains' in request.session:
-        explains = request.session['explains']
-    for attribute, weight in attributes_sorted:
-        explain = ''
-        if attribute+'_explain' in explains:
-            explain = ' - ' + explains[attribute+'_explain']
-        if int(weight) > 0:
-            desc = attribute + ": " + weight + explain
-            edges.append(desc)
-        else:
-            desc = attribute + ": " + unicode(abs(int(weight))) + explain
-            pitfalls.append(desc)
-
     return render(request, 'summary.html', {
-        'edges': edges,
-        'pitfalls': pitfalls,
+        'type': request.session['decision_type'],
+        'decision': request.session['decision'],
+        'options': request.session['options'],
+        'timeframe': request.session['timeframe'],
+        'archetype': request.session['top_archectype'],
+        'cheetahs': request.session['cheetah_sheets'],
+        'commitment': request.session['commitment'],
+        'commitment_days': request.session['commitment_days'],
     })
 

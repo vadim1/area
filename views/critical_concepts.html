@@ -4,14 +4,53 @@
 {% block content %}
     <h3>My decision will be successful when I have:</h3>
     <div style="font-size: larger">
-    <ul style="list-style: none;">
-        <li><label><input type="radio" name="success" value="pro_con"/>Weighed the pros and cons and took my time to decide</label></li>
-        <li><label><input type="radio" name="success" value="acted"/>Acted on a strong plan based in evidence</label></li>
-        <li><label><input type="radio" name="success" value="trust"/>Built more trust with my friends and people who give me advice</label></li>
-        <li><label><input type="radio" name="success" value="pride"/>Felt proud of my instincts and know I can trust them</label></li>
-        <li><label><input type="radio" name="success" value="created"/>Created and acted on a new, better option for my decision than anything I had considered</label></li>
-    </ul>
+        <ul style="list-style: none;">
+            <li>
+                <label>
+                    <input type="radio" name="success" value="pro_con"/>
+                    Weighed the pros and cons and took my time to decide
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="radio" name="success" value="acted"/>
+                    Acted on a strong plan based in evidence
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="radio" name="success" value="trust"/>
+                    Built more trust with my friends and people who give me advice
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="radio" name="success" value="pride"/>
+                    Felt proud of my instincts and know I can trust them
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="radio" name="success" value="created"/>
+                    Created and acted on a new, better option for my decision than anything I had considered
+                </label>
+            </li>
+        </ul>
     </div>
 
     {% include 'buttons.html' %}
+
+    <script type="text/javascript">
+        function validate() {
+            var selected = false;
+            $(':radio:checked').each(function () {
+                selected = true;
+            });
+            if (!selected) {
+                alert("Please select a success criteria");
+                return false;
+            }
+        }
+        $('form').submit(validate);
+    </script>
 {% endblock %}

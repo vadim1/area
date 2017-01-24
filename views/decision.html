@@ -86,26 +86,7 @@
         $('.decision_type').mouseenter(function(){
             var val = $(this).find(':checkbox').attr('value');
             var example = type_examples[val];
-            var text = 'I am facing a';
-            if (val.startsWith('a') || val.startsWith('i')) {
-                text += 'n';
-            }
-            text += ' ' + val + ' challenge. I need to decide ' + example['decision'] + '. ';
-            text += 'I have these options: ' + example['options'] + '. ';
-            var when = '';
-            switch (example['timeframe']) {
-                case 'day':
-                    when = 'by the end of the day';
-                    break;
-                case 'week':
-                    when = 'by next week';
-                    break;
-                case 'month':
-                    when = 'this month';
-                    break;
-            }
-            text += 'I need to decide by ' + when + '.';
-
+            var text = get_decision_text(val, example['decision'], example['options'], example['timeframe']);
             $('#example').text(text);
         });
         $('.decision_type').mouseleave(function(){

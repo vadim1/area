@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^edges_pitfalls$', views.edges_pitfalls, name='Edges and Pitfalls'),
     url(r'^cognitive_biases$', views.cognitive_biases, name='Cognitive Biases'),
     url(r'^cheetah_sheets$', views.cheetah_sheets, name='Cheetah Sheets'),
+    url(r'^action_map$', views.action_map, name='Action Map'),
     url(r'^summary$', views.summary, name='Summary'),
     url(r'^restart$', views.restart_session, name='Restart'),
 ]

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}{% block h1 %}Your Action Map{% endblock %}{% endblock %}
+{% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
+{% block content %}
+    <div>
+    <h3 id="decision_text"></h3>
+    <div>{% with 'archetype/'|add:archetype|add:'.html' as path %}{% include path %}{% endwith %}</div>
+    <p>To make your decision, we have a few guides for you to use next.</p>
+        <div class="q">Formatting needed. Should these be printable?  How do we expect students to take actions here?  Fill out online?  Email / text it to them?</div>
+        {% for cheetah in cheetahs|slice:":3" %}
+            <h4>{{ cheetah }} <span style="font-size: small; color: lightgray;">{{ weight }}</span></h4>
+            <pre>{% with 'cheetah/'|add:cheetah|add:'.html' as path %}{% include path %}{% endwith %}</pre>
+        {% endfor %}
+    <h3>
+        I commit to solving my problem by
+        <input type="text" size="40" name="commitment" id="commitment" placeholder="what will you do?" />
+        in the next
+        <select name="days" id="days">
+            <option value=""></option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+        </select>
+        days and sharing my results to create a community of problem solvers.
+    </h3>
+    <div class="q">Need to get their info to remind them of commitment - phone #?  Email?</div>
+
+    {% include 'buttons.html' %}
+    </div>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+        var decision_text = get_decision_text('{{ type }}', '{{ decision }}', '{{ options }}', '{{ timeframe }}');
+        $('#decision_text').text(decision_text);
+    });
+
+    function validate() {
+        if (!$('#commitment').val()) {
+            alert("Please type in what you will do");
+            return false;
+        }
+        if (!$('#days').val()) {
+            alert("Please select when you'll do it");
+            return false;
+        }
+    }
+    $('form').submit(validate);
+    </script>
+{% endblock %}

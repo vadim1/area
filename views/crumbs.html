@@ -26,11 +26,7 @@
     {% endif %}
 </div>
 <div>
-    {% if s.cheetah_sheets %}
-        <a href="/cheetah_sheets">Cheetah Sheets: {% for item in s.cheetah_sheets|slice:":3" %}{{ item.0 }}, {% endfor %}</a>
-    {% else %}
-        Cheetah Sheets
-    {% endif %}
+    <a href="/action_map">Your Action Map</a>
 </div>
 <div>
     {% if s.summary %}

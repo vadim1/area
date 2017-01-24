@@ -3,71 +3,34 @@
 {% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
 {% block content %}
     <div class="container">
-        <div class="q">Formatting / value needs to be clear.</div>
-        <div class="q">Save / Login / Share on social media?</div>
-        <div class="q">Next steps?  Need a commitment device and call[s] for action.</div>
-        <table class="table">
-            <tr>
-                <th>Decision</th>
-                <td>{{ request.session.decision }}</td>
-            </tr>
-            <tr>
-                <th>Good Outcome</th>
-                <td>{{ request.session.good_outcome }}</td>
-            </tr>
-            <tr>
-                <th>Issues to Resolve</th>
-                <td>{{ request.session.issues }}</td>
-            </tr>
-            <tr>
-                <th>Success Factors</th>
-                <td>{{ request.session.how_to_know }}</td>
-            </tr>
-            <tr>
-                <th>Matters Less</th>
-                <td>{{ request.session.matters_less }}</td>
-            </tr>
-            <tr>
-                <th>Critical Concepts</th>
-                <td>
-                            <div class="q">Auto-generate them here</div>
-                </td>
-            </tr>
-            <tr>
-                <th>Edges</th>
-                <td>
-                    {% for edge in edges %}
-                        <div>{{ edge }}</div>
-                    {% endfor %}
-                </td>
-            </tr>
-            <tr>
-                <th>Pitfalls</th>
-                <td>
-                    {% for pitfall in pitfalls %}
-                        <div>{{ pitfall }}</div>
-                    {% endfor %}
-                </td>
-            </tr>
-            <tr>
-                <th>Cognitive Biases</th>
-                <td>
-                    {% for bias in request.session.cognitive_biases|slice:":3" %}
-                        <h4>{{ bias.bias }} <span style="font-size: small; color: lightgray;">{{ bias.weight }}</span></h4>
-                        <div>{{ bias.description }}</div>
-                    {% endfor %}
-                </td>
-            </tr>
-            <tr>
-                <th>Cheetah Sheets</th>
-                <td>
-                    {% for cheetah, weight in request.session.cheetah_sheets|slice:":3" %}
-                        <h4>{{ cheetah }} <span style="font-size: small; color: lightgray;">{{ weight }}</span></h4>
-                        <pre>{% with 'cheetah/'|add:cheetah|add:'.html' as path %}{% include path %}{% endwith %}</pre>
-                    {% endfor %}
-                </td>
-            </tr>
-        </table>
-        <a href="/restart" class="btn btn-lg" role="button" onclick="return(confirm('Are you sure you want to discard your work?'))">New Decision</a>
+        <div class="q">What goes here? Save / Login / Share on social media?</div>
+
+        <div>
+            <h3 id="decision_text"></h3>
+            <div>{% with 'archetype/'|add:archetype|add:'.html' as path %}{% include path %}{% endwith %}</div>
+            <p>To make your decision, we have a few guides for you to use next.</p>
+            <div class="q">Formatting needed. Should these be printable? How do we expect students to take actions here?
+                Fill out online? Email / text it to them?
+            </div>
+            {% for cheetah in cheetahs|slice:":3" %}
+                <h4>{{ cheetah }} <span style="font-size: small; color: lightgray;">{{ weight }}</span></h4>
+                <pre>{% with 'cheetah/'|add:cheetah|add:'.html' as path %}{% include path %}{% endwith %}</pre>
+            {% endfor %}
+            <h3>
+                I commit to solving my problem by {{ commitment }}
+                in the next {{ commitment_days }}
+                days and sharing my results to create a community of problem solvers.
+            </h3>
+        </div>
+
+        <a href="/restart" class="btn btn-lg" role="button"
+           onclick="return(confirm('Are you sure you want to discard your work?'))">New Decision</a>
     </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var decision_text = get_decision_text('{{ type }}', '{{ decision }}', '{{ options }}', '{{ timeframe }}');
+            $('#decision_text').text(decision_text);
+        });
+    </script>
 {% endblock %}
