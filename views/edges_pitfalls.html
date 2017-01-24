@@ -1,66 +1,18 @@
 {% extends 'base.html' %}
 {% load area_tags %}
-{% block title %}{% block h1 %}Edges / Pitfalls{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}Your Decision-Making Style{% endblock %}{% endblock %}
 {% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
 {% block content %}
-    <p>
-        Before beginning to solve your problem its useful to think through where your work might be easy, or where you
-        have an Edge, and what challenges or roadblocks may impede your decision making, where you might face a Pitfall.
-        For example, if you’re selecting an after school activity, you might find it easy to learn about the different
-        activities, even which students, coaches or teachers are involved, but you might find it more difficult to
-        figure out whether the activity would be fulfilling for you. How could you figure that out? By thinking through
-        your research Edges and Pitfalls you can set yourself up more easily for a successful decision.
-    </p>
-    <div class="q">Can this be done as an interview / scenarios / what-if's
-        (Meyers-Briggs style)?
-    </div>
-    <div class="q">New style randomized.  Need to turn each into a question.  Need to randomize positive / negative.</div>
-    <table>
-    {% for attribute in attrs %}
-                <tr>
-                    <td>Weaker {{ attribute }}</td>
-                    <td>
-                        <input id="{{ attribute }}" class="slider" name="{{ attribute }}" type="text"
-                               data-slider-id="{{ attribute }}" data-slider-min="-5" data-slider-max="5"
-                               data-slider-step="1"
-                               data-slider-value="{{ request.session.attributes|get_entry:attribute }}"/>
-                    </td>
-                    <td>Stronger {{ attribute }}</td>
-                </tr>
+    <div class="q">Need we randomize positive / negative?</div>
+    <h3>Check all that apply to you to determine your decision-making style.</h3>
+    {% for question in questions %}
+        <div>
+            <label>
+                <input type="checkbox" name="question[]" value="{{ question }}"/>
+                {{ question }}
+            </label>
+        </div>
     {% endfor %}
-    </table>
-    <div class="q">Old style by category:</div>
-    {% for category, details in attributes %}
-        <h3>{{ category }}</h3>
-        <div>{{ details.description }}</div>
-        <table>
-            {% for attribute in details.attributes %}
-                <tr>
-                    <td>Weaker {{ attribute }}</td>
-                    <td>
-                        <input id="{{ attribute }}" class="slider" name="{{ attribute }}" type="text"
-                               data-slider-id="{{ attribute }}" data-slider-min="-5" data-slider-max="5"
-                               data-slider-step="1"
-                               data-slider-value="{{ request.session.attributes|get_entry:attribute }}"/>
-                    </td>
-                    <td>Stronger {{ attribute }}</td>
-                </tr>
-            {% endfor %}
-        </table>
-    {% endfor %}
-    {% include 'buttons.html' %}
 
-    <script type="text/javascript">
-        $('.slider').slider({
-            formatter: function (value) {
-                if (value > 0) {
-                    return 'Edge: ' + value;
-                }
-                if (value < 0) {
-                    return 'Pitfall: ' + (0 - value);
-                }
-                return 'Neutral';
-            }
-        });
-    </script>
+    {% include 'buttons.html' %}
 {% endblock %}

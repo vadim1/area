@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 import biases
+import archetypes
 import random
 
 
@@ -41,45 +42,19 @@ def critical_concepts(request):
 def edges_pitfalls(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/critical_concepts')
-        attributes = {}
-        for attribute in request.POST:
-            if attribute == 'csrfmiddlewaretoken' or attribute == 'submit':
-                continue
-            if attribute.endswith('_explain'):
-                value = request.POST[attribute]
-                if value and value != '':
-                    if 'explains' in request.session:
-                        explains = request.session['explains']
-                    else:
-                        explains = {}
-                    explains[attribute] = request.POST[attribute]
-                    request.session['explains'] = explains
-                continue
-            weight = request.POST[attribute]
-            if int(weight) > 0 or int(weight) < 0:
-                attributes[attribute] = weight
-        request.session['attributes'] = attributes
-        attributes_sorted = sorted(attributes.iteritems(), key=lambda (k, v): (v, k), reverse=True)
-        request.session['attributes_sorted'] = attributes_sorted
-        edges = []
-        pitfalls = []
-        for attribute, weight in attributes_sorted:
-            if int(weight) > 0:
-                edges.append(attribute + " (" + weight + ")")
-            else:
-                pitfalls.append(attribute + " (" + unicode(abs(int(weight))) + ")")
-        request.session['edges'] = edges
-        request.session['pitfalls'] = pitfalls
+        questions_yes = request.POST.getlist('question[]')
+        request.session['questions_yes'] = questions_yes
+        top_archetypes = archetypes.get_top_archetypes(questions_yes)
+        request.session['archetypes'] = top_archetypes
         return redirect('/cognitive_biases')
-    # Randomize the order or attributes
-    random_order_attributes = []
-    for category, details in biases.attributes.items():
-        for attr in details['attributes']:
-            random_order_attributes.append(attr)
-    random.shuffle(random_order_attributes)
+    # Randomize the order of questions
+    random_order_questions = []
+    for question, weights in archetypes.edges_pitfalls.items():
+        random_order_questions.append(question)
+    random.shuffle(random_order_questions)
     return render(request, 'edges_pitfalls.html', {
-        'attrs': random_order_attributes,
-        'attributes': biases.attributes.items(),
+        'questions': random_order_questions,
+        'questions_yes': request.session['questions_yes']
     })
 
 
@@ -96,8 +71,12 @@ def cognitive_biases(request):
             {'bias': bias, 'weight': weight, 'description': description}
         )
     request.session['cognitive_biases'] = top_biases
+    top_archetypes = request.session['archetypes']
+    top_archetype = top_archetypes[0]
     return render(request, 'cognitive_biases.html', {
         'biases': top_biases,
+        'archetype': top_archetype[0],
+        'strength': top_archetype[1]
     })
 
 

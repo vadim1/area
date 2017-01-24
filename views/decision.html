@@ -3,53 +3,63 @@
 {% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
 {% block content %}
     <h3>What type of decision are you making? Click all that apply.</h3>
+    <div id="example" style="height: 50px; border: turquoise; background-color:lightblue; margin: 20px; padding: 5px;"></div>
     <div style="margin-top: 20px;" id="decision_types" class="row">
         <div class="col-sm-4">
             <div>
-                <label><input type="checkbox" name="decision_type[]" value="Financial"/> Financial</label>
+                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="financial"/> Financial</label>
             </div>
             <div>
-                <label><input type="checkbox" name="decision_type[]" value="Academic"/> Academic</label>
+                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="academic"/>
+                    Academic</label>
             </div>
             <div>
-                <label><input type="checkbox" name="decision_type[]" value="Friends"/> Friends</label>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div>
-                <label><input type="checkbox" name="decision_type[]" value="Family"/> Family</label>
-            </div>
-            <div>
-                <label><input type="checkbox" name="decision_type[]" value="School"/> School</label>
-            </div>
-            <div>
-                <label><input type="checkbox" name="decision_type[]" value="After School"/> After School</label>
+                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="friends"/>
+                    Friends</label>
             </div>
         </div>
         <div class="col-sm-4">
             <div>
-                <label><input type="checkbox" name="decision_type[]" value="Identity"/> Identity</label>
+                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="family"/>
+                    Family</label>
             </div>
             <div>
-                <label><input type="checkbox" name="decision_type[]" value="Health"/> Health</label>
+                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="school"/>
+                    School</label>
             </div>
             <div>
-                <label><input type="checkbox" name="decision_type[]" value="Other"/> Other: </label>
+                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="after school"/> After
+                    School</label>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div>
+                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="identity"/>
+                    Identity</label>
+            </div>
+            <div>
+                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="health"/>
+                    Health</label>
+            </div>
+            <div>
+                <label><input type="checkbox" name="decision_type[]" value="other"/> Other: </label>
                 <input type="text" name="decision_type_other" id="decision_type_other" size="20"/>
             </div>
         </div>
     </div>
     <h3>What's your decision?</h3>
     <h4>
-        I am facing a<span id="types_starts_with_vowel" style="display:none">s</span> <span id="types">[select type above]</span> challenge.
+        I am facing a<span id="types_starts_with_vowel" style="display:none">n</span> <span id="types"></span>
+        challenge.
         <br/>
-        I need to decide <input type="text" size="40" name="decision" placeholder="what's your decision?"
+        I need to decide <input type="text" size="80" name="decision" id="decision" placeholder="what's your decision?"
                                 value="{{ request.session.decision }}"/>.
         <br/>
-        I have these options: <input type="text" size="40" name="options" placeholder="what are your options?"
+        I have these options: <input type="text" size="76" name="options" id="options"
+                                     placeholder="what are your options?"
                                      value="{{ request.session.options }}"/>.
         <br/>
-        I need to decide <select name="timeframe">
+        I need to decide <select name="timeframe" id="timeframe">
         <option value="">when?</option>
         <option value="day">today</option>
         <option value="week">this week</option>
@@ -59,29 +69,171 @@
     </select>.
     </h4>
     {% include 'buttons.html' %}
+
     <script type="text/javascript">
-    $(':checkbox').click(function(){
-        var types = '';
-        $(':checkbox').each(function(){
-            if ($(this).is(":checked")) {
-                var val = $(this).attr('value');
-                if (types) {
-                    types += ' and ';
-                } else {
-                    if (val.startsWith('A') || val.startsWith('I')) {
-                        $('types_starts_with_vowel').show();
+        var type_none = '[select type above]';
+        $('#types').text(type_none);
+
+        function show_example(val) {
+            var example = type_examples[val];
+            $('#decision').attr('placeholder', example['decision']);
+            $('#options').attr('placeholder', example['options']);
+            if ($('#timeframe').val() == '') {
+                $('#timeframe').val(example['timeframe']);
+            }
+        }
+
+        $('.decision_type').mouseenter(function(){
+            var val = $(this).find(':checkbox').attr('value');
+            var example = type_examples[val];
+            var text = 'I am facing a';
+            if (val.startsWith('a') || val.startsWith('i')) {
+                text += 'n';
+            }
+            text += ' ' + val + ' challenge. I need to decide ' + example['decision'] + '. ';
+            text += 'I have these options: ' + example['options'] + '. ';
+            var when = '';
+            switch (example['timeframe']) {
+                case 'day':
+                    when = 'by the end of the day';
+                    break;
+                case 'week':
+                    when = 'by next week';
+                    break;
+                case 'month':
+                    when = 'this month';
+                    break;
+            }
+            text += 'I need to decide by ' + when + '.';
+
+            $('#example').text(text);
+        });
+        $('.decision_type').mouseleave(function(){
+            $('#example').text('');
+        });
+
+        function updateTypes() {
+            var types = '';
+            var some_checked = false;
+            $(':checkbox').each(function () {
+                if ($(this).is(":checked")) {
+                    some_checked = true;
+                    var val = $(this).attr('value');
+                    if (types) {
+                        types += ' and ';
                     } else {
-                        $('types_starts_with_vowel').hide();
+                        // an / a for the first one
+                        if (val.startsWith('a') || val.startsWith('i')) {
+                            $('#types_starts_with_vowel').show();
+                        } else {
+                            $('#types_starts_with_vowel').hide();
+                        }
+                        // For first one, fill in example
+                        show_example(val)
+                    }
+                    if (val == 'other') {
+                        var other_type = $('#decision_type_other').val();
+                        if (!other_type) {
+                            other_type = '[type in details for "Other"]'
+                        }
+                        types += other_type
+                    } else {
+                        types += val;
                     }
                 }
-                if (val == 'Other') {
-                    types += $('#decision_type_other').val();
-                } else {
-                    types += val;
-                }
+            });
+            if (!types) {
+                types = type_none;
             }
-        });
-        $('#types').text(types);
-    });
+            if (!some_checked) {
+                show_example('none');
+            }
+            $('#types').text(types);
+        }
+
+        $(':checkbox').click(updateTypes);
+        $('#decision_type_other').keyup(updateTypes);
+
+        var type_examples = {
+            'none': {
+                'decision': 'what is your decision?',
+                'options': ' what are your options?',
+                'timeframe': '',
+            },
+            'financial': {
+                'decision': 'whether I need to get a new job so that I can make more money',
+                'options': ' ask my current boss for a raise, or look for a job that pays more',
+                'timeframe': 'week',
+            },
+            'academic': {
+                'decision': 'when I should get my homework done when I have a big basketball game tonight',
+                'options': 'do it before the game, but risk being late and getting benched, or do it after the game, but risk being too tired to focus',
+                'timeframe': 'day',
+            },
+            'friends': {
+                'decision': 'which friend I should talk to about a personal problem',
+                'options': 'Nylah, Naziyah, Brittany, and Amy',
+                'timeframe': 'day',
+            },
+            'family': {
+                'decision': 'if I should babysit my younger brother instead of going to Dream Team',
+                'options': 'stay home with my brother so my mom can go to work, or ask her to stay with my brother so I can go to practice',
+                'timeframe': 'day',
+            },
+            'school': {
+                'decision': 'whether I should transfer to a different school next year',
+                'options': 'stay at the school I am at now, go to East Side, or go to Central',
+                'timeframe': 'month',
+            },
+            'after school': {
+                'decision': 'what sport I should play in the fall',
+                'options': 'soccer, tennis, swimming, or no sport',
+                'timeframe': 'week',
+            },
+            'identity': {
+                'decision': 'if I should come out to my parents',
+                'options': 'tell both parents, tell just one parent, or don’t tell either parent',
+                'timeframe': 'week',
+            },
+            'health': {
+                'decision': 'if I should go to the doctor for my illness',
+                'options': 'go to the doctor and get a check up, or wait and see if I feel better in a few days',
+                'timeframe': 'day',
+            },
+        }
+
+        function validate()
+        {
+            var type_selected = false;
+            $(':checkbox:checked').each(function () {
+                var val = $(this).attr('value');
+                if (val == 'other' && !$('#decision_type_other').val()) {
+                    alert("Please type in the Other type of decision");
+                    return false;
+                } else {
+                    type_selected = true;
+                }
+            });
+            if (!type_selected) {
+                alert("Please select one or more types");
+                return false;
+            }
+            if (!$('#decision').val()) {
+                alert("Please type in what you need to decide");
+                return false;
+            }
+            if (!$('#options').val()) {
+                alert("Please type in your options");
+                return false;
+            }
+            if (!$('#timeframe').val()) {
+                alert("Please select when you need to decide");
+                return false;
+            }
+            return true;
+        }
+        $('form').submit(validate);
+
     </script>
+
 {% endblock %}

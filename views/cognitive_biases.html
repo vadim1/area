@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
-{% block title %}{% block h1 %}Cognitive Biases{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}Your Decision Maker Profile{% endblock %}{% endblock %}
 {% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
 {% block content %}
+    <h3>{{ archetype }}</h3>
+    <div>{% with 'archetype/'|add:archetype|add:'.html' as path %}{% include path %}{% endwith %}</div>
+
     <div>
         <div class="q">Rewrite to be more student friendly.</div>
         <div class="q">Explain what inputs they gave led to these?  Or overkill?</div>

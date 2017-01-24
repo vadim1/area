@@ -9,24 +9,20 @@
     {% endif %}
 </div>
 <div>
-    {% if s.critical_concepts %}
-        <a href="/critical_concepts">Critical Concepts: {{ s.critical_concepts }}</a>
+    <a href="/critical_concepts">Critical Concepts</a>
+</div>
+<div>
+    {% if s.questions_yes %}
+        <a href="/edges_pitfalls">Your Decision-Making Style</a>
     {% else %}
-        Critical Concepts
+        Your Decision-Making Style
     {% endif %}
 </div>
 <div>
-    {% if s.edges or s.pitfalls %}
-        <a href="/edges_pitfalls">Edges: {{ s.edges|join:", " }} / Pitfalls: {{ s.pitfalls|join:", " }} </a>
+    {% if s.archetypes %}
+        <a href="/cognitive_biases">Your Decision Maker Profile</a>
     {% else %}
-        Edges / Pitfalls
-    {% endif %}
-</div>
-<div>
-    {% if s.cognitive_biases %}
-        <a href="/cognitive_biases">Cognitive Biases: {% for item in s.cognitive_biases|slice:":3" %}{{ item.bias }}, {% endfor %}</a>
-    {% else %}
-        Cognitive Biases
+        Your Decision Maker Profile
     {% endif %}
 </div>
 <div>
