@@ -37,8 +37,9 @@ def decision(request):
         request.session['decision_type_other'] = request.POST['decision_type_other']
         return redirect('/critical_concepts')
     decision_types_comma_delimited = ''
-    for decision_type in request.session['decision_types']:
-        decision_types_comma_delimited += decision_type + ','
+    if 'decision_types' in request.session:
+        for decision_type in request.session['decision_types']:
+            decision_types_comma_delimited += decision_type + ','
     return render(request, 'decision.html', {
         'decision_types': decision_types_comma_delimited
     })
@@ -67,7 +68,9 @@ def edges_pitfalls(request):
     for question, weights in archetypes.edges_pitfalls.items():
         random_order_questions.append(question)
     random.shuffle(random_order_questions)
-    questions_yes = request.session['questions_yes']
+    questions_yes = ''
+    if 'questions_yes' in request.session:
+        questions_yes = request.session['questions_yes']
     return render(request, 'edges_pitfalls.html', {
         'questions': random_order_questions,
         'questions_yes': questions_yes,
@@ -78,20 +81,10 @@ def cognitive_biases(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/edges_pitfalls')
         return redirect('/action_map')
-    attributes = request.session['attributes']
-    attribute_biases = biases.get_top(attributes, biases.attribute_biases)
-    top_biases = []
-    for bias, weight in attribute_biases:
-        description = biases.biases[bias]
-        top_biases.append(
-            {'bias': bias, 'weight': weight, 'description': description}
-        )
-    request.session['cognitive_biases'] = top_biases
-    top_archetypes = request.session['archetypes']
+    top_archetypes = request.session['archetype']
     top_archetype = top_archetypes[0]
     request.session['top_archectype'] = top_archetype[0]
     return render(request, 'cognitive_biases.html', {
-        'biases': top_biases,
         'archetype': top_archetype[0],
         'strength': top_archetype[1]
     })
