@@ -4,6 +4,11 @@
 {% block content %}
     <form action="{{ request.path }}" method="post" style="margin: 50px;">
         {% csrf_token %}
+        <div style="float:right;">
+            <iframe width="180" height="315"
+                    src="https://www.youtube.com/embed/eI18uNKEJyo?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0"
+                    allowfullscreen></iframe>
+        </div>
         <h3>You've got a problem to solve. We're here to help.</h3>
         <h3>By using Problem Solved!, you will...</h3>
         <h3>
