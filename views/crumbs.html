@@ -9,7 +9,7 @@
     {% endif %}
 </div>
 <div>
-    <a href="/critical_concepts">Critical Concepts</a>
+    <a href="/critical_concepts">Your Vision of Success</a>
 </div>
 <div>
     {% if s.questions_yes %}
@@ -19,8 +19,8 @@
     {% endif %}
 </div>
 <div>
-    {% if s.archetypes %}
-        <a href="/cognitive_biases">Your Decision Maker Profile</a>
+    {% if s.top_archetype %}
+        <a href="/cognitive_biases">Your Decision Maker Profile: {{ s.top_archetype }}</a>
     {% else %}
         Your Decision Maker Profile
     {% endif %}

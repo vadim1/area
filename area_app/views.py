@@ -62,6 +62,8 @@ def edges_pitfalls(request):
         request.session['questions_yes'] = questions_yes
         top_archetypes = archetypes.get_top_archetypes(questions_yes)
         request.session['archetype'] = top_archetypes
+        top_archetype = top_archetypes[0]
+        request.session['top_archetype'] = top_archetype[0]
         return redirect('/cognitive_biases')
     # Randomize the order of questions
     random_order_questions = []
@@ -83,7 +85,6 @@ def cognitive_biases(request):
         return redirect('/action_map')
     top_archetypes = request.session['archetype']
     top_archetype = top_archetypes[0]
-    request.session['top_archectype'] = top_archetype[0]
     return render(request, 'cognitive_biases.html', {
         'archetype': top_archetype[0],
         'strength': top_archetype[1]

@@ -1,50 +1,76 @@
 {% extends 'base.html' %}
 {% block title %}{% block h1 %}What's your Decision?{% endblock %}{% endblock %}
 {% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
+{% block extra_head %}
+<style class="text/css">
+.tooltip > .tooltip-inner {
+    background-color: #73AD21;
+    color: #FFFFFF;
+    border: 1px solid green;
+    padding: 15px;
+    font-size: 15px;
+    max-width: 500px;
+    width: 500px;
+    text-align: left;
+}
+</style>
+{% endblock %}
 {% block content %}
+    <div style="width: 380px; float:right;">
+        <p>Need some examples for the kinds of decisions that people like you have to make everyday? Click on the videos to hear from Naomi and Mitch.</p>
+        <iframe width="180" height="315"
+                src="https://www.youtube.com/embed/eI18uNKEJyo?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0"
+                allowfullscreen></iframe>
+        <iframe width="180" height="315"
+                src="https://www.youtube.com/embed/CvkjxEoVKL8?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0"
+                allowfullscreen></iframe>
+    </div>
     <h3>What type of decision are you making? Click all that apply.</h3>
-    <div id="example" style="height: 50px; border: turquoise; background-color:lightblue; margin: 20px; padding: 5px;"></div>
     <div style="margin-top: 20px;" id="decision_types" class="row">
-        <div class="col-sm-4">
-            <div>
-                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="financial"/> Financial</label>
-            </div>
-            <div>
-                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="academic"/>
-                    Academic</label>
-            </div>
-            <div>
-                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="friends"/>
-                    Friends</label>
-            </div>
+        <div>
+            <label class="decision_type"><input type="checkbox" name="decision_type[]" value="financial"/>
+                Financial</label>
+            <span class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></span>
         </div>
-        <div class="col-sm-4">
-            <div>
-                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="family"/>
-                    Family</label>
-            </div>
-            <div>
-                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="school"/>
-                    School</label>
-            </div>
-            <div>
-                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="after school"/> After
-                    School</label>
-            </div>
+        <div>
+            <label class="decision_type"><input type="checkbox" name="decision_type[]" value="academic"/>
+                Academic</label>
+            <span class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></span>
         </div>
-        <div class="col-sm-4">
-            <div>
-                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="identity"/>
-                    Identity</label>
-            </div>
-            <div>
-                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="health"/>
-                    Health</label>
-            </div>
-            <div>
-                <label><input type="checkbox" name="decision_type[]" value="other"/> Other: </label>
-                <input type="text" name="decision_type_other" id="decision_type_other" size="20" value="{{ request.session.decision_type_other }}"/>
-            </div>
+        <div>
+            <label class="decision_type"><input type="checkbox" name="decision_type[]" value="friends"/>
+                Friends</label>
+            <span class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></span>
+        </div>
+        <div>
+            <label class="decision_type"><input type="checkbox" name="decision_type[]" value="family"/>
+                Family</label>
+            <span class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></span>
+        </div>
+        <div>
+            <label class="decision_type"><input type="checkbox" name="decision_type[]" value="school"/>
+                School</label>
+            <span class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></span>
+        </div>
+        <div>
+            <label class="decision_type"><input type="checkbox" name="decision_type[]" value="after school"/> After
+                School</label>
+            <span class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></span>
+        </div>
+        <div>
+            <label class="decision_type"><input type="checkbox" name="decision_type[]" value="identity"/>
+                Identity</label>
+            <span class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></span>
+        </div>
+        <div>
+            <label class="decision_type"><input type="checkbox" name="decision_type[]" value="health"/>
+                Health</label>
+            <span class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></span>
+        </div>
+        <div>
+            <label><input type="checkbox" name="decision_type[]" value="other"/> Other: </label>
+            <input type="text" name="decision_type_other" id="decision_type_other" size="20"
+                   value="{{ request.session.decision_type_other }}"/>
         </div>
     </div>
     <h3>What's your decision?</h3>
@@ -52,15 +78,14 @@
         I am facing a<span id="types_starts_with_vowel" style="display:none">n</span> <span id="types"></span>
         challenge.
         <br/>
-        I need to decide <input type="text" size="80" name="decision" id="decision" placeholder="what's your decision?"
+        I need to decide <input type="text" size="80" name="decision" id="decision"
                                 value="{{ request.session.decision }}"/>.
         <br/>
         I have these options: <input type="text" size="76" name="options" id="options"
-                                     placeholder="what are your options?"
                                      value="{{ request.session.options }}"/>.
         <br/>
         I need to decide <select name="timeframe" id="timeframe">
-        <option value="">when?</option>
+        <option value=""></option>
         <option value="day">today</option>
         <option value="week">this week</option>
         <option value="month">this month</option>
@@ -71,35 +96,23 @@
     {% include 'buttons.html' %}
 
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('#timeframe').val('{{ request.session.timeframe }}');
             var decision_types = '{{ decision_types }}'.split(',');
             for (var i = 0; i < decision_types.length; i++) {
                 $('[name="decision_type[]"][value="' + decision_types[i] + '"]').click();
             }
+            $('.info').each(function(){
+                var val = $(this).closest('div').find(':checkbox').attr('value');
+                var example = type_examples[val];
+                var text = get_decision_text(val, example['decision'], example['options'], example['timeframe']);
+                $(this).attr('title', text);
+            });
+            $('[data-toggle="tooltip"]').tooltip();
         });
 
         var type_none = '[select type above]';
         $('#types').text(type_none);
-
-        function show_example(val) {
-            var example = type_examples[val];
-            $('#decision').attr('placeholder', example['decision']);
-            $('#options').attr('placeholder', example['options']);
-            if ($('#timeframe').val() == '') {
-                $('#timeframe').val(example['timeframe']);
-            }
-        }
-
-        $('.decision_type').mouseenter(function(){
-            var val = $(this).find(':checkbox').attr('value');
-            var example = type_examples[val];
-            var text = get_decision_text(val, example['decision'], example['options'], example['timeframe']);
-            $('#example').text(text);
-        });
-        $('.decision_type').mouseleave(function(){
-            $('#example').text('');
-        });
 
         function updateTypes() {
             var types = '';
@@ -117,8 +130,6 @@
                         } else {
                             $('#types_starts_with_vowel').hide();
                         }
-                        // For first one, fill in example
-                        show_example(val)
                     }
                     if (val == 'other') {
                         var other_type = $('#decision_type_other').val();
@@ -133,9 +144,6 @@
             });
             if (!types) {
                 types = type_none;
-            }
-            if (!some_checked) {
-                show_example('none');
             }
             $('#types').text(types);
         }
@@ -191,8 +199,7 @@
             },
         }
 
-        function validate()
-        {
+        function validate() {
             var type_selected = false;
             $(':checkbox:checked').each(function () {
                 var val = $(this).attr('value');

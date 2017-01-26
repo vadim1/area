@@ -1,39 +1,38 @@
 {% extends 'base.html' %}
 {% block title %}{% block h1 %}Your Vision of Success{% endblock %}{% endblock %}
 {% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
+{% block extra_head %}
+    <script src="https://rawgit.com/RubaXa/Sortable/master/Sortable.js"></script>
+    <style type="text/css">
+        .list-group-item {
+            cursor: pointer;
+        }
+    </style>
+{% endblock %}
 {% block content %}
-    <h3>My decision will be successful when I have:</h3>
+    <h3>Please sort to rank what will make your decision a success</h3>
+    <input type="hidden" name="success" id="success" value="{{ success_order }}" />
     <div style="font-size: larger">
-        <ul style="list-style: none;">
-            <li>
-                <label>
-                    <input type="radio" name="success" value="pro_con"/>
-                    Weighed the pros and cons and took my time to decide
-                </label>
+        <ul class="list-group sortable" id="successList" style="list-style: none;">
+            <li class="list-group-item" data-id="pro_con">
+                <span class="drag-handle">☰</span>
+                Weighed the pros and cons and took my time to decide
             </li>
-            <li>
-                <label>
-                    <input type="radio" name="success" value="acted"/>
-                    Acted on a strong plan based in evidence
-                </label>
+            <li class="list-group-item" data-id="acted">
+                <span class="drag-handle">☰</span>
+                Acted on a strong plan based in evidence
             </li>
-            <li>
-                <label>
-                    <input type="radio" name="success" value="trust"/>
-                    Built more trust with my friends and people who give me advice
-                </label>
+            <li class="list-group-item" data-id="trust">
+                <span class="drag-handle">☰</span>
+                Built more trust with my friends and people who give me advice
             </li>
-            <li>
-                <label>
-                    <input type="radio" name="success" value="pride"/>
-                    Felt proud of my instincts and know I can trust them
-                </label>
+            <li class="list-group-item" data-id="pride">
+                <span class="drag-handle">☰</span>
+                Felt proud of my instincts and know I can trust them
             </li>
-            <li>
-                <label>
-                    <input type="radio" name="success" value="created"/>
-                    Created and acted on a new, better option for my decision than anything I had considered
-                </label>
+            <li class="list-group-item" data-id="created">
+                <span class="drag-handle">☰</span>
+                Created and acted on a new, better option for my decision than anything I had considered
             </li>
         </ul>
     </div>
@@ -41,20 +40,36 @@
     {% include 'buttons.html' %}
 
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('[name="success"][value="{{ request.session.success }}"]').click();
         });
 
         function validate() {
-            var selected = false;
-            $(':radio:checked').each(function () {
-                selected = true;
-            });
-            if (!selected) {
-                alert("Please select a success criteria");
-                return false;
-            }
+            return true;
         }
         $('form').submit(validate);
+
+        Sortable.create(successList, {
+            store: {
+                /**
+                 * Get the order of elements. Called once during initialization.
+                 * @param   {Sortable}  sortable
+                 * @returns {Array}
+                 */
+                get: function (sortable) {
+                    var order = $('#success').val();
+                    return order ? order.split('|') : [];
+                },
+
+                /**
+                 * Save the order of elements. Called onEnd (when the item is dropped).
+                 * @param {Sortable}  sortable
+                 */
+                set: function (sortable) {
+                    var order = sortable.toArray();
+                    $('#success').val(order);
+                }
+            }
+        });
     </script>
 {% endblock %}
