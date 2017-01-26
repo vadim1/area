@@ -2,29 +2,29 @@
 {% block title %}{% block h1 %}Problem Solved!{% endblock %}{% endblock %}
 {% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
 {% block content %}
-    <form action="{{ request.path }}" method="post" style="margin: 50px;">
-        {% csrf_token %}
-        <h3>The Gray AREA</h3>
-        <h3>The place between black and white that's the place where life happens</h3>
-        <h3>Use the AREA Method app to help you solve your problems, your gray AREAs</h3>
-        <h3>By using the AREA app you will...</h3>
-        <h3>
-            <ul>
-                <li>Clarify the problem you need to solve</li>
-                <li>Clarify what matters to you in the outcome</li>
-                <li>Understand yourself better as a decision maker</li>
-                <li>Get action steps tailored to help you begin to solve your problem</li>
-                <li>Connect with other decision makers like you</li>
-                <li>Receive an “Action Map” that puts it all together so you move from the Gray AREA to Where Life Happens</li>
-            </ul>
-        </h3>
-        <h3>Are you ready to be a better problem solver?</h3>
-        <div style="margin: 50px;">
-            <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Get started!"/>
-        </div>
+    <h3>The Gray AREA</h3>
+    <h3>The place between black and white that's the place where life happens</h3>
+    <h3>Use the AREA Method app to help you solve your problems, your gray AREAs</h3>
+    <h3>By using the AREA app you will...</h3>
+    <h3>
+        <ul>
+            <li>Clarify the problem you need to solve</li>
+            <li>Clarify what matters to you in the outcome</li>
+            <li>Understand yourself better as a decision maker</li>
+            <li>Get action steps tailored to help you begin to solve your problem</li>
+            <li>Connect with other decision makers like you</li>
+            <li>Receive an “Action Map” that puts it all together so you move from the Gray AREA to Where Life Happens
+            </li>
+        </ul>
+    </h3>
+    <h3>Are you ready to be a better problem solver?</h3>
+    <div style="margin: 50px;">
+        <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Get started!"/>
+    </div>
 
-        <div class="q">Allow log in / pull up saves decisions / etc.?</div>
-        <p>To learn more about the AREA Method and see a few examples of AREA at work check out <a
-                href="http://areamethod.com">areamethod.com</a></p>
-    </form>
+    <div class="q">Allow log in / pull up saves decisions / etc.?</div>
+    <p>To learn more about the AREA Method and see a few examples of AREA at work check out <a
+            href="http://areamethod.com">areamethod.com</a></p>
+
+    <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
 {% endblock %}

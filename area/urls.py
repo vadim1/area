@@ -13,12 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from area_app import views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='Home'),
     url(r'^decision$', views.decision, name='Decision'),
     url(r'^critical_concepts$', views.critical_concepts, name='Critical Concepts'),
@@ -28,4 +27,10 @@ urlpatterns = [
     url(r'^action_map$', views.action_map, name='Action Map'),
     url(r'^summary$', views.summary, name='Summary'),
     url(r'^restart$', views.restart_session, name='Restart'),
+    url(r'^oauth/', include('social.apps.django_app.urls', namespace='social')),
+    url(r'^admin/', admin.site.urls),
 ]
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'logged_in'

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social.apps.django_app.default',
     'area_app',
 ]
 
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'area.urls'
@@ -63,6 +65,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -80,6 +84,8 @@ DATABASES = {
         'NAME': 'area_method',
         'USER': 'area',
         'PASSWORD': 'HIDDEN',
+        'HOST': 'area.csdqzmj3antr.us-west-1.rds.amazonaws.com',
+        'PORT': 3306,
     }
 }
 
@@ -102,6 +108,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'social.backends.github.GithubOAuth2',
+    'social.backends.twitter.TwitterOAuth',
+    'social.backends.facebook.FacebookOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# Facebook Login
+SOCIAL_AUTH_FACEBOOK_KEY = '414446745559947'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = 'd257e99573552511bcc5106b50cb47b4'  # App Secret
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/

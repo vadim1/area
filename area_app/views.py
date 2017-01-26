@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 import biases
 import archetypes
 import random
@@ -8,6 +9,11 @@ def restart_session(request):
     for key in request.session.keys():
         del request.session[key]
     return redirect('/decision')
+
+
+@login_required
+def logged_in(request):
+    return redirect('/home')
 
 
 def home(request):
