@@ -8,18 +8,16 @@
         <div>
             <h3 id="decision_text"></h3>
             <div>{% with 'archetype/'|add:archetype|add:'.html' as path %}{% include path %}{% endwith %}</div>
-            <p>To make your decision, we have a few guides for you to use next.</p>
-            <div class="q">Formatting needed. Should these be printable? How do we expect students to take actions here?
-                Fill out online? Email / text it to them?
-            </div>
+            <p>Your Cheetah Sheets:</p>
+            <div class="q">Have full Cheetah Sheets in-line or just links to printable PDFs?</div>
             {% for cheetah in cheetahs|slice:":3" %}
                 <h4>{{ cheetah }} <span style="font-size: small; color: lightgray;">{{ weight }}</span></h4>
-                <pre>{% with 'cheetah/'|add:cheetah|add:'.html' as path %}{% include path %}{% endwith %}</pre>
+                <div style="background-color: lightblue">{% with 'cheetah/'|add:cheetah|add:'.html' as path %}{% include path %}{% endwith %}</div>
             {% endfor %}
             <h3>
-                I commit to solving my problem by {{ commitment }}
+                You commit to solving your problem by {{ commitment }}
                 in the next {{ commitment_days }}
-                days and sharing my results to create a community of problem solvers.
+                days and sharing your results to create a community of problem solvers.
             </h3>
         </div>
 

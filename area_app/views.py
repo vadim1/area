@@ -11,9 +11,8 @@ def restart_session(request):
     return redirect('/decision')
 
 
-@login_required
 def logged_in(request):
-    return redirect('/home')
+    return redirect('/')
 
 
 def home(request):
@@ -115,7 +114,7 @@ def action_map(request):
         request.session['commitment'] = request.POST['commitment']
         request.session['commitment_days'] = request.POST['days']
         return redirect('/summary')
-    archetype = request.session['top_archectype']
+    archetype = request.session['top_archetype']
     archetype_cheetahs = archetypes.archetype_cheetah_sheets[archetype]
     request.session['cheetah_sheets'] = archetype_cheetahs
     return render(request, 'action_map.html', {
@@ -135,7 +134,7 @@ def summary(request):
         'decision': request.session['decision'],
         'options': request.session['options'],
         'timeframe': request.session['timeframe'],
-        'archetype': request.session['top_archectype'],
+        'archetype': request.session['top_archetype'],
         'cheetahs': request.session['cheetah_sheets'],
         'commitment': request.session['commitment'],
         'commitment_days': request.session['commitment_days'],

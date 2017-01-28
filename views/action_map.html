@@ -4,16 +4,17 @@
 {% block content %}
     <div>
     <h3 id="decision_text"></h3>
-    <div>{% with 'archetype/'|add:archetype|add:'.html' as path %}{% include path %}{% endwith %}</div>
-    <p>To make your decision, we have a few guides for you to use next.</p>
-        <div class="q">Formatting needed. Should these be printable?  How do we expect students to take actions here?  Fill out online?  Email / text it to them?</div>
+    <h3>
+        You are a <strong>{{ archetype }}</strong>! To make your decision, we have a few guides for you to use next.
         {% for cheetah in cheetahs|slice:":3" %}
             <h4>{{ cheetah }} <span style="font-size: small; color: lightgray;">{{ weight }}</span></h4>
-            <pre>{% with 'cheetah/'|add:cheetah|add:'.html' as path %}{% include path %}{% endwith %}</pre>
+            <div style="background-color: lightblue">{% with 'cheetah/'|add:cheetah|add:'.html' as path %}{% include path %}{% endwith %}</div>
         {% endfor %}
+    </h3>
     <h3>
         I commit to solving my problem by
         <input type="text" size="40" name="commitment" id="commitment" placeholder="what will you do?" value="{{ request.session.commitment }}" />
+        <br/>
         in the next
         <select name="days" id="days">
             <option value=""></option>
@@ -27,9 +28,18 @@
         </select>
         days and sharing my results to create a community of problem solvers.
     </h3>
-    <div class="q">Need to get their info to remind them of commitment - phone #?  Email?</div>
 
-    {% include 'buttons.html' %}
+<div style="margin-top: 50px;">
+    <input type="submit" class="btn btn-sm" name="submit" value="Back" />
+    &nbsp;
+    <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Make your commitments and receive an email of your Action Map and Cheetah Sheets!" />
+</div>
+
+
+        <div class="q">Formatting needed. Should these be printable?  How do we expect students to take actions here?  Fill out online?  Email / text it to them?</div>
+
+    <div class="q">Get their fb login if not already done here</div>
+
     </div>
 
     <script type="text/javascript">

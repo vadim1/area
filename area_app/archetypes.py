@@ -30,9 +30,13 @@ edges_pitfalls = {
         'yes': {'thinker': 1, 'detective': 1},
         'no': {}
     },
-    'I am good at making sense of information and understanding the implications of it.': {
+    'I am good at getting the information I need.': {
         'yes': {'thinker': 1, 'architect': 1},
-        'no': {}
+        'no': {'intuitive': 1, 'listener': 1}
+    },
+    'I am good at drawing conclusions.': {
+        'yes': {'thinker': 1, 'architect': 1},
+        'no': {'intuitive': 1, 'listener': 1}
     },
     'I like learning from others.': {
         'yes': {'listener': 1},
@@ -42,7 +46,7 @@ edges_pitfalls = {
         'yes': {'intuitive': 1},
         'no': {'listener': 1}
     },
-    'I feel overwhelmed when I have too much choice.': {
+    'I feel overwhelmed when I have too many choices.': {
         'yes': {'thinker': 1},
         'no': {'detective': 1}
     },
@@ -66,7 +70,7 @@ edges_pitfalls = {
         'yes': {'architect': 1},
         'no': {}
     },
-    'I prefer to lean on my community of friends than to do my own thing.': {
+    'I prefer to lean on my friends than to do my own thing.': {
         'yes': {'listener': 1},
         'no': {'architect': 1}
     },

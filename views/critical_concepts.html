@@ -10,29 +10,31 @@
     </style>
 {% endblock %}
 {% block content %}
-    <h3>Please sort to rank what will make your decision a success</h3>
+    <h3>How can you feel confident that you are making the best decision for you?
+        I feel most confident when I... (rank in order of importance)</h3>
+    <div class="q">TODO: Randomize order</div>
     <input type="hidden" name="success" id="success" value="{{ success_order }}" />
     <div style="font-size: larger">
         <ul class="list-group sortable" id="successList" style="list-style: none;">
             <li class="list-group-item" data-id="pro_con">
                 <span class="drag-handle">☰</span>
-                Weighed the pros and cons and took my time to decide
+                Weigh the pros and cons and take my time to decide
             </li>
             <li class="list-group-item" data-id="acted">
                 <span class="drag-handle">☰</span>
-                Acted on a strong plan based in evidence
+                Act on a strong plan based in evidence
             </li>
             <li class="list-group-item" data-id="trust">
                 <span class="drag-handle">☰</span>
-                Built more trust with my friends and people who give me advice
+                Build more trust with my friends and people who give me advice
             </li>
             <li class="list-group-item" data-id="pride">
                 <span class="drag-handle">☰</span>
-                Felt proud of my instincts and know I can trust them
+                Feel proud of my instincts and know I can trust them
             </li>
             <li class="list-group-item" data-id="created">
                 <span class="drag-handle">☰</span>
-                Created and acted on a new, better option for my decision than anything I had considered
+                Create and act on a new, better option for my decision than anything I consider
             </li>
         </ul>
     </div>

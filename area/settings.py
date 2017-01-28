@@ -37,8 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'social.apps.django_app.default',
     'area_app',
+    'social.apps.django_app.default',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -83,7 +84,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'area_method',
         'USER': 'area',
-        'PASSWORD': 'HIDDEN',
+        'PASSWORD': 'einhorn',
         'HOST': 'area.csdqzmj3antr.us-west-1.rds.amazonaws.com',
         'PORT': 3306,
     }
@@ -119,6 +120,13 @@ AUTHENTICATION_BACKENDS = (
 # Facebook Login
 SOCIAL_AUTH_FACEBOOK_KEY = '414446745559947'  # App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = 'd257e99573552511bcc5106b50cb47b4'  # App Secret
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id,name,email',
+}
+LOGIN_URL = '/login'
+LOGOUT_URL = '/logout'
+LOGIN_REDIRECT_URL = '/logged_in'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/

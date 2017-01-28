@@ -26,46 +26,42 @@
                 allowfullscreen></iframe>
     </div>
     <h3>What type of decision are you making? Click all that apply.</h3>
+    <div class="q">Line breaks to match below...</div>
     <div style="margin-top: 20px;" id="decision_types" class="row">
         <div>
-            <label class="decision_type"><input type="checkbox" name="decision_type[]" value="financial"/>
-                Financial</label>
-            <span class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></span>
-        </div>
-        <div>
-            <label class="decision_type"><input type="checkbox" name="decision_type[]" value="academic"/>
-                Academic</label>
-            <span class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></span>
+            <label class="decision_type"><input type="checkbox" name="decision_type[]" value="family"/>
+                Family</label>
+            <span class="info" data-toggle="tooltip">[<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> See Example]</span>
         </div>
         <div>
             <label class="decision_type"><input type="checkbox" name="decision_type[]" value="friends"/>
                 Friends</label>
-            <span class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></span>
-        </div>
-        <div>
-            <label class="decision_type"><input type="checkbox" name="decision_type[]" value="family"/>
-                Family</label>
-            <span class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></span>
+            <span class="info" data-toggle="tooltip">[<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> See Example]</span>
         </div>
         <div>
             <label class="decision_type"><input type="checkbox" name="decision_type[]" value="school"/>
                 School</label>
-            <span class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></span>
+            <span class="info" data-toggle="tooltip">[<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> See Example]</span>
         </div>
         <div>
             <label class="decision_type"><input type="checkbox" name="decision_type[]" value="after school"/> After
                 School</label>
-            <span class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></span>
+            <span class="info" data-toggle="tooltip">[<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> See Example]</span>
+        </div>
+        <div>
+            <label class="decision_type"><input type="checkbox" name="decision_type[]" value="money related"/>
+                Money Related</label>
+            <span class="info" data-toggle="tooltip">[<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> See Example]</span>
         </div>
         <div>
             <label class="decision_type"><input type="checkbox" name="decision_type[]" value="identity"/>
                 Identity</label>
-            <span class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></span>
+            <span class="info" data-toggle="tooltip">[<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> See Example]</span>
         </div>
         <div>
             <label class="decision_type"><input type="checkbox" name="decision_type[]" value="health"/>
                 Health</label>
-            <span class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></span>
+            <span class="info" data-toggle="tooltip">[<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> See Example]</span>
         </div>
         <div>
             <label><input type="checkbox" name="decision_type[]" value="other"/> Other: </label>
@@ -157,15 +153,10 @@
                 'options': ' what are your options?',
                 'timeframe': '',
             },
-            'financial': {
+            'money related': {
                 'decision': 'whether I need to get a new job so that I can make more money',
                 'options': ' ask my current boss for a raise, or look for a job that pays more',
                 'timeframe': 'week',
-            },
-            'academic': {
-                'decision': 'when I should get my homework done when I have a big basketball game tonight',
-                'options': 'do it before the game, but risk being late and getting benched, or do it after the game, but risk being too tired to focus',
-                'timeframe': 'day',
             },
             'friends': {
                 'decision': 'which friend I should talk to about a personal problem',
@@ -178,9 +169,9 @@
                 'timeframe': 'day',
             },
             'school': {
-                'decision': 'whether I should transfer to a different school next year',
-                'options': 'stay at the school I am at now, go to East Side, or go to Central',
-                'timeframe': 'month',
+                'decision': 'when I should get my homework done when I have a big basketball game tonight',
+                'options': 'do it before the game, but risk being late and getting benched, or do it after the game, but risk being too tired to focus',
+                'timeframe': 'day',
             },
             'after school': {
                 'decision': 'what sport I should play in the fall',
