@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 import biases
 import archetypes
 import random
+import os
 
 
 def restart_session(request):
@@ -139,4 +140,12 @@ def summary(request):
         'commitment': request.session['commitment'],
         'commitment_days': request.session['commitment_days'],
     })
+
+
+def cheetah_master(request):
+    cheetahs = os.listdir('../area/views/cheetah')
+    return render(request, 'cheetah_master.html', {
+        'cheetahs': cheetahs,
+    })
+
 

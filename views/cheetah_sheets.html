@@ -9,7 +9,7 @@
         <div class="q">Should these be printable?  How do we expect students to take actions here?  Fill out online?  Email / text it to them?</div>
         {% for cheetah, weight in attribute_cheetahs|slice:":3" %}
             <h4>{{ cheetah }} <span style="font-size: small; color: lightgray;">{{ weight }}</span></h4>
-            <pre>{% with 'cheetah/'|add:cheetah|add:'.html' as path %}{% include path %}{% endwith %}</pre>
+            <div style="background-color: lightblue">{% with 'cheetah/'|add:cheetah|add:'.html' as path %}{% include path %}{% endwith %}</div>
         {% endfor %}
     {% include 'buttons.html' %}
     </div>

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}{% block h1 %}Cheetah Sheets{% endblock %}{% endblock %}
+{% block content %}
+    <div>
+        {% for cheetah in cheetahs %}
+            <h4>{{ cheetah }} <span style="font-size: small; color: lightgray;"></span></h4>
+            <div style="background-color: lightblue">{% with 'cheetah/'|add:cheetah as path %}{% include path %}{% endwith %}</div>
+        {% endfor %}
+    </div>
+{% endblock %}
