@@ -3,27 +3,27 @@
 
 edges_pitfalls = {
     'I tend to make gut decisions.': {
-        'yes': {'intuitive': 1},
+        'yes': {'adventurer': 1},
         'no': {'thinker': 1}
     },
     'I like to collect all possible evidence before making a decision.': {
         'yes': {'detective': 1},
-        'no': {'intuitive': 1}
+        'no': {'adventurer': 1}
     },
     'I have trouble making decisions because I see all the pluses and minuses.': {
         'yes': {'thinker': 1},
-        'no': {'intuitive': 1, 'architect': 1}
+        'no': {'adventurer': 1, 'architect': 1}
     },
     'The best way for me to make a decision is to ask others for advice.': {
         'yes': {'listener': 1},
-        'no': {'intuitive': 1, 'detective': 1}
+        'no': {'adventurer': 1, 'detective': 1}
     },
     'I always think outside the box when making decisions.': {
         'yes': {'architect': 1},
         'no': {'detective': 1}
     },
     'I never consider how much a decision will cost me before I make it.': {
-        'yes': {'intuitive': 1},
+        'yes': {'adventurer': 1},
         'no': {'detective': 1}
     },
     'I know where to look for good resources to solve my problems.': {
@@ -32,18 +32,18 @@ edges_pitfalls = {
     },
     'I am good at getting the information I need.': {
         'yes': {'thinker': 1, 'architect': 1},
-        'no': {'intuitive': 1, 'listener': 1}
+        'no': {'adventurer': 1, 'listener': 1}
     },
     'I am good at drawing conclusions.': {
         'yes': {'thinker': 1, 'architect': 1},
-        'no': {'intuitive': 1, 'listener': 1}
+        'no': {'adventurer': 1, 'listener': 1}
     },
     'I like learning from others.': {
         'yes': {'listener': 1},
         'no': {}
     },
     'I don\'t like to listen to the opinions of other people - I prefer to make my own decisions.': {
-        'yes': {'intuitive': 1},
+        'yes': {'adventurer': 1},
         'no': {'listener': 1}
     },
     'I feel overwhelmed when I have too many choices.': {
@@ -64,7 +64,7 @@ edges_pitfalls = {
     },
     'I don\'t feel the need to make decisions quickly.': {
         'yes': {'thinker': 1},
-        'no': {'intuitive': 1}
+        'no': {'adventurer': 1}
     },
     'I don\'t like to pick the obvious decision.': {
         'yes': {'architect': 1},
@@ -87,7 +87,7 @@ edges_pitfalls = {
 
 def get_top_archetypes(questions_yes):
     archetypes = {
-        'intuitive': 0,
+        'adventurer': 0,
         'thinker': 0,
         'detective': 0,
         'listener': 0,
@@ -105,7 +105,7 @@ def get_top_archetypes(questions_yes):
 
 
 archetype_cheetah_sheets = {
-    'intuitive': ['Scenario Analysis', 'Pro Con'],
+    'adventurer': ['Scenario Analysis', 'Pro Con'],
     'thinker': ['Getting Help with Your Search', 'Great Questions Roadmap'],
     'detective': ['Competing Alternative Hypothesis', 'Pre Mortem'],
     'listener': ['Deep Dive Resources', 'Pre Mortem'],

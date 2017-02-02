@@ -5,10 +5,21 @@
     <div>
     <h3 id="decision_text"></h3>
     <h3>
-        You are a <strong>{{ archetype }}</strong>! To make your decision, we have a few guides for you to use next.
+        You are a <strong>{{ archetype }}</strong>! To make your decision, we have a guide for you to use next.
         {% for cheetah in cheetahs|slice:":3" %}
+            <div class="resource">
+            {% if forloop.counter0 > 0 %}
+                <h4 class="showLink">
+                    <a href="#" onclick="$(this).closest('.resource').find('.cheetahContent').show();$(this).closest('.showLink').hide();return false;">Show Another Resource...</a>
+                </h4>
+                <div class="cheetahContent" style="display:none">
+            {% endif %}
             <h4>{{ cheetah }} <span style="font-size: small; color: lightgray;">{{ weight }}</span></h4>
             <div style="background-color: lightblue">{% with 'cheetah/'|add:cheetah|add:'.html' as path %}{% include path %}{% endwith %}</div>
+            {% if forloop.counter0 > 0 %}
+                </div>
+            {% endif %}
+            </div>
         {% endfor %}
     </h3>
     <h3>
