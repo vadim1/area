@@ -16,10 +16,18 @@ def logged_in(request):
     return redirect('/')
 
 
+def check_partner(request):
+    partner = ''
+    if 'partner' in request.GET:
+        partner = request.GET['partner']
+    request.session['partner'] = partner
+
+
 def home(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/home')
         return redirect('/decision')
+    check_partner(request)
     return render(request, 'home.html', {
     })
 

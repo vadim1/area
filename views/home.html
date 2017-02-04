@@ -2,17 +2,32 @@
 {% block title %}{% block h1 %}Problem Solved!{% endblock %}{% endblock %}
 {% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
 {% block content %}
-    <h3>It can be messy and challenging to figure out how to solve thorny problems. Where do you start?
-        How can you feel confident that you are making the best decision for you?</h3>
-
-    <h3>Whether you are making a decision about friends, family, money or school,
-        <a href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved" target="_blank">Problem Solved!</a>
-        will show you how to
+    <h3>
+        {% if request.session.partner == "apres" %}
+            Looking for a job you'll love?
+            Problem Solved! by Après can help you successfully navigate your transition,
+            by helping you hone in on what constitutes a successful transition for you.
+            </h3><h3>
+            Should you look for full-time, part-time or project-based work?
+            Should you look for an office job, a tele-commuting opportunity or one with flexibility?
+            Do you want on-the-job training or professional development opportunities or focus on what you know?
+            {% else %}
+            How do you make a good decision? Where do you start?
+            How can you feel confident that you are making the best decision for you?</h3>
+        {% endif %}
+    <h3>
+        {% if request.session.partner == "fp" %}
+            Whether you are making a decision about friends, family, money or school,
+        {% endif %}
+        <a href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved"
+           target="_blank">Problem Solved!</a>
+        can help you determine what matters for your decision and how to get there by showing you how to
         use the powerful <a href="http://areamethod.com" target="_blank">AREA Method</a> to make successful decisions
         with confidence and conviction.
     </h3>
     <h3>By using
-        <a href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved" target="_blank">Problem Solved!</a>
+        <a href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved"
+           target="_blank">Problem Solved!</a>
         you will understand yourself better as a decision maker by...</h3>
     <h3>
         <ul>

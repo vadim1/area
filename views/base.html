@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Area Method: {% block title %}{% endblock %}</title>
+    <title>Problem Solved! {% block title %}{% endblock %}</title>
 
     <!-- JQuery -->
     <script
@@ -13,22 +13,26 @@
 
     <!-- Boostrap -->
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
 
     <!-- Slider -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.5.4/bootstrap-slider.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.5.4/css/bootstrap-slider.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.5.4/css/bootstrap-slider.css"/>
 
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function () {
         });
 
-        function get_decision_text(decision_type, decision, options, timeframe)
-        {
+        function get_decision_text(decision_type, decision, options, timeframe) {
             var text = 'You are facing a';
             if (decision_type.startsWith('a') || decision_type.startsWith('i')) {
                 text += 'n';
@@ -54,8 +58,8 @@
     </script>
 
     <!-- Fonts -->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Vollkorn" />
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Droid+Sans" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Vollkorn"/>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Droid+Sans"/>
 
     <style type="text/css">
         /* Sticky footer styles
@@ -64,14 +68,17 @@
             position: relative;
             min-height: 100%;
         }
+
         body {
             /* Margin bottom by footer height */
             margin-bottom: 100px;
             font-family: "Droid Sans";
         }
+
         h1 {
             font-family: "Vollkorn";
         }
+
         .footer {
             position: absolute;
             bottom: 0;
@@ -93,24 +100,57 @@
             margin-top: 10px;
             margin-bottom: 10px;
         }
+
+        {% if request.session.partner == "apres" %}
+        #logo {
+            display: block;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            background: url('https://apresgroup.com/wp-content/uploads/2016/05/apres-logo_small@2x.png') no-repeat;
+            background-size: 100% 100%;
+            border: none;
+            float: right;
+            width: 130px;
+            height: 35px;
+        }
+        {% endif %}
+        {% if request.session.partner == "fp" %}
+        #logo {
+            display: block;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            background: url('http://www.thefutureproject.org/img/logo.png') no-repeat;
+            background-size: 100% 100%;
+            border: none;
+            float: right;
+            width: 130px;
+            height: 130px;
+        }
+        {% endif %}
     </style>
-{% block extra_head %}{% endblock %}
+    {% block extra_head %}{% endblock %}
 </head>
 <body>
 <div class="container" style="margin-top: 20px; margin-bottom: 50px;">
     <div class="jumbotron">
+        <img id="logo"/>
         <h1>{% block h1 %}{% endblock %}</h1>
         {% block post_title %}{% endblock %}
     </div>
     <form action="{{ request.path }}" method="post" style="margin: 50px;">
         {% csrf_token %}
-    {% block content %}
-    </form>
-    {% endblock %}
+        {% block content %}
+            </form>
+        {% endblock %}
 </div>
 <footer class="footer">
     <div class="container">
-        <p class="text-muted">&copy; 2017 The Area Method</p>
+        <p class="text-muted">
+            &copy; 2017 <a href="http://areamethod.com" target="_blank">AREA Method</a>
+            and
+            <a href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved"
+           target="_blank">Problem Solved!</a>
+        </p>
     </div>
 </footer>
 </body>

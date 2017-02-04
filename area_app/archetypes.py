@@ -106,8 +106,8 @@ def get_top_archetypes(questions_yes):
 
 archetype_cheetah_sheets = {
     'adventurer': ['Scenario Analysis', 'Pro Con'],
-    'thinker': ['Getting Help with Your Search', 'Great Questions Roadmap'],
+    'thinker': ['What Is The Story', 'Great Questions Roadmap'],
     'detective': ['Competing Alternative Hypothesis', 'Pre Mortem'],
-    'listener': ['Deep Dive Resources', 'Pre Mortem'],
+    'listener': ['What Is The Story', 'Pre Mortem'],
     'architect': ['Great Questions Direct Broad and Theoretical', 'Scenario Analysis'],
 }
