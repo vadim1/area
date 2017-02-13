@@ -28,79 +28,14 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.5.4/css/bootstrap-slider.css"/>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-        });
-
-        function get_decision_text(decision_type, decision, options, timeframe) {
-            var text = 'You are facing a';
-            if (decision_type.startsWith('a') || decision_type.startsWith('i')) {
-                text += 'n';
-            }
-            text += ' ' + decision_type + ' challenge.\nYou need to decide ' + decision + '. ';
-            text += 'You have these options: ' + options + '.\n';
-            var when = '';
-            switch (timeframe) {
-                case 'day':
-                    when = 'by the end of the day';
-                    break;
-                case 'week':
-                    when = 'by next week';
-                    break;
-                case 'month':
-                    when = 'this month';
-                    break;
-            }
-            text += 'You need to decide by ' + when + '.';
-
-            return text;
-        }
-    </script>
+    <script scr="{% static "area_app/js/area.js" %}" type="text/javascript"></script>
+    <link rel="stylesheet" href="{% static "area_app/css/area.css" %}" />
 
     <!-- Fonts -->
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Vollkorn"/>
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Droid+Sans"/>
 
     <style type="text/css">
-        /* Sticky footer styles
-        -------------------------------------------------- */
-        html {
-            position: relative;
-            min-height: 100%;
-        }
-
-        body {
-            /* Margin bottom by footer height */
-            margin-bottom: 100px;
-            font-family: "Droid Sans";
-        }
-
-        h1 {
-            font-family: "Vollkorn";
-        }
-
-        .footer {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            /* Set the fixed height of the footer here */
-            height: 60px;
-            background-color: #f5f5f5;
-        }
-
-        .container .text-muted {
-            margin: 20px 0;
-        }
-
-        .q {
-            font-size: large;
-            background-color: lightgoldenrodyellow;
-            border: 1px solid yellow;
-            padding: 10px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-
         {% if request.session.partner == "apres" %}
         #logo {
             display: block;
