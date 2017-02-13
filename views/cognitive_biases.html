@@ -2,7 +2,9 @@
 {% block title %}{% block h1 %}Your Decision Maker Profile{% endblock %}{% endblock %}
 {% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
 {% block content %}
+    {% if archetype %}
     <div>{% with 'archetype/'|add:archetype|add:'.html' as path %}{% include path %}{% endwith %}</div>
+    {% endif %}
     <div>
     <h2 class="q">TODO - Login / Sign Up to see Cheetah Sheets and Template</h2>
     <div class="q">Add posting to social media here?</div>

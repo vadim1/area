@@ -97,6 +97,9 @@ def cognitive_biases(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/edges_pitfalls')
         return redirect('/action_map')
+    if 'archetype' not in request.session:
+        return render(request, 'cognitive_biases.html', {
+        })
     top_archetypes = request.session['archetype']
     top_archetype = top_archetypes[0]
     return render(request, 'cognitive_biases.html', {
@@ -123,6 +126,8 @@ def action_map(request):
         request.session['commitment'] = request.POST['commitment']
         request.session['commitment_days'] = request.POST['days']
         return redirect('/summary')
+    if 'top_archetype' not in request.session:
+        return render(request, 'action_map.html', {});
     archetype = request.session['top_archetype']
     archetype_cheetahs = archetypes.archetype_cheetah_sheets[archetype]
     request.session['cheetah_sheets'] = archetype_cheetahs
@@ -138,6 +143,8 @@ def action_map(request):
 
 def summary(request):
     request.session['summary'] = 1
+    if 'decision' not in request.session:
+        return render(request, 'summary.html', {});
     return render(request, 'summary.html', {
         'type': request.session['decision_type'],
         'decision': request.session['decision'],
