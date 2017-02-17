@@ -17,10 +17,19 @@
 {% endblock %}
 {% block content %}
     <div style="width: 380px; float:right;">
-        <p>Need some examples for the kinds of decisions that people like you have to make everyday? Click on the videos to hear from Naomi and Mitch.</p>
+    <h3 id="videos_link" style="margin-top: 150px;"><a href="#" onclick="$('#videos').show();$('#videos_link').hide();return false;">See Video Examples</a></h3>
+    <table id="videos" style="display: none">
+    <tr>
+        <td>Watch Naomi decide if she should skip a day of school</td>
+        <td>Watch Mitch decide if he should go to detention</td>
+    </tr>
+    <tr>
+        <td>
         <iframe width="180" height="315"
                 src="https://www.youtube.com/embed/eI18uNKEJyo?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0"
                 allowfullscreen></iframe>
+        </td>
+        <td>
         <iframe width="180" height="315"
                 {% if request.session.partner == "apres" %}
                 src="https://www.youtube.com/embed/AVKZOcV3hIQ?rel=0&amp;controls=0&amp;showinfo=0"
@@ -29,9 +38,11 @@
                 {% endif %}
                 frameborder="0"
                 allowfullscreen></iframe>
+        </td>
+    </tr>
+    </table>
     </div>
-    <h3>What type of decision are you making? Click all that apply.</h3>
-    <div class="q">Line breaks to match below...</div>
+    <h3>Select the type of decision you are making. You can pick more than one!</h3>
     <div style="margin-top: 20px;" id="decision_types" class="row">
         <div>
             <label class="decision_type"><input type="checkbox" name="decision_type[]" value="family"/>

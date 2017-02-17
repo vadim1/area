@@ -10,32 +10,20 @@
     </style>
 {% endblock %}
 {% block content %}
-    <h3>How can you feel confident that you are making the best decision for you?
-        I feel most confident when I... (rank in order of importance)</h3>
-    <div class="q">TODO: Randomize order</div>
+    <h3>
+    Imagine you've already made your decision.
+        Which of these statements are you most likely to say and feel proud of?
+        Rank them in order.
+    </h3>
     <input type="hidden" name="success" id="success" value="{{ success_order }}" />
     <div style="font-size: larger">
         <ul class="list-group sortable" id="successList" style="list-style: none;">
-            <li class="list-group-item" data-id="pro_con">
+            {% for item in success %}
+            <li class="list-group-item" data-id="{{ item.0 }}">
                 <span class="drag-handle">☰</span>
-                Weigh the pros and cons and take my time to decide
+                {{ item.1 }}
             </li>
-            <li class="list-group-item" data-id="acted">
-                <span class="drag-handle">☰</span>
-                Act on a strong plan based in evidence
-            </li>
-            <li class="list-group-item" data-id="trust">
-                <span class="drag-handle">☰</span>
-                Build more trust with my friends and people who give me advice
-            </li>
-            <li class="list-group-item" data-id="pride">
-                <span class="drag-handle">☰</span>
-                Feel proud of my instincts and know I can trust them
-            </li>
-            <li class="list-group-item" data-id="created">
-                <span class="drag-handle">☰</span>
-                Create and act on a new, better option for my decision than anything I consider
-            </li>
+            {% endfor %}
         </ul>
     </div>
 

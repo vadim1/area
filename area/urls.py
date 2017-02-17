@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^summary$', views.summary, name='Summary'),
     url(r'^restart$', views.restart_session, name='Restart'),
     url(r'^admin/', admin.site.urls),
+    url(r'^dd$', views.autocomplete_dd, name='Dream Director Autocomplete'),
 
 #    url(r'', include('social_auth.urls')),
     url(r'login/$', auth_views.login, name='login'),

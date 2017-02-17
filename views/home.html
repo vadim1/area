@@ -2,51 +2,121 @@
 {% block title %}{% block h1 %}Problem Solved!{% endblock %}{% endblock %}
 {% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
 {% block content %}
-    <h3>
-        {% if request.session.partner == "apres" %}
+    {% if request.session.partner == "apres" %}
+        <h3>
             Looking for a job you'll love?
             Problem Solved! by Après can help you successfully navigate your transition,
             by helping you hone in on what constitutes a successful transition for you.
-            </h3><h3>
+        </h3>
+        <h3>
             Should you look for full-time, part-time or project-based work?
             Should you look for an office job, a tele-commuting opportunity or one with flexibility?
             Do you want on-the-job training or professional development opportunities or focus on what you know?
-            {% else %}
             How do you make a good decision? Where do you start?
-            How can you feel confident that you are making the best decision for you?</h3>
-        {% endif %}
+            How can you feel confident that you are making the best decision for you?
+        </h3>
+    {% elif request.session.partner == "fp" %}
+        <h3>
+            Throughout life's journey, we make thousands of decisions everyday.
+            They could be small decisions, like, figuring out when to do your homework on a busy day, or big decisions,
+            like figuring out what you should do after high school.
+            Sometimes, it's hard to know if you made the right choice.
+            Well, this app,
+            <a href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved"
+               target="_blank">Problem Solved!</a> is here to help you do that!
+        </h3>
+    {% else %}
+        <h3>
+            <a href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved"
+               target="_blank">Problem Solved!</a>
+            can help you determine what matters for your decision and how to get there by showing you how to
+            use the powerful <a href="http://areamethod.com" target="_blank">AREA Method</a> to make successful
+            decisions
+            with confidence and conviction.
+        </h3>
+    {% endif %}
     <h3>
-        {% if request.session.partner == "fp" %}
-            Whether you are making a decision about friends, family, money or school,
-        {% endif %}
+        With
         <a href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved"
            target="_blank">Problem Solved!</a>
-        can help you determine what matters for your decision and how to get there by showing you how to
-        use the powerful <a href="http://areamethod.com" target="_blank">AREA Method</a> to make successful decisions
-        with confidence and conviction.
+        (powered by the <a href="http://areamethod.com" target="_blank">AREA Method</a>), you will:
     </h3>
-    <h3>By using
-        <a href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved"
-           target="_blank">Problem Solved!</a>
-        you will understand yourself better as a decision maker by...</h3>
     <h3>
         <ul>
-            <li>Clarifying the problem you need to solve</li>
-            <li>Prioritizing what matters to you in the outcome</li>
-            <li>Getting action steps tailored to help you solve your problem</li>
-            <li>Connecting with other decision makers like you</li>
-            <li>Receiving an "Action Map" that puts it all together</li>
+            <li>Get clear on what problem you're solving</li>
+            <li>Identify what matters most to you and what you'd count as success</li>
+            <li>Take a personality quiz to learn how you make decisions</li>
+            <li>Get into action with some clear next steps</li>
         </ul>
     </h3>
-    <div style="margin: 50px;">
+    <h3>
+        Making decisions that you feel good about doesn't have to be an uphill climb. Are you ready to solve your
+        problem?
+    </h3>
+    <div style="margin-top: 50px; text-align: center;">
+        {% if request.session.partner == "fp" %}
+            <div id="signup">
+            <table style="margin: 0 auto;">
+            <tr>
+                <th>Name:</th>
+                <td><input type="text" class="form-control" id="name" name="name" size="20"/></td>
+            </tr>
+            <tr>
+                <th>Email:</th>
+                <td><input type="text" class="form-control" id="email" name="email" size="20"/></td>
+            </tr>
+            <tr>
+                <th>Password:</th>
+                <td><input type="password" class="form-control" id="password" name="password" size="20"/></td>
+            </tr>
+            <tr>
+                <th>Phone:</th>
+                <td><input type="text" class="form-control" id="phone" name="phone" size="20"/></td>
+            </tr>
+            <tr>
+                <th>Dream Director:</th>
+                <td><input type="text" class="form-control" id="dream-director" name="dream-director" size="20"/></td>
+            </tr>
+            </table>
+            <script type="text/javascript">
+            $(function() {
+$("#dream-director").autocomplete({
+source: "/dd",
+minLength: 2,
+});
+});
+            </script>
+        <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Sign Up to Make a Good Decision!" style="margin: 20px;" />
+            <div>
+            <a href="#" onclick="$('#signin').show();$('#signup').hide();return false;">Sign In</a>
+            </div>
+            </div>
+            <div id="signin" style="display: none;">
+            <table style="margin: 0 auto;">
+            <tr>
+                <th>Email:</th>
+                <td><input type="text" class="form-control" id="email" name="email" size="20"/></td>
+            </tr>
+            <tr>
+                <th>Password:</th>
+                <td><input type="password" class="form-control" id="password" name="password" size="20"/></td>
+            </tr>
+            </table>
+        <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Sign In" style="margin: 20px;" />
+            <div>
+            <a href="#" onclick="$('#signup').show();$('#signin').hide();return false;">Sign Up</a>
+            </div>
+            </div>
+        {% else %}
         <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Make a Good Decision!"/>
+        {% endif %}
     </div>
 
     <div class="q">In log in / pull up saves decisions / etc.</div>
     <div class="q">Amazon tracking for app vs areamethod.com (email Chris)</div>
-    <div class="q"><a href="/cheetah_master">All Cheetah Sheets</a> - needs editing</div>
+    <div class="q"><a href="/cheetah_master">All Problem Solvers</a> - needs editing</div>
 
-    <div>
+    <div style="display: none;">
         {% if user.email %}
             Logged in as {{ user.email }} <a href="/logout">Logout</a>
         {% else %}

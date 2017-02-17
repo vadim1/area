@@ -4,6 +4,7 @@ import biases
 import archetypes
 import random
 import os
+import json
 
 
 def restart_session(request):
@@ -59,13 +60,27 @@ def decision(request):
     })
 
 
+success = {
+    "new": "I created a new solution that I hadn't considered when I started.",
+    "gut": "I trusted my gut instinct and followed my heart.",
+    "evidence": "I acted on a strong plan based in evidence.",
+    "options": "I considered all my options and took my time to decide.",
+    "guidance": "I relied on the guidance of the friends and people I trust.",
+}
+
+
 def critical_concepts(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/decision')
         request.session['success'] = request.POST['success']
         return redirect('/edges_pitfalls')
-
+    success_keys = success.keys()
+    random.shuffle(success_keys)
+    success_shuffled = []
+    for success_key in success_keys:
+        success_shuffled.append([success_key, success[success_key]])
     return render(request, 'critical_concepts.html', {
+        'success': success_shuffled,
     })
 
 
@@ -164,3 +179,11 @@ def cheetah_master(request):
     })
 
 
+dream_directors = [
+    'Bob, New York',
+    'Jill, California',
+]
+
+
+def autocomplete_dd(request):
+    return json.dumps({'results': dream_directors})
