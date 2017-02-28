@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}{% block h1 %}Sign Up{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Sign Up</button>
+    </form>
+
+    <table style="margin: 0 auto;">
+        <tr>
+            <th>Email:</th>
+            <td><input type="text" class="form-control" id="email" name="email" size="20"/></td>
+        </tr>
+        <tr>
+            <th>Password:</th>
+            <td><input type="password" class="form-control" id="password" name="password" size="20"/></td>
+        </tr>
+    </table>
+    <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Sign Up"
+           style="margin: 20px;"/>
+
+{% endblock %}

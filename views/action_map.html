@@ -3,10 +3,10 @@
 {% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
 {% block content %}
     <div>
-        <h3 id="decision_text"></h3>
-        <h3>
+        <p id="decision_text"></p>
+        <p>
             You are a <strong>{{ archetype }}</strong>! To make your decision, we have a guide for you to use next.
-        </h3>
+        </p>
         {% for cheetah in cheetahs|slice:":3" %}
             <div class="resource">
                 {% if forloop.counter0 > 0 %}
@@ -25,7 +25,7 @@
                 {% endif %}
             </div>
         {% endfor %}
-        <h3>
+        <p>
             I commit to solving my problem by
             <input type="text" size="40" name="commitment" id="commitment" placeholder="what will you do?"
                    value="{{ request.session.commitment }}"/>
@@ -42,13 +42,14 @@
                 <option value="7">7</option>
             </select>
             days and sharing my results to create a community of problem solvers.
-        </h3>
+        </p>
 
         <div style="margin-top: 50px;">
             <input type="submit" class="btn btn-sm" name="submit" value="Back"/>
             &nbsp;
             <input type="submit" class="btn btn-lg btn-primary" name="submit"
-                   value="Make your commitments and receive an email of your Action Map and Problem Solvers!"/>
+                   value="Commit!"/>
+            <p>When you commit, you will receive an email of your Action Map and Problem Solvers!</p>
         </div>
 
 

@@ -1,16 +1,11 @@
 from __future__ import unicode_literals
 
 from django.db import models
-
-
-class UserProfile(models.Model):
-    user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
-    facebook_username = models.CharField(max_length=255)
-    email = models.EmailField()
+from accounts.models import User
 
 
 class Problem(models.Model):
-    user = models.ForeignKey(UserProfile)
+    user = models.ForeignKey(User)
     decision_type = models.CharField(max_length=255)
     decision = models.CharField(max_length=255)
     options = models.CharField(max_length=255)

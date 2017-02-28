@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-import biases
-import archetypes
-import random
-import os
 import json
+import os
+import random
+
+from django.shortcuts import render, redirect
+
+import archetypes
+import biases
 
 
 def restart_session(request):
@@ -56,7 +57,8 @@ def decision(request):
         for decision_type in request.session['decision_types']:
             decision_types_comma_delimited += decision_type + ','
     return render(request, 'decision.html', {
-        'decision_types': decision_types_comma_delimited
+        'decision_types': decision_types_comma_delimited,
+        'step': 2,
     })
 
 
@@ -81,6 +83,7 @@ def critical_concepts(request):
         success_shuffled.append([success_key, success[success_key]])
     return render(request, 'critical_concepts.html', {
         'success': success_shuffled,
+        'step': 3,
     })
 
 
@@ -105,6 +108,7 @@ def edges_pitfalls(request):
     return render(request, 'edges_pitfalls.html', {
         'questions': random_order_questions,
         'questions_yes': questions_yes,
+        'step': 4,
     })
 
 
@@ -119,7 +123,8 @@ def cognitive_biases(request):
     top_archetype = top_archetypes[0]
     return render(request, 'cognitive_biases.html', {
         'archetype': top_archetype[0],
-        'strength': top_archetype[1]
+        'strength': top_archetype[1],
+        'step': 5,
     })
 
 
@@ -132,6 +137,7 @@ def cheetah_sheets(request):
     request.session['cheetah_sheets'] = attribute_cheetahs
     return render(request, 'cheetah_sheets.html', {
         'attribute_cheetahs': attribute_cheetahs,
+        'step': 5,
     })
 
 
@@ -153,6 +159,7 @@ def action_map(request):
         'timeframe': request.session['timeframe'],
         'archetype': archetype,
         'cheetahs': archetype_cheetahs,
+        'step': 5,
     })
 
 
@@ -169,6 +176,7 @@ def summary(request):
         'cheetahs': request.session['cheetah_sheets'],
         'commitment': request.session['commitment'],
         'commitment_days': request.session['commitment_days'],
+        'step': 5,
     })
 
 

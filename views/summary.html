@@ -6,7 +6,7 @@
         <div class="q">What goes here? Save / Login / Share on social media?</div>
 
         <div>
-            <h3 id="decision_text"></h3>
+            <p id="decision_text"></p>
             <div>{% with 'archetype/'|add:archetype|add:'.html' as path %}{% include path %}{% endwith %}</div>
             <p>Your Problem Solvers:</p>
             <div class="q">Have full Problem Solvers in-line or just links to printable PDFs?</div>
@@ -14,11 +14,11 @@
                 <h4>{{ cheetah }} <span style="font-size: small; color: lightgray;">{{ weight }}</span></h4>
                 <div style="background-color: lightblue">{% with 'cheetah/'|add:cheetah|add:'.html' as path %}{% include path %}{% endwith %}</div>
             {% endfor %}
-            <h3>
+            <p>
                 You commit to solving your problem by {{ commitment }}
                 in the next {{ commitment_days }}
                 days and sharing your results to create a community of problem solvers.
-            </h3>
+            </p>
         </div>
 
         <a href="/restart" class="btn btn-lg" role="button"

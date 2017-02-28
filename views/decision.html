@@ -16,8 +16,8 @@
 </style>
 {% endblock %}
 {% block content %}
-    <div style="width: 380px; float:right;">
-    <h3 id="videos_link" style="margin-top: 150px;"><a href="#" onclick="$('#videos').show();$('#videos_link').hide();return false;">See Video Examples</a></h3>
+    <div style="float:right;">
+    <p id="videos_link" style="margin-top: 150px;"><a href="#" onclick="return showVideos()">See Video Examples</a></p>
     <table id="videos" style="display: none">
     <tr>
         <td>Watch Naomi decide if she should skip a day of school</td>
@@ -42,8 +42,8 @@
     </tr>
     </table>
     </div>
-    <h3>Select the type of decision you are making. You can pick more than one!</h3>
-    <div style="margin-top: 20px;" id="decision_types" class="row">
+    <p>Select the type of decision you are making. You can pick more than one!</p>
+    <p style="margin-top: 20px; height: 0px;" id="decision_types" class="row">
         <div>
             <label class="decision_type"><input type="checkbox" name="decision_type[]" value="family"/>
                 Family</label>
@@ -84,16 +84,16 @@
             <input type="text" name="decision_type_other" id="decision_type_other" size="20"
                    value="{{ request.session.decision_type_other }}"/>
         </div>
-    </div>
-    <h3>What's your decision?</h3>
-    <h4>
+    </p>
+    <p class="margin-top-30-mob">What's your decision?</p>
+    <p>
         I am facing a<span id="types_starts_with_vowel" style="display:none">n</span> <span id="types"></span>
         challenge.
         <br/>
-        I need to decide <input type="text" size="80" name="decision" id="decision"
+        I need to decide <input type="text" size="40" name="decision" id="decision"
                                 value="{{ request.session.decision }}"/>.
         <br/>
-        I have these options: <input type="text" size="76" name="options" id="options"
+        I have these options: <input type="text" size="36" name="options" id="options"
                                      value="{{ request.session.options }}"/>.
         <br/>
         I need to decide <select name="timeframe" id="timeframe">
@@ -104,7 +104,7 @@
         <option value="year">this year</option>
         <option value="sometime">sometime</option>
     </select>.
-    </h4>
+    </p>
     {% include 'buttons.html' %}
 
     <script type="text/javascript">
@@ -125,6 +125,13 @@
 
         var type_none = '[select type above]';
         $('#types').text(type_none);
+
+        function showVideos() {
+            $('#videos').closest('div').css('width', 360);
+            $('#videos').show();
+            $('#videos_link').hide();
+            return false;
+        }
 
         function updateTypes() {
             var types = '';

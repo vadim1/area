@@ -29,13 +29,16 @@ urlpatterns = [
     url(r'^action_map$', views.action_map, name='Action Map'),
     url(r'^summary$', views.summary, name='Summary'),
     url(r'^restart$', views.restart_session, name='Restart'),
-    url(r'^admin/', admin.site.urls),
     url(r'^dd$', views.autocomplete_dd, name='Dream Director Autocomplete'),
 
 #    url(r'', include('social_auth.urls')),
+
+    url(r'^admin/', admin.site.urls),
     url(r'login/$', auth_views.login, name='login'),
     url(r'logout/$', auth_views.logout, name='logout'),
     url(r'^oauth/', include('social.apps.django_app.urls', namespace='social')),
+
+    url(r'^accounts/', include('accounts.urls', namespace='accounts')),
 
     url(r'^logged_in/$', views.logged_in, name='Logged In'),
 ]

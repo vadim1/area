@@ -2,7 +2,7 @@
 {% block title %}{% block h1 %}Your Vision of Success{% endblock %}{% endblock %}
 {% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
 {% block extra_head %}
-    <script src="https://rawgit.com/RubaXa/Sortable/master/Sortable.js"></script>
+    <script src="static/area_app/js/Sortable.js"></script>
     <style type="text/css">
         .list-group-item {
             cursor: pointer;
@@ -10,13 +10,13 @@
     </style>
 {% endblock %}
 {% block content %}
-    <h3>
+    <p>
     Imagine you've already made your decision.
         Which of these statements are you most likely to say and feel proud of?
         Rank them in order.
-    </h3>
+    </p>
     <input type="hidden" name="success" id="success" value="{{ success_order }}" />
-    <div style="font-size: larger">
+    <p>
         <ul class="list-group sortable" id="successList" style="list-style: none;">
             {% for item in success %}
             <li class="list-group-item" data-id="{{ item.0 }}">
@@ -25,11 +25,19 @@
             </li>
             {% endfor %}
         </ul>
-    </div>
+    </p>
 
     {% include 'buttons.html' %}
 
     <script type="text/javascript">
+        (function ($) {
+        "use strict";
+
+        // Fix for seiyria bootstrap slider conflicting with UI-Slider
+        $.fn.slider = function () { return true; };
+
+    })(jQuery);
+
         $(document).ready(function () {
             $('[name="success"][value="{{ request.session.success }}"]').click();
         });
