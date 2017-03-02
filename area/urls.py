@@ -20,10 +20,15 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url(r'^$', views.home, name='Home'),
+    url(r'^1$', views.home, name='Home'),
     url(r'^decision$', views.decision, name='Decision'),
+    url(r'^2$', views.decision, name='Decision'),
     url(r'^critical_concepts$', views.critical_concepts, name='Critical Concepts'),
+    url(r'^3$', views.critical_concepts, name='Critical Concepts'),
     url(r'^edges_pitfalls$', views.edges_pitfalls, name='Edges and Pitfalls'),
+    url(r'^4$', views.edges_pitfalls, name='Edges and Pitfalls'),
     url(r'^cognitive_biases$', views.cognitive_biases, name='Cognitive Biases'),
+    url(r'^5$', views.cognitive_biases, name='Cognitive Biases'),
     url(r'^cheetah_sheets$', views.cheetah_sheets, name='Cheetah Sheets'),
     url(r'^cheetah_master$', views.cheetah_master, name='Cheetah Master'),
     url(r'^action_map$', views.action_map, name='Action Map'),
