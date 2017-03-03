@@ -607,3 +607,11 @@ h3 {
 h4 {
     font-size: x-large !important;
 }
+
+.bio img {
+    height: 120px;
+}
+
+.bio div:first-child {
+    text-align: center;
+}
