@@ -51,14 +51,14 @@ def decision(request):
         request.session['options'] = request.POST['options']
         request.session['timeframe'] = request.POST['timeframe']
         request.session['decision_type_other'] = request.POST['decision_type_other']
-        return redirect('/critical_concepts')
+        return redirect('/rank')
     decision_types_comma_delimited = ''
     if 'decision_types' in request.session:
         for decision_type in request.session['decision_types']:
             decision_types_comma_delimited += decision_type + ','
     return render(request, 'decision.html', {
         'decision_types': decision_types_comma_delimited,
-        'step': 2,
+        'step': 1,
     })
 
 
@@ -71,66 +71,70 @@ success = {
 }
 
 
-def critical_concepts(request):
+def rank(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/decision')
         request.session['success'] = request.POST['success']
-        return redirect('/edges_pitfalls')
+        return redirect('/questions')
     success_keys = success.keys()
     random.shuffle(success_keys)
     success_shuffled = []
     for success_key in success_keys:
         success_shuffled.append([success_key, success[success_key]])
-    return render(request, 'critical_concepts.html', {
+    return render(request, 'rank.html', {
         'success': success_shuffled,
-        'step': 3,
+        'step': 2,
     })
 
 
-def edges_pitfalls(request):
+def questions(request):
     if request.method == 'POST':
-        if request.POST['submit'] == 'Back': return redirect('/critical_concepts')
+        if request.POST['submit'] == 'Back': return redirect('/rank')
         questions_yes = request.POST.getlist('question[]')
         request.session['questions_yes'] = questions_yes
         top_archetypes = archetypes.get_top_archetypes(questions_yes)
         request.session['archetype'] = top_archetypes
         top_archetype = top_archetypes[0]
         request.session['top_archetype'] = top_archetype[0]
-        return redirect('/cognitive_biases')
+        return redirect('/archetype')
     # Randomize the order of questions
     random_order_questions = []
-    for question, weights in archetypes.edges_pitfalls.items():
+    for question, weights in archetypes.questions.items():
         random_order_questions.append(question)
     random.shuffle(random_order_questions)
     questions_yes = ''
     if 'questions_yes' in request.session:
         questions_yes = request.session['questions_yes']
-    return render(request, 'edges_pitfalls.html', {
+    return render(request, 'questions.html', {
         'questions': random_order_questions,
         'questions_yes': questions_yes,
+        'step': 3,
+    })
+
+
+def archetype(request):
+    if request.method == 'POST':
+        if request.POST['submit'] == 'Back': return redirect('/questions')
+        return redirect('/action_map')
+    if 'archetype' not in request.session:
+        return render(request, 'archetype.html', {
+        })
+    top_archetypes = request.session['archetype']
+    top_archetype = top_archetypes[0]
+    return render(request, 'archetype.html', {
+        'archetype': top_archetype[0],
+        'strength': top_archetype[1],
         'step': 4,
     })
 
 
-def cognitive_biases(request):
-    if request.method == 'POST':
-        if request.POST['submit'] == 'Back': return redirect('/edges_pitfalls')
-        return redirect('/action_map')
-    if 'archetype' not in request.session:
-        return render(request, 'cognitive_biases.html', {
-        })
-    top_archetypes = request.session['archetype']
-    top_archetype = top_archetypes[0]
-    return render(request, 'cognitive_biases.html', {
-        'archetype': top_archetype[0],
-        'strength': top_archetype[1],
-        'step': 5,
-    })
+def archetype_info(request):
+    archetype = request.GET['t']
 
 
 def cheetah_sheets(request):
     if request.method == 'POST':
-        if request.POST['submit'] == 'Back': return redirect('/cognitive_biases')
+        if request.POST['submit'] == 'Back': return redirect('/archetype')
         return redirect('/summary')
     attributes = request.session['attributes']
     attribute_cheetahs = biases.get_top(attributes, biases.attribute_cheetahs)
@@ -141,9 +145,15 @@ def cheetah_sheets(request):
     })
 
 
+def archetypes_list(request):
+    return render(request, 'archetypes.html', {
+        'step': 4,
+    })
+
+
 def action_map(request):
     if request.method == 'POST':
-        if request.POST['submit'] == 'Back': return redirect('/cognitive_biases')
+        if request.POST['submit'] == 'Back': return redirect('/archetype')
         request.session['commitment'] = request.POST['commitment']
         request.session['commitment_days'] = request.POST['days']
         return redirect('/summary')

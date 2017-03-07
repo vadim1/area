@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: latin-1 -*-
 
-edges_pitfalls = {
+questions = {
     'I tend to make gut decisions.': {
         'yes': {'adventurer': 1},
         'no': {'thinker': 1}
@@ -10,16 +10,16 @@ edges_pitfalls = {
         'yes': {'detective': 1},
         'no': {'adventurer': 1}
     },
-    'I have trouble making decisions because I see all the pluses and minuses.': {
+    'I have trouble making decisions because I see all the pros and cons.': {
         'yes': {'thinker': 1},
-        'no': {'adventurer': 1, 'architect': 1}
+        'no': {'adventurer': 1, 'creative': 1}
     },
     'The best way for me to make a decision is to ask others for advice.': {
         'yes': {'listener': 1},
         'no': {'adventurer': 1, 'detective': 1}
     },
     'I always think outside the box when making decisions.': {
-        'yes': {'architect': 1},
+        'yes': {'creative': 1},
         'no': {'detective': 1}
     },
     'I never consider how much a decision will cost me before I make it.': {
@@ -31,11 +31,11 @@ edges_pitfalls = {
         'no': {}
     },
     'I am good at getting the information I need.': {
-        'yes': {'thinker': 1, 'architect': 1},
+        'yes': {'thinker': 1, 'creative': 1},
         'no': {'adventurer': 1, 'listener': 1}
     },
     'I am good at drawing conclusions.': {
-        'yes': {'thinker': 1, 'architect': 1},
+        'yes': {'thinker': 1, 'creative': 1},
         'no': {'adventurer': 1, 'listener': 1}
     },
     'I like learning from others.': {
@@ -46,7 +46,7 @@ edges_pitfalls = {
         'yes': {'adventurer': 1},
         'no': {'listener': 1}
     },
-    'I feel overwhelmed when I have too many choices.': {
+    'I feel overwhelmed when I have too many options.': {
         'yes': {'thinker': 1},
         'no': {'detective': 1}
     },
@@ -54,32 +54,32 @@ edges_pitfalls = {
         'yes': {'listener': 1},
         'no': {}
     },
-    'I let my friends influence my decisions.': {
+    'I  lean on my friends to make my decisions for me.': {
         'yes': {'listener': 1},
         'no': {'detective': 1}
     },
     'I prefer to come up with creative solutions.': {
         'yes': {},
-        'no': {'architect': 1}
+        'no': {'creative': 1}
     },
     'I don\'t feel the need to make decisions quickly.': {
         'yes': {'thinker': 1},
         'no': {'adventurer': 1}
     },
     'I don\'t like to pick the obvious decision.': {
-        'yes': {'architect': 1},
+        'yes': {'creative': 1},
         'no': {}
     },
     'I prefer to lean on my friends than to do my own thing.': {
         'yes': {'listener': 1},
-        'no': {'architect': 1}
+        'no': {'creative': 1}
     },
     'People tell me that I\'m careful and cautious.': {
         'yes': {'thinker': 1},
         'no': {}
     },
     'I tend to be independent and go my own way.': {
-        'yes': {'architect': 1},
+        'yes': {'creative': 1},
         'no': {'listener': 1}
     },
 }
@@ -91,9 +91,9 @@ def get_top_archetypes(questions_yes):
         'thinker': 0,
         'detective': 0,
         'listener': 0,
-        'architect': 0,
+        'creative': 0,
     }
-    for question, yes_no in edges_pitfalls.items():
+    for question, yes_no in questions.items():
         if question in questions_yes:
             weights = yes_no['yes']
         else:
@@ -109,5 +109,5 @@ archetype_cheetah_sheets = {
     'thinker': ['What Is The Story', 'Great Questions Roadmap'],
     'detective': ['Pro Con', 'Scenario Analysis'],
     'listener': ['What Is The Story', 'Scenario Analysis'],
-    'architect': ['Great Questions Roadmap', 'Scenario Analysis'],
+    'creative': ['Great Questions Roadmap', 'Scenario Analysis'],
 }

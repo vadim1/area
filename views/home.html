@@ -34,19 +34,19 @@
             with confidence and conviction.
         </p>
     {% endif %}
-        <p class="margin-top-30-mob center margin-0-auto">
+    <p class="margin-top-30-mob center margin-0-auto">
         With
         <a href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved"
            target="_blank">Problem Solved!</a>
         (powered by the <a href="http://areamethod.com" target="_blank">AREA Method</a>), you will:
     </p>
     <p>
-        <ul>
-            <li>Get clear on what problem you're solving</li>
-            <li>Identify what matters most to you and what you'd count as success</li>
-            <li>Take a personality quiz to learn how you make decisions</li>
-            <li>Get into action with some clear next steps</li>
-        </ul>
+    <ul>
+        <li>Get clear on what problem you're solving</li>
+        <li>Identify what matters most to you and what you'd count as success</li>
+        <li>Take a personality quiz to learn how you make decisions</li>
+        <li>Get into action with some clear next steps</li>
+    </ul>
     </p>
     <p>
         Making decisions that you feel good about doesn't have to be an uphill climb. Are you ready to solve your
@@ -110,6 +110,66 @@
                     <a href="#" onclick="$('#signup').show();$('#signin').hide();return false;">Sign Up</a>
                 </div>
             </div>
+
+
+            <div class="carousel slide" data-ride="carousel" id="quote-carousel"
+                 style="height: 150px; margin-bottom: 20px; margin-top: 20px;">
+                <!-- Carousel Slides / Quotes -->
+                <div class="carousel-inner">
+                    <!-- Quote 1 -->
+                    <div class="item active">
+                        <blockquote>
+                            <div class="row">
+                                <p style="font-size: small">
+                                    The app was really helpful in making my decision. The community that I will get
+                                    around this app will be really helpful. I’ll get input on my decision from others,
+                                    and other people with my archetype can help me get me get my ideas in place and my
+                                    decisions on the right rack.
+                                </p>
+                                <small>Aicha, 10th Grader</small>
+                            </div>
+                        </blockquote>
+                    </div>
+                    <!-- Quote 2 -->
+                    <div class="item">
+                        <blockquote>
+                            <div class="row">
+                                <p style="font-size: small">
+                                    The app was very impactful to me because it was a way for me to actually get a sense
+                                    of direction of what I want to do and the decision I want to make. They gave me a
+                                    step by step process on things I should do…I feel like the app will be useful for
+                                    everybody.
+                                </p>
+                                <small>Alberto, 10th Grader</small>
+                            </div>
+                        </blockquote>
+                    </div>
+                    <!-- Quote 3 -->
+                    <div class="item">
+                        <blockquote>
+                            <div class="row">
+                                <p style="font-size: small">
+                                    I felt the app was useful for young adults and teens that have trouble making
+                                    decisions. They need a path or direction; they app could really help lead them step
+                                    by step and connect them to other people who may excel where they struggle to make
+                                    important decisions in their lives.
+                                </p>
+                                <small>Aldikhr, 10th Grader</small>
+                            </div>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    //Set the carousel options
+                    $('#quote-carousel').carousel({
+                        pause: true,
+                        interval: 10000,
+                    });
+                });
+            </script>
+
         {% else %}
             <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Make a Good Decision!"/>
         {% endif %}
