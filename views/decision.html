@@ -2,110 +2,165 @@
 {% block title %}{% block h1 %}What's your Decision?{% endblock %}{% endblock %}
 {% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
 {% block extra_head %}
-<style class="text/css">
-.tooltip > .tooltip-inner {
-    background-color: #73AD21;
-    color: #FFFFFF;
-    border: 1px solid green;
-    padding: 15px;
-    font-size: 15px;
-    max-width: 400px;
-    width: 400px;
-    text-align: left;
-}
-</style>
+    <style class="text/css">
+        .tooltip > .tooltip-inner {
+            background-color: #73AD21;
+            color: #FFFFFF;
+            border: 1px solid green;
+            padding: 15px;
+            font-size: 15px;
+            max-width: 400px;
+            width: 400px;
+            text-align: left;
+        }
+    </style>
 {% endblock %}
 {% block content %}
-    <div style="float:right;">
-    <p id="videos_link" style="margin-top: 150px;"><a href="#" onclick="return showVideos()">See Video Examples</a></p>
-    <table id="videos" style="display: none">
-    <tr>
-        <td>Watch Naomi decide if she should skip a day of school</td>
-        <td>Watch Mitch decide if he should go to detention</td>
-    </tr>
-    <tr>
-        <td>
-        <iframe width="180" height="315"
-                src="https://www.youtube.com/embed/eI18uNKEJyo?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0"
-                allowfullscreen></iframe>
-        </td>
-        <td>
-        <iframe width="180" height="315"
-                {% if request.session.partner == "apres" %}
-                src="https://www.youtube.com/embed/AVKZOcV3hIQ?rel=0&amp;controls=0&amp;showinfo=0"
-                {% else %}
-                src="https://www.youtube.com/embed/CvkjxEoVKL8?rel=0&amp;controls=0&amp;showinfo=0"
-                {% endif %}
-                frameborder="0"
-                allowfullscreen></iframe>
-        </td>
-    </tr>
-    </table>
+    <div class="container">
+        <div class="row">
+            <h3 class="text-center">WHAT'S YOUR DECISION?</h3>
+        </div>
+        <div class="row">
+            <div class="text-center">
+                <div id="videos_link"><a href="#" onclick="return showVideos()">See Video Examples</a></div>
+                <table id="videos" style="display: none; width: 100%;">
+                    <tr>
+                        <td>Watch Naomi decide if she should skip a day of school</td>
+                        <td> &nbsp; </td>
+                        <td>Watch Mitch decide if he should go to detention</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <iframe width="180" height="315"
+                                    src="https://www.youtube.com/embed/eI18uNKEJyo?rel=0&amp;controls=0&amp;showinfo=0"
+                                    frameborder="0"
+                                    allowfullscreen></iframe>
+                        </td>
+                        <td> &nbsp; </td>
+                        <td>
+                            <iframe width="180" height="315"
+                                    {% if request.session.partner == "apres" %}
+                                    src="https://www.youtube.com/embed/AVKZOcV3hIQ?rel=0&amp;controls=0&amp;showinfo=0"
+                                    {% else %}
+                                    src="https://www.youtube.com/embed/CvkjxEoVKL8?rel=0&amp;controls=0&amp;showinfo=0"
+                                    {% endif %}
+                                    frameborder="0"
+                                    allowfullscreen></iframe>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="clearfix">&nbsp;</div>
+        <div class="row">
+            <p class="col-md-12">
+                Select the type of decision you are making. You can pick more than one!
+            </p>
+        </div>
+        <div class="clearfix">&nbsp;</div>
+        <div id="decision_types" class="row">
+            <div class="decision_group col-md-4 col-sm-6 col-xs-6 text-center">
+                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="family"/>
+                    Family</label>
+                <div class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign"
+                                                              aria-hidden="true"></span> See Example
+                </div>
+            </div>
+            <div class="decision_group col-md-4 col-sm-6 col-xs-6 text-center">
+                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="friends"/>
+                    Friends</label>
+                <div class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign"
+                                                              aria-hidden="true"></span> See Example
+                </div>
+            </div>
+            <div class="decision_group col-md-4 col-sm-6 col-xs-6 text-center">
+                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="school"/>
+                    School</label>
+                <div class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign"
+                                                              aria-hidden="true"></span> See Example
+                </div>
+            </div>
+            <div class="decision_group col-md-4 col-sm-6 col-xs-6 text-center">
+                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="after school"/> After
+                    School</label>
+                <div class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign"
+                                                              aria-hidden="true"></span> See Example
+                </div>
+            </div>
+            <div class="decision_group col-md-4 col-sm-6 col-xs-6 text-center">
+                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="money related"/>
+                    Money Related</label>
+                <div class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign"
+                                                              aria-hidden="true"></span> See Example
+                </div>
+            </div>
+            <div class="decision_group col-md-4 col-sm-6 col-xs-6 text-center">
+                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="identity"/>
+                    Identity</label>
+                <div class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign"
+                                                              aria-hidden="true"></span> See Example
+                </div>
+            </div>
+            <div class="decision_group col-md-4 col-sm-6 col-xs-6 text-center">
+                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="health"/>
+                    Health</label>
+                <div class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign"
+                                                              aria-hidden="true"></span> See Example
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-6 text-center">
+                <label class="decision_type"><input type="checkbox" name="decision_type[]" value="other"/> Other:
+                </label>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-6 text-center">
+                <input type="text" name="decision_type_other" id="decision_type_other" size="22"
+                       style="margin-top: 22px;" value="{{ request.session.decision_type_other }}"/>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-11 col-centered boeder">&nbsp;</div>
+        </div>
+        <div class="clearfix">&nbsp;</div>
+        <div class="row">
+            <h3 class="text-center">
+                I am facing a<span id="types_starts_with_vowel" style="display:none">n</span> <span id="types"></span>
+                challenge.
+            </h3>
+        </div>
+        <div class="clearfix">&nbsp;</div>
+        <div class="row">
+            <div class="col-md-3 col-xs-4" style="padding-top:10px;font-size:13px">I need to decide:</div>
+            <div class="col-md-9 col-xs-8">
+                <input type="text" class="inpu" name="decision" id="decision"
+                       value="{{ request.session.decision }}"/>
+            </div>
+        </div>
+        <div class="clearfix">&nbsp;</div>
+        <div class="row">
+            <div class="col-md-3 col-xs-4" style="padding-top:10px;font-size:13px">I have these options:</div>
+            <div class="col-md-9 col-xs-8">
+                <input type="text" name="options" id="options" class="inpu"
+                       value="{{ request.session.options }}"/>
+            </div>
+        </div>
+        <div class="clearfix">&nbsp;</div>
+        <div class="row">
+            <div class="col-md-3 col-xs-4" style="font-size:13px">I need to decide:</div>
+            <div class="col-md-9 col-xs-8">
+                <select name="timeframe" class="inpu" id="timeframe">
+                    <option value=""></option>
+                    <option value="day">today</option>
+                    <option value="week">this week</option>
+                    <option value="month">this month</option>
+                    <option value="year">this year</option>
+                    <option value="sometime">sometime</option>
+                </select>
+            </div>
+        </div>
+        <div class="clearfix">&nbsp;</div>
+        {% include 'buttons.html' %}
     </div>
-    <p>Select the type of decision you are making. You can pick more than one!</p>
-    <p style="margin-top: 20px; height: 0px;" id="decision_types" class="row">
-        <div>
-            <label class="decision_type"><input type="checkbox" name="decision_type[]" value="family"/>
-                Family</label>
-            <span class="info" data-toggle="tooltip">[<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> See Example]</span>
-        </div>
-        <div>
-            <label class="decision_type"><input type="checkbox" name="decision_type[]" value="friends"/>
-                Friends</label>
-            <span class="info" data-toggle="tooltip">[<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> See Example]</span>
-        </div>
-        <div>
-            <label class="decision_type"><input type="checkbox" name="decision_type[]" value="school"/>
-                School</label>
-            <span class="info" data-toggle="tooltip">[<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> See Example]</span>
-        </div>
-        <div>
-            <label class="decision_type"><input type="checkbox" name="decision_type[]" value="after school"/> After
-                School</label>
-            <span class="info" data-toggle="tooltip">[<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> See Example]</span>
-        </div>
-        <div>
-            <label class="decision_type"><input type="checkbox" name="decision_type[]" value="money related"/>
-                Money Related</label>
-            <span class="info" data-toggle="tooltip">[<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> See Example]</span>
-        </div>
-        <div>
-            <label class="decision_type"><input type="checkbox" name="decision_type[]" value="identity"/>
-                Identity</label>
-            <span class="info" data-toggle="tooltip">[<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> See Example]</span>
-        </div>
-        <div>
-            <label class="decision_type"><input type="checkbox" name="decision_type[]" value="health"/>
-                Health</label>
-            <span class="info" data-toggle="tooltip">[<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> See Example]</span>
-        </div>
-        <div>
-            <label><input type="checkbox" name="decision_type[]" value="other"/> Other: </label>
-            <input type="text" name="decision_type_other" id="decision_type_other" size="20"
-                   value="{{ request.session.decision_type_other }}"/>
-        </div>
-    </p>
-    <p class="margin-top-30-mob">What's your decision?</p>
-    <p>
-        I am facing a<span id="types_starts_with_vowel" style="display:none">n</span> <span id="types"></span>
-        challenge.
-        <br/>
-        I need to decide <input type="text" size="35" name="decision" id="decision"
-                                value="{{ request.session.decision }}"/>.
-        <br/>
-        I have these options: <input type="text" size="31" name="options" id="options"
-                                     value="{{ request.session.options }}"/>.
-        <br/>
-        I need to decide <select name="timeframe" id="timeframe">
-        <option value=""></option>
-        <option value="day">today</option>
-        <option value="week">this week</option>
-        <option value="month">this month</option>
-        <option value="year">this year</option>
-        <option value="sometime">sometime</option>
-    </select>.
-    </p>
-    {% include 'buttons.html' %}
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -114,20 +169,34 @@
             for (var i = 0; i < decision_types.length; i++) {
                 $('[name="decision_type[]"][value="' + decision_types[i] + '"]').click();
             }
-            $('.info').each(function(){
-                var val = $(this).closest('div').find(':checkbox').attr('value');
+            $('.decision_group').each(function () {
+                var val = $(this).find(':checkbox').attr('value');
                 var example = type_examples[val];
                 var text = get_decision_text(val, example['decision'], example['options'], example['timeframe']);
-                $(this).attr('title', text);
+                $(this).find('.info').attr('title', text);
             });
             $('[data-toggle="tooltip"]').tooltip();
+            $('.decision_type').click(function () {
+                var btn = $(this);
+                var checkbox = $(this).find('input');
+                if (checkbox.is(':checked')) {
+                    btn.addClass('active');
+                } else {
+                    btn.removeClass('active');
+                }
+                checkbox.toggle();
+            });
+            $('.decision_type').each(function () {
+                if ($(this).find('input').is(':checked')) {
+                    $(this).addClass('active');
+                }
+            });
         });
 
         var type_none = '[select type above]';
         $('#types').text(type_none);
 
         function showVideos() {
-            $('#videos').closest('div').css('width', 360);
             $('#videos').show();
             $('#videos_link').hide();
             return false;

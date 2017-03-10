@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}{% block h1 %}Archetypes{% endblock %}{% endblock %}
 {% block content %}
+    {% with 'true' as list %}
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
         <div class="panel panel-default">
@@ -8,6 +9,7 @@
                 <h5 class="panel-title">
                     <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
                        aria-expanded="false" aria-controls="collapseOne">
+                            <img src="/static/area_app/img/adventurer.png" height="50" width="50" />
                         The Adventurer - trust your gut and follow your passions
                     </a>
                 </h5>
@@ -24,6 +26,7 @@
                 <h5 class="panel-title">
                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
                        href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <img src="/static/area_app/img/creative.png" height="50" width="50" />
                         The Creative - come up with solutions not tried before
                     </a>
                 </h5>
@@ -40,7 +43,8 @@
                 <h5 class="panel-title">
                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
                        href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        The Detective - track down clues and gather the evidence before making decisions
+                            <img src="/static/area_app/img/detective.png" height="50" width="50" />
+                        The Detective - track down clues and gather the evidence
                     </a>
                 </h5>
             </div>
@@ -56,6 +60,7 @@
                 <h5 class="panel-title">
                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
                        href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <img src="/static/area_app/img/listener.png" height="50" width="50" />
                         The Listener - thoughtfully consider others' points of view
                     </a>
                 </h5>
@@ -72,6 +77,7 @@
                 <h5 class="panel-title">
                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
                        href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            <img src="/static/area_app/img/thinker.png" height="50" width="50" />
                         The Thinker - examine the possibilities before diving in
                     </a>
                 </h5>
@@ -82,6 +88,7 @@
                 </div>
             </div>
         </div>
+    {% endwith %}
 
     </div>
 

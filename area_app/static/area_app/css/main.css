@@ -427,7 +427,7 @@ label[for^=n] {
 }
 
 .step-content > div > span {
-    background-image: url(http://images.huffingtonpost.com/2016-05-27-1464381878-6932997-11HabitsofSupremelyHappyPeopleHP.jpg);
+    background-image: url('/static/area_app/img/happy.jpg');
     background-size: 100% 100%;
     height: 80px;
     width: 80px;
