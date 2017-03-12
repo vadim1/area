@@ -13,6 +13,12 @@
             width: 320px;
             text-align: left;
         }
+
+        @media screen and (max-width: 500px) {
+            body {
+                cursor: pointer;
+            }
+        }
     </style>
 {% endblock %}
 {% block content %}
@@ -81,7 +87,8 @@
                 </div>
             </div>
             <div class="decision_group col-md-4 col-sm-6 col-xs-6 text-center">
-                <label class="decision_type btnv"><input type="checkbox" name="decision_type[]" value="after school"/> After
+                <label class="decision_type btnv"><input type="checkbox" name="decision_type[]" value="after school"/>
+                    After
                     School</label>
                 <div class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign"
                                                               aria-hidden="true"></span> See Example
@@ -109,7 +116,7 @@
                 </div>
             </div>
             <div class="col-md-4 col-sm-6 col-xs-6 text-center">
-                <label class="decision_type btn"><input type="checkbox" name="decision_type[]" value="other"/> Other:
+                <label class="decision_type btnv"><input type="checkbox" name="decision_type[]" value="other"/> Other:
                 </label>
             </div>
             <div class="col-md-4 col-sm-6 col-xs-6 text-center">
@@ -193,7 +200,7 @@
             });
         });
 
-        $('.tooltip').click(function(){
+        $('.tooltip').click(function () {
             $(this).hide();
         });
 
