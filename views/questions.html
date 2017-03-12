@@ -85,7 +85,7 @@
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox"
-             style="height: 320px; text-align: center; font-size: large; background-color: #3d96ff; color: #ffffff;">
+             style="min-height: 320px; text-align: center; font-size: large; background-color: #3d96ff; color: #ffffff;">
             {% for question in questions %}
                 <div class="item{% if forloop.counter0 == 0 %} active{% endif %}" style="margin-top: 80px;">
                     <div class="question" rel="{{ forloop.counter0 }}" style="padding-left: 80px; padding-right: 80px;">{{ question }}</div>
