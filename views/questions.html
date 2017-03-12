@@ -85,10 +85,10 @@
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox"
-             style="min-height: 320px; text-align: center; font-size: large; background-color: #3d96ff; color: #ffffff;">
+             style="min-height: 350px; text-align: center; font-size: large; background-color: #3d96ff; color: #ffffff;">
             {% for question in questions %}
                 <div class="item{% if forloop.counter0 == 0 %} active{% endif %}" style="margin-top: 80px;">
-                    <div class="question" rel="{{ forloop.counter0 }}" style="padding-left: 80px; padding-right: 80px;">{{ question }}</div>
+                    <div class="question" rel="{{ forloop.counter0 }}" style="padding-left: 50px; padding-right: 50px;">{{ question }}</div>
                     <div style="font-size: 1.5em; margin-top: 20px;">
                         <input type="radio" name="question[{{ question }}]" class="yes" value="yes"
                                id="y{{ forloop.counter0 }}"/>
