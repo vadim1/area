@@ -22,6 +22,8 @@ def check_partner(request):
     partner = ''
     if 'partner' in request.GET:
         partner = request.GET['partner']
+    else:
+        partner = 'fp'
     request.session['partner'] = partner
 
 
