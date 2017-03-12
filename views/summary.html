@@ -5,14 +5,24 @@
     <div class="container">
         <div class="q">What goes here? Save / Login / Share on social media?</div>
 
-        <div>
+        <h2>What do you want to do next?</h2>
+        <h3><a href="https://www.surveymonkey.com/r/7R83KDR">Take our survey!</a></h3>
+        <h3>Visit <a href="http://www.areamethod.com/">areamethod.com</a> to find research, news articles and more about
+            making good decisions.</h3>
+        <h3>Connect with other decision makers like you (COMING SOON!)</h3>
+        <h3>Get help with a <a href="/restart"
+                               onclick="return(confirm('Are you sure you want to discard your work?'))">New Decision</a>
+        </h3>
+        <a href="#" onclick="$('#summary').show(); $(this).hide(); return false;">Show Summary</a>
+        <div id="summary" style="display: none">
             <p id="decision_text"></p>
             <div>{% with 'archetype/'|add:archetype|add:'.html' as path %}{% include path %}{% endwith %}</div>
             <p>Your Problem Solvers:</p>
             <div class="q">Have full Problem Solvers in-line or just links to printable PDFs?</div>
             {% for cheetah in cheetahs|slice:":3" %}
                 <h4>{{ cheetah }} <span style="font-size: small; color: lightgray;">{{ weight }}</span></h4>
-                <div style="background-color: lightblue">{% with 'cheetah/'|add:cheetah|add:'.html' as path %}{% include path %}{% endwith %}</div>
+                <div style="background-color: lightblue">
+                    {% with 'cheetah/'|add:cheetah|add:'.html' as path %}{% include path %}{% endwith %}</div>
             {% endfor %}
             <p>
                 You commit to solving your problem by {{ commitment }}
@@ -20,9 +30,6 @@
                 days and sharing your results to create a community of problem solvers.
             </p>
         </div>
-
-        <a href="/restart" class="btn btn-lg" role="button"
-           onclick="return(confirm('Are you sure you want to discard your work?'))">New Decision</a>
     </div>
 
     <script type="text/javascript">
