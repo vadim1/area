@@ -102,7 +102,7 @@ body {
         font-weight: bold;
         border-radius: 4px;
         width: 150px;
-        height: 45px;
+        min-height: 45px;
         border: none;
         text-align: center;
         padding-top: 6px;
