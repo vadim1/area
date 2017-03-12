@@ -94,7 +94,7 @@ body {
         font-size: 16px;
     }
 
-    .decision_type {
+    .btnv {
         background-color: #3d5b9b;
         color: #FFFFFF;
         margin: 15px 0;
@@ -109,16 +109,16 @@ body {
         cursor: pointer;
     }
 
-    .decision_type:hover {
+    .btnv:hover {
         color: #fff;
         background-color: #ff730a;
     }
 
-    .decision_type.active {
+    .btnv.active {
         background-color: #00dddb;
     }
 
-    .decision_type input {
+    .btnv input {
         color: #bbedf9;
         font-size: 18px;
         text-align: center;
@@ -363,7 +363,7 @@ body {
         line-height: 1.9
     }
 
-    .decision_type {
+    .btnv {
         background-color: #3d5b9b;
         color: #FFFFFF;
         margin: 15px 0;
@@ -378,16 +378,16 @@ body {
         cursor: pointer;
     }
 
-    .decision_type:hover {
+    .btnv:hover {
         color: #fff;
         background-color: #ff730a;
     }
 
-    .decision_type.active {
+    .btnv.active {
         background-color: #00dddb;
     }
 
-    .decision_type input {
+    .btnv input {
         color: #bbedf9;
         font-size: 18px;
         text-align: center;

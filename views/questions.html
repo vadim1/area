@@ -49,6 +49,10 @@
             background-image: linear-gradient(rgb(179, 217, 140), rgb(153, 204, 102));
         }
 
+        .carousel-control {
+            background: none;
+        }
+
         .carousel-indicators li {
             background-color: green;
         }
@@ -56,6 +60,14 @@
         .carousel-indicators li.active {
             background-color: orange;
         }
+
+    .btnv {
+        border: 2px solid white;
+        background-color: #3d96ff;
+        height: 50px;
+        width: 100px;
+    }
+    radio
     </style>
 
 {% endblock %}
@@ -72,18 +84,19 @@
         </ol>
 
         <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox" style="height: 400px; text-align: center; font-size: x-large;">
+        <div class="carousel-inner" role="listbox"
+             style="height: 320px; text-align: center; font-size: large; background-color: #3d96ff; color: #ffffff;">
             {% for question in questions %}
-                <div class="item{% if forloop.counter0 == 0 %} active{% endif %}" style="margin-top: 120px;">
-                    <div class="question" rel="{{ forloop.counter0 }}">{{ question }}</div>
+                <div class="item{% if forloop.counter0 == 0 %} active{% endif %}" style="margin-top: 80px;">
+                    <div class="question" rel="{{ forloop.counter0 }}" style="padding-left: 80px; padding-right: 80px;">{{ question }}</div>
                     <div style="font-size: 1.5em; margin-top: 20px;">
                         <input type="radio" name="question[{{ question }}]" class="yes" value="yes"
                                id="y{{ forloop.counter0 }}"/>
-                        <label for="y{{ forloop.counter0 }}"><span><span></span></span>Yes</label>
+                        <label for="y{{ forloop.counter0 }}" class="btnv"><span><span></span></span>Yes</label>
                         &nbsp;
                         <input type="radio" name="question[{{ question }}]" class="no" value="no"
                                id="n{{ forloop.counter0 }}"/>
-                        <label for="n{{ forloop.counter0 }}"><span><span></span></span>No</label>
+                        <label for="n{{ forloop.counter0 }}" class="btnv"><span><span></span></span>No</label>
                     </div>
                 </div>
             {% endfor %}
