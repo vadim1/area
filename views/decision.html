@@ -18,6 +18,10 @@
             body {
                 cursor: pointer;
             }
+            .btnv:hover {
+                color: #fff;
+                background-color: inherit;
+            }
         }
     </style>
 {% endblock %}
@@ -153,14 +157,14 @@
         </div>
         <div class="clearfix">&nbsp;</div>
         <div class="row">
-            <div class="col-md-3 col-xs-4" style="font-size:13px">I need to decide:</div>
+            <div class="col-md-3 col-xs-4" style="font-size:13px">Decide by end of:</div>
             <div class="col-md-9 col-xs-8">
                 <select name="timeframe" class="inpu" id="timeframe">
                     <option value=""></option>
-                    <option value="day">today</option>
-                    <option value="week">this week</option>
-                    <option value="month">this month</option>
-                    <option value="year">this year</option>
+                    <option value="day">day</option>
+                    <option value="week">week</option>
+                    <option value="month">month</option>
+                    <option value="year">year</option>
                     <option value="sometime">sometime</option>
                 </select>
             </div>
