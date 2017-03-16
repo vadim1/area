@@ -23,7 +23,7 @@ def check_partner(request):
     if 'partner' in request.GET:
         partner = request.GET['partner']
     else:
-        partner = 'fp'
+        partner = 'apres'
     request.session['partner'] = partner
 
 
