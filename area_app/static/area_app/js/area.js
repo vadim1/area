@@ -8,10 +8,10 @@ function get_decision_text(decision_type, decision, options, timeframe) {
     var when = '';
     switch (timeframe) {
         case 'day':
-            when = 'by the end of the day';
+            when = 'the end of the day';
             break;
         case 'week':
-            when = 'by next week';
+            when = 'next week';
             break;
         case 'month':
             when = 'this month';

@@ -3,6 +3,7 @@ import os
 import random
 
 from django.shortcuts import render, redirect
+from django.conf import settings
 
 import archetypes
 import biases
@@ -23,7 +24,7 @@ def check_partner(request):
     if 'partner' in request.GET:
         partner = request.GET['partner']
     else:
-        partner = 'apres'
+        partner = settings.DEFAULT_PARTNER
     request.session['partner'] = partner
 
 

@@ -155,3 +155,5 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+DEFAULT_PARTNER = 'fp'
