@@ -12,32 +12,40 @@
 {% endblock %}
 {% block content %}
     <p>
-    Imagine you've already made your decision.
+        Imagine you've already made your decision.
         Which of these statements are you most likely to say and feel proud of?
         Rank them in order.
     </p>
-    <input type="hidden" name="success" id="success" value="{{ success_order }}" />
+    <input type="hidden" name="success" id="success" value="{{ success_order }}"/>
     <p>
-        <ul class="list-group sortable" id="successList" style="list-style: none;">
-            {% for item in success %}
+    <ul class="list-group sortable" id="successList" style="list-style: none;">
+        {% for item in success %}
             <li class="list-group-item" data-id="{{ item.0 }}">
                 <span class="drag-handle">☰</span>
                 {{ item.1 }}
             </li>
-            {% endfor %}
-        </ul>
+        {% endfor %}
+    </ul>
+    </p>
+    <p>
+        PROBLEM SOLVED inverts the usual problem solving process so that instead of focusing on your problem, it focuses
+        on what you define as your picture of success. The goal: To better understand what constitutes a good outcome
+        for you personally and for your decision and to cater to your strengths while controlling and counter acting
+        mental mistakes.
     </p>
 
     {% include 'buttons.html' %}
 
     <script type="text/javascript">
         (function ($) {
-        "use strict";
+            "use strict";
 
-        // Fix for seiyria bootstrap slider conflicting with UI-Slider
-        $.fn.slider = function () { return true; };
+            // Fix for seiyria bootstrap slider conflicting with UI-Slider
+            $.fn.slider = function () {
+                return true;
+            };
 
-    })(jQuery);
+        })(jQuery);
 
         $(document).ready(function () {
             $('[name="success"][value="{{ request.session.success }}"]').click();

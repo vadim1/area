@@ -62,9 +62,9 @@ questions = {
         'yes': {},
         'no': {'creative': 1}
     },
-    'I don\'t feel the need to make decisions quickly.': {
-        'yes': {'thinker': 1},
-        'no': {'adventurer': 1}
+    'I feel the need to make decisions quickly.': {
+        'yes': {'adventurer': 1},
+        'no': {'thinker': 1}
     },
     'I don\'t like to pick the obvious decision.': {
         'yes': {'creative': 1},

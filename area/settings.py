@@ -154,4 +154,4 @@ try:
 except ImportError:
     pass
 
-DEFAULT_PARTNER = 'fp'
+DEFAULT_PARTNER = 'area'
