@@ -1,7 +1,8 @@
+{% load static %}
 <h3>
-    <img src="/static/area_app/img/detective.png" />
+    <img src="{% static 'area_app/img/detective.png' %}"/>
     {% if list != 'true' %}
-    You are...
+        You are...
     {% endif %}
     The Detective!
 </h3>
@@ -54,7 +55,7 @@
 
     <div class="bio col-md-4">
         <div>
-            <img src="/static/area_app/img/archetype/wells.jpg"/>
+            <img src="{% static 'area_app/img/archetype/wells.jpg' %}"/>
         </div>
         <div>
             <a href="https://en.wikipedia.org/wiki/Ida_B._Wells" target="_blank">Ida B. Wells</a>

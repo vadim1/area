@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = '%)hu^tv4(2(8mjtkfdp!oea^m!&nqeu3@20jmzp0a!9lrnlkds'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -39,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'area_app',
     'accounts',
-    #'social.apps.django_app.default',
-    #'social_django',
+    # 'social.apps.django_app.default',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -51,7 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
+    # 'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'area.urls'
@@ -67,15 +65,14 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                #'social.apps.django_app.context_processors.backends',
-                #'social.apps.django_app.context_processors.login_redirect',
+                # 'social.apps.django_app.context_processors.backends',
+                # 'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'area.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
@@ -90,7 +87,6 @@ DATABASES = {
         'PORT': 3306,
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -113,9 +109,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTHENTICATION_BACKENDS = (
-    #'social.backends.github.GithubOAuth2',
-    #'social.backends.twitter.TwitterOAuth',
-    #'social.backends.facebook.FacebookOAuth2',
+    # 'social.backends.github.GithubOAuth2',
+    # 'social.backends.twitter.TwitterOAuth',
+    # 'social.backends.facebook.FacebookOAuth2',
 
     'django.contrib.auth.backends.ModelBackend',
 )
@@ -144,14 +140,14 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
 STATICFILES_DIR = [os.path.join(BASE_DIR, "static"),
-                   '/home/ubuntu/area/area_app/static/area_app',
-                   '/var/www/static/',]  # TODO - finish config
+                   os.path.join(BASE_DIR, 'area_app/static/area_app'),
+                   '/var/www/static/', ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 try:
     from local_settings import *

@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}{% block h1 %}Your Vision of Success{% endblock %}{% endblock %}
 {% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
 {% block extra_head %}
-    <script src="static/area_app/js/Sortable.js"></script>
+    <script src="{% static 'area_app/js/Sortable.js' %}"></script>
     <style type="text/css">
         .list-group-item {
             cursor: pointer;

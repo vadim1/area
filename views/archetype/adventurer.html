@@ -1,5 +1,6 @@
+{% load static %}
 <h3>
-    <img src="/static/area_app/img/adventurer.png" />
+    <img src="{% static 'area_app/img/adventurer.png' %}" />
     {% if list != 'true' %}
     You are...
     {% endif %}
