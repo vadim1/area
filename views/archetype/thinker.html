@@ -1,7 +1,8 @@
+{% load static %}
 <h3>
-    <img src="/static/area_app/img/thinker.png" />
+    <img src="{% static 'area_app/img/thinker.png' %}"/>
     {% if list != 'true' %}
-    You are...
+        You are...
     {% endif %}
     The Thinker!
 </h3>
@@ -39,7 +40,7 @@
 
     <div class="bio col-md-4">
         <div>
-            <img src="/static/area_app/img/archetype/lincoln.jpg"/>
+            <img src="{% static 'area_app/img/archetype/lincoln.jpg' %}"/>
         </div>
         <div>
             <a href="https://en.wikipedia.org/wiki/Abraham_Lincoln" target="_blank">Abraham Lincoln</a>
@@ -49,7 +50,7 @@
 
     <div class="bio col-md-4">
         <div>
-            <img src="/static/area_app/img/archetype/einstein.jpg"/>
+            <img src="{% static 'area_app/img/archetype/einstein.jpg' %}"/>
         </div>
         <div>
             <a href="https://en.wikipedia.org/wiki/Albert_Einstein" target="_blank">Albert Einstein</a>
@@ -59,7 +60,7 @@
 
     <div class="bio col-md-4">
         <div>
-            <img src="/static/area_app/img/archetype/mlk.jpg"/>
+            <img src="{% static 'area_app/img/archetype/mlk.jpg' %}"/>
         </div>
         <div>
             <a href="https://en.wikipedia.org/wiki/Martin_Luther_King_Jr." target="_blank">Martin Luther King Jr.</a>

@@ -1,5 +1,6 @@
+{% load static %}
 <h3>
-    <img src="/static/area_app/img/listener.png" />
+    <img src="{% static 'area_app/img/listener.png' %}" />
     {% if list != 'true' %}
     You are...
     {% endif %}
@@ -55,7 +56,7 @@
 
         <div class="bio col-md-4">
         <div>
-            <img src="/static/area_app/img/archetype/oprah.jpg"/>
+            <img src="{% static 'area_app/img/archetype/oprah.jpg' %}"/>
         </div>
         <div>
             <a href="https://en.wikipedia.org/wiki/Oprah_Winfrey" target="_blank">Oprah Winfrey</a>
