@@ -72,4 +72,5 @@ The Area Method Application for Making Important Decisions
 # Nginx command
     1. similar command exist for nginx( replace gunicorn with nginx)
 
-# Once you change static file  then don't forgot to issue python manage.py collectstatic
+# Once you change static file then don't forgot to run below command 
+    `python manage.py collectstatic
