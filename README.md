@@ -61,3 +61,15 @@ The Area Method Application for Making Important Decisions
                     proxy_pass http://unix:/home/ubuntu/area/area.sock;
             }
     }
+
+
+# Gunicorn command : Django app is served via this
+    1. sudo service gunicorn status : Give the status Gunicorn (You can see running/stoped/failed)
+    2. sudo service gunicorn restart : Restart Gunicorn
+    3. sudo service gunicorn start :  Start WSGI Gunicorn
+    4. sudo service gunicorn stop  : Stop WSGI Gunicorn
+
+# Nginx command
+    1. similar command exist for nginx( replace gunicorn with nginx)
+
+# Once you change static file  then don't forgot to issue python manage.py collectstatic
