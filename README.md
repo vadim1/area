@@ -74,3 +74,4 @@ The Area Method Application for Making Important Decisions
 
 # Once you change static file then don't forgot to run below command 
     python manage.py collectstatic
+    NOTE: It may ask for override, enter `yes`
