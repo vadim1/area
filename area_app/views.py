@@ -2,21 +2,18 @@ import json
 import os
 import random
 
-from django.shortcuts import render, redirect
-from django.conf import settings
-
 import archetypes
 import biases
 
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from django.conf import settings
+from utils import send_from_default_email
 
-def restart_session(request):
-    for key in request.session.keys():
-        del request.session[key]
-    return redirect('/decision')
-
-
-def logged_in(request):
-    return redirect('/')
+dream_directors = [
+    'Bob, New York',
+    'Jill, California',
+]
 
 
 def check_partner(request):
@@ -37,15 +34,17 @@ def home(request):
     })
 
 
+@login_required
 def decision(request):
     if request.method == 'POST':
-        if request.POST['submit'] == 'Back': return redirect('/')
+        if request.POST['submit'] == 'Back':
+            return redirect('/')
         decision_types = request.POST.getlist('decision_type[]')
         request.session['decision_types'] = decision_types
         decision_type_text = ''
         for decision_type in decision_types:
             if decision_type_text:
-               decision_type_text += ' and '
+                decision_type_text += ' and '
             if decision_type == 'other':
                 decision_type = request.POST['decision_type_other']
             decision_type_text += decision_type
@@ -74,6 +73,7 @@ success = {
 }
 
 
+@login_required
 def rank(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/decision')
@@ -90,6 +90,7 @@ def rank(request):
     })
 
 
+@login_required
 def questions(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/rank')
@@ -115,6 +116,7 @@ def questions(request):
     })
 
 
+@login_required
 def archetype(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/questions')
@@ -131,10 +133,12 @@ def archetype(request):
     })
 
 
+@login_required
 def archetype_info(request):
     archetype = request.GET['t']
 
 
+@login_required
 def cheetah_sheets(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/archetype')
@@ -148,20 +152,24 @@ def cheetah_sheets(request):
     })
 
 
+@login_required
 def archetypes_list(request):
     return render(request, 'archetypes.html', {
         'step': 4,
     })
 
 
+@login_required
 def action_map(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/archetype')
         request.session['commitment'] = request.POST['commitment']
         request.session['commitment_days'] = request.POST['days']
+        request.session['email_sent'] = False
+
         return redirect('/summary')
     if 'top_archetype' not in request.session:
-        return render(request, 'action_map.html', {});
+        return render(request, 'action_map.html', {})
     archetype = request.session['top_archetype']
     archetype_cheetahs = archetypes.archetype_cheetah_sheets[archetype]
     request.session['cheetah_sheets'] = archetype_cheetahs
@@ -176,10 +184,27 @@ def action_map(request):
     })
 
 
+@login_required
 def summary(request):
     request.session['summary'] = 1
     if 'decision' not in request.session:
-        return render(request, 'summary.html', {});
+        return render(request, 'summary.html', {})
+
+    if not request.session['email_sent']:
+        subject = "Your Commitment Details"
+        message = list()
+        message.append("You have taken commitments to do")
+        message.append(request.session['commitment'])
+        message.append("in")
+        message.append(request.session['commitment_days'])
+        message.append("Days.\n")
+        message.append("Thank you.\n")
+        message.append("Team App Areamethod\n")
+        message.append("https://app.areamethod.com\n\n")
+
+        send_from_default_email(subject, " ".join(message), [request.user.email])
+        request.session['email_sent'] = True
+
     return render(request, 'summary.html', {
         'type': request.session['decision_type'],
         'decision': request.session['decision'],
@@ -193,18 +218,22 @@ def summary(request):
     })
 
 
+@login_required
 def cheetah_master(request):
-    cheetahs = os.listdir('../area/views/cheetah')
+    cheetahs = os.listdir('../area/templates/cheetah')
     return render(request, 'cheetah_master.html', {
         'cheetahs': cheetahs,
     })
 
 
-dream_directors = [
-    'Bob, New York',
-    'Jill, California',
-]
-
-
+@login_required
 def autocomplete_dd(request):
     return json.dumps({'results': dream_directors})
+
+
+@login_required
+def restart_session(request):
+    for key in request.session.keys():
+        if not key.startswith('_'):
+            del request.session[key]
+    return redirect('/decision')

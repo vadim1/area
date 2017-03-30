@@ -19,12 +19,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%)hu^tv4(2(8mjtkfdp!oea^m!&nqeu3@20jmzp0a!9lrnlkds'
+SECRET_KEY = 'XXX'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['app.areamethod.com', '127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -35,10 +34,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'area_app',
-    'accounts',
-    # 'social.apps.django_app.default',
-    'social_django',
+    'profile',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
+    'bootstrapform',
 ]
 
 MIDDLEWARE = [
@@ -49,7 +53,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'area.urls'
@@ -57,7 +60,7 @@ ROOT_URLCONF = 'area.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['views'],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -65,8 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                # 'social.apps.django_app.context_processors.backends',
-                # 'social.apps.django_app.context_processors.login_redirect',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -74,24 +76,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'area.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'area_method',
-        'USER': 'area',
-        'PASSWORD': 'einhorn',
-        'HOST': 'area.csdqzmj3antr.us-west-1.rds.amazonaws.com',
-        'PORT': 3306,
-    }
-}
-
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
-
-AUTH_USER_MODEL = "accounts.User"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -107,25 +93,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-AUTHENTICATION_BACKENDS = (
-    # 'social.backends.github.GithubOAuth2',
-    # 'social.backends.twitter.TwitterOAuth',
-    # 'social.backends.facebook.FacebookOAuth2',
-
-    'django.contrib.auth.backends.ModelBackend',
-)
-
-# Facebook Login
-SOCIAL_AUTH_FACEBOOK_KEY = '414446745559947'  # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = 'd257e99573552511bcc5106b50cb47b4'  # App Secret
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
-SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
-    'fields': 'id,name,email',
-}
-LOGIN_URL = '/login'
-LOGOUT_URL = '/logout'
-LOGIN_REDIRECT_URL = '/logged_in'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
@@ -149,9 +116,73 @@ STATICFILES_DIR = [os.path.join(BASE_DIR, "static"),
                    '/var/www/static/', ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+DEFAULT_PARTNER = 'area'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST_USER = 'XXX'
+EMAIL_HOST_PASSWORD = 'XXX'
+EMAIL_HOST = 'XXX'
+EMAIL_PORT = 465
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_USE_SSL = True
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 30
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_LOGOUT_ON_GET = True
+
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook': {
+        'METHOD': 'oauth2',
+        'SCOPE': ['email'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'FIELDS': [
+            'id',
+            'email',
+            'name',
+            'first_name',
+            'last_name',
+            'verified',
+            'locale',
+            'timezone',
+            'link',
+            'gender',
+            'updated_time',
+        ],
+        'EXCHANGE_TOKEN': True,
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v2.4',
+    }
+}
+
+LOGIN_URL = '/accounts/login'
+LOGOUT_URL = '/accounts/logout'
+LOGIN_REDIRECT_URL = '/'
+
+SITE_ID = 1
+SITE_NAME = "app.areamethod.com"
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.xxx',
+        'NAME': 'xxxx',
+        'USER': 'xxxx',
+        'PASSWORD': 'xxxx',
+        'HOST': 'xxxx',
+        'PORT': 1234,
+    }
+}
+
 try:
     from local_settings import *
 except ImportError:
     pass
-
-DEFAULT_PARTNER = 'area'

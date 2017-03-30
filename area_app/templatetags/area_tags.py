@@ -12,11 +12,19 @@ def get_entry(data_dictionary, key):
         return 0
 
 
+@register.filter(is_safe=False)
+def add_str(a, b):
+    try:
+        return str(a) + str(b)
+    except (ValueError, TypeError):
+        return ""
+
+
 @register.filter(name='get_explain')
 def get_explain(data_dictionary, key):
     """Return the key_explain entry of an attribute from a data_dictionary or None if not there"""
     key += '_explain'
-    #raise Exception(data_dictionary)
+    # raise Exception(data_dictionary)
     if key in data_dictionary:
         return data_dictionary[key]
     else:

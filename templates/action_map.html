@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block title %}{% block h1 %}Your Action Map{% endblock %}{% endblock %}
+{% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
+{% block content %}
+    <div>
+        <p id="decision_text"></p>
+        <p>
+            You are a <strong>{{ archetype }}</strong>! To make your decision, we have a guide for you to use next.
+        </p>
+        {% for cheetah in cheetahs|slice:":3" %}
+            <div class="resource">
+                {% if forloop.counter0 > 0 %}
+                    <h4 class="showLink">
+                        <a href="#"
+                           onclick="$(this).closest('.resource').find('.cheetahContent').show();$(this).closest('.showLink').hide();return false;">Show
+                            Another Resource...</a>
+                    </h4>
+                    <div class="cheetahContent" style="display:none">
+                {% endif %}
+                <h4>{{ cheetah }} <span style="font-size: small; color: lightgray;">{{ weight }}</span></h4>
+                <div style="background-color: lightblue">
+                    {% with 'cheetah/'|add:cheetah|add:'.html' as path %}
+                        {% include path %}
+                    {% endwith %}
+                </div>
+                {% if forloop.counter0 > 0 %}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <div class="form-group">
+            <label for="commitment">I commit to solving my problem by</label>
+            <input type="text" name="commitment" class="form-control" id="commitment" placeholder="what will you do?"
+                   value="{{ request.session.commitment }}">
+        </div>
+        <div class="form-group">
+            <label for="days">In the next </label>
+            <select name="days" id="days">
+                <option value="days"></option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+            </select>
+            <label> days and sharing my results to create a community of problem solvers.</label>
+        </div>
+        <div style="margin-top: 50px;">
+            <input type="submit" class="btn btn-sm" name="submit" value="Back"/>
+            <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Commit!"/>
+            <p>When you commit, you will receive an email of your Action Map and Problem Solvers!</p>
+        </div>
+
+
+        <div class="q">Formatting needed. Should these be printable? How do we expect students to take actions here?
+            Fill out online? Email / text it to them?
+        </div>
+
+        <div class="q">Get their fb login if not already done here</div>
+
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var decision_text = get_decision_text('{{ type }}', '{{ decision }}', '{{ options }}', '{{ timeframe }}');
+            $('#decision_text').text(decision_text);
+            $('#days').val('{{ request.session.commitment_days }}');
+        });
+
+        function validate() {
+            if (!$('#commitment').val()) {
+                alert("Please type in what you will do");
+                return false;
+            }
+            if (!$('#days').val()) {
+                alert("Please select when you'll do it");
+                return false;
+            }
+        }
+        $('form').submit(validate);
+    </script>
+{% endblock %}
