@@ -33,7 +33,17 @@ def home(request):
         if request.POST['submit'] == 'Back': return redirect('/home')
         return redirect('/decision')
     check_partner(request)
+    # Randomize the order of questions
+    random_order_questions = []
+    for question, weights in archetypes.questions.items():
+        random_order_questions.append(question)
+    random.shuffle(random_order_questions)
+    questions_yes = ''
+    if 'questions_yes' in request.session:
+        questions_yes = request.session['questions_yes']
     return render(request, 'home.html', {
+        'questions': random_order_questions,
+        'questions_yes': questions_yes,
     })
 
 
@@ -113,6 +123,16 @@ def questions(request):
         'questions_yes': questions_yes,
         'step': 3,
     })
+
+
+def answer(request):
+    if request.method == 'POST':
+        question = request.POST.get('question')
+        answer = request.POST.get('answer')
+        if 'questions_yes' not in request.session:
+            request.session['questions_yes'] = {}
+        if answer == 'yes':
+            request.session['questions_yes']
 
 
 def archetype(request):
