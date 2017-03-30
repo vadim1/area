@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% load socialaccount %}
+{% block title %}{% block h1 %}{% endblock %}{% endblock %}
+{% block content %}
+    {% if request.session.partner == "apres" %}
+        <p class="margin-top-30-mob center margin-0-auto">
+            Looking for a job you'll love?
+            With
+            <a href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved"
+               target="_blank">PROBLEM SOLVED</a>
+            (powered by the <a href="http://areamethod.com" target="_blank">AREA Method</a>)
+            you will:
+        <ul>
+            <li>Get clear on what problem you're solving</li>
+            <li>Identify what matters most to you and what you'd count as success</li>
+            <li>Take a personality quiz to learn how you make decisions</li>
+            <li>Get into action with some clear next steps</li>
+        </ul>
+        </p>
+        <p class="margin-top-30-mob center margin-0-auto">
+            Should you look for full-time, part-time or project-based work?
+            Should you look for an office job, a tele-commuting opportunity or one with flexibility?
+            Do you want on-the-job training or professional development opportunities or focus on what you know?
+            How do you make a good decision? Where do you start?
+            How can you feel confident that you are making the best decision for you?
+        </p>
+    {% elif request.session.partner == "fp" %}
+        <p class="margin-top-30-mob center margin-0-auto">
+            Throughout life's journey, we make thousands of decisions everyday.
+            They could be small decisions, like, figuring out when to do your homework on a busy day, or big decisions,
+            like figuring out what you should do after high school.
+            Sometimes, it's hard to know if you made the right choice.
+            Well, this app,
+            <a href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved"
+               target="_blank">PROBLEM SOLVED</a> is here to help you do that!
+        </p>
+        <p class="margin-top-30-mob center margin-0-auto">
+            With
+            <a href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved"
+               target="_blank">PROBLEM SOLVED</a>
+            (powered by the <a href="http://areamethod.com" target="_blank">AREA Method</a>), you will:
+        </p>
+        <p>
+        <ul>
+            <li>Get clear on what problem you're solving</li>
+            <li>Identify what matters most to you and what you'd count as success</li>
+            <li>Take a personality quiz to learn how you make decisions</li>
+            <li>Get into action with some clear next steps</li>
+        </ul>
+        </p>
+        <p>
+            Making decisions that you feel good about doesn't have to be an uphill climb. Are you ready to solve your
+            problem?
+        </p>
+    {% else %}
+        <p class="margin-top-30-mob center margin-0-auto" style="font-size: x-large">
+            What kind of a {% include "problem_solver.html" %} are you? Take a quiz to find out!
+        </p>
+        <p class="margin-top-30-mob center margin-0-auto">
+            Are you a
+            <img src="/static/area_app/img/thinker.png" height="20"/>Thinker
+            (Albert Einstein), or a
+            <img src="/static/area_app/img/detective.png" height="20"/>Detective (Marie Curie)?
+            Might you solve problems like famous
+            <img src="/static/area_app/img/adventurer.png" height="20"/>Adventurers (Ernest Shackleton), or are you a
+            <img src="/static/area_app/img/creative.png" height="20"/>Creative (Beyonce)?
+        </p>
+        <p class="margin-top-30-mob center margin-0-auto">
+            Take this quiz, powered by Cheryl Strauss Einhorn’s decision making system
+            <a href="http://www.areamethod.com/" target="_blank">PROBLEM SOLVED</a> and make big decisions better!
+            Select what feels most right to you.
+        </p>
+        {% include "_quiz.html" %}
+        <p class="clearfix"></p>
+        <p class="margin-top-30-mob center margin-0-auto">
+            Researchers say that we make 40,000 decisions on any given day, everything from when to wake up in the
+            morning
+            to whether or not to have that late night snack (and then what to have).
+            Knowing your {% include "problem_solver.html" %} profile will help you learn about both your decision
+            making strengths and potential blind spots to control for and counteract mental mistakes.
+        </p>
+        <p class="margin-top-30-mob center margin-0-auto">
+            With
+            <a href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved"
+               target="_blank">PROBLEM SOLVED</a>
+            (powered by the <a href="http://areamethod.com" target="_blank">AREA Method</a>)
+            you will:
+        <ul>
+            <li>Take a personality quiz to learn how you make decisions</li>
+            <li>Get clear on what problem you're solving</li>
+            <li>Identify what matters most to you and what you'd count as success</li>
+            <li>Get into action with some clear next steps</li>
+        </ul>
+        </p>
+        <p class="margin-top-30-mob center margin-0-auto">
+            What does your {% include "problem_solver.html" %} profile say about you? Cheryl explains:
+        </p>
+        <p class="margin-top-30-mob center margin-0-auto">
+            The {% include "problem_solver.html" %} profiles reflect a few realities about how we make decisions and the
+            mental shortcuts that help us make small decisions well but hinder
+            our insight, understanding and creativity when solving high stakes problems.
+            For while we are all flawed thinkers, swayed by everything from experience to authority, we need a way to
+            pry open
+            cognitive space to allow for new information and analysis when solving complex problems.
+            We want to make sure that our own preconceptions
+            and mental shortcuts aren't directing our attention away from unfamiliar, yet viable opportunities.
+        </p>
+        <p class="margin-top-30-mob center margin-0-auto">
+            The quiz was derived from Cheryl's <a
+                href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1476473016&sr=8-1&keywords=cheryl+strauss+einhorn"
+                target="_blank">PROBLEM SOLVED</a>
+            framework.
+        </p>
+        <p class="margin-top-30-mob center margin-0-auto" style="font-size: x-large; font-weight: bold;">
+            A Good Process + Good Information = Great Decisions
+        </p>
+    {% endif %}
+    <div style="margin-top: 50px; text-align: center;">
+        {% if user.is_authenticated %}
+            <h3 class="text-center">Signed in as {{ request.user.email }}</h3>
+            <a class="btn btn-warning" href="{% url 'account_logout' %}">Signout</a>
+        {% else %}
+            <a class="btn btn-info" href="{% provider_login_url 'facebook' %}">Facebook Signin</a>
+            <a class="btn btn-danger" href="{% provider_login_url 'google' %}">Google Signin</a>
+            <a class="btn btn-success" href="{% url 'account_login' %}">Signin</a>
+        {% endif %}
+    </div>
+
+    <div class="q">In log in / pull up saves decisions / etc.</div>
+    <div class="q">Amazon tracking for app vs areamethod.com (email Chris)</div>
+    <div class="q"><a href="{% url 'Cheetah_Sheets' %}">All Problem Solvers</a> - needs editing</div>
+    <div class="text-center" style="margin-top: 20px">
+        <a class="btn" href="{% url 'Decision' %}" style="background-color: #f6653c; color: #ffffff;">
+            <p style="font-size: x-large">PROBLEM <span style="color:#000000">SOLVED</span></p>
+            Make Big Decisions Better
+        </a>
+    </div>
+
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58da669822b5e1b4"></script>
+{% endblock %}

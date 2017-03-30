@@ -1,0 +1,1 @@
+default_app_config = 'area_app.apps.AreaAppConfig'
