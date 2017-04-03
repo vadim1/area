@@ -25,21 +25,25 @@ def check_partner(request):
     request.session['partner'] = partner
 
 
+def get_randomized_questions():
+    """
+    Randomize the order of questions
+    """
+    question_and_details = archetypes.questions.items()
+    random.shuffle(question_and_details)
+    return question_and_details
+
+
 def home(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/home')
         return redirect('/decision')
     check_partner(request)
-    # Randomize the order of questions
-    random_order_questions = []
-    for question, weights in archetypes.questions.items():
-        random_order_questions.append(question)
-    random.shuffle(random_order_questions)
     questions_yes = ''
     if 'questions_yes' in request.session:
         questions_yes = request.session['questions_yes']
     return render(request, 'home.html', {
-        'questions': random_order_questions,
+        'questions': get_randomized_questions(),
         'questions_yes': questions_yes,
     })
 
@@ -111,16 +115,11 @@ def questions(request):
         top_archetype = top_archetypes[0]
         request.session['top_archetype'] = top_archetype[0]
         return redirect('/archetype')
-    # Randomize the order of questions
-    random_order_questions = []
-    for question, weights in archetypes.questions.items():
-        random_order_questions.append(question)
-    random.shuffle(random_order_questions)
     questions_yes = ''
     if 'questions_yes' in request.session:
         questions_yes = request.session['questions_yes']
     return render(request, 'questions.html', {
-        'questions': random_order_questions,
+        'questions': get_randomized_questions(),
         'questions_yes': questions_yes,
         'step': 3,
     })
