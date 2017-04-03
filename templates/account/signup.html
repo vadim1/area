@@ -1,6 +1,6 @@
 {% extends "account/base.html" %}
 
-{% load i18n bootstrap socialaccount%}
+{% load i18n bootstrap socialaccount %}
 
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 
@@ -16,8 +16,17 @@
         {% if redirect_field_value %}
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
         {% endif %}
+        {% if request.session.partner == "fp" %}
+            <div class="form-group">
+                <label class="control-label" for="dream_director">Dream Director Name</label>
+                <div>
+                    <input class="form-control" id="dream_director" name="dream_director" placeholder="Dream Director"
+                           type="text"/>
+                </div>
+            </div>
+        {% endif %}
         <button type="submit" class="btn btn-success">{% trans "Sign Up" %} &raquo;</button>
-         <a class="btn btn-info" href="{% provider_login_url 'facebook' %}">Facebook Signup</a>
+        <a class="btn btn-info" href="{% provider_login_url 'facebook' %}">Facebook Signup</a>
         <a class="btn btn-danger" href="{% provider_login_url 'google' %}">Google Signup</a>
     </form>
 {% endblock %}
