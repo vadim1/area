@@ -238,7 +238,6 @@ def summary(request):
     })
 
 
-@login_required
 def cheetah_master(request):
     cheetahs = os.listdir('../area/templates/cheetah')
     return render(request, 'cheetah_master.html', {
