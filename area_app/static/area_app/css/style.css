@@ -644,3 +644,7 @@ h4 {
 .bio div:first-child {
     text-align: center;
 }
+
+.quote {
+    color: #ff730a;
+}
