@@ -5,9 +5,9 @@ from django.contrib.auth.models import User
 
 
 class QuestionModel(models.Model):
-    question = models.CharField(max_length=256)
-    answer_yes = models.CharField(max_length=256)
-    answer_no = models.CharField(max_length=256)
+    question = models.CharField(max_length=256, default='')
+    answer_yes = models.CharField(max_length=256, null=True)
+    answer_no = models.CharField(max_length=256, null=True)
     weight_yes = models.FloatField(default=1.0)
     weight_no = models.FloatField(default=1.0)
 
@@ -30,7 +30,7 @@ class Problem(models.Model):
     decision_type_other = models.CharField(max_length=255)
     success = models.CharField(max_length=255)
     commitment_days = models.IntegerField(default=7)
-    commitment = models.TextField()
+    commitment = models.TextField(null=True)
 
 
 class ArchType(models.Model):
@@ -41,7 +41,7 @@ class ArchType(models.Model):
 
 class Question(models.Model):
     problem = models.ForeignKey(Problem)
-    question = models.ForeignKey(QuestionModel, related_name='user_question')
+    question = models.ForeignKey(QuestionModel, related_name='user_question', null=True)
     answer = models.BooleanField(default=False)
 
 

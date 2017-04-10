@@ -171,7 +171,6 @@ def cheetah_sheets(request):
     })
 
 
-@login_required
 def archetypes_list(request):
     return render(request, 'archetypes.html', {
         'step': 4,
