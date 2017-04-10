@@ -36,8 +36,8 @@ def get_randomized_questions():
 
 def home(request):
     if request.method == 'POST':
-        if request.POST['submit'] == 'Back': return redirect('/home')
-        return redirect('/decision')
+        return handle_answers(request)
+        return redirect('/accounts/signup/?next=/archetype')
     check_partner(request)
     questions_yes = ''
     if 'questions_yes' in request.session:
@@ -104,17 +104,22 @@ def rank(request):
     })
 
 
+def handle_answers(request):
+    if request.POST['submit'] == 'Back':
+        return redirect('/rank')
+    questions_yes = request.POST.getlist('question[]')
+    request.session['questions_yes'] = questions_yes
+    top_archetypes = archetypes.get_top_archetypes(questions_yes)
+    request.session['archetype'] = top_archetypes
+    top_archetype = top_archetypes[0]
+    request.session['top_archetype'] = top_archetype[0]
+    return redirect('/archetype')
+
+
 @login_required
 def questions(request):
     if request.method == 'POST':
-        if request.POST['submit'] == 'Back': return redirect('/rank')
-        questions_yes = request.POST.getlist('question[]')
-        request.session['questions_yes'] = questions_yes
-        top_archetypes = archetypes.get_top_archetypes(questions_yes)
-        request.session['archetype'] = top_archetypes
-        top_archetype = top_archetypes[0]
-        request.session['top_archetype'] = top_archetype[0]
-        return redirect('/archetype')
+        return handle_answers(request)
     questions_yes = ''
     if 'questions_yes' in request.session:
         questions_yes = request.session['questions_yes']
@@ -135,7 +140,7 @@ def answer(request):
             request.session['questions_yes']
 
 
-@login_required
+@login_required(login_url='/accounts/signup/')
 def archetype(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/questions')
