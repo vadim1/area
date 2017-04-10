@@ -596,6 +596,8 @@ h4 {
 
 .bio {
     margin-bottom: 20px;
+    text-align: center;
+    font-size: large;
 }
 
 .bio img {
@@ -627,4 +629,8 @@ h4 {
 
 .footer a {
     color: #ddddff;
+}
+
+.archetype-name {
+    font-size: large;
 }
