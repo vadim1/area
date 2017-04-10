@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}{% block h1 %}Your Decision Maker Profile{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}Your {% include "problem_solver.html" %} Profile{% endblock %}{% endblock %}
 {% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
 {% block content %}
     {% if archetype %}
@@ -8,9 +8,9 @@
     <div>
         <div class="q">Add posting to social media here?</div>
         <div class="clearfix"></div>
-        <h4>Curious about <a href="/archetypes" target="_blank">other decision-maker profiles</a>?</h4>
+        <h4>Curious about <a href="/archetypes" target="_blank">other {% include "problem_solver.html" %} Profiles</a>?</h4>
         <h3>Applying the AREA Method</h3>
-        <p>COMING SOON! Use your Decision-Maker Profile and the AREA Method app to make big decisions better!</p>
+        <p>COMING SOON! Use your {% include "problem_solver.html" %} Profile and the AREA Method app to make big decisions better!</p>
         {% include 'buttons.html' %}
     <a href="/archetypes" data-modal-title="Decision-Maker Styles"
    data-modal-description="dd2" data-modal-iframe-scroll="true">

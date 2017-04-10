@@ -594,6 +594,10 @@ h4 {
     font-size: x-large !important;
 }
 
+.bio {
+    margin-bottom: 20px;
+}
+
 .bio img {
     height: 120px;
 }

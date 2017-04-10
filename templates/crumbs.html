@@ -13,16 +13,16 @@
 </div>
 <div>
     {% if s.questions_yes %}
-        <a href="/edges_pitfalls">Your Decision-Making Style</a>
+        <a href="/edges_pitfalls">Your {% include "problem_solver.html" %} Profile</a>
     {% else %}
-        Your Decision-Making Style
+        Your {% include "problem_solver.html" %} Profile
     {% endif %}
 </div>
 <div>
     {% if s.top_archetype %}
-        <a href="/cognitive_biases">Your Decision Maker Profile: {{ s.top_archetype }}</a>
+        <a href="/cognitive_biases">Your {% include "problem_solver.html" %} Profile: {{ s.top_archetype }}</a>
     {% else %}
-        Your Decision Maker Profile
+        Your {% include "problem_solver.html" %} Profile
     {% endif %}
 </div>
 <div>
