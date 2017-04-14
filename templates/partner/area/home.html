@@ -1,0 +1,122 @@
+{% load static account socialaccount bootstrap i18n %}
+
+<style>
+    .archetype {
+        display: inline;
+        position: relative;
+        border-bottom: 2px dotted #aaaaff;
+    }
+
+    .archetype:hover:after {
+        background: #333;
+        background: rgba(0, 0, 0, .8);
+        border-radius: 5px;
+        bottom: 26px;
+        color: #fff;
+        content: attr(title);
+        left: 20%;
+        padding: 5px 15px;
+        position: absolute;
+        z-index: 98;
+    }
+
+    .archetype:hover:before {
+        border: solid;
+        border-color: #333 transparent;
+        border-width: 6px 6px 0 6px;
+        bottom: 20px;
+        content: "";
+        left: 50%;
+        position: absolute;
+        z-index: 99;
+    }
+
+    .archetype img {
+        height: 18px;
+        margin-bottom: 3px;
+    }
+</style>
+<p class="margin-top-30-mob center margin-0-auto" style="font-size: x-large">
+    What kind of a {% include "problem_solver.html" %} are you?
+</p>
+<p class="margin-top-30-mob center margin-0-auto">
+    Are you a
+    <span class="archetype" title="Albert Einstein">
+        <img src="{% static "area_app/img/thinker.png" %}"/>Thinker</span>
+    or a
+    <span class="archetype" title="Marie Curie">
+        <img src="{% static "area_app/img/detective.png" %}"/>Detective</span>?
+    Might you solve problems like famous
+    <span class="archetype" title="Ernest Shackleton">
+        <img src="{% static "area_app/img/adventurer.png" %}"/>Adventurers</span>
+    or
+    <span class="archetype" title="Oprah Winfrey">
+        <img src="{% static "area_app/img/listener.png" %}"/>Listeners</span>?
+    Or are you a
+    <span class="archetype" title="Beyoncé">
+        <img src="{% static "area_app/img/creative.png" %}"/>Visionary</span>
+    going your own way?
+</p>
+<p class="margin-top-30-mob center margin-0-auto">
+    Take this quiz, powered by Cheryl Strauss Einhorn's decision making system
+    <a href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved"
+       target="_blank">PROBLEM SOLVED</a>
+    and make big decisions better!
+    Select the answers what feels most right to you.
+</p>
+{% include "_quiz.html" %}
+<p class="clearfix"></p>
+<p class="margin-top-30-mob center margin-0-auto" style="font-size: x-large">
+    What does your problem solver profile say about you? Cheryl explains:
+</p>
+<p class="margin-top-30-mob center margin-0-auto">
+We make thousands of decisions every day - from when to wake up to whether to have a late night snack, and we make them quickly, and largely unconsciously. But what happens when we face a high stakes decision? Knowing your {% include "problem_solver.html" %} Profile will help you learn
+about your decision-making strengths and your potential blind spots, those mental shortcuts that help us make small decisions well but that can hinder our insight, understanding and creativity when solving high stakes problems.
+</p>
+<p class="margin-top-30-mob center margin-0-auto">
+    With
+    <a href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved"
+       target="_blank">PROBLEM SOLVED</a>
+    (powered by the <a href="http://areamethod.com" target="_blank">AREA Method</a>)
+    you will:
+<ul style="font-size: inherit;">
+    <li>Take a personality quiz to learn how you make decisions</li>
+    <li>Get clear on what problem you're solving</li>
+    <li>Identify what matters most to you and what you'd count as success</li>
+    <li>Get into action with some clear next steps</li>
+</ul>
+</p>
+<p class="margin-top-30-mob center margin-0-auto">
+    The quiz was derived from Cheryl's <a
+        href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1476473016&sr=8-1&keywords=cheryl+strauss+einhorn"
+        target="_blank">PROBLEM SOLVED</a>
+    framework.
+</p>
+<p class="margin-top-30-mob center margin-0-auto" style="font-size: large; font-weight: bold; white-space: nowrap;">
+    A Good Process + Good Information = Great Decisions
+</p>
+
+<div style="margin-top: 50px; text-align: center;">
+    {% if user.is_authenticated %}
+        <h4 class="text-center">Signed in as {{ request.user.email }}</h4>
+        <a class="btn btn-warning" href="{% url 'account_logout' %}">Sign Out</a>
+        <a class="btn btn-default" href="/decision">Make a Good Decision!</a>
+    {% else %}
+        <a class="btn btn-info" href="{% provider_login_url 'facebook' %}">Facebook Sign In</a>
+        <a class="btn btn-danger" href="{% provider_login_url 'google' %}">Google Sign In</a>
+        <a class="btn btn-success" href="{% url 'account_login' %}">Sign In</a>
+    {% endif %}
+</div>
+
+<div class="q">Amazon tracking for app vs areamethod.com (email Chris)</div>
+<div class="q"><a href="{% url 'Cheetah_Sheets' %}">All Problem Solvers</a> - needs editing</div>
+<div class="text-center" style="margin-top: 20px">
+    <a class="btn" href="{% url 'Decision' %}" style="background-color: #f6653c; color: #ffffff;">
+        <p style="font-size: x-large">PROBLEM <span style="color:#000000">SOLVED</span></p>
+        Make Big Decisions Better
+    </a>
+</div>
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58da669822b5e1b4"></script>
+

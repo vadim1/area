@@ -4,6 +4,7 @@ import random
 
 import archetypes
 import biases
+import forms
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -23,6 +24,7 @@ def check_partner(request):
     else:
         partner = settings.DEFAULT_PARTNER
     request.session['partner'] = partner
+    return partner
 
 
 def get_randomized_questions():
@@ -38,17 +40,20 @@ def home(request):
     if request.method == 'POST':
         return handle_answers(request)
         return redirect('/accounts/signup/?next=/archetype')
-    check_partner(request)
+    partner = check_partner(request)
+    login_form = None
+    if partner == 'fp':
+        login_form = forms.FutureProjectSignupForm
     questions_yes = ''
     if 'questions_yes' in request.session:
         questions_yes = request.session['questions_yes']
     return render(request, 'home.html', {
         'questions': get_randomized_questions(),
         'questions_yes': questions_yes,
+        'form': login_form,
     })
 
 
-@login_required
 def decision(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back':
@@ -116,7 +121,6 @@ def handle_answers(request):
     return redirect('/archetype')
 
 
-@login_required
 def questions(request):
     if request.method == 'POST':
         return handle_answers(request)
@@ -157,7 +161,6 @@ def archetype(request):
     })
 
 
-@login_required
 def archetype_info(request):
     archetype = request.GET['t']
 
@@ -248,12 +251,10 @@ def cheetah_master(request):
     })
 
 
-@login_required
 def autocomplete_dd(request):
     return json.dumps({'results': dream_directors})
 
 
-@login_required
 def restart_session(request):
     for key in request.session.keys():
         if not key.startswith('_'):

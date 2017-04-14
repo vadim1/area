@@ -20,7 +20,7 @@ body {
         height: 8px;
     }
 
-    p {
+    p, ul, ul li {
         font-size: 13px;
         line-height: 19px;
         font-family: 'Open Sans', sans-serif;
@@ -273,7 +273,7 @@ body {
         margin: 0 auto;
     }
 
-    p {
+    p, ul, ul li {
         font-size: 18px;
         line-height: 26px;
         font-family: 'Open Sans', sans-serif;

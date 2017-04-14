@@ -1,0 +1,60 @@
+{% load account socialaccount bootstrap i18n %}
+
+<p class="margin-top-30-mob center margin-0-auto">
+    Throughout life's journey, we make thousands of decisions everyday.
+    They could be small decisions, like, figuring out when to do your homework on a busy day, or big decisions,
+    like figuring out what you should do after high school.
+    Sometimes, it's hard to know if you made the right choice.
+    Well, this app,
+    <a href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved"
+       target="_blank">PROBLEM SOLVED</a> is here to help you do that!
+</p>
+<p class="margin-top-30-mob center margin-0-auto">
+    With
+    <a href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved"
+       target="_blank">PROBLEM SOLVED</a>
+    (powered by the <a href="http://areamethod.com" target="_blank">AREA Method</a>), you will:
+</p>
+<p>
+<ul>
+    <li>Get clear on what problem you're solving</li>
+    <li>Identify what matters most to you and what you'd count as success</li>
+    <li>Take a personality quiz to learn how you make decisions</li>
+    <li>Get into action with some clear next steps</li>
+</ul>
+</p>
+<p>
+    Making decisions that you feel good about doesn't have to be an uphill climb. Are you ready to solve your
+    problem?
+</p>
+
+<div style="margin-top: 50px; text-align: center;">
+    {% if user.is_authenticated %}
+        <h4 class="text-center">Signed in as {{ request.user.email }}</h4>
+        <a class="btn btn-warning" href="{% url 'account_logout' %}">Sign Out</a>
+        <a class="btn btn-default" href="/decision">Make a Good Decision!</a>
+    {% else %}
+    <p>
+        {% blocktrans %}Already have an account? Then please <a href="/accounts/login/">Sign In</a>.{% endblocktrans %}
+    </p>
+    <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+        {% endif %}
+        {% if request.session.partner == "fp" %}
+            <div class="form-group">
+                <label class="control-label" for="dream_director">Dream Director Name</label>
+                <div>
+                    <input class="form-control" id="dream_director" name="dream_director" placeholder="Dream Director"
+                           type="text"/>
+                </div>
+            </div>
+        {% endif %}
+        <button type="submit" class="btn btn-success">{% trans "Sign Up" %} &raquo;</button>
+        <a class="btn btn-info" href="{% provider_login_url 'facebook' %}">Facebook Sign Up</a>
+        <a class="btn btn-danger" href="{% provider_login_url 'google' %}">Google Sign up</a>
+    </form>
+    {% endif %}
+</div>

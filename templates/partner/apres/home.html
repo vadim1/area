@@ -1,0 +1,114 @@
+{% load account socialaccount bootstrap i18n %}
+
+<p class="margin-top-30-mob center margin-0-auto">
+    Looking for a job you'll love?
+    With
+    <a href="http://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved"
+       target="_blank">PROBLEM SOLVED</a>
+    (powered by the <a href="http://areamethod.com" target="_blank">AREA Method</a>)
+    you will:
+<ul>
+    <li>Get clear on what problem you're solving</li>
+    <li>Identify what matters most to you and what you'd count as success</li>
+    <li>Take a personality quiz to learn how you make decisions</li>
+    <li>Get into action with some clear next steps</li>
+</ul>
+</p>
+<p class="margin-top-30-mob center margin-0-auto">
+    Should you look for full-time, part-time or project-based work?
+    Should you look for an office job, a tele-commuting opportunity or one with flexibility?
+    Do you want on-the-job training or professional development opportunities or focus on what you know?
+    How do you make a good decision? Where do you start?
+    How can you feel confident that you are making the best decision for you?
+</p>
+<p class="margin-top-30-mob center margin-0-auto" style="font-size: x-large">
+    What kind of a {% include "problem_solver.html" %} are you?
+    <br/>
+    Take a quiz to find out!
+</p>
+<p class="margin-top-30-mob center margin-0-auto">
+    Are you a
+    <img src="/static/area_app/img/thinker.png" height="20"/>Thinker
+    (Albert Einstein), or a
+    <img src="/static/area_app/img/detective.png" height="20"/>Detective (Marie Curie)?
+    Might you solve problems like famous
+    <img src="/static/area_app/img/adventurer.png" height="20"/>Adventurers (Ernest Shackleton), or are you a
+    <img src="/static/area_app/img/creative.png" height="20"/>Visionary (Beyonce)?
+</p>
+<p class="margin-top-30-mob center margin-0-auto">
+    Problem Solved is a digital coach powered by the AREA Method, a decision making system that helps you solve complex
+    problems. It provides you with tips and action steps that are uniquely customized to the way that you make
+    decisions. It’s a tool that gives you control over your life and allows you to chart a decision path forward into
+    your best future.
+</p>
+<p class="margin-top-30-mob center margin-0-auto">
+    Start making big decisions better. Select what feels most right to you.
+</p>
+{% include "_quiz.html" %}
+<p class="clearfix"></p>
+<p class="margin-top-30-mob center margin-0-auto">
+    We make thousands of decisions every day - from when to wake up to whether to have a late night snack. We each make
+    those decisions differently.
+    Knowing your {% include "problem_solver.html" %} Profile will help you learn about your decision-making strengths
+    and your potential blind spots.
+</p>
+<p class="margin-top-30-mob center margin-0-auto">
+    With
+    <a href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved"
+       target="_blank">PROBLEM SOLVED</a>
+    (powered by the <a href="http://areamethod.com" target="_blank">AREA Method</a>)
+    you will:
+<ul>
+    <li>Take a personality quiz to learn how you make decisions</li>
+    <li>Get clear on what problem you're solving</li>
+    <li>Identify what matters most to you and what you'd count as success</li>
+    <li>Get into action with some clear next steps</li>
+</ul>
+</p>
+<p class="margin-top-30-mob center margin-0-auto">
+    What does your {% include "problem_solver.html" %} Profile say about you? Cheryl explains:
+</p>
+<p class="margin-top-30-mob center margin-0-auto">
+    The {% include "problem_solver.html" %} Profiles reflect a few realities about how we make decisions and the
+    mental shortcuts that help us make small decisions well but hinder
+    our insight, understanding and creativity when solving high stakes problems.
+    For while we are all flawed thinkers, swayed by everything from experience to authority, we need a way to
+    pry open
+    cognitive space to allow for new information and analysis when solving complex problems.
+    We want to make sure that our own preconceptions
+    and mental shortcuts aren't directing our attention away from unfamiliar, yet viable opportunities.
+</p>
+<p class="margin-top-30-mob center margin-0-auto">
+    The quiz was derived from Cheryl's <a
+        href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1476473016&sr=8-1&keywords=cheryl+strauss+einhorn"
+        target="_blank">PROBLEM SOLVED</a>
+    framework.
+</p>
+<p class="margin-top-30-mob center margin-0-auto" style="font-size: x-large; font-weight: bold;">
+    A Good Process + Good Information = Great Decisions
+</p>
+
+<div style="margin-top: 50px; text-align: center;">
+    {% if user.is_authenticated %}
+        <h4 class="text-center">Signed in as {{ request.user.email }}</h4>
+        <a class="btn btn-warning" href="{% url 'account_logout' %}">Sign Out</a>
+        <a class="btn btn-default" href="/decision">Make a Good Decision!</a>
+    {% else %}
+        <a class="btn btn-info" href="{% provider_login_url 'facebook' %}">Facebook Sign In</a>
+        <a class="btn btn-danger" href="{% provider_login_url 'google' %}">Google Sign In</a>
+        <a class="btn btn-success" href="{% url 'account_login' %}">Sign In</a>
+    {% endif %}
+</div>
+
+<div class="q">Amazon tracking for app vs areamethod.com (email Chris)</div>
+<div class="q"><a href="{% url 'Cheetah_Sheets' %}">All Problem Solvers</a> - needs editing</div>
+<div class="text-center" style="margin-top: 20px">
+    <a class="btn" href="{% url 'Decision' %}" style="background-color: #f6653c; color: #ffffff;">
+        <p style="font-size: x-large">PROBLEM <span style="color:#000000">SOLVED</span></p>
+        Make Big Decisions Better
+    </a>
+</div>
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58da669822b5e1b4"></script>
+
