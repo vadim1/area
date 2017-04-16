@@ -11,6 +11,17 @@ class QuestionModel(models.Model):
     weight_yes = models.FloatField(default=1.0)
     weight_no = models.FloatField(default=1.0)
 
+    @staticmethod
+    def get_by_question(question):
+        question_models = QuestionModel.objects.filter(question=question).all()
+        if len(question_models) > 0:
+            return question_models[0]
+        else:
+            # New Question - add it
+            question_model = QuestionModel(question=question)
+            question_model.save()
+            return question_model
+
 
 class ArchetypesModel(models.Model):
     name = models.CharField(max_length=256)
@@ -40,7 +51,7 @@ class ArchType(models.Model):
 
 
 class Question(models.Model):
-    problem = models.ForeignKey(Problem)
+    user = models.ForeignKey(User, null=True)
     question = models.ForeignKey(QuestionModel, related_name='user_question', null=True)
     answer = models.BooleanField(default=False)
 

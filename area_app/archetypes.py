@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: latin-1 -*-
 
+from models import QuestionModel, Question
+
 questions = {
     'I tend to make gut decisions.': {
         'yes': {'adventurer': 1},
@@ -121,3 +123,26 @@ archetype_cheetah_sheets = {
     'listener': ['What Is The Story', 'Scenario Analysis'],
     'creative': ['Great Questions Roadmap', 'Scenario Analysis'],
 }
+
+
+def save_questions(questions_yes):
+    for question, yes_no in questions.items():
+        question_model = QuestionModel.get_by_question(question)
+        q = Question(question=question_model)
+        if question in questions_yes:
+            q.answer = 'yes'
+        else:
+            q.answer = 'no'
+        q.save()
+
+
+def save_questions(questions_yes, user=None):
+    for question, yes_no in questions.items():
+        question_model = QuestionModel.get_by_question(question)
+        q = Question(question=question_model, user=user)
+        if question in questions_yes:
+            q.answer = 'yes'
+        else:
+            q.answer = 'no'
+        q.save()
+

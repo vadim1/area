@@ -247,7 +247,6 @@ body {
         font-size: 13px;
         font-family: 'Open Sans', sans-serif;
         color: #495057;
-        line-height: 19px;
         padding-left: 0px;
         counter-increment: list;
         list-style: none;
@@ -275,7 +274,6 @@ body {
 
     p, ul, ul li {
         font-size: 18px;
-        line-height: 26px;
         font-family: 'Open Sans', sans-serif;
         color: #495057
     }
@@ -316,7 +314,6 @@ body {
         font-size: 18px;
         font-weight: bold;
         color: #3d96ff;
-        line-height: 1.9
     }
 
     .btnv {
@@ -472,7 +469,6 @@ body {
         font-weight: bold;
         font-family: 'Open Sans', sans-serif;
         color: #495057;
-        line-height: 26px;
         counter-increment: list;
         list-style: none;
         text-indent: -16px;
@@ -507,7 +503,6 @@ body {
 
 .list {
     font-size: 18px;
-    line-height: 26px;
     font-family: 'Open Sans', sans-serif;
     color: #495057;
 }

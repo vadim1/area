@@ -136,6 +136,10 @@ def handle_answers(request):
     if request.POST['submit'] == 'Back':
         return redirect('/rank')
     questions_yes = request.POST.getlist('question[]')
+    user = None
+    if request.user.is_authenticated():
+        user = request.user
+    archetypes.save_questions(questions_yes=questions_yes, user=user)
     request.session['questions_yes'] = questions_yes
     top_archetypes = archetypes.get_top_archetypes(questions_yes)
     request.session['archetype'] = top_archetypes
