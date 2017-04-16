@@ -84,7 +84,7 @@ def home_logged_in(request):
 
 
 def load_problem(request, pid):
-    problem = Problem.objects.filter(id=id).first()
+    problem = Problem.objects.filter(id=pid).first()
     request.session['problem_id'] = pid
     request.session['decision_type'] = problem.decision_type
     request.session['decision'] = problem.decision
