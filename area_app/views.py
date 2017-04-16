@@ -90,6 +90,7 @@ def load_problem(request, id):
     request.session['options'] = problem.options
     request.session['timeframe'] = problem.time_frame
     request.session['decision_type_other'] = problem.decision_type_other
+    request.session['success'] = problem.success
     request.session['comitment_days'] = problem.comitment_days
     request.session['comitment'] = problem.comitment
 
@@ -98,14 +99,16 @@ def decision(request):
     if 'pid' in request.GET:
         pid = request.GET['pid']
         problem = Problem.objects.filter(id=request.GET['pid']).first()
+        request.session['problem_id'] = pid
     else:
         pid = None
         problem = Problem()
+        request.session['problem_id'] = None
     if request.method == 'POST':
         if request.POST['submit'] == 'Back':
             return redirect('/')
-        if 'pid' in request.POST:
-            problem = Problem.objects.filter(id=request.POST['pid']).first()
+        if 'problem_id' in request.session:
+            problem = Problem.objects.filter(id=request.session['problem_id']).first()
         decision_types = request.POST.getlist('decision_type[]')
         request.session['decision_types'] = decision_types
         decision_type_text = ''
@@ -137,7 +140,7 @@ def decision(request):
             decision_types_comma_delimited += decision_type + ','
     return render(request, 'decision.html', {
         'decision_types': decision_types_comma_delimited,
-        'pid': pid,
+        'problem_id': pid,
         'step': 1,
     })
 
@@ -156,7 +159,14 @@ def rank(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/decision')
         request.session['success'] = request.POST['success']
-        return redirect('/questions')
+        if 'problem_id' in request.session:
+            problem = Problem.objects.filter(id=request.GET['pid']).first()
+            problem.success = success
+            problem.save()
+        if 'questions_yes' in request.session:
+            return redirect('/action_map')
+        else:
+            return redirect('/questions')
     success_keys = success.keys()
     random.shuffle(success_keys)
     success_shuffled = []
