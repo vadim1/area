@@ -56,8 +56,9 @@ class Question(models.Model):
 
     @staticmethod
     def get_yes_questions(user):
-        yes_questions = Question.objects.filter(user=user, answer=True).all()
-        return yes_questions
+        yes_questions = Question.objects.filter(user=user, answer=True)
+        raise Exception(yes_questions.query)
+        return yes_questions.all()
 
     def text(self):
         return self.question.text()
