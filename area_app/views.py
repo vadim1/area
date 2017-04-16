@@ -83,9 +83,20 @@ def home_logged_in(request):
     })
 
 
-def load_problem(request, pid):
-    problem = Problem.objects.filter(id=pid).first()
-    request.session['problem_id'] = pid
+def load_problem(request):
+    pid = None  # Problem id
+    if request.method == 'POST':
+        if 'pid' in request.POST:
+            pid = request.POST['pid']
+        else:
+            raise Exception('POST without pid')
+    else:
+        if 'pid' in request.GET:
+            pid = request.GET['pid']
+    problem = Problem()
+    if pid:
+        problem = Problem.objects.filter(id=pid).first()
+    request.session['pid'] = pid
     request.session['decision_type'] = problem.decision_type
     request.session['decision'] = problem.decision
     request.session['options'] = problem.options
@@ -98,20 +109,10 @@ def load_problem(request, pid):
 
 
 def decision(request):
-    if 'pid' in request.GET:
-        pid = request.GET['pid']
-        problem = load_problem(request, pid)
-    else:
-        pid = None
-        problem = Problem()
-        request.session['problem_id'] = None
+    problem = load_problem(request)
     if request.method == 'POST':
         if request.POST['submit'] == 'Back':
             return redirect('/')
-        if 'pid' in request.POST:
-            problem = Problem.objects.filter(id=request.POST['pid']).first()
-        elif 'problem_id' in request.session and request.session['problem_id']:
-            problem = Problem.objects.filter(id=request.session['problem_id']).first()
         decision_types = request.POST.getlist('decision_type[]')
         request.session['decision_types'] = decision_types
         decision_type_text = ''
@@ -143,7 +144,7 @@ def decision(request):
             decision_types_comma_delimited += decision_type + ','
     return render(request, 'decision.html', {
         'decision_types': decision_types_comma_delimited,
-        'problem_id': pid,
+        'pid': problem.id,
         'step': 1,
     })
 
@@ -159,20 +160,12 @@ success = {
 
 @login_required
 def rank(request):
-    pid = None
-    if 'pid' in request.GET:
-        pid = request.GET['pid']
-        problem = load_problem(request, pid)
-    else:
-        problem = None
+    problem = load_problem(request)
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/decision')
         request.session['success'] = request.POST['success']
-        if problem:
-            problem.success = success
-            problem.save()
-        else:
-            raise Exception(pid)
+        problem.success = success
+        problem.save()
         if 'questions_yes' in request.session:
             return redirect('/action_map')
         else:
@@ -185,6 +178,7 @@ def rank(request):
     return render(request, 'rank.html', {
         'success': success_shuffled,
         'step': 2,
+        'pid': problem.id,
     })
 
 
