@@ -159,6 +159,7 @@ success = {
 
 @login_required
 def rank(request):
+    pid = None
     if 'pid' in request.GET:
         pid = request.GET['pid']
         problem = load_problem(request, pid)
