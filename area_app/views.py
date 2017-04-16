@@ -56,16 +56,23 @@ def home(request):
     })
 
 
+def get_from_session(request, param):
+    if param in request.session:
+        return request.session[param]
+    else:
+        return None
+
+
 def home_logged_in(request):
     return render(request, 'home_logged_in.html', {
-        'type': request.session['decision_type'],
-        'decision': request.session['decision'],
-        'options': request.session['options'],
-        'timeframe': request.session['timeframe'],
-        'archetype': request.session['top_archetype'],
-        #'cheetahs': request.session['cheetah_sheets'],
-        #'commitment': request.session['commitment'],
-        #'commitment_days': request.session['commitment_days'],
+        'type': get_from_session(request, 'decision_type'),
+        'decision': get_from_session(request, 'decision'),
+        'options': get_from_session(request, 'options'),
+        'timeframe': get_from_session(request, 'timeframe'),
+        'archetype': get_from_session(request, 'top_archetype'),
+        'cheetahs': get_from_session(request, 'cheetah_sheets'),
+        'commitment': get_from_session(request, 'commitment'),
+        'commitment_days': get_from_session(request, 'commitment_days'),
         'step': 1,
     })
 
