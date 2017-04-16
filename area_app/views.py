@@ -92,8 +92,8 @@ def load_problem(request, pid):
     request.session['timeframe'] = problem.time_frame
     request.session['decision_type_other'] = problem.decision_type_other
     request.session['success'] = problem.success
-    request.session['comitment_days'] = problem.comitment_days
-    request.session['comitment'] = problem.comitment
+    request.session['commitment_days'] = problem.commitment_days
+    request.session['commitment'] = problem.commitment
     return problem
 
 
