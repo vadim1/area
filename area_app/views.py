@@ -171,7 +171,13 @@ def rank(request):
         else:
             return redirect('/questions')
     success_keys = success.keys()
-    random.shuffle(success_keys)
+    if problem and problem.success:
+        prior_rank = problem.success
+        raise Exception(prior_rank)
+        success_keys = success.keys()
+    else:
+        success_keys = success.keys()
+        random.shuffle(success_keys)
     success_shuffled = []
     for success_key in success_keys:
         success_shuffled.append([success_key, success[success_key]])
