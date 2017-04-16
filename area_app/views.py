@@ -136,7 +136,7 @@ def decision(request):
         problem.time_frame = request.session['timeframe']
         problem.decision_type_other = request.session['decision_type_other']
         problem.save()
-        return redirect('/rank')
+        return redirect('/rank?pid='+pid)
     decision_types_comma_delimited = ''
     if 'decision_types' in request.session:
         for decision_type in request.session['decision_types']:
@@ -159,11 +159,15 @@ success = {
 
 @login_required
 def rank(request):
+    if 'pid' in request.GET:
+        pid = request.GET['pid']
+        problem = load_problem(request, pid)
+    else:
+        problem = None
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/decision')
         request.session['success'] = request.POST['success']
-        if 'problem_id' in request.session:
-            problem = load_problem(request, request.session['problem_id'])
+        if problem:
             problem.success = success
             problem.save()
         if 'questions_yes' in request.session:
