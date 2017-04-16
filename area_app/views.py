@@ -37,7 +37,6 @@ def get_randomized_questions():
 
 
 def home(request):
-    archetypes.populate_questions()
     if request.user.is_authenticated():
         return home_logged_in(request)
     if request.method == 'POST':
