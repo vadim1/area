@@ -170,6 +170,8 @@ def rank(request):
         if problem:
             problem.success = success
             problem.save()
+        else:
+            raise Exception(pid)
         if 'questions_yes' in request.session:
             return redirect('/action_map')
         else:
