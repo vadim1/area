@@ -135,6 +135,7 @@ def decision(request):
         problem.options = request.session['options']
         problem.time_frame = request.session['timeframe']
         problem.decision_type_other = request.session['decision_type_other']
+        raise Exception(problem.id)
         problem.save()
         return redirect('/rank')
     decision_types_comma_delimited = ''
