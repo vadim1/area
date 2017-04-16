@@ -158,6 +158,7 @@ success = {
 }
 
 
+@login_required(login_url='/accounts/signup/')
 def rank(request):
     problem = load_problem(request)
     if request.method == 'POST':
@@ -167,9 +168,9 @@ def rank(request):
         problem.success = success_shuffled
         problem.save()
         if 'questions_yes' in request.session:
-            return redirect('/action_map')
+            return redirect('/action_map?pid='+str(problem.id))
         else:
-            return redirect('/questions')
+            return redirect('/questions?pid='+str(problem.id))
     success_keys = None
     if problem:
         success_keys = problem.success.split(',')
@@ -251,7 +252,7 @@ def archetype_info(request):
     return archetype
 
 
-@login_required
+@login_required(login_url='/accounts/signup/')
 def cheetah_sheets(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/archetype')
@@ -271,15 +272,20 @@ def archetypes_list(request):
     })
 
 
-@login_required
+@login_required(login_url='/accounts/signup/')
 def action_map(request):
+    problem = load_problem(request)
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/archetype')
         request.session['commitment'] = request.POST['commitment']
         request.session['commitment_days'] = request.POST['days']
+        problem.commitment = request.session['commitment']
+        problem.commitment_days = request.session['commitment_days']
+        problem.save()
+
         request.session['email_sent'] = False
 
-        return redirect('/summary')
+        return redirect('/summary?pid='+str(problem.id))
     if 'top_archetype' not in request.session:
         return render(request, 'action_map.html', {})
     archetype = request.session['top_archetype']
@@ -292,12 +298,14 @@ def action_map(request):
         'timeframe': request.session['timeframe'],
         'archetype': archetype,
         'cheetahs': archetype_cheetahs,
+        'pid': problem.id,
         'step': 5,
     })
 
 
-@login_required
+@login_required(login_url='/accounts/signup/')
 def summary(request):
+    problem = load_problem(request)
     request.session['summary'] = 1
     if 'decision' not in request.session:
         return render(request, 'summary.html', {})
@@ -326,6 +334,7 @@ def summary(request):
         'cheetahs': request.session['cheetah_sheets'],
         'commitment': request.session['commitment'],
         'commitment_days': request.session['commitment_days'],
+        'pid': problem.id,
         'step': 5,
     })
 
