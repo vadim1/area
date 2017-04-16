@@ -75,6 +75,7 @@ def home_logged_in(request):
         'cheetahs': get_from_session(request, 'cheetah_sheets'),
         'commitment': get_from_session(request, 'commitment'),
         'commitment_days': get_from_session(request, 'commitment_days'),
+        'questions_yes': request.session['questions_yes'],
         'step': 1,
     })
 
