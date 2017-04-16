@@ -32,7 +32,7 @@ class CheetahSheets(models.Model):
 
 
 class Problem(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, null=True)
     decision_type = models.CharField(max_length=255)
     decision = models.CharField(max_length=255)
     options = models.CharField(max_length=255)

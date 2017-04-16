@@ -6,10 +6,23 @@
 <h2>Welcome Back, {{ request.user.email }}!</h2>
     <h3>{% include "problem_solver.html" %} Profile: {{ archetype }}</h3>
     <div>
+        {% if not problems %}
+        <h3>No Decisions Yet</h3>
+        {% else %}
+        <h3>Decisions:</h3>
+            <ul>
+            {% for problem in problems %}
+                <li>
+                <a href="/decision?pid={{ problem.id }}">{{ problem.decision }}</a>
+                </li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <div>
         <a class="btn btn-warning" href="{% url 'account_logout' %}">Sign Out</a>
         <a class="btn btn-default" href="/decision">Make a Good Decision!</a>
         <a class="btn" href="/questions">Determine {% include "problem_solver.html" %} Profile</a>
     </div>
-{{ questions_yes }}
 </div>
 {% endblock %}

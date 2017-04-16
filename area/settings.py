@@ -24,7 +24,7 @@ SECRET_KEY = 'XXX'
 DEBUG = False
 
 ALLOWED_HOSTS = ['app.areamethod.com', '127.0.0.1', 'localhost']
-INTERNAL_IPS = ['app.areamethod.com', '127.0.0.1', 'localhost', '54.193.100.251']
+INTERNAL_IPS = ['127.0.0.1', 'localhost']
 
 # Application definition
 

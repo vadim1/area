@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.conf import settings
 from utils import send_from_default_email
+from .models import Problem
 
 dream_directors = [
     'Bob, New York',
@@ -66,6 +67,7 @@ def get_from_session(request, param):
 def home_logged_in(request):
     request.session['questions_yes'] = archetypes.load_questions(request.user)
     compute_archetype(request)
+    problems = Problem.objects.filter(user=request.user).all()
     return render(request, 'home_logged_in.html', {
         'type': get_from_session(request, 'decision_type'),
         'decision': get_from_session(request, 'decision'),
@@ -76,11 +78,29 @@ def home_logged_in(request):
         'commitment': get_from_session(request, 'commitment'),
         'commitment_days': get_from_session(request, 'commitment_days'),
         'questions_yes': request.session['questions_yes'],
+        'problems': problems,
         'step': 1,
     })
 
 
+def load_problem(request, id):
+    problem = Problem.objects.filter(id=id).first()
+    request.session['decision_type'] = problem.decision_type
+    request.session['decision'] = problem.decision
+    request.session['options'] = problem.options
+    request.session['timeframe'] = problem.time_frame
+    request.session['decision_type_other'] = problem.decision_type_other
+    request.session['comitment_days'] = problem.comitment_days
+    request.session['comitment'] = problem.comitment
+
+
 def decision(request):
+    if 'pid' in request.GET:
+        pid = request.GET['pid']
+        problem = Problem.objects.filter(id=request.POST['problem_id']).first()
+    else:
+        pid = None
+        problem = Problem()
     if request.method == 'POST':
         if request.POST['submit'] == 'Back':
             return redirect('/')
@@ -98,6 +118,16 @@ def decision(request):
         request.session['options'] = request.POST['options']
         request.session['timeframe'] = request.POST['timeframe']
         request.session['decision_type_other'] = request.POST['decision_type_other']
+        if request.user.is_authenticated():
+            problem.user = request.user
+        else:
+            problem.user = None
+        problem.decision_type = decision_type_text
+        problem.decision = request.session['decision']
+        problem.options = request.session['options']
+        problem.time_frame = request.session['timeframe']
+        problem.decision_type_other = request.session['decision_type_other']
+        problem.save()
         return redirect('/rank')
     decision_types_comma_delimited = ''
     if 'decision_types' in request.session:
@@ -105,6 +135,7 @@ def decision(request):
             decision_types_comma_delimited += decision_type + ','
     return render(request, 'decision.html', {
         'decision_types': decision_types_comma_delimited,
+        'problem_id': pid,
         'step': 1,
     })
 
