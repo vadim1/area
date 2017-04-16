@@ -136,7 +136,7 @@ def decision(request):
         problem.time_frame = request.session['timeframe']
         problem.decision_type_other = request.session['decision_type_other']
         problem.save()
-        return redirect('/rank?pid='+str(pid))
+        return redirect('/rank?pid='+str(problem.id))
     decision_types_comma_delimited = ''
     if 'decision_types' in request.session:
         for decision_type in request.session['decision_types']:
