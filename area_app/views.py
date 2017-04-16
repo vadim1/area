@@ -83,8 +83,9 @@ def home_logged_in(request):
     })
 
 
-def load_problem(request, id):
+def load_problem(request, pid):
     problem = Problem.objects.filter(id=id).first()
+    request.session['problem_id'] = pid
     request.session['decision_type'] = problem.decision_type
     request.session['decision'] = problem.decision
     request.session['options'] = problem.options
@@ -93,13 +94,13 @@ def load_problem(request, id):
     request.session['success'] = problem.success
     request.session['comitment_days'] = problem.comitment_days
     request.session['comitment'] = problem.comitment
+    return problem
 
 
 def decision(request):
     if 'pid' in request.GET:
         pid = request.GET['pid']
-        problem = Problem.objects.filter(id=request.GET['pid']).first()
-        request.session['problem_id'] = pid
+        problem = load_problem(request, request.GET['pid'])
     else:
         pid = None
         problem = Problem()
@@ -165,7 +166,7 @@ def rank(request):
         if request.POST['submit'] == 'Back': return redirect('/decision')
         request.session['success'] = request.POST['success']
         if 'problem_id' in request.session:
-            problem = Problem.objects.filter(id=request.session['problem_id']).first()
+            problem = load_problem(request, request.session['problem_id'])
             problem.success = success
             problem.save()
         if 'questions_yes' in request.session:
