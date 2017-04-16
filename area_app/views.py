@@ -172,7 +172,7 @@ def rank(request):
             return redirect('/questions')
     success_shuffled = None
     if problem:
-        success_shuffled = problem.successs.split(',')
+        success_shuffled = problem.success.split(',')
     if not success_shuffled:
         success_keys = success.keys()
         random.shuffle(success_keys)
