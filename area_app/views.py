@@ -229,7 +229,7 @@ def answer(request):
             request.session['questions_yes']
 
 
-def psp(request):
+def psp(request, profile=None):
     """
     Problem Solver Profile teaser
     """
@@ -238,14 +238,17 @@ def psp(request):
         return redirect('/action_map')
     if 'archetype' not in request.session:
         return render(request, 'psp.html', {
+            'step': 4,
         })
-    top_archetypes = request.session['archetype']
-    top_archetype = top_archetypes[0]
-    return render(request, 'psp.html', {
-        'archetype': top_archetype[0],
-        'strength': top_archetype[1],
-        'step': 4,
-    })
+    if profile:
+        return render(request, 'psp.html', {
+            'archetype': profile,
+            'step': 4,
+        })
+    else:
+        top_archetypes = request.session['archetype']
+        profile = top_archetypes[0][0]
+        return redirect('/psp/'+str(profile))
 
 @login_required(login_url='/accounts/signup/')
 def archetype(request):
