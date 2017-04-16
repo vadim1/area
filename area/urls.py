@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from area_app import urls
+from django.conf import settings
 
 admin.autodiscover()
 
@@ -24,3 +25,9 @@ urlpatterns = [
     url(r'^', include(urls)),
     url(r'^accounts/', include('allauth.urls')),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

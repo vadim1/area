@@ -24,6 +24,7 @@ SECRET_KEY = 'XXX'
 DEBUG = False
 
 ALLOWED_HOSTS = ['app.areamethod.com', '127.0.0.1', 'localhost']
+INTERNAL_IPS = ['app.areamethod.com', '127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
     'bootstrapform',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'area.urls'
