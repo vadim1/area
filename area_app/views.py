@@ -322,8 +322,8 @@ def summary(request):
         message.append("Team App Areamethod\n")
         message.append("https://app.areamethod.com\n\n")
 
-        send_from_default_email(subject, " ".join(message), [request.user.email])
-        request.session['email_sent'] = True
+        # TODO: send_from_default_email(subject, " ".join(message), [request.user.email])
+        # request.session['email_sent'] = True
 
     return render(request, 'summary.html', {
         'type': request.session['decision_type'],
