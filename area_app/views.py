@@ -104,6 +104,8 @@ def decision(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back':
             return redirect('/')
+        if 'pid' in request.POST:
+            problem = Problem.objects.filter(id=request.POST['pid']).first()
         decision_types = request.POST.getlist('decision_type[]')
         request.session['decision_types'] = decision_types
         decision_type_text = ''
@@ -135,7 +137,7 @@ def decision(request):
             decision_types_comma_delimited += decision_type + ','
     return render(request, 'decision.html', {
         'decision_types': decision_types_comma_delimited,
-        'problem_id': pid,
+        'pid': pid,
         'step': 1,
     })
 
