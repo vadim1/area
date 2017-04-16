@@ -112,6 +112,7 @@ def decision(request):
         if 'pid' in request.POST:
             problem = Problem.objects.filter(id=request.POST['pid']).first()
         if not problem:
+            raise Exception(request.POST['pid'])
             problem = Problem()
         decision_types = request.POST.getlist('decision_type[]')
         request.session['decision_types'] = decision_types
