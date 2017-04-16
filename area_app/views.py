@@ -64,7 +64,7 @@ def get_from_session(request, param):
 
 
 def home_logged_in(request):
-    archetypes.loadquestions(request.user)
+    archetypes.load_questions(request.user)
     compute_archetype(request)
     return render(request, 'home_logged_in.html', {
         'type': get_from_session(request, 'decision_type'),
