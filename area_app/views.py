@@ -349,6 +349,15 @@ def autocomplete_dd(request):
 
 
 def restart_session(request):
+    request.session['pid'] = None
+    request.session['decision_type'] = None
+    request.session['decision'] = None
+    request.session['options'] = None
+    request.session['timeframe'] = None
+    request.session['decision_type_other'] = None
+    request.session['success'] = None
+    request.session['commitment_days'] = None
+    request.session['commitment'] = None
     for key in request.session.keys():
         if not key.startswith('_'):
             del request.session[key]
