@@ -97,7 +97,7 @@ def load_problem(request, id):
 def decision(request):
     if 'pid' in request.GET:
         pid = request.GET['pid']
-        problem = Problem.objects.filter(id=request.POST['problem_id']).first()
+        problem = Problem.objects.filter(id=request.GET['pid']).first()
     else:
         pid = None
         problem = Problem()
