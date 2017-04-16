@@ -63,9 +63,9 @@ def home_logged_in(request):
         'options': request.session['options'],
         'timeframe': request.session['timeframe'],
         'archetype': request.session['top_archetype'],
-        'cheetahs': request.session['cheetah_sheets'],
-        'commitment': request.session['commitment'],
-        'commitment_days': request.session['commitment_days'],
+        #'cheetahs': request.session['cheetah_sheets'],
+        #'commitment': request.session['commitment'],
+        #'commitment_days': request.session['commitment_days'],
         'step': 1,
     })
 
