@@ -100,7 +100,7 @@ def load_problem(request, pid):
 def decision(request):
     if 'pid' in request.GET:
         pid = request.GET['pid']
-        problem = load_problem(request, request.GET['pid'])
+        problem = load_problem(request, pid)
     else:
         pid = None
         problem = Problem()
@@ -108,10 +108,10 @@ def decision(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back':
             return redirect('/')
-        if 'problem_id' in request.session and request.session['problem_id']:
-            problem = Problem.objects.filter(id=request.session['problem_id']).first()
         if 'pid' in request.POST:
             problem = Problem.objects.filter(id=request.POST['pid']).first()
+        elif 'problem_id' in request.session and request.session['problem_id']:
+            problem = Problem.objects.filter(id=request.session['problem_id']).first()
         decision_types = request.POST.getlist('decision_type[]')
         request.session['decision_types'] = decision_types
         decision_type_text = ''
