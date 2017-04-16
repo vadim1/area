@@ -172,7 +172,7 @@ def rank(request):
         else:
             return redirect('/questions?pid='+str(problem.id))
     success_keys = None
-    if problem:
+    if problem and problem.success:
         success_keys = problem.success.split(',')
     if not success_keys:
         success_keys = success.keys()
