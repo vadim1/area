@@ -108,13 +108,10 @@ def decision(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back':
             return redirect('/')
-        if 'problem_id' in request.session:
+        if 'problem_id' in request.session and request.session['problem_id']:
             problem = Problem.objects.filter(id=request.session['problem_id']).first()
         if 'pid' in request.POST:
             problem = Problem.objects.filter(id=request.POST['pid']).first()
-        if not problem:
-            raise Exception(request.POST['pid'])
-            problem = Problem()
         decision_types = request.POST.getlist('decision_type[]')
         request.session['decision_types'] = decision_types
         decision_type_text = ''
