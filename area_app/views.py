@@ -172,9 +172,9 @@ def rank(request):
             return redirect('/questions')
     success_keys = success.keys()
     if problem and problem.success:
-        prior_rank = problem.success
-        raise Exception(prior_rank)
+        prior_rank = json.loads(problem.success)
         success_keys = success.keys()
+        raise Exception(success_keys)
     else:
         success_keys = success.keys()
         random.shuffle(success_keys)
