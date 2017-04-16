@@ -158,26 +158,20 @@ success = {
 }
 
 
-@login_required
 def rank(request):
     problem = load_problem(request)
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/decision')
-        request.session['success'] = request.POST['success']
-        problem.success = success
+        success_shuffled = request.POST['success']
+        request.session['success'] = success_shuffled
+        problem.success = success_shuffled
         problem.save()
         if 'questions_yes' in request.session:
             return redirect('/action_map')
         else:
             return redirect('/questions')
     success_keys = success.keys()
-    if problem and problem.success:
-        raise Exception(problem.success)
-        prior_rank = json.loads(problem.success)
-        success_keys = success.keys()
-    else:
-        success_keys = success.keys()
-        random.shuffle(success_keys)
+    random.shuffle(success_keys)
     success_shuffled = []
     for success_key in success_keys:
         success_shuffled.append([success_key, success[success_key]])

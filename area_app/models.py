@@ -38,7 +38,7 @@ class Problem(models.Model):
     options = models.CharField(max_length=255)
     time_frame = models.CharField(max_length=255)
     decision_type_other = models.CharField(max_length=255)
-    success = models.TextField(default='')
+    success = models.CharField(max_length=255)
     commitment_days = models.IntegerField(default=7)
     commitment = models.TextField(default='')
 
