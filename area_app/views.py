@@ -37,6 +37,8 @@ def get_randomized_questions():
 
 
 def home(request):
+    if request.user.is_authenticated():
+        return home_logged_in(request)
     if request.method == 'POST':
         return handle_answers(request)
         return redirect('/accounts/signup/?next=/archetype')
@@ -51,6 +53,20 @@ def home(request):
         'questions': get_randomized_questions(),
         'questions_yes': questions_yes,
         'form': login_form,
+    })
+
+
+def home_logged_in(request):
+    return render(request, 'home_logged_in.html', {
+        'type': request.session['decision_type'],
+        'decision': request.session['decision'],
+        'options': request.session['options'],
+        'timeframe': request.session['timeframe'],
+        'archetype': request.session['top_archetype'],
+        'cheetahs': request.session['cheetah_sheets'],
+        'commitment': request.session['commitment'],
+        'commitment_days': request.session['commitment_days'],
+        'step': 1,
     })
 
 
@@ -163,6 +179,7 @@ def archetype(request):
 
 def archetype_info(request):
     archetype = request.GET['t']
+    return archetype
 
 
 @login_required
