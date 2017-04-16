@@ -62,6 +62,12 @@
         height: 50px;
         width: 100px;
     }
+
+    #why {
+        line-height: 120% !important;
+        margin-left: 40px;
+        margin-right: 40px;
+    }
 </style>
 <div id="questionCarousel" class="carousel slide" data-interval="false" style="display: none;">
     <!-- Indicators -->
@@ -91,8 +97,8 @@
                 </div>
                 <div style="margin-top: 20px">
                     <a href="#" onclick="$(this).next('div').show(); $(this).hide(); return false;"
-                       style="color: #ffffff; font-size: smaller;">Why this question?</a>
-                    <div id="why" style="font-size: small; display:none;">{{ details.why }}</div>
+                       style="color: #ffffff;">Why this question?</a>
+                    <div id="why" style="display:none;">{{ details.why }}</div>
                 </div>
             </div>
         {% endfor %}

@@ -2,6 +2,7 @@
 
 body {
     font-family: 'Open Sans', sans-serif !important;
+    line-height: 220%;
 }
 
 .col-centered {
@@ -61,7 +62,6 @@ body {
         font-size: 13px;
         font-weight: bold;
         color: #3d96ff;
-        line-height: 1.5
     }
 
     .info {
@@ -561,7 +561,6 @@ button:focus {
     float: right;
     color: #3d96ff;
     font-size: 18px;
-    line-height: 22px;
     margin-top: 12px;
     /* rotate "play" icon from > (right arrow) to down arrow */
     -webkit-transform: rotate(-90deg);
