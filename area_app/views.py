@@ -170,11 +170,15 @@ def rank(request):
             return redirect('/action_map')
         else:
             return redirect('/questions')
-    success_keys = success.keys()
-    random.shuffle(success_keys)
-    success_shuffled = []
-    for success_key in success_keys:
-        success_shuffled.append([success_key, success[success_key]])
+    success_shuffled = None
+    if problem:
+        success_shuffled = problem.success
+    if not success_shuffled:
+        success_keys = success.keys()
+        random.shuffle(success_keys)
+        success_shuffled = []
+        for success_key in success_keys:
+            success_shuffled.append([success_key, success[success_key]])
     return render(request, 'rank.html', {
         'success': success_shuffled,
         'step': 2,
