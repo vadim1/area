@@ -40,7 +40,7 @@ class Problem(models.Model):
     decision_type_other = models.CharField(max_length=255)
     success = models.CharField(max_length=255)
     commitment_days = models.IntegerField(default=7)
-    commitment = models.TextField(null=True)
+    commitment = models.TextField(default='')
 
 
 class ArchType(models.Model):
