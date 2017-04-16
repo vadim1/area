@@ -164,7 +164,7 @@ def rank(request):
         if request.POST['submit'] == 'Back': return redirect('/decision')
         request.session['success'] = request.POST['success']
         if 'problem_id' in request.session:
-            problem = Problem.objects.filter(id=request.GET['pid']).first()
+            problem = Problem.objects.filter(id=request.session['problem_id']).first()
             problem.success = success
             problem.save()
         if 'questions_yes' in request.session:
