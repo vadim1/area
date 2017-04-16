@@ -109,6 +109,8 @@ def decision(request):
             return redirect('/')
         if 'problem_id' in request.session:
             problem = Problem.objects.filter(id=request.session['problem_id']).first()
+        if 'pid' in request.POST:
+            problem = Problem.objects.filter(id=request.POST['pid']).first()
         decision_types = request.POST.getlist('decision_type[]')
         request.session['decision_types'] = decision_types
         decision_type_text = ''
