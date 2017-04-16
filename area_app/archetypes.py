@@ -125,24 +125,31 @@ archetype_cheetah_sheets = {
 }
 
 
-def save_questions(questions_yes):
-    for question, yes_no in questions.items():
-        question_model = QuestionModel.get_by_question(question)
-        q = Question(question=question_model)
-        if question in questions_yes:
-            q.answer = 'yes'
-        else:
-            q.answer = 'no'
-        q.save()
-
-
-def save_questions(questions_yes, user=None):
-    for question, yes_no in questions.items():
+def save_questions(questions_yes, user):
+    for question, details in questions.items():
         question_model = QuestionModel.get_by_question(question)
         q = Question(question=question_model, user=user)
         if question in questions_yes:
-            q.answer = 'yes'
+            q.answer = True
         else:
-            q.answer = 'no'
+            q.answer = False
         q.save()
 
+
+def load_questions(user):
+    questions_yes = []
+    for question in Question.get_yes_questions(user):
+        questions_yes.append(question.text())
+    return questions_yes
+
+
+def populate_questions():
+    for question, details in questions.items():
+        question_model = QuestionModel.get_by_question(question)
+        if not question_model:
+            # New Question - add it
+            yes = details['yes']
+            no = details['no']
+            why = details['why']
+            question_model = QuestionModel(question=question, answer_yes=yes, answer_no=no, why=why)
+            question_model.save()

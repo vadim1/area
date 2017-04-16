@@ -8,8 +8,7 @@ class QuestionModel(models.Model):
     question = models.CharField(max_length=256, default='')
     answer_yes = models.CharField(max_length=256, null=True)
     answer_no = models.CharField(max_length=256, null=True)
-    weight_yes = models.FloatField(default=1.0)
-    weight_no = models.FloatField(default=1.0)
+    why = models.CharField(max_length=256, default='')
 
     @staticmethod
     def get_by_question(question):
@@ -17,10 +16,10 @@ class QuestionModel(models.Model):
         if len(question_models) > 0:
             return question_models[0]
         else:
-            # New Question - add it
-            question_model = QuestionModel(question=question)
-            question_model.save()
-            return question_model
+            return None
+
+    def text(self):
+        return self.question
 
 
 class ArchetypesModel(models.Model):
@@ -54,6 +53,14 @@ class Question(models.Model):
     user = models.ForeignKey(User, null=True)
     question = models.ForeignKey(QuestionModel, related_name='user_question', null=True)
     answer = models.BooleanField(default=False)
+
+    @staticmethod
+    def get_yes_questions(user):
+        yes_questions = Question.objects.filter(user=user, answer='yes').all()
+        return yes_questions
+
+    def text(self):
+        return self.question.text()
 
 
 class DecisionTypes(models.Model):

@@ -37,6 +37,7 @@ def get_randomized_questions():
 
 
 def home(request):
+    archetypes.populate_questions()
     if request.user.is_authenticated():
         return home_logged_in(request)
     if request.method == 'POST':
@@ -64,6 +65,8 @@ def get_from_session(request, param):
 
 
 def home_logged_in(request):
+    archetypes.loadquestions(request.user)
+    compute_archetype(request)
     return render(request, 'home_logged_in.html', {
         'type': get_from_session(request, 'decision_type'),
         'decision': get_from_session(request, 'decision'),
@@ -132,6 +135,14 @@ def rank(request):
     })
 
 
+def compute_archetype(request):
+    questions_yes = request.session['questions_yes']
+    top_archetypes = archetypes.get_top_archetypes(questions_yes)
+    request.session['archetype'] = top_archetypes
+    top_archetype = top_archetypes[0]
+    request.session['top_archetype'] = top_archetype[0]
+
+
 def handle_answers(request):
     if request.POST['submit'] == 'Back':
         return redirect('/rank')
@@ -140,11 +151,7 @@ def handle_answers(request):
     if request.user.is_authenticated():
         user = request.user
     archetypes.save_questions(questions_yes=questions_yes, user=user)
-    request.session['questions_yes'] = questions_yes
-    top_archetypes = archetypes.get_top_archetypes(questions_yes)
-    request.session['archetype'] = top_archetypes
-    top_archetype = top_archetypes[0]
-    request.session['top_archetype'] = top_archetype[0]
+    compute_archetype(request)
     return redirect('/archetype')
 
 
