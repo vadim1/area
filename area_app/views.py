@@ -88,8 +88,6 @@ def load_problem(request):
     if request.method == 'POST':
         if 'pid' in request.POST:
             pid = request.POST['pid']
-        else:
-            raise Exception('POST without pid')
     else:
         if 'pid' in request.GET:
             pid = request.GET['pid']
