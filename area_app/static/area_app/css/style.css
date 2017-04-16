@@ -628,3 +628,8 @@ h4 {
 .archetype-name {
     font-size: large;
 }
+
+h3 img {
+    height: 100px;
+    margin-right: 20px;
+}

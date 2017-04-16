@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load static account socialaccount bootstrap i18n %}
+
+{% block title %}{% block h1 %}Your {% include "problem_solver.html" %} Profile{% endblock %}{% endblock %}
+{% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
+{% block content %}
+    {% if archetype %}
+        <div>{% with 'psp/'|add:archetype|add:'.html' as path %}{% include path %}{% endwith %}</div>
+    {% endif %}
+    <div>
+        <div class="clearfix"></div>
+        <p>Sign Up for the Problem Solved App to receive:</p>
+        <ul>
+            <li>Your complete {% include "problem_solver.html" %} Profile, which outlines your strengths and potential
+                blind spots
+            </li>
+            <li>Famous people that share your {% include "problem_solver.html" %} Profile</li>
+            <li>A decision making tool customized to your {% include "problem_solver.html" %} Profile</li>
+            <li>A roadmap to use the AREA Method's decision making system to make your big decisions better</li>
+        </ul>
+        <p>
+            Problem Solved is a digital coach powered by the AREA Method, a decision making system that helps you solve
+            complex problems. It provides you with tips and action steps that are uniquely customized to the way that
+            you make decisions. It's a tool that gives you control over your life and allows you to chart a decision
+            path forward into your best future.
+        </p>
+        <div style="margin-top: 50px; text-align: center;">
+            {% if user.is_authenticated %}
+                <h4 class="text-center">Signed in as {{ request.user.email }}</h4>
+                <a class="btn btn-warning" href="{% url 'account_logout' %}">Sign Out</a>
+                <a class="btn btn-default" href="/decision">Make a Good Decision!</a>
+            {% else %}
+                <a class="btn btn-info" href="{% provider_login_url 'facebook' %}">Facebook Sign Up</a>
+                <a class="btn btn-danger" href="{% provider_login_url 'google' %}">Google Sign Up</a>
+                <a class="btn btn-success" href="/accounts/signup">Sign Up</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58da669822b5e1b4"></script>
+{% endblock %}

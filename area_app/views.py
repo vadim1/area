@@ -194,15 +194,16 @@ def compute_archetype(request):
 
 
 def handle_answers(request):
+    problem = load_problem(request)
     if request.POST['submit'] == 'Back':
-        return redirect('/rank')
+        return redirect('/rank?pid='+str(problem.id))
     questions_yes = request.POST.getlist('question[]')
     user = None
     if request.user.is_authenticated():
         user = request.user
     archetypes.save_questions(questions_yes=questions_yes, user=user)
     compute_archetype(request)
-    return redirect('/archetype')
+    return redirect('/psp')
 
 
 def questions(request):
@@ -227,6 +228,24 @@ def answer(request):
         if answer == 'yes':
             request.session['questions_yes']
 
+
+def psp(request):
+    """
+    Problem Solver Profile teaser
+    """
+    if request.method == 'POST':
+        if request.POST['submit'] == 'Back': return redirect('/questions')
+        return redirect('/action_map')
+    if 'archetype' not in request.session:
+        return render(request, 'psp.html', {
+        })
+    top_archetypes = request.session['archetype']
+    top_archetype = top_archetypes[0]
+    return render(request, 'psp.html', {
+        'archetype': top_archetype[0],
+        'strength': top_archetype[1],
+        'step': 4,
+    })
 
 @login_required(login_url='/accounts/signup/')
 def archetype(request):
