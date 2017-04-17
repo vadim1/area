@@ -66,7 +66,6 @@ def get_from_session(request, param):
 def home_logged_in(request):
     request.session['questions_yes'] = archetypes.load_questions(request.user)
     compute_archetype(request)
-    raise Exception(request.session['top_archetype'])
     problems = Problem.objects.filter(user=request.user).all()
     return render(request, 'home_logged_in.html', {
         'type': get_from_session(request, 'decision_type'),
@@ -188,6 +187,7 @@ def rank(request):
 def compute_archetype(request):
     questions_yes = request.session['questions_yes']
     top_archetypes = archetypes.get_top_archetypes(questions_yes)
+    raise Exception(top_archetypes)
     request.session['archetypes'] = top_archetypes
     top_archetype = top_archetypes[0]
     request.session['top_archetype'] = top_archetype[0]
