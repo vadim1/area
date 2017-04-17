@@ -10,6 +10,11 @@ body {
     margin: 0 auto;
 }
 
+.lbl {
+    font-size: x-large;
+    white-space: nowrap;
+}
+
 @media screen and (max-width: 749px) {
     .logo {
         height: 62px;
@@ -262,6 +267,10 @@ body {
     h3 img {
         height: 60px;
         margin-right: 10px;
+    }
+
+    .lbl {
+        font-size: small;
     }
 }
 

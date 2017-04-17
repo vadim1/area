@@ -14,14 +14,22 @@
             text-align: left;
         }
 
+        .challenge {
+            font-size: x-large;
+        }
+
         @media screen and (max-width: 500px) {
             body {
                 cursor: pointer;
             }
 
             .btnv:hover {
-                color: #fff;
+                color: #ff730a;
                 background-color: inherit;
+            }
+
+            .challenge {
+                font-size: medium;
             }
         }
     </style>
@@ -65,7 +73,8 @@
         <div class="clearfix">&nbsp;</div>
         <div class="row">
             <p class="col-md-12">
-                Now that you've learned about yourself as a {% include "problem_solver.html" %}, it's time to get clear on the type of
+                Now that you've learned about yourself as a {% include "problem_solver.html" %}, it's time to get clear
+                on the type of
                 problem you want to solve. Often, when faced with a complex problem getting started on solving it is
                 difficult. AREA will break it down into manageable steps.
             </p>
@@ -134,14 +143,14 @@
         </div>
         <div class="clearfix">&nbsp;</div>
         <div class="row">
-            <div class="text-center" style="font-size: x-large;">
+            <div class="text-center challenge">
                 I am facing a<span id="types_starts_with_vowel" style="display:none">n</span> <span id="types"></span>
                 challenge.
             </div>
         </div>
         <div class="clearfix">&nbsp;</div>
         <div class="row">
-            <div class="col-md-3 col-xs-4" style="padding-top:12px; font-size:large; white-space: nowrap;">I need to decide:</div>
+            <div class="col-md-3 col-xs-4 lbl" style="padding-top:12px;">I need to decide:</div>
             <div class="col-md-9 col-xs-8">
                 <input type="text" class="inpu" name="decision" id="decision"
                        value="{{ request.session.decision }}"/>
@@ -149,7 +158,7 @@
         </div>
         <div class="clearfix">&nbsp;</div>
         <div class="row">
-            <div class="col-md-3 col-xs-4" style="padding-top:12px; font-size:large; white-space: nowrap;">My options:</div>
+            <div class="col-md-3 col-xs-4 lbl" style="padding-top:12px;">My options:</div>
             <div class="col-md-9 col-xs-8">
                 <input type="text" name="options" id="options" class="inpu"
                        value="{{ request.session.options }}"/>
@@ -157,7 +166,7 @@
         </div>
         <div class="clearfix">&nbsp;</div>
         <div class="row">
-            <div class="col-md-3 col-xs-4" style="font-size:large; white-space: nowrap;">Decide by end of:</div>
+            <div class="col-md-3 col-xs-4 lbl">Decide by end of:</div>
             <div class="col-md-9 col-xs-8">
                 <select name="timeframe" class="inpu" id="timeframe">
                     <option value=""></option>

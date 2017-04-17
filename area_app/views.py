@@ -159,7 +159,8 @@ success = {
 def rank(request):
     problem = load_problem(request)
     if request.method == 'POST':
-        if request.POST['submit'] == 'Back': return redirect('/decision')
+        if request.POST['submit'] == 'Back':
+            return redirect('/decision?pid='+str(problem.id))
         success_shuffled = request.POST['success']
         request.session['success'] = success_shuffled
         problem.success = success_shuffled
@@ -261,7 +262,8 @@ def psp(request, profile=None):
     Problem Solver Profile teaser
     """
     if request.method == 'POST':
-        if request.POST['submit'] == 'Back': return redirect('/questions')
+        if request.POST['submit'] == 'Back':
+            return redirect('/questions')
         return redirect('/action_map')
     if 'top_archetype' not in request.session:
         return render(request, 'psp.html', {
@@ -279,7 +281,8 @@ def psp(request, profile=None):
 @login_required(login_url='/accounts/signup/')
 def archetype(request):
     if request.method == 'POST':
-        if request.POST['submit'] == 'Back': return redirect('/questions')
+        if request.POST['submit'] == 'Back':
+            return redirect('/questions')
         return redirect('/action_map')
     if 'archetypes' not in request.session:
         return render(request, 'archetype.html', {
