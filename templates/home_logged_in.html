@@ -10,8 +10,12 @@
             {% endwith %}
             {{ archetype|title }}</a>
         </div>
-        <div><a href="/questions">Take the quiz again</a></div>
         <div style="margin-top: 20px">
+            <a class="btn" href="/decision" style="background-color: #f6653c; color: #ffffff;">
+                <div style="font-size: large">Read Full {% include "problem_solver.html" %} Profile</div>
+            </a>
+        </div>
+        <div style="margin-top: 20px; font-size: larger;">
             Chart a decision path forward into your best future with <a href="http://areamethod.com" target="_blank">The AREA Method</a>
         </div>
         <div style="margin-top: 20px">
@@ -19,7 +23,6 @@
         </div>
         <div style="margin-top: 20px">
             <a class="btn" href="/decision" style="background-color: #f6653c; color: #ffffff;">
-                <div style="font-size: x-large">PROBLEM <span style="color:#000000">SOLVED</span></div>
                 <div style="font-size: large">Make Your Big Decision Better!</div>
             </a>
         </div>
@@ -36,6 +39,7 @@
         <div style="font-size: large; margin-top: 40px;">
             <a href="/archetypes">See Other {% include "problem_solver.html" %} Profiles</a>
         </div>
+        <div><a href="/questions">Take the quiz again</a></div>
         <div style="margin-top: 50px;">
             <a class="btn" href="{% url 'account_logout' %}">Sign Out</a>
         </div>
