@@ -38,12 +38,11 @@ def get_randomized_questions():
 
 
 def home(request):
+    partner = check_partner(request)
     if request.user.is_authenticated():
         return home_logged_in(request)
     if request.method == 'POST':
         return handle_answers(request)
-        return redirect('/accounts/signup/?next=/archetype')
-    partner = check_partner(request)
     login_form = None
     if partner == 'fp':
         login_form = forms.FutureProjectSignupForm
@@ -198,6 +197,7 @@ def handle_answers(request):
     if request.POST['submit'] == 'Back':
         return redirect('/rank?pid='+str(problem.id))
     questions_yes = request.POST.getlist('question[]')
+    request.session['questions_yes'] = questions_yes
     user = None
     if request.user.is_authenticated():
         user = request.user
