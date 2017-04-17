@@ -10,10 +10,9 @@ body {
     margin: 0 auto;
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 749px) {
     .logo {
-        width: 243px;
-        height: 42px;
+        height: 62px;
     }
 
     .progre img {
@@ -261,7 +260,7 @@ body {
     }
 }
 
-@media screen and (min-width: 760px) {
+@media screen and (min-width: 750px) {
     .container {
         width: 650px;
     }
