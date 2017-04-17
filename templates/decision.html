@@ -18,6 +18,7 @@
             body {
                 cursor: pointer;
             }
+
             .btnv:hover {
                 color: #fff;
                 background-color: inherit;
@@ -28,7 +29,7 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <h3 class="text-center">WHAT'S YOUR DECISION?</h3>
+            <div class="text-center" style="font-size: x-large">What problem do you want to solve for today?</div>
         </div>
         <div class="row">
             <div class="text-center">
@@ -36,7 +37,7 @@
                 <table id="videos" style="display: none; width: 100%;">
                     <tr>
                         <td>Watch Naomi decide if she should skip a day of school</td>
-                        <td> &nbsp; </td>
+                        <td> &nbsp;</td>
                         <td>Watch Mitch decide if he should go to detention</td>
                     </tr>
                     <tr>
@@ -46,7 +47,7 @@
                                     frameborder="0"
                                     allowfullscreen></iframe>
                         </td>
-                        <td> &nbsp; </td>
+                        <td> &nbsp;</td>
                         <td>
                             <iframe width="180" height="315"
                                     {% if request.session.partner == "apres" %}
@@ -64,7 +65,14 @@
         <div class="clearfix">&nbsp;</div>
         <div class="row">
             <p class="col-md-12">
-                Select the type of decision you are making. You can pick more than one!
+                Now that you've learned about yourself as a {% include "problem_solver.html" %}, it's time to get clear on the type of
+                problem you want to solve. Often, when faced with a complex problem getting started on solving it is
+                difficult. AREA will break it down into manageable steps.
+            </p>
+            <p class="col-md-12">
+                On this page let's get clear on the type or problem you are solving, your current options and your
+                timeframe. Of course complex problems may fall into a few categories, but focus on the category that
+                matters the most to you.
             </p>
         </div>
         <div class="clearfix">&nbsp;</div>
@@ -77,23 +85,22 @@
                 </div>
             </div>
             <div class="decision_group col-md-4 col-sm-6 col-xs-6 text-center">
-                <label class="decision_type btnv"><input type="checkbox" name="decision_type[]" value="friends"/>
-                    Friends</label>
+                <label class="decision_type btnv"><input type="checkbox" name="decision_type[]" value="professional"/>
+                    Professional</label>
                 <div class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign"
                                                               aria-hidden="true"></span> See Example
                 </div>
             </div>
             <div class="decision_group col-md-4 col-sm-6 col-xs-6 text-center">
-                <label class="decision_type btnv"><input type="checkbox" name="decision_type[]" value="school"/>
-                    School</label>
+                <label class="decision_type btnv"><input type="checkbox" name="decision_type[]" value="education"/>
+                    Education</label>
                 <div class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign"
                                                               aria-hidden="true"></span> See Example
                 </div>
             </div>
             <div class="decision_group col-md-4 col-sm-6 col-xs-6 text-center">
-                <label class="decision_type btnv"><input type="checkbox" name="decision_type[]" value="after school"/>
-                    After
-                    School</label>
+                <label class="decision_type btnv"><input type="checkbox" name="decision_type[]" value="community"/>
+                    Community</label>
                 <div class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign"
                                                               aria-hidden="true"></span> See Example
                 </div>
@@ -101,13 +108,6 @@
             <div class="decision_group col-md-4 col-sm-6 col-xs-6 text-center">
                 <label class="decision_type btnv"><input type="checkbox" name="decision_type[]" value="money related"/>
                     Money Related</label>
-                <div class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign"
-                                                              aria-hidden="true"></span> See Example
-                </div>
-            </div>
-            <div class="decision_group col-md-4 col-sm-6 col-xs-6 text-center">
-                <label class="decision_type btnv"><input type="checkbox" name="decision_type[]" value="identity"/>
-                    Identity</label>
                 <div class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign"
                                                               aria-hidden="true"></span> See Example
                 </div>
@@ -134,14 +134,14 @@
         </div>
         <div class="clearfix">&nbsp;</div>
         <div class="row">
-            <h3 class="text-center">
+            <div class="text-center" style="font-size: x-large;">
                 I am facing a<span id="types_starts_with_vowel" style="display:none">n</span> <span id="types"></span>
                 challenge.
-            </h3>
+            </div>
         </div>
         <div class="clearfix">&nbsp;</div>
         <div class="row">
-            <div class="col-md-3 col-xs-4" style="padding-top:10px;font-size:13px">I need to decide:</div>
+            <div class="col-md-3 col-xs-4" style="padding-top:12px; font-size:large; white-space: nowrap;">I need to decide:</div>
             <div class="col-md-9 col-xs-8">
                 <input type="text" class="inpu" name="decision" id="decision"
                        value="{{ request.session.decision }}"/>
@@ -149,7 +149,7 @@
         </div>
         <div class="clearfix">&nbsp;</div>
         <div class="row">
-            <div class="col-md-3 col-xs-4" style="padding-top:10px;font-size:13px">I have these options:</div>
+            <div class="col-md-3 col-xs-4" style="padding-top:12px; font-size:large; white-space: nowrap;">My options:</div>
             <div class="col-md-9 col-xs-8">
                 <input type="text" name="options" id="options" class="inpu"
                        value="{{ request.session.options }}"/>
@@ -157,7 +157,7 @@
         </div>
         <div class="clearfix">&nbsp;</div>
         <div class="row">
-            <div class="col-md-3 col-xs-4" style="font-size:13px">Decide by end of:</div>
+            <div class="col-md-3 col-xs-4" style="font-size:large; white-space: nowrap;">Decide by end of:</div>
             <div class="col-md-9 col-xs-8">
                 <select name="timeframe" class="inpu" id="timeframe">
                     <option value=""></option>
@@ -183,8 +183,7 @@
             $('.decision_group').each(function () {
                 var val = $(this).find(':checkbox').attr('value');
                 var example = type_examples[val];
-                var text = get_decision_text(val, example['decision'], example['options'], example['timeframe']);
-                $(this).find('.info').attr('title', text);
+                $(this).find('.info').attr('title', example);
             });
             $('[data-toggle="tooltip"]').tooltip();
             $('.decision_type').click(function () {
@@ -224,24 +223,26 @@
                 if ($(this).is(":checked")) {
                     some_checked = true;
                     var val = $(this).attr('value');
-                    if (types) {
-                        types += ' and ';
-                    } else {
-                        // an / a for the first one
-                        if (val.startsWith('a') || val.startsWith('i')) {
-                            $('#types_starts_with_vowel').show();
+                    if (val) {
+                        if (types) {
+                            types += ' and ';
                         } else {
-                            $('#types_starts_with_vowel').hide();
+                            // an / a for the first one
+                            if (val.startsWith('a') || val.startsWith('i')) {
+                                $('#types_starts_with_vowel').show();
+                            } else {
+                                $('#types_starts_with_vowel').hide();
+                            }
                         }
-                    }
-                    if (val == 'other') {
-                        var other_type = $('#decision_type_other').val();
-                        if (!other_type) {
-                            other_type = '[type in details for "Other"]'
+                        if (val == 'other') {
+                            var other_type = $('#decision_type_other').val();
+                            if (!other_type) {
+                                other_type = '[type in details for "Other"]'
+                            }
+                            types += other_type
+                        } else {
+                            types += val;
                         }
-                        types += other_type
-                    } else {
-                        types += val;
                     }
                 }
             });
@@ -255,46 +256,12 @@
         $('#decision_type_other').keyup(updateTypes);
 
         var type_examples = {
-            'none': {
-                'decision': 'what is your decision?',
-                'options': ' what are your options?',
-                'timeframe': '',
-            },
-            'money related': {
-                'decision': 'whether I need to get a new job so that I can make more money',
-                'options': ' ask my current boss for a raise, or look for a job that pays more',
-                'timeframe': 'week',
-            },
-            'friends': {
-                'decision': 'which friend I should talk to about a personal problem',
-                'options': 'Nylah, Naziyah, Brittany, and Amy',
-                'timeframe': 'day',
-            },
-            'family': {
-                'decision': 'if I should babysit my younger brother instead of going to Dream Team',
-                'options': 'stay home with my brother so my mom can go to work, or ask her to stay with my brother so I can go to practice',
-                'timeframe': 'day',
-            },
-            'school': {
-                'decision': 'when I should get my homework done when I have a big basketball game tonight',
-                'options': 'do it before the game, but risk being late and getting benched, or do it after the game, but risk being too tired to focus',
-                'timeframe': 'day',
-            },
-            'after school': {
-                'decision': 'what sport I should play in the fall',
-                'options': 'soccer, tennis, swimming, or no sport',
-                'timeframe': 'week',
-            },
-            'identity': {
-                'decision': 'if I should come out to my parents',
-                'options': 'tell both parents, tell just one parent, or don\'t tell either parent',
-                'timeframe': 'week',
-            },
-            'health': {
-                'decision': 'if I should go to the doctor for my illness',
-                'options': 'go to the doctor and get a check up, or wait and see if I feel better in a few days',
-                'timeframe': 'day',
-            },
+            'money related': 'You would like to move to using a budgeting app, so that you can budget your money in real time. Which budgeting app should you use – YNAB or Mint? You get a paycheck in two weeks, and would like to have up and running by then, so you have about ten days to decide.',
+            'professional': 'You have been offered an opportunity for an off-site two-day email marketing course, paid for by your employer. Email marketing isn\'t your area of interest, but taking the course will make you the "expert" in your department. Should you go? Your boss wants a decision in 48 hours.',
+            'community': 'You have been invited by a friend to join her book group, which meets on a weekday evening, time you usually spend with your children but you never seem to find time for your friends and this is a scheduled way to see a few together regularly. Should you join? Your friend wants an answer by the end of the week. You have five days to decide.',
+            'education': 'You are facing an educational challenge. You would like to learn some Spanish before travelling to Mexico in three months. What is the best way to learn a new language with limited time? You want to decide within a week so you can maximize your learning time.',
+            'family': 'You are facing a family challenge. You need to decide whether to move your aging mother into a care facility or try to provide care for her in her apartment. A nearby facility has an opening, and you\'ve put down a deposit, which you will lose in two weeks. So you have two weeks to make the decision.',
+            'health': 'You are facing a health-related decision. You need braces. The orthodontist offers four different options: metal braces, ceramic braces, lingual braces or invisalign braces. Which should you choose? You have an initial fitting appointment in a week, and have to decide by then.',
         }
 
         function validate() {

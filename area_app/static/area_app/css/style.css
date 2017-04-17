@@ -112,7 +112,6 @@ body {
         width: 100%;
         border: #bbedf9 solid 1px;
         padding: 15px;
-        color: #9adae5;
     }
 
     .decide {
@@ -364,7 +363,6 @@ body {
         width: 100%;
         border: #bbedf9 solid 1px;
         padding: 15px;
-        color: #9adae5;
     }
 
     .decide {
@@ -644,4 +642,8 @@ h3 img {
 
 ol ol {
     list-style-type: lower-alpha;
+}
+
+.inpu {
+    color: #ff730a;
 }
