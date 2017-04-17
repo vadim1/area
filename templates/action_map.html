@@ -2,19 +2,100 @@
 {% block title %}{% block h1 %}Your PROBLEM SOLVER Action Plan{% endblock %}{% endblock %}
 {% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
 {% block content %}
+    <style>
+        #cheetah {
+            display: inline;
+            position: relative;
+            border-bottom: 2px dotted #aaaaff;
+        }
+
+        #cheetah:hover:after {
+            background: #333;
+            background: rgba(0, 0, 0, .8);
+            border-radius: 5px;
+            bottom: 26px;
+            color: #fff;
+            content: attr(title);
+            left: 20%;
+            padding: 5px 15px;
+            position: absolute;
+            z-index: 98;
+        }
+
+        #cheetah:hover:before {
+            border: solid;
+            border-color: #333 transparent;
+            border-width: 6px 6px 0 6px;
+            bottom: 20px;
+            content: "";
+            left: 50%;
+            position: absolute;
+            z-index: 99;
+        }
+    </style>
     <div>
         <p>
-            You are a{% if archetype == 'adventurer' %}n{% endif %} <strong>{{ archetype }}</strong>!
+            You are a{% if archetype == 'adventurer' %}n{% endif %}
+            <strong>
+                {% with 'area_app/img/'|add:archetype|add:'.png' as img_path %}
+                    <img src="{% static img_path %}" height="50px"/>
+                {% endwith %}
+                {{ archetype|title }}
+            </strong>!
         </p>
         <p id="decision_text"></p>
         <p>Most important towards a successful decision:
-        <ul>
+        <ol>
             {% for success in success_ordered|slice:":3" %}
                 <li>{{ success.1 }}</li>
             {% endfor %}
-        </ul>
+        </ol>
         </p>
         <p>Your Personalized {% include "problem_solver.html" %} Tool: Your Cheetah Sheet!</p>
+        <p>
+            {% if archetype == 'adventurer' %}
+                You are an Adventurer and you trust your gut. But that optimism may mean that you don't fully explore
+                how
+                your actions play out, especially when it comes to downside scenarios. For Adventurers like you the
+                Scenario Analysis is a great tool to overcome bias. It asks you to fully imagine and play out different
+                results for your decision.
+            {% elif archetype == 'detective' %}
+                You are a Detective and you like evidence. But collecting data doesn't always mean that you fully
+                explore
+                how your actions will play out, especially when it comes to weighing both the pros and cons. For
+                Detectives like you the Pro/Con Analysis is a great tool to overcome bias. It asks you to lay out the
+                data on both sides of the ledger to imagine and play out different results for your decision.
+            {% elif archetype == 'listener' %}
+                You are a listener! You have people whom you trust to help you make decisions and move forward in your
+                life, and you know that you can always turn to them. But sometimes it's difficult to identify the best
+                people to help you make your decision and to ask them the right questions, ones that will get you the
+                information and analysis that you really need.
+            {% elif archetype == 'thinker' %}
+                You are a Thinker! You are a thoughtful decision maker who weighs the options before making a decision.
+                You like to look at all the possibilities, so it's important for you to gather the right information.
+                But how do you do that in a focused and targeted way?
+            {% elif archetype == 'visionary' %}
+                You are a Visionary! You see possibilities that other people may miss. However, because you are drawn to
+                exciting ideas, you often get attached to the most recent or bold information or ideas, even if
+                they aren't ultimately the most important. This can lead you to make decisions
+                based on superficial information.
+                </p><p>
+                For Visionaries like you the Pro/Con Analysis is a great tool to overcome bias. It asks you to lay out
+                the data on both sides of the ledger to imagine and play out different results for your decision.
+            {% endif %}
+            </p>
+        <p>
+            The AREA Method uses
+            <span id="cheetah" title="Why the cheetah? Because the cheetah's prodigious hunting skills are not due to its speed. Rather, it's the animals' ability to decelerate quickly that makes them fearsome hunters.
+Cheetahs habitually run down their prey at speeds approaching 60 miles per hour but are able to cut their speed by nine miles per hour in a single stride, an advantage in hunting greater than being able to accelerate like a race car. This allows the cheetah to make sharp turns, sideways jumps and direction changes.
+As cheetah researcher Alan Wilson, explained in a New York Times article a few years ago, 'The hunt is much more about maneuvering, about acceleration, about ducking and diving to capture the prey.'
+Like the cheetah's hunt, the AREA Method offers both stability and maneuverability; it doesn't consistently move forward. Instead, it benefits from calculated pauses and periods of thoughtful deceleration that will enable you to consolidate knowledge before accelerating again. The reason: a quality research and decision making process is about depth, flexibility and creativity.
+The method's cheetah pauses work as 'strategic stops' during and after each part of your research. They enable you to chunk your learning, prevent you from going off course, and provide a clear record of your work at each stage. But most importantly, they will help you hone in on your motivation for making your high stakes decision and identify what is most critical to you in the outcome.)">
+                Cheetah Sheets</span>
+            , graphic organizers that will help you gather the information and
+            analyze it to make the best decision for you.
+            Here is a Cheetah Sheet for a{% if archetype == 'adventurer' %}n{% endif %} {{ archetype|title }}!
+        </p>
         {% for cheetah in cheetahs|slice:":3" %}
             <div class="resource">
                 {% if forloop.counter0 > 0 %}
