@@ -7,6 +7,13 @@
 {% block content %}
     <h1>{% trans "Verify Your E-mail Address" %}</h1>
 
-    <p>{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process. Please contact us if you do not receive it within a few minutes.{% endblocktrans %}</p>
+    <p>{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup
+        process.
+        Please check your spam folder and contact us at <a href="mailto:admin@areamethod.com">admin@areamethod.com</a>
+        if you do not receive it within a few minutes.{% endblocktrans %}</p>
 
+    <p>In the meanwhile, check out
+        <a href="http://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved">{% include "problem_solved.html" %}</a>
+        (powered by the <a href="http://areamethod.com">AREA Method</a>)
+    </p>
 {% endblock %}

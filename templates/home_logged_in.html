@@ -2,27 +2,29 @@
 {% load socialaccount %}
 {% block title %}{% block h1 %}{% endblock %}{% endblock %}
 {% block content %}
-<div style="margin-top: 50px; text-align: center;">
-<h2>Welcome Back, {{ request.user.email }}!</h2>
-    <h3>{% include "problem_solver.html" %} Profile: {{ archetype }}</h3>
-    <div>
-        {% if not problems %}
-        <h3>No Decisions Yet</h3>
-        {% else %}
-        <h3>Decisions:</h3>
+    <div style="margin-top: 50px; text-align: center;">
+        <h2>Welcome Back!</h2>
+        <div style="font-size: xx-large">{% include "problem_solver.html" %} Profile: <a
+                href="/archetype">{{ archetype }}</a></div>
+    <div><a href="/questions">Take the quiz again</a></div>
+        <div class="text-center" style="margin-top: 20px">
+            <a class="btn" href="{% url 'Decision' %}" style="background-color: #f6653c; color: #ffffff;">
+                <p style="font-size: x-large">PROBLEM <span style="color:#000000">SOLVED</span></p>
+                Make Big Decisions Better
+            </a>
+        </div>
+        {% if problems %}
+            <h2>Prior Decisions:</h2>
             <ul>
-            {% for problem in problems %}
-                <li>
-                <a href="/decision?pid={{ problem.id }}">{{ problem.decision }}</a>
-                </li>
-            {% endfor %}
+                {% for problem in problems %}
+                    <li>
+                        <a href="/decision?pid={{ problem.id }}">{{ problem.decision }}</a>
+                    </li>
+                {% endfor %}
             </ul>
         {% endif %}
+        <div>
+            <a class="btn btn-warning" href="{% url 'account_logout' %}">Sign Out</a>
+        </div>
     </div>
-    <div>
-        <a class="btn btn-warning" href="{% url 'account_logout' %}">Sign Out</a>
-        <a class="btn btn-default" href="/decision">Make a Good Decision!</a>
-        <a class="btn" href="/questions">Determine {% include "problem_solver.html" %} Profile</a>
-    </div>
-</div>
 {% endblock %}
