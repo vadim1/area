@@ -8,16 +8,22 @@ function get_decision_text(decision_type, decision, options, timeframe) {
     var when = '';
     switch (timeframe) {
         case 'day':
-            when = 'the end of the day';
+            when = 'by the end of the day';
             break;
         case 'week':
-            when = 'next week';
+            when = 'this week';
             break;
         case 'month':
             when = 'this month';
             break;
+        case 'year':
+            when = 'this year';
+            break;
+        case 'sometime':
+            when = 'sometime';
+            break;
     }
-    text += 'You need to decide by ' + when + '.';
+    text += 'You need to decide ' + when + '.';
 
     return text;
 }

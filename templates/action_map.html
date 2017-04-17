@@ -4,9 +4,16 @@
 {% block content %}
     <div>
         <p>
-            You are a{% if archetype == 'adventurer' %}m{% endif %} <strong>{{ archetype }}</strong>!
+            You are a{% if archetype == 'adventurer' %}n{% endif %} <strong>{{ archetype }}</strong>!
         </p>
         <p id="decision_text"></p>
+        <p>Most important towards a successful decision:
+        <ul>
+            {% for success in success_ordered|slice:":3" %}
+                <li>{{ success.0 }}</li>
+            {% endfor %}
+        </ul>
+        </p>
         <p>Your Personalized {% include "problem_solver.html" %} Tool: Your Cheetah Sheet!</p>
         {% for cheetah in cheetahs|slice:":3" %}
             <div class="resource">

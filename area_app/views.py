@@ -250,6 +250,7 @@ def psp(request, profile=None):
         profile = top_archetypes[0][0]
         return redirect('/psp/'+str(profile))
 
+
 @login_required(login_url='/accounts/signup/')
 def archetype(request):
     if request.method == 'POST':
@@ -268,8 +269,7 @@ def archetype(request):
 
 
 def archetype_info(request):
-    archetype = request.GET['t']
-    return archetype
+    return request.GET['t']
 
 
 @login_required(login_url='/accounts/signup/')
@@ -308,17 +308,24 @@ def action_map(request):
         return redirect('/summary?pid='+str(problem.id))
     if 'top_archetype' not in request.session:
         return render(request, 'action_map.html', {})
-    archetype = request.session['top_archetype']
-    archetype_cheetahs = archetypes.archetype_cheetah_sheets[archetype]
+    top_archetype = request.session['top_archetype']
+    archetype_cheetahs = archetypes.archetype_cheetah_sheets[top_archetype]
     request.session['cheetah_sheets'] = archetype_cheetahs
+    if problem and problem.success:
+        success_keys = problem.success.split(',')
+        success_ordered = []
+        for success_key in success_keys:
+            success_ordered.append([success_key, success[success_key]])
+
     return render(request, 'action_map.html', {
         'type': request.session['decision_type'],
         'decision': request.session['decision'],
         'options': request.session['options'],
         'timeframe': request.session['timeframe'],
-        'archetype': archetype,
+        'archetype': top_archetype,
         'cheetahs': archetype_cheetahs,
         'pid': problem.id,
+        'success_ordered': success_ordered,
         'step': 5,
     })
 
