@@ -6,7 +6,7 @@
         <div style="font-size: xx-large">
             <a href="/archetype">{% include "problem_solver.html" %} Profile:
                 {% with 'area_app/img/'|add:archetype|add:'.png' as img_path %}
-                    <img src="{% static img_path %}"/>
+                    <img src="{% static img_path %}" height="50px"/>
                 {% endwith %}
                 {{ archetype|title }}</a>
         </div>
