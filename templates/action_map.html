@@ -4,7 +4,7 @@
 {% block content %}
     <div>
         <p>
-            You are a <strong>{{ archetype }}</strong>!
+            You are a{% if archetype == 'adventurer' %}m{% endif %} <strong>{{ archetype }}</strong>!
         </p>
         <p id="decision_text"></p>
         <p>Your Personalized {% include "problem_solver.html" %} Tool: Your Cheetah Sheet!</p>
