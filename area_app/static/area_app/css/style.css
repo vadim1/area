@@ -46,10 +46,6 @@ body {
         color: #fff;
     }
 
-    .footer div {
-        margin-top: -30px;
-    }
-
     /*DECISION*/
     h2 {
         font-size: 26px;
@@ -257,6 +253,15 @@ body {
         color: #3d96ff;
         font-size: 16px;
         font-weight: bold;
+    }
+
+    #psp h3 {
+        font-size: x-large;
+    }
+
+    h3 img {
+        height: 60px;
+        margin-right: 10px;
     }
 }
 
@@ -480,6 +485,15 @@ body {
     .dis_p {
         padding: 0px !important;
     }
+
+    #psp h3 {
+        font-size: xx-large;
+    }
+
+    h3 img {
+        height: 80px;
+        margin-right: 20px;
+    }
 }
 
 .info_cat {
@@ -618,8 +632,8 @@ h4 {
 .footer {
     background-color: #676767;
     color: #cccccc;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 .footer a {
@@ -628,15 +642,6 @@ h4 {
 
 .archetype-name {
     font-size: large;
-}
-
-h3 img {
-    height: 80px;
-    margin-right: 20px;
-}
-
-#psp h3 {
-    font-size: xx-large;
 }
 
 ol ol {

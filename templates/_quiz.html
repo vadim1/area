@@ -68,6 +68,38 @@
         margin-left: 40px;
         margin-right: 40px;
     }
+
+    .question {
+        padding-left: 50px;
+        padding-right: 50px;
+        font-size: 150%;
+    }
+
+    .answers {
+        font-size: 1.5em;
+        margin-top: 20px;
+    }
+
+    .why_div {
+        margin-top: 20px;
+    }
+
+    @media screen and (max-width: 749px) {
+        .question {
+            font-size: 100%;
+            margin-top: -20px;
+            margin-left: -30px;
+            margin-right: -30px;
+        }
+
+        #why {
+            font-size: small !important;
+        }
+
+        .answers, .why_div {
+            margin-top: 10px;
+        }
+    }
 </style>
 <div id="questionCarousel" class="carousel slide" data-interval="false" style="display: none;">
     <!-- Indicators -->
@@ -84,9 +116,8 @@
          style="min-height: 350px; text-align: center; font-size: large; background-color: #3d96ff; color: #ffffff;">
         {% for question, details in questions %}
             <div class="item{% if forloop.counter0 == 0 %} active{% endif %}" style="margin-top: 50px;">
-                <div class="question" rel="{{ forloop.counter0 }}"
-                     style="padding-left: 50px; padding-right: 50px; font-size: 150%;">{{ question }}</div>
-                <div style="font-size: 1.5em; margin-top: 20px;">
+                <div class="question" rel="{{ forloop.counter0 }}">{{ question }}</div>
+                <div class="answers">
                     <input type="radio" name="question[{{ question }}]" class="yes" value="yes"
                            id="y{{ forloop.counter0 }}"/>
                     <label for="y{{ forloop.counter0 }}" class="btnv"><span><span></span></span>Yes</label>
@@ -95,7 +126,7 @@
                            id="n{{ forloop.counter0 }}"/>
                     <label for="n{{ forloop.counter0 }}" class="btnv"><span><span></span></span>No</label>
                 </div>
-                <div style="margin-top: 20px">
+                <div class="why_div">
                     <a href="#" onclick="$(this).next('div').show(); $(this).hide(); return false;"
                        style="color: #ffffff">Why this question?</a>
                     <div id="why" style="display:none;">{{ details.why }}</div>
