@@ -12,9 +12,11 @@
 {% endblock %}
 {% block content %}
     <p>
-        Imagine you've already made your decision.
-        Which of these statements are you most likely to say and feel proud of?
-        Rank them in order.
+        {% include "problem_solved.html" %} inverts the usual decision-making process so that instead of focusing on
+        your problem, you focus on your picture of success. The goal: To better understand what constitutes a good
+        outcome for you personally and for your decision, and to cater to your strengths while controlling for and
+        counteracting your biases. So imagine you've already made your decision. Which of these statements are you most
+        likely to say and feel proud of? You can rank them in order by moving the statements into the order you want.
     </p>
     <input type="hidden" name="success" id="success" value="{{ success_order }}"/>
     <p>
@@ -26,12 +28,6 @@
             </li>
         {% endfor %}
     </ul>
-    </p>
-    <p>
-        PROBLEM SOLVED inverts the usual problem solving process so that instead of focusing on your problem, it focuses
-        on what you define as your picture of success. The goal: To better understand what constitutes a good outcome
-        for you personally and for your decision and to cater to your strengths while controlling and counter acting
-        mental mistakes.
     </p>
 
     {% include 'buttons.html' %}
