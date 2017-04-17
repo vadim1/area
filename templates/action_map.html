@@ -3,17 +3,18 @@
 {% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
 {% block content %}
     <div>
-        <p id="decision_text"></p>
         <p>
-            You are a <strong>{{ archetype }}</strong>! To make your decision, we have a guide for you to use next.
+            You are a <strong>{{ archetype }}</strong>!
         </p>
+        <p id="decision_text"></p>
+        <p>Your Personalized {% include "problem_solver.html" %} Tool: Your Cheetah Sheet!</p>
         {% for cheetah in cheetahs|slice:":3" %}
             <div class="resource">
                 {% if forloop.counter0 > 0 %}
                     <h4 class="showLink">
                         <a href="#"
                            onclick="$(this).closest('.resource').find('.cheetahContent').show();$(this).closest('.showLink').hide();return false;">Show
-                            Another Resource...</a>
+                            Another Cheetah Sheet...</a>
                     </h4>
                     <div class="cheetahContent" style="display:none">
                 {% endif %}
