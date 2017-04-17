@@ -187,7 +187,6 @@ def rank(request):
 def compute_archetype(request):
     questions_yes = request.session['questions_yes']
     top_archetypes = archetypes.get_top_archetypes(questions_yes)
-    # DEBUG: raise Exception(top_archetypes)
     request.session['archetypes'] = top_archetypes
     top_archetype = top_archetypes[0]
     request.session['top_archetype'] = top_archetype[0]
@@ -244,9 +243,7 @@ def psp(request, profile=None):
             'step': 4,
         })
     else:
-        top_archetypes = request.session['top_archetype']
-        profile = top_archetypes[0][0]
-        return redirect('/psp/'+str(profile))
+        return redirect('/psp/'+str(request.session['top_archetype']))
 
 
 @login_required(login_url='/accounts/signup/')
