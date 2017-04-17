@@ -24,17 +24,17 @@
             </a>
         </div>
         {% if problems %}
-            <div style="font-size: x-large">Prior Decisions:</div>
+            <div style="font-size: x-large; margin-top: 40px;">Prior Decisions:</div>
             {% for problem in problems %}
                 <div style="font-size: large">
                     <a href="/decision?pid={{ problem.id }}">{{ problem.decision }}</a>
                 </div>
             {% endfor %}
         {% endif %}
-        <div style="font-size: large">
+        <div style="font-size: large; margin-top: 40px;">
             <a href="/archetypes" target="_blank">See Other {% include "problem_solver.html" %} Profiles</a>
         </div>
-        <div style="margin-top: 100px;">
+        <div style="margin-top: 50px;">
             <a class="btn" href="{% url 'account_logout' %}">Sign Out</a>
         </div>
     </div>
