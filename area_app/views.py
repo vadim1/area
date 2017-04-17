@@ -336,16 +336,16 @@ def action_map(request):
     top_archetype = request.session['top_archetype']
     archetype_cheetahs = archetypes.archetype_cheetah_sheets[top_archetype]
     request.session['cheetah_sheets'] = archetype_cheetahs
+    success_ordered = []
     if problem and problem.success:
         success_keys = problem.success.split(',')
-        success_ordered = []
         for success_key in success_keys:
             success_ordered.append([success_key, success[success_key]])
 
     ccs = CriticalConcepts.objects.filter(problem=problem).first()
     if not ccs:
         ccs = CriticalConcepts()
-        
+
     return render(request, 'action_map.html', {
         'type': request.session['decision_type'],
         'decision': request.session['decision'],
