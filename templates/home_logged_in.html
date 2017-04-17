@@ -4,33 +4,36 @@
 {% block content %}
     <div style="margin-top: 50px; text-align: center;">
         <div style="font-size: xx-large">
-            <a href="/archetype">{% include "problem_solver.html" %} Profile:
-            <br/>
-                {% with 'area_app/img/'|add:archetype|add:'.png' as img_path %}
-                    <img src="{% static img_path %}" height="50px"/>
-                {% endwith %}
-                {{ archetype|title }}</a>
+            Welcome, <a href="/archetype">
+            {% with 'area_app/img/'|add:archetype|add:'.png' as img_path %}
+                <img src="{% static img_path %}" height="50px"/>
+            {% endwith %}
+            {{ archetype|title }}</a>
         </div>
         <div><a href="/questions">Take the quiz again</a></div>
-        <div style="font-size: x-large">
-            <a href="/archetypes" target="_blank">See Other {% include "problem_solver.html" %} Profiles</a>
+        <div style="margin-top: 20px">
+            Chart a decision path forward into your best future with <a href="http://areamethod.com" target="_blank">The AREA Method</a>
         </div>
-        <div class="text-center" style="margin-top: 20px">
+        <div style="margin-top: 20px">
+            <i>Turning Good Ideas into Great Thinking</i>
+        </div>
+        <div style="margin-top: 20px">
             <a class="btn" href="/decision" style="background-color: #f6653c; color: #ffffff;">
                 <div style="font-size: x-large">PROBLEM <span style="color:#000000">SOLVED</span></div>
-                <div style="font-size: large">Make Your Decisions Better!</div>
+                <div style="font-size: large">Make Your Big Decision Better!</div>
             </a>
         </div>
         {% if problems %}
-            <h2>Prior Decisions:</h2>
-            <ul>
-                {% for problem in problems %}
-                    <li>
-                        <a href="/decision?pid={{ problem.id }}">{{ problem.decision }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
+            <div style="font-size: x-large">Prior Decisions:</div>
+            {% for problem in problems %}
+                <div style="font-size: large">
+                    <a href="/decision?pid={{ problem.id }}">{{ problem.decision }}</a>
+                </div>
+            {% endfor %}
         {% endif %}
+        <div style="font-size: large">
+            <a href="/archetypes" target="_blank">See Other {% include "problem_solver.html" %} Profiles</a>
+        </div>
         <div style="margin-top: 100px;">
             <a class="btn" href="{% url 'account_logout' %}">Sign Out</a>
         </div>
