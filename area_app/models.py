@@ -51,6 +51,7 @@ class ArchType(models.Model):
 
 class Question(models.Model):
     user = models.ForeignKey(User, null=True)
+    session_key = models.CharField(max_length=40, null=True)
     question = models.ForeignKey(QuestionModel, related_name='user_question', null=True)
     answer = models.BooleanField(default=False)
 
@@ -58,6 +59,10 @@ class Question(models.Model):
     def get_yes_questions(user):
         yes_questions_query = Question.objects.filter(user=user, answer=True)
         return yes_questions_query.all()
+
+    @staticmethod
+    def fill_in_user(user, session_key):
+        Question.objects.filter(session_key__exact=session_key, user__isnull=True).update(user=user)
 
     def text(self):
         return self.question.text()

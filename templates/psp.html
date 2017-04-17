@@ -22,7 +22,6 @@
         <div style="margin-top: 20px; margin-bottom: 20px; text-align: center;">
             {% if user.is_authenticated %}
                 <h4 class="text-center">Signed in as {{ request.user.email }}</h4>
-                <a class="btn btn-warning" href="{% url 'account_logout' %}">Sign Out</a>
                 <a class="btn btn-default" href="/decision">Make a Good Decision!</a>
             {% else %}
                 <a class="btn btn-info" href="{% provider_login_url 'facebook' %}">Facebook Sign Up</a>

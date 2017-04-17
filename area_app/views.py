@@ -198,10 +198,7 @@ def handle_answers(request):
         return redirect('/rank?pid='+str(problem.id))
     questions_yes = request.POST.getlist('question[]')
     request.session['questions_yes'] = questions_yes
-    user = None
-    if request.user.is_authenticated():
-        user = request.user
-    archetypes.save_questions(questions_yes=questions_yes, user=user)
+    archetypes.save_questions(questions_yes=questions_yes, request=request)
     compute_archetype(request)
     return redirect('/psp')
 
