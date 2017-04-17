@@ -9,31 +9,6 @@
             position: relative;
             border-bottom: 2px dotted #aaaaff;
         }
-
-        #cheetah:hover:after {
-            background: #333;
-            background: rgba(0, 0, 0, .8);
-            border-radius: 5px;
-            bottom: 26px;
-            color: #fff;
-            content: attr(title);
-            left: 20%;
-            padding: 5px 15px;
-            position: absolute;
-            z-index: 98;
-            width: 500px;
-        }
-
-        #cheetah:hover:before {
-            border: solid;
-            border-color: #333 transparent;
-            border-width: 6px 6px 0 6px;
-            bottom: 20px;
-            content: "";
-            left: 50%;
-            position: absolute;
-            z-index: 99;
-        }
     </style>
     <div>
         <p>
@@ -86,16 +61,28 @@
                 the data on both sides of the ledger to imagine and play out different results for your decision.
             {% endif %}
             </p>
+        <div data-role="popup" id="cheetahPopup">
+            Why the cheetah? Because the cheetah's prodigious hunting skills are not due to its speed. Rather, it's the
+            animals' ability to decelerate quickly that makes them fearsome hunters.
+            Cheetahs habitually run down their prey at speeds approaching 60 miles per hour but are able to cut their
+            speed by nine miles per hour in a single stride, an advantage in hunting greater than being able to
+            accelerate like a race car. This allows the cheetah to make sharp turns, sideways jumps and direction
+            changes.
+            As cheetah researcher Alan Wilson, explained in a New York Times article a few years ago, 'The hunt is much
+            more about maneuvering, about acceleration, about ducking and diving to capture the prey.'
+            Like the cheetah's hunt, the AREA Method offers both stability and maneuverability; it doesn't consistently
+            move forward. Instead, it benefits from calculated pauses and periods of thoughtful deceleration that will
+            enable you to consolidate knowledge before accelerating again. The reason: a quality research and decision
+            making process is about depth, flexibility and creativity.
+            The method's cheetah pauses work as 'strategic stops' during and after each part of your research. They
+            enable you to chunk your learning, prevent you from going off course, and provide a clear record of your
+            work at each stage. But most importantly, they will help you hone in on your motivation for making your high
+            stakes decision and identify what is most critical to you in the outcome.)
+        </div>
         <p>
             The AREA Method uses
-            <span id="cheetah" title="Why the cheetah? Because the cheetah's prodigious hunting skills are not due to its speed. Rather, it's the animals' ability to decelerate quickly that makes them fearsome hunters.
-Cheetahs habitually run down their prey at speeds approaching 60 miles per hour but are able to cut their speed by nine miles per hour in a single stride, an advantage in hunting greater than being able to accelerate like a race car. This allows the cheetah to make sharp turns, sideways jumps and direction changes.
-As cheetah researcher Alan Wilson, explained in a New York Times article a few years ago, 'The hunt is much more about maneuvering, about acceleration, about ducking and diving to capture the prey.'
-Like the cheetah's hunt, the AREA Method offers both stability and maneuverability; it doesn't consistently move forward. Instead, it benefits from calculated pauses and periods of thoughtful deceleration that will enable you to consolidate knowledge before accelerating again. The reason: a quality research and decision making process is about depth, flexibility and creativity.
-The method's cheetah pauses work as 'strategic stops' during and after each part of your research. They enable you to chunk your learning, prevent you from going off course, and provide a clear record of your work at each stage. But most importantly, they will help you hone in on your motivation for making your high stakes decision and identify what is most critical to you in the outcome.)">
-                Cheetah Sheets</span>
-            , graphic organizers that will help you gather the information and
-            analyze it to make the best decision for you.
+            <a href="#cheetahPopup" data-rel="popup" id="cheetah">Cheetah Sheets</a>, graphic organizers that will help
+            you gather the information and analyze it to make the best decision for you.
             Here is a Cheetah Sheet for a{% if archetype == 'adventurer' %}n{% endif %} {{ archetype|title }}!
         </p>
         {% for cheetah in cheetahs|slice:":3" %}
