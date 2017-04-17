@@ -5,10 +5,12 @@
     <div style="margin-top: 50px; text-align: center;">
         <div style="font-size: xx-large">
             <a href="/archetype">{% include "problem_solver.html" %} Profile:
-                <img src="{% static 'area_app/img/' %}{{ archetype }}.png"/>
+                {% with 'area_app/img/'|add:archetype|add:'.png' as img_path %}
+                    <img src="{% static img_path %}"/>
+                {% endwith %}
                 {{ archetype|title }}</a>
         </div>
-    <div><a href="/questions">Take the quiz again</a></div>
+        <div><a href="/questions">Take the quiz again</a></div>
         <div class="text-center" style="margin-top: 20px">
             <a class="btn" href="{% url 'Decision' %}" style="background-color: #f6653c; color: #ffffff;">
                 <p style="font-size: x-large">PROBLEM <span style="color:#000000">SOLVED</span></p>
