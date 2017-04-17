@@ -3,9 +3,11 @@
 {% block title %}{% block h1 %}{% endblock %}{% endblock %}
 {% block content %}
     <div style="margin-top: 50px; text-align: center;">
-        <h2>Welcome Back!</h2>
-        <div style="font-size: xx-large">{% include "problem_solver.html" %} Profile: <a
-                href="/archetype">{{ archetype }}</a></div>
+        <div style="font-size: xx-large">
+            <a href="/archetype">{% include "problem_solver.html" %} Profile:
+                <img src="{% static 'area_app/img/' %}{{ archetype }}.png"/>
+                {{ archetype|title }}</a>
+        </div>
     <div><a href="/questions">Take the quiz again</a></div>
         <div class="text-center" style="margin-top: 20px">
             <a class="btn" href="{% url 'Decision' %}" style="background-color: #f6653c; color: #ffffff;">
