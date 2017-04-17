@@ -65,7 +65,7 @@ def get_from_session(request, param):
 
 def home_logged_in(request):
     request.session['questions_yes'] = archetypes.load_questions(request.user)
-    raise Exception(request.user.id)
+    raise Exception(request.session['questions_yes'])
     compute_archetype(request)
     problems = Problem.objects.filter(user=request.user).all()
     return render(request, 'home_logged_in.html', {
