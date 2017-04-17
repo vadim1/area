@@ -49,6 +49,13 @@
             {% endfor %}
         </ol>
         </p>
+        <p>Top Critical Concepts:
+        <ol>
+            <li>{{ ccs.concept1 }}</li>
+            <li>{{ ccs.concept2 }}</li>
+            <li>{{ ccs.concept3 }}</li>
+        </ol>
+        </p>
         <p>Your Personalized {% include "problem_solver.html" %} Tool: Your Cheetah Sheet!</p>
         <p>
             {% if archetype == 'adventurer' %}
@@ -88,8 +95,10 @@
                 the animals' ability to <i>decelerate</i> quickly that makes them fearsome hunters.
             </p>
             <p>
-                Cheetahs habitually run down their prey at speeds approaching 60 miles per hour but are able to cut their
-                speed by nine miles per hour <i>in a single stride</i>, an advantage in hunting greater than being able to
+                Cheetahs habitually run down their prey at speeds approaching 60 miles per hour but are able to cut
+                their
+                speed by nine miles per hour <i>in a single stride</i>, an advantage in hunting greater than being able
+                to
                 accelerate like a race car. This allows the cheetah to make sharp turns, sideways jumps and direction
                 changes.
             </p>
@@ -165,9 +174,9 @@
                 <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Commit!"/>
             </div>
         </div>
-            <div style="margin-top: 50px;">
-                <a href="/" class="btn btn-lg btn-primary">Continue</a>
-            </div>
+        <div style="margin-top: 50px;">
+            <a href="/" class="btn btn-lg btn-primary">Continue</a>
+        </div>
 
     </div>
 

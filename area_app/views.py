@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.conf import settings
 from utils import send_from_default_email
-from .models import Problem
+from .models import Problem, CriticalConcepts
 
 dream_directors = [
     'Bob, New York',
@@ -164,10 +164,7 @@ def rank(request):
         request.session['success'] = success_shuffled
         problem.success = success_shuffled
         problem.save()
-        if 'questions_yes' in request.session:
-            return redirect('/action_map?pid='+str(problem.id))
-        else:
-            return redirect('/questions?pid='+str(problem.id))
+        return redirect('/critical_concepts?pid='+str(problem.id))
     success_keys = None
     if problem and problem.success:
         success_keys = problem.success.split(',')
@@ -181,6 +178,39 @@ def rank(request):
         'success': success_shuffled,
         'step': 2,
         'pid': problem.id,
+    })
+
+
+@login_required(login_url='/accounts/signup/')
+def critical_concepts(request):
+    problem = load_problem(request)
+    ccs = CriticalConcepts.objects.filter(problem=problem).first()
+    if not ccs:
+        ccs = CriticalConcepts(problem=problem)
+    if request.method == 'POST':
+        if request.POST['submit'] == 'Back':
+            return redirect('/rank?pid='+str(problem.id))
+        request.session['critical_concept1'] = request.POST['critical_concept1']
+        request.session['critical_concept2'] = request.POST['critical_concept2']
+        request.session['critical_concept3'] = request.POST['critical_concept3']
+        ccs.concept1 = request.session['critical_concept1']
+        ccs.concept2 = request.session['critical_concept2']
+        ccs.concept3 = request.session['critical_concept3']
+        ccs.save()
+        if 'questions_yes' in request.session:
+            return redirect('/action_map?pid='+str(problem.id))
+        else:
+            return redirect('/questions?pid='+str(problem.id))
+    return render(request, 'critical_concepts.html', {
+        'ccs': ccs,
+        'pid': problem.id,
+        'step': 4,
+    })
+
+
+def critical_concepts_example(request):
+    return render(request, 'critical_concepts_example.html', {
+        'step': 4,
     })
 
 
@@ -312,6 +342,10 @@ def action_map(request):
         for success_key in success_keys:
             success_ordered.append([success_key, success[success_key]])
 
+    ccs = CriticalConcepts.objects.filter(problem=problem).first()
+    if not ccs:
+        ccs = CriticalConcepts()
+        
     return render(request, 'action_map.html', {
         'type': request.session['decision_type'],
         'decision': request.session['decision'],
@@ -321,6 +355,7 @@ def action_map(request):
         'cheetahs': archetype_cheetahs,
         'pid': problem.id,
         'success_ordered': success_ordered,
+        'ccs': ccs,
         'step': 5,
     })
 

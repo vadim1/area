@@ -72,3 +72,9 @@ class DecisionTypes(models.Model):
     problem = models.ForeignKey(Problem)
     name = models.CharField(max_length=256)
 
+
+class CriticalConcepts(models.Model):
+    problem = models.ForeignKey(Problem, unique=True)
+    concept1 = models.CharField(max_length=256, default='')
+    concept2 = models.CharField(max_length=256, default='')
+    concept3 = models.CharField(max_length=256, default='')

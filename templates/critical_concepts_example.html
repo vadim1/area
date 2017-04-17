@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{% block h1 %}Critical Concepts Example{% endblock %}{% endblock %}
+{% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <p>
+        Both Micah and his friend Kyle are high school seniors who applied to colleges as pre-med majors. Both are
+        deciding between two very different schools. Micah is interested in academic medicine and has already spent a
+        summer in a lab. He imagines himself pursuing a fellowship or additional research training even after medical
+        school and residency. He's deciding between the University of Pittsburgh, where he's been offered a full
+        scholarship, and Johns Hopkins University, which has not offered his family any financial assistance. </p>
+    <p>
+        However, for Micah, an only child of two professional parents, the sizable cost difference between his two
+        choices is not his primary Critical Concepts. Micah and his parents are concerned with providing him with an undergraduate
+        education that will set him up for the specific kind of medical career he envisioned. Equally important Critical Concepts for
+        Micah are the accessibility of undergraduate research opportunities, medical school acceptance rates, and the
+        selectivity of the medical schools each undergraduate institution is getting their students into. </p>
+    <p>
+        Kyle, on the other hand, is one of four children, also deciding between the University of Pittsburgh, with a
+        free ride, and Johns Hopkins, with some aid. Kyle is pretty sure he wants to be a family practice doctor, and
+        has no interest in research. Kyle's parents have saved $40,000 dollars towards his education, but any additional
+        costs will be his responsibility. For Kyle, the cost of his undergraduate options is his overriding Critical
+        Concept.
+    </p>
+    <div style="margin-top: 50px; text-align: center;">
+        <input type="submit" class="btn btn-lg btn-continue" name="submit" value="Close" onclick="window.close()"/>
+    </div>
+
+{% endblock %}

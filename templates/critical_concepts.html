@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{% block h1 %}Cricial Concepts{% endblock %}{% endblock %}
+{% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <p>
+        This page helps you develop your decision's Critical Concepts, which are the one, two or three things that
+        really matter to you. They answer: 'What am I really solving for?' There's no one right answer.
+        <a href="/ccex" target="_blank">Two people
+            looking at the same data may well have different Critical Concepts and may make entirely different decisions</a>.
+    </p>
+    <p>
+        Think of your decision like a poker hand. How do you increase your odds of winning – of choosing your best path
+        forward? You've got incomplete information, and the future will change in some ways you can predict and many you
+        can't. But as the pros at a poker table will tell you (unless they're playing against you), you don't have to
+        know <i>everything</i> because you only have to focus on what hands your cards can beat.
+    </p>
+    <p>
+        What are the outcomes that matter for you in this game? Every poker player has a set of skills but they start
+        each hand fresh, figuring out what's critical for that hand. The same will be true for you as a decision maker
+        developing your decision's Critical Concepts. As they say in poker, that's where you're "pot-committed."
+        You've got chips on the table and a vested interest. The game is highly personal, subjective and specific to
+        your situation.
+    </p>
+    <p>
+        List your Critical Concepts in order of importance.
+    </p>
+    <div class="container">
+        <div class="clearfix">&nbsp;</div>
+        <div class="row">
+            <div class="col-md-3 col-xs-4" style="padding-top:12px; font-size:large; white-space: nowrap;">
+                Critical Concept 1:</div>
+            <div class="col-md-9 col-xs-8">
+                <input type="text" class="inpu" name="critical_concept1" id="critical_concept1"
+                       value="{{ ccs.concept1 }}"/>
+            </div>
+        </div>
+        <div class="clearfix">&nbsp;</div>
+        <div class="row">
+            <div class="col-md-3 col-xs-4" style="padding-top:12px; font-size:large; white-space: nowrap;">
+                Critical Concept 2:</div>
+            <div class="col-md-9 col-xs-8">
+                <input type="text" class="inpu" name="critical_concept2" id="critical_concept2"
+                       value="{{ ccs.concept2 }}"/>
+            </div>
+        </div>
+        <div class="clearfix">&nbsp;</div>
+        <div class="row">
+            <div class="col-md-3 col-xs-4" style="padding-top:12px; font-size:large; white-space: nowrap;">
+                Critical Concept 3:</div>
+            <div class="col-md-9 col-xs-8">
+                <input type="text" class="inpu" name="critical_concept3" id="critical_concept3"
+                       value="{{ ccs.concept3 }}"/>
+            </div>
+        </div>
+    </div>
+
+    {% include 'buttons.html' %}
+
+{% endblock %}
