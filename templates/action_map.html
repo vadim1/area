@@ -10,6 +10,16 @@
             border-bottom: 2px dotted #aaaaff;
         }
     </style>
+    <script>
+    $(document).ready(function(){
+        $('#cheetahPopup').dialog({
+            autoOpen: false,
+        });
+        $('#cheetah').on("click", function() {
+            $('#cheetahPopup').dialog("open");
+        });
+    });
+    </script>
     <div>
         <p>
             You are a{% if archetype == 'adventurer' %}n{% endif %}
@@ -61,7 +71,7 @@
                 the data on both sides of the ledger to imagine and play out different results for your decision.
             {% endif %}
             </p>
-        <div data-role="popup" id="cheetahPopup">
+        <div id="cheetahPopup" title="Cheetah Sheets Explained">
             Why the cheetah? Because the cheetah's prodigious hunting skills are not due to its speed. Rather, it's the
             animals' ability to decelerate quickly that makes them fearsome hunters.
             Cheetahs habitually run down their prey at speeds approaching 60 miles per hour but are able to cut their
@@ -81,7 +91,7 @@
         </div>
         <p>
             The AREA Method uses
-            <a href="#cheetahPopup" data-rel="popup" id="cheetah">Cheetah Sheets</a>, graphic organizers that will help
+            <a id="cheetah">Cheetah Sheets</a>, graphic organizers that will help
             you gather the information and analyze it to make the best decision for you.
             Here is a Cheetah Sheet for a{% if archetype == 'adventurer' %}n{% endif %} {{ archetype|title }}!
         </p>
