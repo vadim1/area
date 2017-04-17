@@ -201,5 +201,8 @@
     </script>
 
 
-<script>(function(e,t,n,o){var s,c,i;e.SMCX=e.SMCX||[],t.getElementById(o)||(s=t.getElementsByTagName(n),c=s[s.length-1],i=t.createElement(n),i.type="text/javascript",i.async=!0,i.id=o,i.src=["https:"===location.protocol?"https://":"http://","widget.surveymonkey.com/collect/website/js/KSvPNh4x87ph1Vbqxh4HSxGIiJBfLynaP0_2F9Cf2G8K7BeIyMlBepM5WmfPMy7YLN.js"].join(""),c.parentNode.insertBefore(i,c))})(window,document,"script","smcx-sdk");</script>
+<script>
+    var feedback = function(e,t,n,o){var s,c,i;e.SMCX=e.SMCX||[],t.getElementById(o)||(s=t.getElementsByTagName(n),c=s[s.length-1],i=t.createElement(n),i.type="text/javascript",i.async=!0,i.id=o,i.src=["https:"===location.protocol?"https://":"http://","widget.surveymonkey.com/collect/website/js/KSvPNh4x87ph1Vbqxh4HSxGIiJBfLynaP0_2F9Cf2G8K7BeIyMlBepM5WmfPMy7YLN.js"].join(""),c.parentNode.insertBefore(i,c))})(window,document,"script","smcx-sdk";
+    window.setTimeout(feedback, 10000); // Delay for 10 seconds
+</script>
 {% endblock %}
