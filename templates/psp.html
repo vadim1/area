@@ -2,15 +2,15 @@
 
 {% load static account socialaccount bootstrap i18n %}
 
-{% block title %}{% block h1 %}Your {% include "problem_solver.html" %} Profile{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}Your PROBLEM SOLVER Profile{% endblock %}{% endblock %}
 {% block post_title %}{% include 'crumbs.html' with s=request.session %}{% endblock %}
 {% block content %}
     {% if archetype %}
-        <div>{% with 'psp/'|add:archetype|add:'.html' as path %}{% include path %}{% endwith %}</div>
+        <div id="psp">{% with 'psp/'|add:archetype|add:'.html' as path %}{% include path %}{% endwith %}</div>
     {% endif %}
     <div>
-        <div class="clearfix"></div>
-        <p>Sign Up for the Problem Solved App to receive:</p>
+        <div class="clearfix" style="margin-top:20px;"></div>
+        <p>Sign Up for the {% include "problem_solved.html" %} App to receive:</p>
         <ul>
             <li>Your complete {% include "problem_solver.html" %} Profile, which outlines your strengths and potential
                 blind spots
@@ -19,13 +19,7 @@
             <li>A decision making tool customized to your {% include "problem_solver.html" %} Profile</li>
             <li>A roadmap to use the AREA Method's decision making system to make your big decisions better</li>
         </ul>
-        <p>
-            Problem Solved is a digital coach powered by the AREA Method, a decision making system that helps you solve
-            complex problems. It provides you with tips and action steps that are uniquely customized to the way that
-            you make decisions. It's a tool that gives you control over your life and allows you to chart a decision
-            path forward into your best future.
-        </p>
-        <div style="margin-top: 50px; text-align: center;">
+        <div style="margin-top: 20px; margin-bottom: 20px; text-align: center;">
             {% if user.is_authenticated %}
                 <h4 class="text-center">Signed in as {{ request.user.email }}</h4>
                 <a class="btn btn-warning" href="{% url 'account_logout' %}">Sign Out</a>
@@ -36,6 +30,15 @@
                 <a class="btn btn-success" href="/accounts/signup">Sign Up</a>
             {% endif %}
         </div>
+        <p style="margin-top: 20px;">
+            <a href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved"
+               target="_blank">{% include "problem_solved.html" %}</a>
+            is a digital coach powered by the
+            <a href="http://areamethod.com" target="_blank">AREA Method</a>, a decision making system that helps you
+            solve complex problems. It provides you with tips and action steps that are uniquely customized to the way
+            that you make decisions. It's a tool that gives you control over your life and allows you to chart a
+            decision path forward into your best future.
+        </p>
     </div>
 
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58da669822b5e1b4"></script>

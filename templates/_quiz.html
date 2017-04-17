@@ -83,9 +83,9 @@
     <div class="carousel-inner" role="listbox"
          style="min-height: 350px; text-align: center; font-size: large; background-color: #3d96ff; color: #ffffff;">
         {% for question, details in questions %}
-            <div class="item{% if forloop.counter0 == 0 %} active{% endif %}" style="margin-top: 80px;">
+            <div class="item{% if forloop.counter0 == 0 %} active{% endif %}" style="margin-top: 50px;">
                 <div class="question" rel="{{ forloop.counter0 }}"
-                     style="padding-left: 50px; padding-right: 50px;">{{ question }}</div>
+                     style="padding-left: 50px; padding-right: 50px; font-size: 150%;">{{ question }}</div>
                 <div style="font-size: 1.5em; margin-top: 20px;">
                     <input type="radio" name="question[{{ question }}]" class="yes" value="yes"
                            id="y{{ forloop.counter0 }}"/>
@@ -97,7 +97,7 @@
                 </div>
                 <div style="margin-top: 20px">
                     <a href="#" onclick="$(this).next('div').show(); $(this).hide(); return false;"
-                       style="color: #ffffff;">Why this question?</a>
+                       style="color: #ffffff">Why this question?</a>
                     <div id="why" style="display:none;">{{ details.why }}</div>
                 </div>
             </div>

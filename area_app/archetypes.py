@@ -16,7 +16,7 @@ questions = {
     },
     'I have trouble making decisions because I see all the pros and cons.': {
         'yes': {'thinker': 1},
-        'no': {'adventurer': 1, 'creative': 1},
+        'no': {'adventurer': 1, 'visionary': 1},
         'why': 'AREA inverts normal decision making so that you focus on what matters most to you. It also gives you exercises to weigh the pros and cons.',
     },
     'The best way for me to make a decision is to ask others for advice.': {
@@ -25,7 +25,7 @@ questions = {
         'why': 'Remember that everyone has incentives and motives. AREA makes these explicit.',
     },
     'I always think outside the box when making decisions.': {
-        'yes': {'creative': 1},
+        'yes': {'visionary': 1},
         'no': {'detective': 1},
         'why': 'AREA encourages creativity in decision making but makes sure that you have evidence to back your decision.',
     },
@@ -40,12 +40,12 @@ questions = {
         'why': 'AREA gives you tools to evaluate the data you collect from the resource you use.',
     },
     'I am good at getting the information I need.': {
-        'yes': {'thinker': 1, 'creative': 1},
+        'yes': {'thinker': 1, 'visionary': 1},
         'no': {'adventurer': 1, 'listener': 1},
         'why': 'AREA gives you tools to evaluate the information you collect.',
     },
     'I am good at drawing conclusions.': {
-        'yes': {'thinker': 1, 'creative': 1},
+        'yes': {'thinker': 1, 'visionary': 1},
         'no': {'adventurer': 1, 'listener': 1},
         'why': 'It\'s good to analyze your options before making a decisions. AREA makes sure that you don\'t rush to the conclusion by building in space to allow for new information and insights.',
     },
@@ -71,7 +71,7 @@ questions = {
     },
     'I like to come up with creative solutions.': {
         'yes': {},
-        'no': {'creative': 1},
+        'no': {'visionary': 1},
         'why': 'The AREA Method encourages creative decision making but makes sure that you have evidence to back your decision.',
     },
     'I feel the need to make decisions quickly.': {
@@ -80,7 +80,7 @@ questions = {
         'why': 'It can be uncomfortable to have a decision hanging over your head. AREA gives you a step by step process so that you can decisions efficiently.',
     },
     'I don\'t like to pick the obvious decision.': {
-        'yes': {'creative': 1},
+        'yes': {'visionary': 1},
         'no': {},
         'why': 'Sometimes the obvious decision is the wrong one, but sometimes it\'s the right one. AREA helps you evaluate your evidence so you can make the best decision for you.',
     },
@@ -90,7 +90,7 @@ questions = {
         'why': 'The AREA Method allows you to make decisions carefully and cautiously but with data and a focus on what really matters to you.',
     },
     'I tend to be independent and go my own way.': {
-        'yes': {'creative': 1},
+        'yes': {'visionary': 1},
         'no': {'listener': 1},
         'why': 'If you rely on instinct beware that you are subject to mental shortcuts and biases. The AREA Method is structured so you can be independant without making a decision on instinct alone.',
     },
@@ -103,7 +103,7 @@ def get_top_archetypes(questions_yes):
         'thinker': 0,
         'detective': 0,
         'listener': 0,
-        'creative': 0,
+        'visionary': 0,
     }
     for question, yes_no in questions.items():
         if question in questions_yes:
@@ -118,10 +118,10 @@ def get_top_archetypes(questions_yes):
 
 archetype_cheetah_sheets = {
     'adventurer': ['Scenario Analysis', 'Pro Con'],
-    'thinker': ['What Is The Story', 'Great Questions Roadmap'],
+    'thinker': ['Thinking with Your Whole Brain', 'Great Questions Roadmap'],
     'detective': ['Pro Con', 'Scenario Analysis'],
-    'listener': ['What Is The Story', 'Scenario Analysis'],
-    'creative': ['Great Questions Roadmap', 'Scenario Analysis'],
+    'listener': ['Great Questions Roadmap', 'Scenario Analysis'],
+    'visionary': ['Pro Con', 'Scenario Analysis'],
 }
 
 

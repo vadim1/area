@@ -584,6 +584,10 @@ button:focus {
     display: none;
 }
 
+h3 {
+    font-size: large;
+}
+
 h4 {
     font-size: x-large !important;
 }
@@ -630,6 +634,14 @@ h4 {
 }
 
 h3 img {
-    height: 100px;
+    height: 80px;
     margin-right: 20px;
+}
+
+#psp h3 {
+    font-size: xx-large;
+}
+
+ol ol {
+    list-style-type: lower-alpha;
 }
