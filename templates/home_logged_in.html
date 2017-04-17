@@ -36,11 +36,8 @@
                 </div>
             {% endfor %}
         {% endif %}
-        <div style="font-size: large; margin-top: 40px;">
-            <a href="/archetypes">See Other {% include "problem_solver.html" %} Profiles</a>
-        </div>
-        <div><a href="/questions">Take the quiz again</a></div>
-        <div style="margin-top: 50px;">
+        <div style="margin-top: 50px;"><a href="/questions">Take the quiz again</a></div>
+        <div>
             <a class="btn" href="{% url 'account_logout' %}">Sign Out</a>
         </div>
     </div>
