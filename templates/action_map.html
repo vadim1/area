@@ -10,15 +10,16 @@
             border-bottom: 2px dotted #aaaaff;
         }
 
-        #cheetahPopup {
+        #cheetahPopup p {
             font-size: medium;
+            line-height: 120%;
         }
     </style>
     <script>
         $(document).ready(function () {
             $('#cheetahPopup').dialog({
                 autoOpen: false,
-                width: 500,
+                width: "80%",
                 buttons: {
                     "Close": function () {
                         $(this).dialog("close");
