@@ -10,7 +10,7 @@
         <p>Most important towards a successful decision:
         <ul>
             {% for success in success_ordered|slice:":3" %}
-                <li>{{ success.0 }}</li>
+                <li>{{ success.1 }}</li>
             {% endfor %}
         </ul>
         </p>
