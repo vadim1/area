@@ -4,11 +4,12 @@
 {% block content %}
     <div style="margin-top: 50px; text-align: center;">
         <div style="font-size: xx-large">
-            Welcome, <a href="/archetype">
+            Welcome,
+            <span style="white-space: nowrap;"><a href="/archetype">
             {% with 'area_app/img/'|add:archetype|add:'.png' as img_path %}
                 <img src="{% static img_path %}" height="50px"/>
             {% endwith %}
-            {{ archetype|title }}</a>
+            {{ archetype|title }}</a></span>
         </div>
         <div style="margin-top: 20px; font-size: larger;">
             Chart a decision path forward into your best future with <a href="http://areamethod.com" target="_blank">The AREA Method</a>
