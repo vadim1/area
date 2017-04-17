@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^3$', views.rank, name='Rank What Matters'),
     url(r'^questions', views.questions, name='Questions'),
     url(r'^4$', views.questions, name='Questions'),
+    url(r'^critical_concepts', views.rank, name='Critical Concepts'),
     url(r'^archetype$', views.archetype, name='Archetype'),
     url(r'^psp$', views.psp, name='Problem_Solver_Profile'),
     url(r'^psp/(?P<profile>[\w-]+)$', views.psp, name='Problem_Solver_Profile'),
