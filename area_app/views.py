@@ -187,7 +187,7 @@ def rank(request):
 def compute_archetype(request):
     questions_yes = request.session['questions_yes']
     top_archetypes = archetypes.get_top_archetypes(questions_yes)
-    raise Exception(top_archetypes)
+    # DEBUG: raise Exception(top_archetypes)
     request.session['archetypes'] = top_archetypes
     top_archetype = top_archetypes[0]
     request.session['top_archetype'] = top_archetype[0]
