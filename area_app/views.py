@@ -65,8 +65,8 @@ def get_from_session(request, param):
 
 def home_logged_in(request):
     request.session['questions_yes'] = archetypes.load_questions(request.user)
-    raise Exception(request.session['questions_yes'])
     compute_archetype(request)
+    raise Exception(request.session['top_archetype'])
     problems = Problem.objects.filter(user=request.user).all()
     return render(request, 'home_logged_in.html', {
         'type': get_from_session(request, 'decision_type'),
@@ -188,7 +188,7 @@ def rank(request):
 def compute_archetype(request):
     questions_yes = request.session['questions_yes']
     top_archetypes = archetypes.get_top_archetypes(questions_yes)
-    request.session['archetype'] = top_archetypes
+    request.session['archetypes'] = top_archetypes
     top_archetype = top_archetypes[0]
     request.session['top_archetype'] = top_archetype[0]
 
@@ -234,7 +234,7 @@ def psp(request, profile=None):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/questions')
         return redirect('/action_map')
-    if 'archetype' not in request.session:
+    if 'top_archetype' not in request.session:
         return render(request, 'psp.html', {
             'step': 4,
         })
@@ -244,7 +244,7 @@ def psp(request, profile=None):
             'step': 4,
         })
     else:
-        top_archetypes = request.session['archetype']
+        top_archetypes = request.session['top_archetype']
         profile = top_archetypes[0][0]
         return redirect('/psp/'+str(profile))
 
@@ -254,10 +254,10 @@ def archetype(request):
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/questions')
         return redirect('/action_map')
-    if 'archetype' not in request.session:
+    if 'archetypes' not in request.session:
         return render(request, 'archetype.html', {
         })
-    top_archetypes = request.session['archetype']
+    top_archetypes = request.session['archetypes']
     top_archetype = top_archetypes[0]
     return render(request, 'archetype.html', {
         'archetype': top_archetype[0],
