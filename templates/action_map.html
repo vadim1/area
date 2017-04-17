@@ -143,37 +143,35 @@
             </div>
         {% endfor %}
 
-        <div class="form-group">
-            <label for="commitment">I commit to solving my problem by</label>
-            <input type="text" name="commitment" class="form-control" id="commitment" placeholder="what will you do?"
-                   value="{{ request.session.commitment }}">
+        <div style="display:none;">
+            <div class="form-group">
+                <label for="commitment">I commit to solving my problem by</label>
+                <input type="text" name="commitment" class="form-control" id="commitment"
+                       placeholder="what will you do?"
+                       value="{{ request.session.commitment }}">
+            </div>
+            <div class="form-group">
+                <label for="days">In the next </label>
+                <select name="days" id="days">
+                    <option value="days"></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
+                <label> days and sharing my results to create a community of problem solvers.</label>
+            </div>
+            <div style="margin-top: 50px;">
+                <input type="submit" class="btn btn-sm" name="submit" value="Back"/>
+                <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Commit!"/>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="days">In the next </label>
-            <select name="days" id="days">
-                <option value="days"></option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-            </select>
-            <label> days and sharing my results to create a community of problem solvers.</label>
-        </div>
-        <div style="margin-top: 50px;">
-            <input type="submit" class="btn btn-sm" name="submit" value="Back"/>
-            <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Commit!"/>
-            <p>When you commit, you will receive an email of your Action Map and Problem Solvers!</p>
-        </div>
-
-
-        <div class="q">Formatting needed. Should these be printable? How do we expect students to take actions here?
-            Fill out online? Email / text it to them?
-        </div>
-
-        <div class="q">Get their fb login if not already done here</div>
+            <div style="margin-top: 50px;">
+                <a href="/" class="btn btn-lg btn-primary">Continue</a>
+            </div>
 
     </div>
 
