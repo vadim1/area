@@ -5,16 +5,20 @@
     <div style="margin-top: 50px; text-align: center;">
         <div style="font-size: xx-large">
             <a href="/archetype">{% include "problem_solver.html" %} Profile:
+            <br/>
                 {% with 'area_app/img/'|add:archetype|add:'.png' as img_path %}
                     <img src="{% static img_path %}" height="50px"/>
                 {% endwith %}
                 {{ archetype|title }}</a>
         </div>
         <div><a href="/questions">Take the quiz again</a></div>
+        <div style="font-size: x-large">
+            <a href="/archetypes">See Other {% include "problem_solver.html" %} Profiles</a>
+        </div>
         <div class="text-center" style="margin-top: 20px">
-            <a class="btn" href="{% url 'Decision' %}" style="background-color: #f6653c; color: #ffffff;">
+            <a class="btn" href="/decision" style="background-color: #f6653c; color: #ffffff;">
                 <p style="font-size: x-large">PROBLEM <span style="color:#000000">SOLVED</span></p>
-                Make Big Decisions Better
+                <p style="font-size: large">Make Your Decisions Better!</p>
             </a>
         </div>
         {% if problems %}
@@ -27,8 +31,8 @@
                 {% endfor %}
             </ul>
         {% endif %}
-        <div>
-            <a class="btn btn-warning" href="{% url 'account_logout' %}">Sign Out</a>
+        <div style="margin-top: 100px;">
+            <a class="btn" href="{% url 'account_logout' %}">Sign Out</a>
         </div>
     </div>
 {% endblock %}
