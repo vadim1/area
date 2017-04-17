@@ -27,7 +27,7 @@
             <div style="font-size: x-large; margin-top: 40px;">Prior Decisions:</div>
             {% for problem in problems %}
                 <div style="font-size: larger">
-                    <a href="/action_map?pid={{ problem.id }}"><span class="glyphicon glyphicon-file"></span>{{ problem.decision }}</a>
+                    <a href="/action_map?pid={{ problem.id }}"><span class="glyphicon glyphicon-file"></span>Decide {{ problem.decision }}</a>
                     &nbsp;
                     <a href="/decision?pid={{ problem.id }}" style="font-size: medium"><span class="glyphicon glyphicon-pencil">Edit</span></a>
                 </div>
