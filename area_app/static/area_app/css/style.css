@@ -337,7 +337,7 @@ body {
         border-radius: 4px;
         width: 200px;
         border: none;
-        height: 45px;
+        min-height: 45px;
         text-align: center;
         padding-top: 6px;
         cursor: pointer;
@@ -659,4 +659,8 @@ ol ol {
 
 .inpu {
     color: #ff730a;
+}
+
+.decision_group label {
+    text-transform: capitalize;
 }

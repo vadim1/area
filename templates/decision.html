@@ -32,6 +32,13 @@
                 font-size: medium;
             }
         }
+        {% if request.session.partner == "apres" %}
+            .btnv {
+                margin-left: 10px;
+                margin-right: 10px;
+                height: 70px;
+            }
+        {% endif %}
     </style>
 {% endblock %}
 {% block content %}
@@ -39,7 +46,8 @@
         <div class="row">
             <div class="text-center" style="font-size: x-large">What problem do you want to solve for today?</div>
         </div>
-        <div class="row" style="display:none;">
+        {% if request.session.partner == "fp" %}
+        <div class="row">
             <div class="text-center">
                 <div id="videos_link"><a href="#" onclick="return showVideos()">See Video Examples</a></div>
                 <table id="videos" style="display: none; width: 100%;">
@@ -70,6 +78,7 @@
                 </table>
             </div>
         </div>
+        {% endif %}
         <div class="clearfix">&nbsp;</div>
         <div class="row">
             <p class="col-md-12">
@@ -86,48 +95,7 @@
         </div>
         <div class="clearfix">&nbsp;</div>
         <div id="decision_types" class="row">
-            <div class="decision_group col-md-4 col-sm-6 col-xs-6 text-center">
-                <label class="decision_type btnv"><input type="checkbox" name="decision_type[]" value="family"/>
-                    Family</label>
-                <div class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign"
-                                                              aria-hidden="true"></span> See Example
-                </div>
-            </div>
-            <div class="decision_group col-md-4 col-sm-6 col-xs-6 text-center">
-                <label class="decision_type btnv"><input type="checkbox" name="decision_type[]" value="professional"/>
-                    Professional</label>
-                <div class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign"
-                                                              aria-hidden="true"></span> See Example
-                </div>
-            </div>
-            <div class="decision_group col-md-4 col-sm-6 col-xs-6 text-center">
-                <label class="decision_type btnv"><input type="checkbox" name="decision_type[]" value="education"/>
-                    Education</label>
-                <div class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign"
-                                                              aria-hidden="true"></span> See Example
-                </div>
-            </div>
-            <div class="decision_group col-md-4 col-sm-6 col-xs-6 text-center">
-                <label class="decision_type btnv"><input type="checkbox" name="decision_type[]" value="community"/>
-                    Community</label>
-                <div class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign"
-                                                              aria-hidden="true"></span> See Example
-                </div>
-            </div>
-            <div class="decision_group col-md-4 col-sm-6 col-xs-6 text-center">
-                <label class="decision_type btnv"><input type="checkbox" name="decision_type[]" value="financial"/>
-                    Financial</label>
-                <div class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign"
-                                                              aria-hidden="true"></span> See Example
-                </div>
-            </div>
-            <div class="decision_group col-md-4 col-sm-6 col-xs-6 text-center">
-                <label class="decision_type btnv"><input type="checkbox" name="decision_type[]" value="health"/>
-                    Health</label>
-                <div class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign"
-                                                              aria-hidden="true"></span> See Example
-                </div>
-            </div>
+            <span id="decision_types_placeholder"></span>
             <div class="col-md-4 col-sm-6 col-xs-6 text-center">
                 <label class="decision_type btnv"><input type="checkbox" name="decision_type[]" value="other"/> Other:
                 </label>
@@ -183,7 +151,11 @@
     </div>
 
     <script type="text/javascript">
+        var type_none = '[select type above]';
+
         $(document).ready(function () {
+            load_decision_types();
+            $('#types').text(type_none);
             $('#timeframe').val('{{ request.session.timeframe }}');
             var decision_types = '{{ decision_types }}'.split(',');
             for (var i = 0; i < decision_types.length; i++) {
@@ -210,14 +182,13 @@
                     $(this).addClass('active');
                 }
             });
+            $('.tooltip').click(function () {
+                $(this).hide();
+            });
+            $(':checkbox').click(updateTypes);
+            $('#decision_type_other').keyup(updateTypes);
+            updateTypes();
         });
-
-        $('.tooltip').click(function () {
-            $(this).hide();
-        });
-
-        var type_none = '[select type above]';
-        $('#types').text(type_none);
 
         function showVideos() {
             $('#videos').show();
@@ -261,16 +232,40 @@
             $('#types').text(types);
         }
 
-        $(':checkbox').click(updateTypes);
-        $('#decision_type_other').keyup(updateTypes);
-
         var type_examples = {
+        {% if request.session.partner == "apres" %}
+            'leaving workforce': 'You have both a demanding career and young children.  You feel the constant demand to respond to everyone else\'s needs (other than your own) and yet you still feel like you’re failing at work and failing at home.  Does it make sense to leave the workforce entirely?  Or should I keep working through it?',
+            're-entering workforce': 'You had a pretty great career but then decided to take a career break to focus on your family.  But, it\'s now been five years since you left and you\'re trying to figure out what to do next.  Is the time right to go back to work?',
+            'changing careers': 'You love working but your current career doesn\'t inspire or fulfil you (or it no longer fits with your lifestyle of being a busy mom).  Should I consider pivoting to a new career -- for example, going from finance to non-profit work?',
+            'changing job type': 'You love your job but feel you’re always running from pillar to post to get everything done.  Should I consider dialing back to a part-time position to give myself or little more breathing space or will that move totally derail my career?',
+            'changing company type': 'You used to work for a large company downtown but then decided to take a career break.  Now, you know you want to get back to work but aren\'t sure if you should return to the large company environment.  You’re wondering if  a part-time gig or remote work would be a better fit for you now.',
+        {% elif request.session.partner == "fp" %}
             'financial': 'You would like to move to using a budgeting app, so that you can budget your money in real time. Which budgeting app should you use – YNAB or Mint? You get a paycheck in two weeks, and would like to have up and running by then, so you have about ten days to decide.',
             'professional': 'You have been offered an opportunity for an off-site two-day email marketing course, paid for by your employer. Email marketing isn\'t your area of interest, but taking the course will make you the "expert" in your department. Should you go? Your boss wants a decision in 48 hours.',
             'community': 'You have been invited by a friend to join her book group, which meets on a weekday evening, time you usually spend with your children. However, but you never seem to find time for your friends and this is a scheduled way to see a few together regularly. Should you join? Your friend wants an answer by the end of the week. You have five days to decide.',
             'education': 'You are facing an educational challenge. You would like to learn some Spanish before travelling to Mexico in three months. What is the best way to learn a new language with limited time? You want to decide within a week so you can maximize your learning time.',
             'family': 'You are facing a family challenge. You need to decide whether to move your aging mother into a care facility or try to provide care for her in her apartment. A nearby facility has an opening, and you\'ve put down a deposit, which you will lose in two weeks. So you have two weeks to make the decision.',
             'health': 'You are facing a health-related decision. You need braces. The orthodontist offers four different options: metal braces, ceramic braces, lingual braces or invisalign braces. Which should you choose? You have an initial fitting appointment in a week, and have to decide by then.',
+        {% else %}
+            'financial': 'You would like to move to using a budgeting app, so that you can budget your money in real time. Which budgeting app should you use – YNAB or Mint? You get a paycheck in two weeks, and would like to have up and running by then, so you have about ten days to decide.',
+            'professional': 'You have been offered an opportunity for an off-site two-day email marketing course, paid for by your employer. Email marketing isn\'t your area of interest, but taking the course will make you the "expert" in your department. Should you go? Your boss wants a decision in 48 hours.',
+            'community': 'You have been invited by a friend to join her book group, which meets on a weekday evening, time you usually spend with your children. However, but you never seem to find time for your friends and this is a scheduled way to see a few together regularly. Should you join? Your friend wants an answer by the end of the week. You have five days to decide.',
+            'education': 'You are facing an educational challenge. You would like to learn some Spanish before travelling to Mexico in three months. What is the best way to learn a new language with limited time? You want to decide within a week so you can maximize your learning time.',
+            'family': 'You are facing a family challenge. You need to decide whether to move your aging mother into a care facility or try to provide care for her in her apartment. A nearby facility has an opening, and you\'ve put down a deposit, which you will lose in two weeks. So you have two weeks to make the decision.',
+            'health': 'You are facing a health-related decision. You need braces. The orthodontist offers four different options: metal braces, ceramic braces, lingual braces or invisalign braces. Which should you choose? You have an initial fitting appointment in a week, and have to decide by then.',
+        {% endif %}
+        }
+
+        String.prototype.capitalizeFirstLetter = function() {
+            return this.charAt(0).toUpperCase() + this.slice(1);
+        }
+
+        function load_decision_types() {
+            var where_to_insert = $('#decision_types_placeholder');
+            $.each(type_examples, function(type_name, example){
+                where_to_insert.append('<div class="decision_group col-md-4 col-sm-6 col-xs-6 text-center"><label class="decision_type btnv"><input type="checkbox" name="decision_type[]" value="' +
+                    type_name + '"/>' + type_name + '</label><div class="info" data-toggle="tooltip"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> See Example</div></div>');
+            });
         }
 
         function validate() {
@@ -303,7 +298,6 @@
             return true;
         }
         $('form').submit(validate);
-
     </script>
 
 {% endblock %}

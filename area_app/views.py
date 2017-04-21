@@ -23,6 +23,9 @@ def check_partner(request):
     if 'partner' in request.GET:
         partner = request.GET['partner']
     else:
+        if 'partner' in request.session:
+            partner = request.session['partner']
+    if not partner:
         partner = settings.DEFAULT_PARTNER
     request.session['partner'] = partner
     return partner
@@ -64,6 +67,7 @@ def get_from_session(request, param):
 
 
 def home_logged_in(request):
+    partner = check_partner(request)
     request.session['questions_yes'] = archetypes.load_questions(request.user)
     compute_archetype(request)
     problems = Problem.objects.filter(user=request.user).all()
@@ -106,6 +110,7 @@ def load_problem(request):
 
 
 def decision(request):
+    partner = check_partner(request)
     problem = load_problem(request)
     if request.method == 'POST':
         if request.POST['submit'] == 'Back':
@@ -146,18 +151,32 @@ def decision(request):
     })
 
 
-success = {
-    "new": "I created a new solution that I hadn't considered when I started.",
-    "gut": "I trusted my gut instinct and followed my heart.",
-    "evidence": "I acted on a strong plan based in evidence.",
-    "options": "I considered all my options and took my time to decide.",
-    "guidance": "I relied on the guidance of the friends and people I trust.",
-}
+def get_success(partner=None):
+    success = {
+        "new": "I created a new solution that I hadn't considered when I started.",
+        "gut": "I trusted my gut instinct and followed my heart.",
+        "evidence": "I acted on a strong plan based in evidence.",
+        "options": "I considered all my options and took my time to decide.",
+        "guidance": "I relied on the guidance of the friends and people I trust.",
+    }
+    if partner == 'apres':
+        success = {
+            "security": "I achieve financial security and independence.",
+            "confidence": "I am more confident and feel better about myself.",
+            "engagement": "I am interested in what I\'m doing and more interesting to other people.",
+            "stimulation": "I am intellectually stimulated.",
+            "role_model": "I am living up to my full potential and providing a good role model to my kids.",
+            "skills": "My professional skills are up to date and I feel I can add value to a workplace.",
+            "women": "I serve as a role model and as an advocate for women in the workplace.",
+        }
+    return success
 
 
 @login_required(login_url='/accounts/signup/')
 def rank(request):
     problem = load_problem(request)
+    partner = check_partner(request)
+    success = get_success(partner)
     if request.method == 'POST':
         if request.POST['submit'] == 'Back':
             return redirect('/decision?pid='+str(problem.id))
