@@ -342,6 +342,7 @@ def archetypes_list(request):
 @login_required(login_url='/accounts/signup/')
 def action_map(request):
     problem = load_problem(request)
+    partner = check_partner(request)
     if request.method == 'POST':
         if request.POST['submit'] == 'Back': return redirect('/archetype')
         request.session['commitment'] = request.POST['commitment']
@@ -362,7 +363,7 @@ def action_map(request):
     if problem and problem.success:
         success_keys = problem.success.split(',')
         for success_key in success_keys:
-            success_ordered.append([success_key, success[success_key]])
+            success_ordered.append([success_key, get_success(partner)[success_key]])
 
     ccs = CriticalConcepts.objects.filter(problem=problem).first()
     if not ccs:
