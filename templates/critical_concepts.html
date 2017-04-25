@@ -5,27 +5,52 @@
 {% block extra_head %}
 {% endblock %}
 {% block content %}
-    <p>
-        This page helps you develop your decision's Critical Concepts, which are the one, two or three things that
-        really matter to you. They answer: 'What am I really solving for?' There's no one right answer.
-        <a href="/ccex" target="_blank">Two people
-            looking at the same data may well have different Critical Concepts and may make entirely different decisions</a>.
+<style>
+    .example {
+        display: inline;
+        position: relative;
+        border-bottom: 2px dotted #aaaaff;
+    }
+
+    .example:hover:after {
+        background: #333;
+        background: rgba(0, 0, 0, .8);
+        border-radius: 5px;
+        bottom: 26px;
+        color: #fff;
+        content: attr(title);
+        left: 20%;
+        padding: 5px 15px;
+        position: absolute;
+        z-index: 98;
+        width: 400px;
+    }
+
+    .example:hover:before {
+        border: solid;
+        border-color: #333 transparent;
+        border-width: 6px 6px 0 6px;
+        bottom: 20px;
+        content: "";
+        left: 50%;
+        position: absolute;
+        z-index: 99;
+    }
+</style>
+    <p style="font-size: larger">
+        What are Critical Concepts?
     </p>
     <p>
-        Think of your decision like a poker hand. How do you increase your odds of winning – of choosing your best path
-        forward? You've got incomplete information, and the future will change in some ways you can predict and many you
-        can't. But as the pros at a poker table will tell you (unless they're playing against you), you don't have to
-        know <i>everything</i> because you only have to focus on what hands your cards can beat.
+        They are the one, two or three things that will allow you to achieve your version of success. They answer: 'What am I really solving for?'
     </p>
     <p>
-        What are the outcomes that matter for you in this game? Every poker player has a set of skills but they start
-        each hand fresh, figuring out what's critical for that hand. The same will be true for you as a decision maker
-        developing your decision's Critical Concepts. As they say in poker, that's where you're "pot-committed."
-        You've got chips on the table and a vested interest. The game is highly personal, subjective and specific to
-        your situation.
+        There's no one right answer.
+        <a href="/ccex" target="_blank">
+            Two people looking at the same data may well have different Critical Concepts and may make entirely different decisions.
+        </a>.
     </p>
     <p>
-        List your Critical Concepts in order of importance.
+        List your <span class="example" title="Sarah needs a new car. She's on a tight budget, lives in place with harsh winters and relies upon her car to get to work every day. She's deciding between a used car or a new one. Her personal CCs are: Reliability, all weather performance and price.">Critical Concepts</span> in order of importance.
     </p>
     <div class="container">
         <div class="clearfix">&nbsp;</div>

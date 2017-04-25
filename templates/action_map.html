@@ -51,9 +51,15 @@
         </p>
         <p>Top Critical Concepts:
         <ol>
+            {% if ccs.concept1 %}
             <li>{{ ccs.concept1 }}</li>
+            {% endif %}
+            {% if ccs.concept1 %}
             <li>{{ ccs.concept2 }}</li>
+            {% endif %}
+            {% if ccs.concept1 %}
             <li>{{ ccs.concept3 }}</li>
+            {% endif %}
         </ol>
         </p>
         <p>Your Personalized {% include "problem_solver.html" %} Tool: Your Cheetah Sheet!</p>
