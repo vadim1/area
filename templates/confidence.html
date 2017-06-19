@@ -1,0 +1,37 @@
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<div id="donut_single" style="width: 400px; height: 200px; margin-left: 20%"></div>
+<script type="text/javascript">
+    google.charts.load('current', {'packages': ['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+        var confidence = ({{ confidence }} + {{ conviction }} + 4)
+        var lack = 8 - confidence
+        var data = google.visualization.arrayToDataTable([
+            ['Attribute', 'Value'],
+            ['Confident', confidence],
+            ['Unsure', lack],
+        ]);
+
+        var options = {
+            pieHole: 0.5,
+            pieSliceTextStyle: {
+                color: 'black',
+            },
+            pieSliceText: 'label',
+            legend: 'none',
+            title: 'Decision-Making Confidence',
+            labels: 'name',
+            fontSize: 10,
+            tooltip: {
+                trigger: 'none',
+            },
+            reverseCategories: true,
+            colors: ['yellow', 'green'],
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
+        chart.draw(data, options);
+    }
+</script>
