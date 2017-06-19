@@ -153,6 +153,9 @@ def save_questions(questions_yes, request):
         user = request.user
     for question, details in questions.items():
         question_model = QuestionModel.get_by_question(question)
+        if not question_model:
+            populate_questions()
+            question_model = QuestionModel.get_by_question(question)
         q = Question(question=question_model, user=user, session_key=request.session.session_key)
         if question in questions_yes:
             q.answer = True
