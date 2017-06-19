@@ -188,7 +188,9 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            var decision_text = get_decision_text('{{ type|safe }}', '{{ decision|safe }}', '{{ options|safe }}', '{{ timeframe|safe }}');
+            {% autoescape off %}
+            var decision_text = get_decision_text('{{ type }}', '{{ decision }}', '{{ options }}', '{{ timeframe }}');
+            {% endautoescape %}
             $('#decision_text').text(decision_text);
             $('#days').val('{{ request.session.commitment_days }}');
         });
