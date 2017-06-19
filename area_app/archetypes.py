@@ -94,6 +94,26 @@ questions = {
         'no': {'listener': 1},
         'why': 'If you rely on instinct beware that you are subject to mental shortcuts and biases. The AREA Method is structured so you can be independant without making a decision on instinct alone.',
     },
+    'I feel worried when faced with a big decision.': {
+        'yes': {'confidence': -1},
+        'no': {'confidence': 1},
+        'why': 'Even if we\'ve made big decision before, some of us don\'t feel confident in our decision making skills.',
+    },
+    'I know how to start to solve complex problems.': {
+        'yes': {'confidence': 1},
+        'no': {'confidence': -1},
+        'why': 'I have confidence in my ability to think through complex problems.',
+    },
+    'Sometimes I get stuck before reaching a final decision.': {
+        'yes': {'confidence': -1},
+        'no': {'confidence': 1},
+        'why': 'Some of us know how to get started but don\'t have confidence that we have a good process for decision making.',
+    },
+    'I know that my decisions have a good chance of succeeding.': {
+        'yes': {'conviction': 1},
+        'no': {'conviction': -1},
+        'why': 'I have a history of making good decisions and have confidence in my decision making process.',
+    },
 }
 
 
@@ -111,6 +131,8 @@ def get_top_archetypes(questions_yes):
         else:
             weights = yes_no['no']
         for archetype, weight in weights.items():
+            if archetype in ['confidence', 'conviction']:
+                continue
             archetypes[archetype] = archetypes[archetype] + weight
     top = sorted(archetypes.iteritems(), key=lambda (k, v): (v, k), reverse=True)
     return top
