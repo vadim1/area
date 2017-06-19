@@ -188,7 +188,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            var decision_text = get_decision_text('{{ type }}', '{{ decision }}', '{{ options }}', '{{ timeframe }}');
+            var decision_text = get_decision_text('{{ type|safe }}', '{{ decision|safe }}', '{{ options|safe }}', '{{ timeframe|safe }}');
             $('#decision_text').text(decision_text);
             $('#days').val('{{ request.session.commitment_days }}');
         });
