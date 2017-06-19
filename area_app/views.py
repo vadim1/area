@@ -284,13 +284,18 @@ def psp(request, profile=None):
         if request.POST['submit'] == 'Back':
             return redirect('/questions')
         return redirect('/action_map')
+    confidence_conviction = archetypes.get_confidence_conviction(request.session['questions_yes'])
     if 'top_archetype' not in request.session:
         return render(request, 'psp.html', {
+            'confidence': confidence_conviction['confidence'],
+            'conviction': confidence_conviction['conviction'],
             'step': 4,
         })
     if profile:
         return render(request, 'psp.html', {
             'archetype': profile,
+            'confidence': confidence_conviction['confidence'],
+            'conviction': confidence_conviction['conviction'],
             'step': 4,
         })
     else:

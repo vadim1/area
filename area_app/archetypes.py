@@ -181,3 +181,23 @@ def populate_questions():
             why = details['why']
             question_model = QuestionModel(question=question, answer_yes=yes, answer_no=no, why=why)
             question_model.save()
+
+
+def get_confidence_conviction(questions_yes):
+    attributes = {
+        'confidence': 0,
+        'conviction': 0,
+    }
+    for question, yes_no in questions.items():
+        if question in questions_yes:
+            weights = yes_no['yes']
+        else:
+            weights = yes_no['no']
+        for attribute, weight in weights.items():
+            if attribute not in ['confidence', 'conviction']:
+                continue
+            attributes[attribute] = attributes[attribute] + weight
+    return {
+        'confidence': attributes['confidence'],
+        'conviction': attributes['conviction'],
+    }
