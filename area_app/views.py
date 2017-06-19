@@ -375,10 +375,10 @@ def action_map(request):
         ccs = CriticalConcepts()
 
     return render(request, 'action_map.html', {
-        'type': request.session['decision_type'],
-        'decision': request.session['decision'],
-        'options': request.session['options'],
-        'timeframe': request.session['timeframe'],
+        'type': request.session['decision_type'].replace('\'','\\\''),
+        'decision': request.session['decision'].replace('\'','\\\''),
+        'options': request.session['options'].replace('\'','\\\''),
+        'timeframe': request.session['timeframe'].replace('\'','\\\''),
         'archetype': top_archetype,
         'cheetahs': archetype_cheetahs,
         'pid': problem.id,
