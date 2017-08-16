@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load account socialaccount bootstrap i18n %}
+{% block title %}{% block h1 %}Future Project AREA Method{% endblock %}{% endblock %}
+{% block content %}
+    <h3>Future Project AREA Method</h3>
+    <p>There is nothing higher stakes that we do each day than make choices.
+        You are about to learn a system to help you make big decisions better.
+        Get ready to learn the AREA Method
+    </p>
+    <p>Are you ready?</p>
+    <p>
+        <form method="post" action="/tour">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success btn-lg">I'm Ready To Make Big Decisions Better!</button>
+        </form>
+    </p>
+{% endblock %}

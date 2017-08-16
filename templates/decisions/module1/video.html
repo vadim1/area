@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 1 - Video{% endblock %}{% endblock %}
+{% block content %}
+    <iframe src="https://player.vimeo.com/video/107654528?autoplay=1&title=0&byline=0" width="800px" height="480px"
+            frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        <p id="next" style="display:none; margin-top: 20px;"><button><a href="directions">Let me try!</a></button></p>
+    <script>
+    setTimeout(function(){$('#next').show()},3000);
+    </script>
+{% endblock %}

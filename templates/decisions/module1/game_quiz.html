@@ -1,0 +1,214 @@
+<style type="text/css">
+    input[type=radio]:not(old) {
+        width: 2em;
+        margin: 0;
+        padding: 0;
+        font-size: 1em;
+        opacity: 0;
+    }
+
+    input[type=radio]:not(old) + label {
+        display: inline-block;
+        margin-left: -3em;
+        line-height: 1.5em;
+    }
+
+    input[type=radio]:not(old) + label > span {
+        display: inline-block;
+        width: 0.875em;
+        height: 0.875em;
+        margin: 0.25em 0.5em 0.25em 0.25em;
+        border: 0.0625em solid rgb(192, 192, 192);
+        border-radius: 0.25em;
+        background: rgb(224, 224, 224);
+        background-image: -moz-linear-gradient(rgb(240, 240, 240), rgb(224, 224, 224));
+        background-image: -ms-linear-gradient(rgb(240, 240, 240), rgb(224, 224, 224));
+        background-image: -o-linear-gradient(rgb(240, 240, 240), rgb(224, 224, 224));
+        background-image: -webkit-linear-gradient(rgb(240, 240, 240), rgb(224, 224, 224));
+        background-image: linear-gradient(rgb(240, 240, 240), rgb(224, 224, 224));
+        vertical-align: bottom;
+    }
+
+    input[type=radio]:not(old):checked + label > span > span {
+        display: block;
+        width: 0.5em;
+        height: 0.5em;
+        margin: 0.125em;
+        border: 0.0625em solid rgb(115, 153, 77);
+        border-radius: 0.125em;
+        background: rgb(153, 204, 102);
+        background-image: -moz-linear-gradient(rgb(179, 217, 140), rgb(153, 204, 102));
+        background-image: -ms-linear-gradient(rgb(179, 217, 140), rgb(153, 204, 102));
+        background-image: -o-linear-gradient(rgb(179, 217, 140), rgb(153, 204, 102));
+        background-image: -webkit-linear-gradient(rgb(179, 217, 140), rgb(153, 204, 102));
+        background-image: linear-gradient(rgb(179, 217, 140), rgb(153, 204, 102));
+    }
+
+    .carousel-control {
+        background: none;
+    }
+
+    .carousel-indicators li {
+        background-color: green;
+    }
+
+    .carousel-indicators li.active {
+        background-color: orange;
+    }
+
+    .btnv {
+        border: 2px solid white;
+        background-color: #3d96ff;
+        height: 50px;
+        width: 100px;
+    }
+
+    #why {
+        line-height: 120% !important;
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+
+    .question {
+        padding-left: 50px;
+        padding-right: 50px;
+        font-size: 150%;
+    }
+
+    .answers {
+        font-size: 1.5em;
+        margin-top: 20px;
+    }
+
+    .why_div {
+        margin-top: 20px;
+    }
+
+    @media screen and (max-width: 749px) {
+        .question {
+            font-size: 100%;
+            margin-top: -20px;
+            margin-left: -30px;
+            margin-right: -30px;
+        }
+
+        #why {
+            font-size: small !important;
+        }
+
+        .answers, .why_div {
+            margin-top: 10px;
+        }
+    }
+</style>
+<div id="questionCarousel" class="carousel slide" data-interval="false" style="display: none;">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        {% for question in questions %}
+            <li data-target="#questionCarousel" data-slide-to="{{ forloop.counter0 }}"{% if forloop.counter0 == 0 %}
+                class="active"{% endif %}}></li>
+        {% endfor %}
+        <li data-target="#questionCarousel" data-slide-to="{{ questions|length }}"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox"
+         style="min-height: 350px; text-align: center; font-size: large; background-color: #3d96ff; color: #ffffff;">
+        {% for question in questions %}
+            <div class="question_wrapper item{% if forloop.counter0 == 0 %} active{% endif %}" style="margin-top: 50px;">
+                <div class="question" rel="{{ forloop.counter0 }}">{{ forloop.counter }}. {{ question }}</div>
+                <div class="answers">
+                    <img src="https://emojipedia-us.s3.amazonaws.com/thumbs/160/google/40/thumbs-up-sign_1f44d.png"
+                         height="64"/>
+                    <div class="slider like" rel="like"></div>
+                    <img src="http://www.emoji.co.uk/files/apple-emojis/symbols-ios/846-warning-sign.png" height="64"/>
+                    <div></div>
+                    <img src="https://emojipedia-us.s3.amazonaws.com/thumbs/120/apple/96/smiling-face-with-heart-shaped-eyes_1f60d.png"
+                         height="64"/>
+                    <div class="slider easy" rel="easy"></div>
+                    <img src="http://www.emoji.co.uk/files/apple-emojis/smileys-people-ios/38-worried-face.png"
+                         height="64"/>
+                </div>
+            </div>
+            <input type="hidden" name="like[{{ forloop.counter0 }}]" id="like_answer_{{ forloop.counter0 }}" value="" />
+            <input type="hidden" name="easy[{{ forloop.counter0 }}]" id="easy_answer_{{ forloop.counter0 }}" value="" />
+        {% endfor %}
+        <div class="item done" style="margin-top: 120px;">
+            <h1>All Set!</h1>
+            <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Continue"/>
+        </div>
+    </div>
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#questionCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#questionCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+<div id="debug"></div>
+<div style="display:none" id="hidden_div"></div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        {% if questions_yes %}
+            var question = "";
+            // Check all Yes
+            {% for question in questions_yes %}
+                question = "{{ question }}".replace('\'', '\\\'').replace('&#39;', '\\\'');
+                $('[name="question[' + question + ']"][value="yes"]').click();
+            {% endfor %}
+            $('input[type="radio"]').click(function () {
+                $('#questionCarousel').carousel('next');
+            });
+            // Check the rest No
+            $('.item').not('.done').each(function () {
+                if ($(this).find(':checked').length == 0) {
+                    $(this).find('[value="no"]').click();
+                }
+            });
+            $('#questionCarousel').carousel(0);
+            setTimeout(function () {
+                $('#questionCarousel').show();
+            }, 600);
+        {% else %}
+            $('#questionCarousel').show();
+        {% endif %}
+        $(".slider").slider({
+        });
+        $('.slider').change(function () {
+            var axis = $(this).attr('rel');
+            if (!axis) return;
+            var value = $(this).val();
+            var question = $(this).closest('.question_wrapper').find('.question');
+            var selector = '#'+axis+'_answer_'+question.attr('rel')
+            $('#debug').text(selector + ": " + value);
+            $(selector).val(value);
+            if (axis == 'easy') {
+                $('#questionCarousel').carousel('next');
+            }
+        });
+    });
+
+    function validate() {
+        var valid = true;
+        return valid; // TODO
+        $('.item').not('.done').each(function () {
+            var question_elem = $(this).find('.question');
+            var question = question_elem.text();
+            var index = question_elem.attr('rel') - 0 + 1;
+            if ($(this).find(':checked').length == 0) {
+                alert("Please answer question " + index + ": " + question);
+                valid = false;
+                return false;
+            } else if ($(this).find('[value="yes"]').is(':checked')) {
+                $('#hidden_div').append('<input type="checkbox" name="question[]" checked="checked" value="' + question + '"/>');
+            }
+        });
+        return valid;
+    }
+
+    $('form').submit(validate);
+</script>

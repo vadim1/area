@@ -1,4 +1,4 @@
-from django.forms import CharField, Form
+from django.forms import CharField, Form, ChoiceField, EmailField
 from .models import Question
 
 
@@ -16,9 +16,33 @@ class SignupWithNameForm(Form):
 
 # TODO - create custom fields for Future Project
 class FutureProjectSignupForm(SignupWithNameForm):
-    dream_director = CharField(max_length=60, label='Dream Director')
+    email = EmailField(required=True)
+    school = CharField(max_length=60, label='School', required=True)
+    grade = ChoiceField(required=True, choices=(('', '-'),
+                                                ('9', '9'),
+                                                ('10', '10'),
+                                                ('11', '11'),
+                                                ('12', '12'),
+                                                ))
+    dream_director = ChoiceField(required=False, choices=(('', '-'),
+                                                ('ben.kimmerle', 'Ben'),
+                                                ('carrie.sangiovanni', 'Carrie'),
+                                                ('christian.shaboo', 'Christian'),
+                                                ('jessica.valoris', 'Jess'),
+                                                ('justin.zeigler', 'Justin'),
+                                                ('lamarr.womble', 'Lamarr'),
+                                                ('malia.west', 'Malia'),
+                                                ('nikhita', 'Nikhita'),
+                                                ('paula.ramirez', 'Paula'),
+                                                ('scotty.crowe', 'Scotty'),
+                                                ('william.jenkins', 'William'),
+                                                ('zaki', 'Zaki'),
+                                                ))
 
     def signup(self, request, user):
+        user.email = self.cleaned_data['email']
+        user.school = self.cleaned_data['school']
+        user.grade = self.cleaned_data['grade']
         user.dream_director = self.cleaned_data['dream_director']
         user.save()
         Question.fill_in_user(user, request.session.session_key)

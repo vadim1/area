@@ -41,6 +41,10 @@ def get_randomized_questions():
 
 
 def home(request):
+    if 'start' not in request.session:
+        request.session['start'] = '/'
+    elif request.session['start'] != '/':
+        return redirect(request.session['start'])
     partner = check_partner(request)
     if request.user.is_authenticated():
         return home_logged_in(request)

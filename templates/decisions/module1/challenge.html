@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 1 - Critical Concepts Challenge{% endblock %}{% endblock %}
+{% block content %}
+    <p>
+        To add rigor to your thinking answer the following questions:
+    </p>
+    <ul>
+        <li>Why are you solving this problem?</li>
+        <li>What do you want in the outcome?</li>
+        <li>What would happen if you made a poor decision?</li>
+    </ul>
+    <p>
+        Challenge yourself to identify reasons for what might not get you a successful outcome, revise your Critical
+        Concepts.
+    </p>
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Your Critical Concept</th>
+            <th>What would NOT allow it to be fulfilled?</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1.</td>
+            <td><input type="text" name="cc[]" class="cc" value="{{ cc.0 }}" size="30"/></td>
+            <td><input type="text" name="cc_not[]" class="cc" value="" size="30"/></td>
+        </tr>
+        <tr>
+            <td>2.</td>
+            <td><input type="text" name="cc[]" class="cc" value="{{ cc.1 }}" size="30"/></td>
+            <td><input type="text" name="cc_not[]" class="cc" value="" size="30"/></td>
+        </tr>
+        <tr>
+            <td>3.</td>
+            <td><input type="text" name="cc[]" class="cc" value="{{ cc.2 }}" size="30"/></td>
+            <td><input type="text" name="cc_not[]" class="cc" value="" size="30"/></td>
+        </tr>
+        </tbody>
+    </table>
+    </p>
+    <p>
+        <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Submit"/>
+    </p>
+    <script type="text/javascript">
+        function validate() {
+            var valid = true;
+            $('.cc').each(function () {
+                if ($(this).val().length < 5) {
+                    if (valid) {
+                        alert("Please provide 3 critical concepts and potential issues.");
+                    }
+                    valid = false;
+                }
+            });
+            return valid;
+        }
+
+        $('form').submit(validate);
+    </script>
+{% endblock %}

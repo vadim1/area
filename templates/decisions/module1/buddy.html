@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 1 - AREA Method Buddy{% endblock %}{% endblock %}
+{% block content %}
+    <p>
+        Identify a Decision Making Buddy to help you through making your big decision better!
+        Choose someone who:
+    </p>
+    <ul>
+        <li>Knows you well</li>
+        <li>Will be honest with you</li>
+        <li>Will hold you accountable for solving your Critical Concepts to solve your big decision</li>
+    </ul>
+    <p>
+    <table>
+        <tr>
+            <td>Decision Buddy's Name:</td>
+            <td><input type="text" name="decision_buddy" value="" size="30" class="cc"/></td>
+        </tr>
+        <tr>
+            <td>Decision Buddy's Email:</td>
+            <td><input type="email" name="decision_buddy_email" value="" size="30" class="cc"/></td>
+        </tr>
+    </table>
+    </p>
+    <p>
+        <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Let My Decision Buddy Know"/>
+    </p>
+    <script type="text/javascript">
+        function validate() {
+            var valid = true;
+            $('.cc').each(function () {
+                if ($(this).val().length < 5) {
+                    if (valid) {
+                        alert("Please provide your decision buddy's name and email address.");
+                    }
+                    valid = false;
+                }
+            });
+            return valid;
+        }
+
+        $('form').submit(validate);
+    </script>
+{% endblock %}

@@ -15,15 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from area_app import urls
+from area_app import urls as area_app_urls
+from decisions import urls as decisions_urls
 from django.conf import settings
 
 admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include(urls)),
+    url(r'^', include(area_app_urls)),
     url(r'^accounts/', include('allauth.urls')),
+    url(r'^decisions/', include(decisions_urls)),
 ]
 
 if settings.DEBUG:

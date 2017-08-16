@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 1 - Deriving Critical Concepts{% endblock %}{% endblock %}
+{% block content %}
+    <p>
+        You're not Nylah! List three things that would make your decision about whether or not to go away to college
+        successful for YOU.
+    </p>
+    <p>
+        Remember there is no one right answer but there likely is a right answer for YOU personally.
+    </p>
+    <p>
+        The answers about what constitutes success for you personally tell you how to focus your research so you make a
+        decision that achieves that success.
+    </p>
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Nylah's Answer</th>
+            <th>Your Answer</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1.</td>
+            <td>My family is happy with my decision.</td>
+            <td><input type="text" name="cc[]" class="cc" value="" size="30"/></td>
+        </tr>
+        <tr>
+            <td>2.</td>
+            <td>I'm able to afford it.</td>
+            <td><input type="text" name="cc[]" class="cc" value="" size="30"/></td>
+        </tr>
+        <tr>
+            <td>3.</td>
+            <td>It has a good graphic design program.</td>
+            <td><input type="text" name="cc[]" class="cc" value="" size="30"/></td>
+        </tr>
+        </tbody>
+    </table>
+    </p>
+    <p>
+        <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Submit Answers"/>
+    </p>
+    <script type="text/javascript">
+        function validate() {
+            var valid = true;
+            $('.cc').each(function () {
+                if ($(this).val().length < 5) {
+                    if (valid) {
+                        alert("Please provide 3 answers.");
+                    }
+                    valid = false;
+                }
+            });
+            return valid;
+        }
+
+        $('form').submit(validate);
+    </script>
+{% endblock %}

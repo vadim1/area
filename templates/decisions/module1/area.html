@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 1 - Module 1 AREA Method{% endblock %}{% endblock %}
+{% block extra_head %}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages': ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Confidence', 'Process', {role: 'tooltip'}, {role: 'annotation'}],
+                {% for question, answer in answers.items %}
+                    [{{ answer.difficulty }}, {{ answer.likeability }}, '{{ question }}', {{ forloop.counter }}],
+                {% endfor %}
+            ]);
+
+            var options = {
+                title: 'Process and Confidence',
+                hAxis: {title: 'Confidence', minValue: 0, maxValue: 10, format: '#'},
+                vAxis: {title: 'Process', minValue: 0, maxValue: 10, format: '#'},
+                legend: 'none',
+                pointShape: 'star',
+                pointSize: 10,
+            };
+
+            var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+
+            chart.draw(data, options);
+        }
+    </script>
+{% endblock %}
+{% block content %}
+    <h3>Module 1 - Module 1 AREA Method</h3>
+    <p>
+        The area that is highlighted represents the ideal "AREA." You want to
+    <ul>
+        <li>Have self awareness</li>
+        <li>Work well with others</li>
+        <li>Use a good process</li>
+        <li>Have confidence in your decision making skills</li>
+        <li>Have conviction that you can arrive at a successful decision outcome for you <b>personally</b></li>
+    </ul>
+    </p>
+    <div class="chartWithOverlay" style="position: relative; width: 700px;">
+
+        <div id="chart_div" style="width: 600px; height: 500px;"></div>
+
+        <div class="overlay"
+             style="width: 160px; height: 130px; position: absolute; top: 97px; left: 325px; background: rgba(255,0,0,0.4); color: rgba(0,0,0,0.4);">
+            <div style="font-family:'Arial Black'; font-size: 48px; margin-top: 50px; margin-left: 8px;">AREA</div>
+        </div>
+
+    </div>
+    <p>
+        <button><a href="video">Go on...</a></button>
+    </p>
+{% endblock %}

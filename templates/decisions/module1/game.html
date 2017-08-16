@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 1 - Decision Making Game{% endblock %}{% endblock %}
+{% block content %}
+    <h3>Module 1 - Decision Making Game</h3>
+    {% include 'decisions/module1/game_quiz.html' %}
+{% endblock %}

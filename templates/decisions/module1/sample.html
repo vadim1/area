@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 1 - Sample{% endblock %}{% endblock %}
+{% block content %}
+    <p>
+        Take a question like "Should I go away to college?" This has no right answer but it probably has a right answer
+        for YOU.
+    </p>
+    <p>
+        Instead of answering that question which may be difficult AREA inverts decision making to focus on your vision
+        of success.
+    </p>
+    <p>Answer this: How would you know that you've made a good decision for you? List three things.</p>
+    <p id="nylah_button">
+        <button><a href="#" onclick="$('#nylah_button').hide(); $('#nylah').show(); return false;">What might Nylah
+            say?</a></button>
+    </p>
+
+    <div id="nylah" style="display:none;">
+        <p>Nylah might answer:</p>
+        <ol>
+            <li>My family is happy with my decision.</li>
+            <li>I'm able to afford it.</li>
+            <li>It has a good graphic design program.</li>
+        </ol>
+        <p>
+            <button><a href="deriving_cc">But...</a></button>
+        </p>
+    </div>
+{% endblock %}

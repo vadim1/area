@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 1 - Selecting a Decision{% endblock %}{% endblock %}
+{% block content %}
+    <p>
+        Now let's have you think about making a big decision better!
+        Is there an issue that is bothering you that is unresolved?
+    </p>
+    <p>
+        Hint: Think of a decision that would benefit from a process and needs some time and attention like the questions you've seen.
+    </p>
+    <h4>
+What is it?
+    </h4>
+    <h4>
+Can you pose it as a question or a problem that needs to be resolved?
+    </h4>
+    <h4>
+    <input type="text" name="decision" class="cc" size="30" />
+    </h4>
+    <p>
+        <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Submit Decision"/>
+    </p>
+    <script type="text/javascript">
+        function validate() {
+            var valid = true;
+            $('.cc').each(function () {
+                if ($(this).val().length < 10) {
+                    if (valid) {
+                        alert("Please provide a decision.");
+                    }
+                    valid = false;
+                }
+            });
+            return valid;
+        }
+
+        $('form').submit(validate);
+    </script>
+{% endblock %}
