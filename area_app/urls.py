@@ -21,6 +21,5 @@ urlpatterns = [
     url(r'^cheetah_master$', views.cheetah_master, name='Cheetah_Master'),
     url(r'^action_map$', views.action_map, name='Action_Map'),
     url(r'^summary$', views.summary, name='Summary'),
-    url(r'^dd$', views.autocomplete_dd, name='Dream_Director_Autocomplete'),
     url(r'^restart$', views.restart_session, name='Restart'),
 ]
