@@ -12,11 +12,6 @@ from django.conf import settings
 from utils import send_from_default_email
 from .models import Problem, CriticalConcepts
 
-dream_directors = [
-    'Bob, New York',
-    'Jill, California',
-]
-
 
 def check_partner(request):
     partner = ''
@@ -433,10 +428,6 @@ def cheetah_master(request):
     return render(request, 'cheetah_master.html', {
         'cheetahs': cheetahs,
     })
-
-
-def autocomplete_dd(request):
-    return json.dumps({'results': dream_directors})
 
 
 def restart_session(request):
