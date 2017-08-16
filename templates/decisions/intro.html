@@ -8,12 +8,15 @@
     {% if user.is_authenticated %}
         <h4 class="text-center">Signed in as {{ request.user.email }}</h4>
         <p>
-            <a href="1">Module 1 - Introduction to Decision Making</a>
-            {% if module1.step %}
-                (<a href="1/{{ module1.step }}">Resume</a>)
-            {% endif %}
             {% if module1.completed_on %}
-                Completed!
+                Module 1 - Introduction to Decision Making Completed!
+            {% else %}
+                {% if module1.step %}
+                    <a href="1/{{ module1.step }}">Module 1 - Introduction to Decision Making</a>
+                    (<a href="1">Restart</a>)
+                {% else %}
+                    <a href="1">Module 1 - Introduction to Decision Making</a>
+                {% endif %}
             {% endif %}
         </p>
         <p>
