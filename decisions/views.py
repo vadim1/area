@@ -202,7 +202,7 @@ def module1decision(request):
 def module1cheetah(request):
     module1 = load_module1(request, 'cheetah')
     if request.method == 'POST':
-        module1.cc = request.POST.getlist('cc[]')
+        module1.cc = json.dumps(request.POST.getlist('cc[]'))
         module1.save()
         return redirect('/decisions/1/challenge')
     return render(request, 'decisions/module1/cheetah.html', {
@@ -213,12 +213,12 @@ def module1cheetah(request):
 def module1challenge(request):
     module1 = load_module1(request, 'challenge')
     if request.method == 'POST':
-        module1.cc = request.POST.getlist('cc[]')
-        module1.cc_not = request.POST.getlist('cc_not[]')
+        module1.cc = json.dumps(request.POST.getlist('cc[]'))
+        module1.cc_not = json.dumps(request.POST.getlist('cc_not[]'))
         module1.save()
         return redirect('/decisions/1/buddy')
     return render(request, 'decisions/module1/challenge.html', {
-        'cc': module1.cc,
+        'cc': json.loads(module1.cc),
         'decision': module1.decision,
     })
 
@@ -251,6 +251,13 @@ def module1summary(request):
     module1.save()
     return render(request, 'decisions/module1/summary.html', {
     })
+
+
+def module1restart(request):
+    module1 = load_module1(request, 'summary')
+    module1.completed_on = None
+    module1.save()
+    return redirect('/decisions/1')
 
 
 """

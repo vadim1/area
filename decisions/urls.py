@@ -4,6 +4,7 @@ urlpatterns = [
     url(r'^$', views.home, name='Intro'),
     url(r'^tour$', views.tour, name='Tour'),
     url(r'^1$', views.module1, name='Module 1'),
+    url(r'^1/restart', views.module1restart, name='Module 1 Restart'),
     url(r'^1/instructions$', views.module1instructions, name='Module 1 Instructions'),
     url(r'^1/game$', views.module1game, name='Module 1 Decision Game'),
     url(r'^1/game_results$', views.module1game_results, name='Module 1 Decision Game Results'),

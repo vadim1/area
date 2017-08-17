@@ -7,16 +7,27 @@
         Is there an issue that is bothering you that is unresolved?
     </p>
     <p>
-        Hint: Think of a decision that would benefit from a process and needs some time and attention like the questions you've seen.
+        Hint: Think of a decision that would benefit from a process and needs some time and attention like the questions
+        you've seen.
     </p>
     <h4>
-What is it?
+        <input type="text" name="decision" class="cc decision" size="40"/>
     </h4>
     <h4>
-Can you pose it as a question or a problem that needs to be resolved?
+        &#10004;
+        Do I need facts or evidence?
     </h4>
     <h4>
-    <input type="text" name="decision" class="cc" size="30" />
+        &#10004;
+        Would it be useful to learn from other people?
+    </h4>
+    <h4>
+        &#10004;
+        Do I need to develop better self awareness about how I understand my problem?
+    </h4>
+    <h4>
+        &#10004;
+        Have I posed it as a question?
     </h4>
     <p>
         <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Submit Decision"/>
@@ -34,6 +45,8 @@ Can you pose it as a question or a problem that needs to be resolved?
             });
             return valid;
         }
+
+        // TODO - validate that it ends in a "?"
 
         $('form').submit(validate);
     </script>
