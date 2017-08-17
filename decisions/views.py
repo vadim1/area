@@ -4,6 +4,7 @@ from django.conf import settings
 from area_app import forms
 from .models import Course, Module1
 from datetime import datetime
+import json
 
 
 def load_course(request):
@@ -60,6 +61,7 @@ def load_module1(request, step=''):
     else:
         module1 = Module1(course=course, step=step)
         module1.save()
+    module1.answers_json = json.loads(module1.answers)
     return module1
 
 
@@ -77,13 +79,24 @@ def module1instructions(request):
 
 module1game_questions = [
     'What to eat for breakfast?',
-    'What time to wake up for school?',
-    'To cheat on a test or study?',
-    'To watch someone get bullied or step in?',
+    'To study for a test or just hope for the best?',
     'To get an internship or a summer job?',
-    'To walk to school or take the bus?',
     'To take care of your siblings or meet up with friends?',
     'To stay up watching Netflix or finish your homework?',
+    'Make lunch to bring in or buy at the cafeteria?',
+    'Eat meat or become a vegetarian?',
+    'Sit and wait or take action?',
+    'Complain or fix the problem?',
+    'Watch someone get bullied or tell a teacher/take action?',
+    'Be lied to or told the truth?',
+    'Go to a 2-year college or a 4-year university?',
+    'Stay home on a sick day or get work done at school?',
+    'Wear a winter coat or just grab a sweatshirt?',
+    'Sit next to a friend during a test or stay on my own?',
+    'What to do with my hair?',
+    'Share a problem with a friend',
+    'Stay for help after school or try it on my own?',
+    'Buy myself a new video game or save up for my sister\'s birthday?',
 ]
 
 
@@ -106,7 +119,7 @@ def module1game(request):
                 'difficulty': easy_i,
                 'likeability': like_i,
             }
-        module1.answers = answers
+        module1.answers = json.dumps(answers)
         module1.save()
         return redirect('/decisions/1/game_results')
     return render(request, 'decisions/module1/game.html', {
@@ -117,7 +130,7 @@ def module1game(request):
 def module1game_results(request):
     module1 = load_module1(request, 'game_results')
     return render(request, 'decisions/module1/game_results.html', {
-        'answers': module1.answers,
+        'answers': module1.answers_json,
     })
 
 
@@ -130,7 +143,7 @@ def module1explain(request):
 def module1area(request):
     module1 = load_module1(request, 'area')
     return render(request, 'decisions/module1/area.html', {
-        'answers': request.session['answers'],
+        'answers': module1.answers_json,
     })
 
 
@@ -149,7 +162,7 @@ def module1directions(request):
 def module1sample(request):
     module1 = load_module1(request, 'sample')
     return render(request, 'decisions/module1/sample.html', {
-        'answers': request.session['answers'],
+        'answers': module1.answers_json,
     })
 
 
