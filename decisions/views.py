@@ -61,7 +61,9 @@ def load_module1(request, step=''):
     else:
         module1 = Module1(course=course, step=step)
         module1.save()
-    module1.answers_json = json.loads(module1.answers)
+    module1.answers_json = ''
+    if module1.answers:
+        module1.answers_json = json.loads(module1.answers)
     return module1
 
 
