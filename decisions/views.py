@@ -49,6 +49,11 @@ def tour(request):
     })
 
 
+def terms_conditions(request):
+    return render(request, 'decisions/terms_conditions.html', {
+    })
+
+
 def load_module1(request, step=''):
     course = load_course(request)
     module1list = Module1.objects.filter(course=course)

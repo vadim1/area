@@ -3,6 +3,8 @@ import views
 urlpatterns = [
     url(r'^$', views.home, name='Intro'),
     url(r'^tour$', views.tour, name='Tour'),
+    url(r'^terms_conditions', views.terms_conditions, name='Terms and Conditions'),
+
     url(r'^1$', views.module1, name='Module 1'),
     url(r'^1/restart', views.module1restart, name='Module 1 Restart'),
     url(r'^1/instructions$', views.module1instructions, name='Module 1 Instructions'),
