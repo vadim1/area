@@ -11,7 +11,7 @@
             var data = google.visualization.arrayToDataTable([
                 ['Confidence', 'Process', {role: 'tooltip'}, {role: 'annotation'}],
                 {% for question, answer in answers.items %}
-                    [{{ answer.difficulty }}, {{ answer.likeability }}, '{{ question }}', {{ forloop.counter }}],
+                    [{{ answer.difficulty }}, {{ answer.likeability }}, '{{ question }}', '{{ answer.title }}'],
                 {% endfor %}
             ]);
 
@@ -52,6 +52,7 @@
         </div>
 
     </div>
+    <p>TODO - click on items in AREA overlay</p>
     <p>
         <button><a href="video">Go on...</a></button>
         <a href="explain" style="float:right">Back</a>

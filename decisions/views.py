@@ -84,27 +84,23 @@ def module1instructions(request):
     })
 
 
-module1game_questions = [
-    'What to eat for breakfast?',
-    'To study for a test or just hope for the best?',
-    'To get an internship or a summer job?',
-    'To take care of your siblings or meet up with friends?',
-    'To stay up watching Netflix or finish your homework?',
-    'Make lunch to bring in or buy at the cafeteria?',
-    'Eat meat or become a vegetarian?',
-    'Sit and wait or take action?',
-    'Complain or fix the problem?',
-    'Watch someone get bullied or tell a teacher/take action?',
-    'Be lied to or told the truth?',
-    'Go to a 2-year college or a 4-year university?',
-    'Stay home on a sick day or get work done at school?',
-    'Wear a winter coat or just grab a sweatshirt?',
-    'Sit next to a friend during a test or stay on my own?',
-    'What to do with my hair?',
-    'Share a problem with a friend',
-    'Stay for help after school or try it on my own?',
-    'Buy myself a new video game or save up for my sister\'s birthday?',
-]
+module1game_questions = {
+    'Breakfast': 'What to eat for breakfast?',
+    'Test': 'To study for a test or just hope for the best?',
+    'Summer': 'To get an internship or a summer job?',
+    'Siblings': 'To take care of your siblings or meet up with friends?',
+    'Netflix': 'To stay up watching Netflix or finish your homework?',
+    'Lunch': 'Make lunch to bring in or buy at the cafeteria?',
+    'Vegetarian': 'Eat meat or become a vegetarian?',
+    'Action': 'Sit and wait or take action?',
+    'Problem': 'Complain or fix the problem?',
+    'Bullying': 'Watch someone get bullied or tell a teacher/take action?',
+    'Honesty': 'Be lied to or told the truth?',
+    'College': 'Go to a 2-year college or a 4-year university?',
+    'Coat': 'Wear a winter coat or just grab a sweatshirt?',
+    'Hair': 'What to do with my hair?',
+    'Share': 'Share a problem with a friend',
+}
 
 
 def module1game(request):
@@ -113,9 +109,9 @@ def module1game(request):
         easy = []
         like = []
         answers = {}
-        for i in range(0, len(module1game_questions)):
+        for i in range(0, len(module1game_questions.values())):
             index = str(i)
-            question_i = module1game_questions[i]
+            question_i = module1game_questions.values()[i]
             easy_i_str = request.POST.get('easy[' + index + ']')
             like_i_str = request.POST.get('like[' + index + ']')
             easy_i = int(easy_i_str) if easy_i_str else 5
@@ -125,12 +121,13 @@ def module1game(request):
             answers[question_i] = {
                 'difficulty': easy_i,
                 'likeability': like_i,
+                'title': module1game_questions.keys()[i],
             }
         module1.answers = json.dumps(answers)
         module1.save()
         return redirect('/decisions/1/game_results')
     return render(request, 'decisions/module1/game.html', {
-        'questions': module1game_questions,
+        'questions': module1game_questions.values(),
     })
 
 
@@ -138,6 +135,7 @@ def module1game_results(request):
     module1 = load_module1(request, 'game_results')
     return render(request, 'decisions/module1/game_results.html', {
         'answers': module1.answers_json,
+        'questions': module1game_questions,
     })
 
 
@@ -151,6 +149,7 @@ def module1area(request):
     module1 = load_module1(request, 'area')
     return render(request, 'decisions/module1/area.html', {
         'answers': module1.answers_json,
+        'questions': module1game_questions,
     })
 
 

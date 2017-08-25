@@ -11,7 +11,7 @@
             var data = google.visualization.arrayToDataTable([
                 ['Confidence', 'Process', {role: 'tooltip'}, {role: 'annotation'}],
                 {% for question, answer in answers.items %}
-                    [{{ answer.difficulty }}, {{ answer.likeability }}, '{{ question }}', {{ forloop.counter }}],
+                    [{{ answer.difficulty }}, {{ answer.likeability }}, '{{ question }}', '{{ answer.title }}'],
                 {% endfor %}
             ]);
 
@@ -42,7 +42,6 @@
         Explore where your decisions landed!</p>
     </p>
     <div id="chart_div" style="width: 600px; height: 500px;"></div>
-    <p>TODO - click on items in AREA overlay</p>
     <p>
         <button><a href="explain">What does this mean?</a></button>
         <a href="game" style="float:right">Back</a>
