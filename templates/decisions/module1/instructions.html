@@ -5,16 +5,40 @@
     <h3>Module 1 - Introduction to Decision Making</h3>
     <p>
         On the next page you will be given a list of decisions that you make every day.
-        Select how <img src="https://emojipedia-us.s3.amazonaws.com/thumbs/120/apple/96/smiling-face-with-heart-shaped-eyes_1f60d.png" height="64"/> easy or
-        <img src="http://www.emoji.co.uk/files/apple-emojis/smileys-people-ios/38-worried-face.png" height="64"/> difficult each decision is to make,
+        Select how <img
+            src="https://emojipedia-us.s3.amazonaws.com/thumbs/120/apple/96/smiling-face-with-heart-shaped-eyes_1f60d.png"
+            height="64"/> easy or
+        <img src="http://www.emoji.co.uk/files/apple-emojis/smileys-people-ios/38-worried-face.png" height="64"/>
+        difficult each decision is to make,
         and how much you
-        <img src="https://emojipedia-us.s3.amazonaws.com/thumbs/160/google/40/thumbs-up-sign_1f44d.png" height="64"/> like, or
-        <img src="http://www.emoji.co.uk/files/apple-emojis/symbols-ios/846-warning-sign.png" height="64"/> dislike each decision.
+        <img src="https://emojipedia-us.s3.amazonaws.com/thumbs/160/google/40/thumbs-up-sign_1f44d.png" height="64"/>
+        like, or
+        <img src="http://www.emoji.co.uk/files/apple-emojis/symbols-ios/846-warning-sign.png" height="64"/> dislike each
+        decision.
         Try to answer as many as possible in the time given!
     </p>
-    <div>TODO - Go! button, then 3..2..1.. as animation</div>
     <p>
-        <button><a href="game">3.. 2.. 1.. Go!</a></button>
+        <button id="next"><a href="#" onclick="return countdown()">Go!</a></button>
         <a href="/decisions/1" style="float:right">Back</a>
     </p>
+    <div style="display: none; background: rgba(54, 25, 25, .5); height: 100%; width: 100%; position: fixed; top: 0; left: 0; float: right; z-index: 99; text-align: center; padding-top: 10%"
+         id="timer">
+        <div style="font-size: 128px;" id="time">3</div>
+    </div>
+
+    <script type="text/javascript">
+        function countdown() {
+            $('#timer').show()
+            var timeleft = 3;
+            var downloadTimer = setInterval(function () {
+                timeleft--;
+                $("#time").text(timeleft);
+                if (timeleft <= 0) {
+                    clearInterval(downloadTimer);
+                    window.location.href='game';
+                }
+            }, 1000);
+            return true;
+        }
+    </script>
 {% endblock %}
