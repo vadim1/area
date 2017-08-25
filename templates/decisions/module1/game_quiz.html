@@ -177,6 +177,9 @@
             $('#questionCarousel').show();
         {% endif %}
         $(".slider").slider({
+            min: 1,
+            max: 4,
+            value: 1, // TODO - no default value
         });
         $('.slider').change(function () {
             var axis = $(this).attr('rel');
