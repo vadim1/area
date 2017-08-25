@@ -115,23 +115,28 @@
     <div class="carousel-inner" role="listbox"
          style="min-height: 350px; text-align: center; font-size: large; background-color: #3d96ff; color: #ffffff;">
         {% for question in questions %}
-            <div class="question_wrapper item{% if forloop.counter0 == 0 %} active{% endif %}" style="margin-top: 50px;">
+            <div class="question_wrapper item{% if forloop.counter0 == 0 %} active{% endif %}"
+                 style="margin-top: 50px;">
                 <div class="question" rel="{{ forloop.counter0 }}">{{ forloop.counter }}. {{ question }}</div>
                 <div class="answers">
-                    <img src="https://emojipedia-us.s3.amazonaws.com/thumbs/160/google/40/thumbs-up-sign_1f44d.png"
-                         height="64"/>
-                    <div class="slider like" rel="like"></div>
-                    <img src="http://www.emoji.co.uk/files/apple-emojis/symbols-ios/846-warning-sign.png" height="64"/>
-                    <div></div>
-                    <img src="https://emojipedia-us.s3.amazonaws.com/thumbs/120/apple/96/smiling-face-with-heart-shaped-eyes_1f60d.png"
-                         height="64"/>
-                    <div class="slider easy" rel="easy"></div>
-                    <img src="http://www.emoji.co.uk/files/apple-emojis/smileys-people-ios/38-worried-face.png"
-                         height="64"/>
+                    <div class="q1">
+                        <img src="https://emojipedia-us.s3.amazonaws.com/thumbs/160/google/40/thumbs-up-sign_1f44d.png"
+                             height="64"/>
+                        <div class="slider like" rel="like"></div>
+                        <img src="http://www.emoji.co.uk/files/apple-emojis/symbols-ios/846-warning-sign.png"
+                             height="64"/>
+                    </div>
+                    <div class="q2">
+                        <img src="https://emojipedia-us.s3.amazonaws.com/thumbs/120/apple/96/smiling-face-with-heart-shaped-eyes_1f60d.png"
+                             height="64"/>
+                        <div class="slider easy" rel="easy"></div>
+                        <img src="http://www.emoji.co.uk/files/apple-emojis/smileys-people-ios/38-worried-face.png"
+                             height="64"/>
+                    </div>
                 </div>
             </div>
-            <input type="hidden" name="like[{{ forloop.counter0 }}]" id="like_answer_{{ forloop.counter0 }}" value="" />
-            <input type="hidden" name="easy[{{ forloop.counter0 }}]" id="easy_answer_{{ forloop.counter0 }}" value="" />
+            <input type="hidden" name="like[{{ forloop.counter0 }}]" id="like_answer_{{ forloop.counter0 }}" value=""/>
+            <input type="hidden" name="easy[{{ forloop.counter0 }}]" id="easy_answer_{{ forloop.counter0 }}" value=""/>
         {% endfor %}
         <div class="item done" style="margin-top: 120px;">
             <h1>All Set!</h1>
@@ -181,18 +186,23 @@
             max: 4,
             value: 1, // TODO - no default value
         });
-        $('.slider').change(function () {
-            var axis = $(this).attr('rel');
-            if (!axis) return;
-            var value = $(this).val();
-            var question = $(this).closest('.question_wrapper').find('.question');
-            var selector = '#'+axis+'_answer_'+question.attr('rel')
-            $('#debug').text(selector + ": " + value);
-            $(selector).val(value);
-            if (axis == 'easy') {
-                $('#questionCarousel').carousel('next');
-            }
-        });
+        $('.q2').hide();
+    });
+
+    $('.slider').change(function () {
+        var axis = $(this).attr('rel');
+        if (!axis) return;
+        var value = $(this).val();
+        var question = $(this).closest('.question_wrapper').find('.question');
+        var selector = '#' + axis + '_answer_' + question.attr('rel')
+        $('#debug').text(selector + ": " + value);
+        $(selector).val(value);
+        if (axis == 'easy') {
+            $('#questionCarousel').carousel('next');
+        }
+        if (axis == 'like') {
+            $(this).closest('.question_wrapper').find('.q2').show();
+        }
     });
 
     function validate() {
