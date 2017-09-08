@@ -117,7 +117,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIR = [os.path.join(BASE_DIR, "static"),
                    os.path.join(BASE_DIR, 'area_app/static/area_app'),
-                   '/var/www/static/', ]
+                   '/var/www/static/', 'decisions/static/decisions']
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 DEFAULT_PARTNER = 'area'

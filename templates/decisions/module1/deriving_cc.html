@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'decisions/base.html' %}
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Deriving Critical Concepts{% endblock %}{% endblock %}
 {% block content %}
@@ -41,8 +41,8 @@
     </table>
     </p>
     <p>
-        <input type="submit" class="btn btn-lg btn-primary" name="submit" value="Submit Answers"/>
-        <a href="sample" style="float:right">Back</a>
+        <input type="submit" id="next" class="btn btn-lg btn-primary" name="submit" value="Submit Answers"/>
+        <a href="sample" id="back">Back</a>
     </p>
     <script type="text/javascript">
         function validate() {

@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'decisions/base.html' %}
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Summary{% endblock %}{% endblock %}
 {% block content %}
@@ -16,5 +16,5 @@
             <li>Accepted the challenge to… </li>
         </ul>
     </p>
-    <p><button><a href="/decisions">Modules List</a></button></p>
+    <button id="next"><a href="/decisions">Modules List</a></button>
 {% endblock %}

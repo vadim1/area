@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'decisions/base.html' %}
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Video{% endblock %}{% endblock %}
 {% block content %}
@@ -6,7 +6,7 @@
             frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
         <p id="next" style="display:none; margin-top: 20px;">
             <button><a href="directions">Let me try!</a></button>
-            <a href="area" style="float:right">Back</a>
+            <a href="area" id="back">Back</a>
         </p>
     <script>
     setTimeout(function(){$('#next').show()},3000);

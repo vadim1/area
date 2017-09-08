@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'decisions/base.html' %}
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Explanation{% endblock %}{% endblock %}
 {% block content %}
@@ -34,10 +34,10 @@
             personally
         </li>
     <li>
-        <button><a href="area">What is the AREA Method?</a></button>
+        <button id="next"><a href="area">What is the AREA Method?</a></button>
     </li>
     </ul>
-    <a href="game_results" style="float:right">Back</a>
+    <a href="game_results" id="back">Back</a>
 
     <script type="text/javascript">
         var base_duration = 2000;

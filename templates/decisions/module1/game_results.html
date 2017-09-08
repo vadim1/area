@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'decisions/base.html' %}
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Decision Dilemmas - Results!{% endblock %}{% endblock %}
 {% block extra_head %}
@@ -43,7 +43,7 @@
     </p>
     <div id="chart_div" style="width: 600px; height: 500px;"></div>
     <p>
-        <button><a href="explain">What does this mean?</a></button>
-        <a href="game" style="float:right">Back</a>
+        <button id="next"><a href="explain">What does this mean?</a></button>
+        <a href="game" id="back">Back</a>
     </p>
 {% endblock %}

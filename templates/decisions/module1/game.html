@@ -1,12 +1,11 @@
-{% extends 'base.html' %}
+{% extends 'decisions/base.html' %}
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Decision Making Game{% endblock %}{% endblock %}
 {% block content %}
-    <h3>Module 1 - Decision Making Game</h3>
     <div style="width: 100%; text-align: center;">
     <img src="https://rene-henrich.de/content/01-animation/02-chatterfall-introduction-animations/stopwatch.gif"
          style="width: 100px;" />
     </div>
     {% include 'decisions/module1/game_quiz.html' %}
-    <a href="instructions" style="float:right">Back</a>
+    <a href="instructions" id="back">Back</a>
 {% endblock %}

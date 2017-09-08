@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'decisions/base.html' %}
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Directions for Reflection{% endblock %}{% endblock %}
 {% block content %}
@@ -10,7 +10,7 @@
         Because life has easy and difficult questions. We each have a different idea of what is easy and difficult for us. We can all use a process.</p>
     </p>
     <p>
-        <button><a href="sample">So how do you solve complex problems?</a></button>
-        <a href="video" style="float:right">Back</a>
+        <button id="next"><a href="sample">So how do you solve complex problems?</a></button>
+        <a href="video" id="back">Back</a>
     </p>
 {% endblock %}

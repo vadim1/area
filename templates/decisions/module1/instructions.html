@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'decisions/base.html' %}
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Introduction to Decision Making{% endblock %}{% endblock %}
 {% block content %}
@@ -18,7 +18,7 @@
     </p>
     <p>
         <button id="next"><a href="#" onclick="return countdown()">Play Game</a></button>
-        <a href="/decisions/1" style="float:right">Back</a>
+        <a href="/decisions/1" id="back">Back</a>
     </p>
     <div style="display: none; background: rgba(54, 25, 25, .5); height: 100%; width: 100%; position: fixed; top: 0; left: 0; float: right; z-index: 99; text-align: center; padding-top: 10%"
          id="timer">

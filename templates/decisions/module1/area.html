@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'decisions/base.html' %}
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Module 1 AREA Method{% endblock %}{% endblock %}
 {% block extra_head %}
@@ -54,7 +54,7 @@
     </div>
     <p>TODO - click on items in AREA overlay</p>
     <p>
-        <button><a href="video">Go on...</a></button>
-        <a href="explain" style="float:right">Back</a>
+        <button id="next"><a href="video">Go on...</a></button>
+        <a href="explain" id="back">Back</a>
     </p>
 {% endblock %}

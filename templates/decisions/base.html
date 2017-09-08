@@ -1,0 +1,195 @@
+{% load static area_tags %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <!-- JQuery UI -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <!-- Slider -->
+    <script src="{% static 'area_app/js/bootstrap-slider.js' %}"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.2/css/bootstrap-slider.css"/>
+
+    <script src="{% static "area_app/js/area.js" %}" type="text/javascript"></script>
+    <link rel="stylesheet" href="{% static "area_app/css/style.css" %}"/>
+    {% if request.session.partner == "fp" %}
+        <link rel="stylesheet" href="{% static "area_app/css/future_project.css" %}"/>
+    {% endif %}
+    <link rel="stylesheet" href="{% static "decisions/css/decisions.css" %}"/>
+
+    <!--
+    <script src="{% static 'area_app/js/responsive.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'area_app/css/responsive.css' %}" %}"/>
+    -->
+
+    <!-- Fonts -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Vollkorn"/>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Droid+Sans"/>
+    <style type="text/css">
+        {% if request.session.partner == "apres" %}
+            #logo {
+                display: block;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+                background: url('https://apresgroup.com/wp-content/uploads/2016/05/apres-logo_small@2x.png') no-repeat;
+                background-size: 100% 100%;
+                border: none;
+                float: right;
+                width: 130px;
+                height: 35px;
+            }
+        {% endif %}
+
+        {% if request.session.partner == "fp" %}
+            #logo {
+                display: block;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+                background: url('https://www.thefutureproject.org/img/logo.png') no-repeat;
+                background-size: 100% 100%;
+                border: none;
+                float: right;
+                width: 130px;
+                height: 130px;
+            }
+        {% endif %}
+    </style>
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static "area_app/img/apple-touch-icon.png" %}">
+    <link rel="icon" type="image/png" href="{% static "area_app/img/favicon-32x32.png" %}" sizes="32x32">
+    <link rel="icon" type="image/png" href="{% static "area_app/img/favicon-16x16.png" %}" sizes="16x16">
+    <link rel="mask-icon" href="{% static "area_app/img/safari-pinned-tab.svg" %}" color="#5bbad5">
+    <link rel="shortcut icon" href="{% static "area_app/img/favicon.ico" %}">
+    <script>
+        // Google Analytics
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-97448402-1', 'auto');
+        ga('send', 'pageview');
+
+        // FullStory
+        window['_fs_debug'] = false;
+        window['_fs_host'] = 'www.fullstory.com';
+        window['_fs_org'] = '4F2ZH';
+        window['_fs_namespace'] = 'FS';
+(function(m,n,e,t,l,o,g,y){
+    if (e in m && m.console && m.console.log) { m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].'); return;}
+    g=m[e]=function(a,b){g.q?g.q.push([a,b]):g._api(a,b);};g.q=[];
+    o=n.createElement(t);o.async=1;o.src='https://'+_fs_host+'/s/fs.js';
+    y=n.getElementsByTagName(t)[0];y.parentNode.insertBefore(o,y);
+    g.identify=function(i,v){g(l,{uid:i});if(v)g(l,v)};g.setUserVars=function(v){g(l,v)};
+    g.identifyAccount=function(i,v){o='account';v=v||{};v.acctId=i;g(o,v)};
+    g.clearUserCookie=function(c,d,i){if(!c || document.cookie.match('fs_uid=[`;`]*`[`;`]*`[`;`]*`')){
+    d=n.domain;while(1){n.cookie='fs_uid=;domain='+d+
+    ';path=/;expires='+new Date(0).toUTCString();i=d.indexOf('.');if(i<0)break;d=d.slice(i+1)}}};
+})(window,document,window['_fs_namespace'],'script','user');
+// TODO - unique identity for each user
+FS.identify('TODO', {
+  displayName: 'Todo Todo',
+  email: 'todo@todo.com',
+  // TODO: Add your own custom user variables here, details at
+  // http://help.fullstory.com/develop-js/setuservars.
+  reviewsWritten_int: 14,
+});
+    </script>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+<header>
+    <div class="container-fluid header">
+        <div class="row">
+            {% if request.session.partner == "fp" %}
+                <div class="col-md-8 col-lg-12 text-center col-sm-12 col-centered">
+                    <img src="{% static "area_app/img/apptitle.png" %}" class="logo" alt="PROBLEM SOLVED"/>
+                </div>
+            {% else %}
+                <div class="col-sm-1"></div>
+                <div class="col-sm-4">
+                    <a href="/"><img src="{% static "area_app/img/problem_solved.png" %}" class="logo"
+                                     alt="PROBLEM SOLVED"
+                                     height="120px" style="float:left;"/></a>
+                </div>
+                <div class="col-sm-2">
+                {% if request.session.partner == "apres" %}
+                    <img src="{% static "area_app/img/apres-logo.png" %}" class="logo"
+                                     alt="Apres Group"
+                                     height="40px" style="float:left; margin-top: 40px;"/>
+                {% endif %}
+                </div>
+                <div class="col-sm-4">
+                    <img src="{% static "area_app/img/doors-transparent.png" %}" class="logo" alt="PROBLEM SOLVED"
+                         height="120px" style="float:right;"/>
+                </div>
+                <div class="col-sm-1"></div>
+            {% endif %}
+        <div style="display:none;">
+            <div class="clearfix">&nbsp;</div>
+            <div class="col-md-8 col-centered progre text-center">
+                {% with step|default:'1' as step_str %}
+                    {% with  "area_app/img/progressbar"|add_str:step_str as progressbar %}
+                        <img src="{% static progressbar %}.png" alt="Step {{ step_str }} of 5"/>
+                    {% endwith %}
+                {% endwith %}
+            </div>
+        </div>
+        </div>
+    </div>
+</header>
+
+<div class="clearfix">&nbsp;</div>
+<div class="container">
+    <div class="padding-5" style="margin-top: 0px; margin-bottom: 20px;">
+        <form action="{{ request.path }}" method="post">
+            {% csrf_token %}
+            {% if pid %}
+                <input type="hidden" name="pid" value="{{ pid }}"/>
+            {% endif %}
+            {% block content %}
+            {% endblock %}
+        </form>
+    </div>
+</div>
+
+<div class="clearfix">&nbsp;</div>
+<footer class="footer">
+    <div class="col-md-5 text-center col-centered"> &copy; 2017 <a href="http://areamethod.com" target="_blank">AREA
+        Method</a> |
+        <a href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved"
+           target="_blank">{% include "problem_solved.html" %}</a>
+        |
+        <a href="mailto:support@areamethod.com">Contact Us</a>
+    </div>
+</footer>
+</body>
+</html>
