@@ -2,35 +2,9 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Decision Dilemmas - Results!{% endblock %}{% endblock %}
 {% block extra_head %}
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {'packages': ['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
-
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ['Confidence', 'Process', {role: 'tooltip'}, {role: 'annotation'}],
-                {% for question, answer in answers.items %}
-                    [{{ answer.difficulty }}, {{ answer.likeability }}, '{{ question }}', '{{ answer.title }}'],
-                {% endfor %}
-            ]);
-
-            var options = {
-                title: 'Process and Confidence',
-                hAxis: {title: 'Confidence', minValue: 1, maxValue: 4, format: '#'},
-                vAxis: {title: 'Process', minValue: 1, maxValue: 4, format: '#'},
-                legend: 'none',
-                pointShape: 'star',
-                pointSize: 10,
-            };
-
-            var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
-
-            chart.draw(data, options);
-        }
-    </script>
 {% endblock %}
 {% block content %}
+    {{ answers }}
     <h3>Decision Dilemmas - Results!</h3>
     <p>How'd you do and how did it feel?</p>
     <p>Here are your results! We have graphed your decisions based on how easy or difficult you found each question to
@@ -41,9 +15,9 @@
         knowing <b>how</b> to tackle a problem and whether or not you have a <b>process</b> or system.
         Explore where your decisions landed!</p>
     </p>
-    <div id="chart_div" style="width: 600px; height: 500px;"></div>
+    {% include "decisions/module1/game_results_table.html" %}
     <p>
-        <button id="next"><a href="explain">What does this mean?</a></button>
+        <button id="next"><a href="area">What does this mean?</a></button>
         <a href="game" id="back">Back</a>
     </p>
 {% endblock %}

@@ -2,10 +2,99 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Decision Making Game{% endblock %}{% endblock %}
 {% block content %}
-    <div style="width: 100%; text-align: center;">
-    <img src="https://rene-henrich.de/content/01-animation/02-chatterfall-introduction-animations/stopwatch.gif"
-         style="width: 100px;" />
+    <script type="text/javascript">
+        function countdown() {
+            $('#timer').show()
+            var timeleft = 45;
+            var downloadTimer = setInterval(function () {
+                timeleft--;
+                $("#time").text(timeleft);
+                if (timeleft <= 0) {
+                    clearInterval(downloadTimer);
+                    $('form').submit();
+                }
+            }, 1000);
+            return true;
+        }
+
+        {% if attr == 'easy' %}
+        countdown();
+        {% endif %}
+
+        var questions = {
+            {% for question in questions %}
+                '{{ forloop.counter }}': '{{ question }}',
+            {% endfor %}
+        }
+
+        function answer(val) {
+            $('#answer_'+question_num).val(val);
+            return next_question();
+        }
+
+        function easy() {
+            return answer('0');
+        }
+
+        function hard() {
+            return answer('1');
+        }
+
+        var question_num = 0;
+        var num_questions = 15; // TODO - live
+        var animation_direction = 'left';
+
+        function next_question() {
+            question_num++;
+            if (question_num > num_questions) {
+                $('form:last').submit();
+                return true;
+            }
+            if (animation_direction == 'right') {
+                animation_direction = 'left';
+            } else {
+                animation_direction = 'right';
+            }
+            $('#question').text(questions[question_num]);
+            if (animation_direction == 'right') {
+                $('#game').css('left', '100%');
+                $('#game').animate({ 'left': '50%' });
+            } else {
+                $('#game').css('left', '0%');
+                $('#game').animate({ 'left': '50%' });
+            }
+            $('#timer').click();
+            return false;
+        }
+
+        $(document).ready(function () {
+            next_question();
+        });
+    </script>
+
+    {% if attr == 'easy' %}
+    <div style="width: 100%; text-align: center; vertical-align:top; height: 50px;">
+        <div id="timer">
+            <img src="https://rene-henrich.de/content/01-animation/02-chatterfall-introduction-animations/stopwatch.gif"
+                 style="height: 50px; margin-top: -40px; margin-right: 20px;"/>
+            <span style="font-size: 64px; width: 70px; height: 70px;" id="time">&nbsp; &nbsp;</span>
+        </div>
     </div>
-    {% include 'decisions/module1/game_quiz.html' %}
-    <a href="instructions" id="back">Back</a>
+    {% endif %}
+
+    <div id="game" style="position: absolute; width: 100%; height: 200px; font-size: 24px; margin-left: -10%;">
+        <div id="question_wrapper">
+            <div id="question"></div>
+            <div id="answers" style="margin-left: 5%; margin-top: 10px;">
+                <button onclick="$(this).blur(); return easy();">{{ labels.0 }}</button>
+                <button onclick="$(this).blur(); return hard();">{{ labels.1 }}</button>
+            </div>
+        </div>
+    </div>
+
+    <a href="instructions" id="back" style="margin-top: 100px;">Back</a>
+
+    {% for question in questions %}
+            <input type="hidden" name="answer[{{ forloop.counter0 }}]" id="answer_{{ forloop.counter }}" value=""/>
+    {% endfor %}
 {% endblock %}

@@ -1,0 +1,24 @@
+<style type="text/css">
+    #results {
+        vertical-align: top;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #results td {
+        border: 1px solid black;
+        vertical-align: top;
+        padding: 10px;
+        width: 50%;
+    }
+</style>
+<table id="results">
+    <tr>
+        {% include "decisions/module1/game_results_quadrant.html" with t1='Easy' t2='Confident' v1='1' v2='1' %}
+        {% include "decisions/module1/game_results_quadrant.html" with t1='Hard' t2='Confident' v1='0' v2='1' class='area' %}
+    </tr>
+    <tr>
+        {% include "decisions/module1/game_results_quadrant.html" with t1='Easy' t2='Confident' v1='0' v2='0' %}
+        {% include "decisions/module1/game_results_quadrant.html" with t1='Easy' t2='Unsure' v1='1' v2='0' %}
+    </tr>
+</table>

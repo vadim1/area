@@ -1,0 +1,10 @@
+<td class="{{ class }}">
+    <h3>
+        {{ t1 }}, {{ t2 }}
+    </h3>
+    {% for question, answer in answers.items %}
+        {% if answer.easy == v1 and answer.confident == v2 %}
+            <div title="{{ question }}">{{ answer.title.0 }}</div>
+        {% endif %}
+    {% endfor %}
+</td>

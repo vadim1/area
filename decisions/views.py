@@ -8,13 +8,14 @@ import json
 
 
 def load_course(request):
-    courses = Course.objects.filter(user=request.user)
     course = None
-    if courses:
-        course = courses.first()
-    else:
-        course = Course(user=request.user)
-        course.save()
+    if request.user.is_authenticated():
+        courses = Course.objects.filter(user=request.user)
+        if courses:
+            course = courses.first()
+        else:
+            course = Course(user=request.user)
+            course.save()
     return course
 
 
@@ -55,20 +56,21 @@ def terms_conditions(request):
 
 
 def load_module1(request, step=''):
-    course = load_course(request)
-    module1list = Module1.objects.filter(course=course)
     module1 = None
-    if module1list:
-        module1 = module1list.first()
-        if step:
-            module1.step = step
+    course = load_course(request)
+    if course:
+        module1list = Module1.objects.filter(course=course)
+        if module1list:
+            module1 = module1list.first()
+            if step:
+                module1.step = step
+                module1.save()
+        else:
+            module1 = Module1(course=course, step=step)
             module1.save()
-    else:
-        module1 = Module1(course=course, step=step)
-        module1.save()
-    module1.answers_json = ''
-    if module1.answers:
-        module1.answers_json = json.loads(module1.answers)
+        module1.answers_json = ''
+        if module1.answers:
+            module1.answers_json = json.loads(module1.answers)
     return module1
 
 
@@ -84,10 +86,16 @@ def module1instructions(request):
     })
 
 
+def module1instructions2(request):
+    module1 = load_module1(request, 'instructions')
+    return render(request, 'decisions/module1/instructions2.html', {
+    })
+
+
 module1game_questions = {
     'Breakfast': 'What to eat for breakfast?',
     'Test': 'To study for a test or just hope for the best?',
-    'Summer': 'To get an internship or a summer job?',
+    'Job': 'To get an internship or a summer job?',
     'Siblings': 'To take care of your siblings or meet up with friends?',
     'Netflix': 'To stay up watching Netflix or finish your homework?',
     'Lunch': 'Make lunch to bring in or buy at the cafeteria?',
@@ -99,36 +107,46 @@ module1game_questions = {
     'College': 'Go to a 2-year college or a 4-year university?',
     'Coat': 'Wear a winter coat or just grab a sweatshirt?',
     'Hair': 'What to do with my hair?',
-    'Share': 'Share a problem with a friend',
+    'Friend': 'Share a problem with a friend',
 }
+
+game_labels = {
+    'easy': ['Easy', 'Hard'],
+    'confident': ['Confident', 'Unsure'],
+}
+
+
+def game(request, module1, attr, next):
+    if request.method == 'POST':
+        attrs = []
+        answers = {}
+        if module1.answers:
+            answers = json.loads(module1.answers)
+        for i in range(0, len(module1game_questions.values())):
+            index = str(i)
+            question_i = module1game_questions.values()[i]
+            attr_i = request.POST.get('answer[' + index + ']')
+            attrs.append(attr_i)
+            answers[question_i][attr] = attr_i
+            answers[question_i]['title'] = module1game_questions.keys()[i],
+        module1.answers = json.dumps(answers)
+        module1.save()
+        return redirect('/decisions/1/'+next)
+    return render(request, 'decisions/module1/game.html', {
+        'questions': module1game_questions.values(),
+        'attr': attr,
+        'labels': game_labels[attr],
+    })
 
 
 def module1game(request):
     module1 = load_module1(request, 'game')
-    if request.method == 'POST':
-        easy = []
-        like = []
-        answers = {}
-        for i in range(0, len(module1game_questions.values())):
-            index = str(i)
-            question_i = module1game_questions.values()[i]
-            easy_i_str = request.POST.get('easy[' + index + ']')
-            like_i_str = request.POST.get('like[' + index + ']')
-            easy_i = int(easy_i_str) if easy_i_str else 5
-            like_i = int(like_i_str) if like_i_str else 5
-            easy.append(easy_i)
-            like.append(like_i)
-            answers[question_i] = {
-                'difficulty': easy_i,
-                'likeability': like_i,
-                'title': module1game_questions.keys()[i],
-            }
-        module1.answers = json.dumps(answers)
-        module1.save()
-        return redirect('/decisions/1/game_results')
-    return render(request, 'decisions/module1/game.html', {
-        'questions': module1game_questions.values(),
-    })
+    return game(request, module1, 'easy', 'instructions2')
+
+
+def module1game2(request):
+    module1 = load_module1(request, 'game2')
+    return game(request, module1, 'confident', 'game_results')
 
 
 def module1game_results(request):

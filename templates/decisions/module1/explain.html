@@ -2,6 +2,10 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Explanation{% endblock %}{% endblock %}
 {% block content %}
+    <audio autoplay>
+        <source src="/static/decisions/audio/1-12.m4a" type="audio/aac">
+        Your browser does not support audio
+    </audio>
     <style type="text/css">
         ul {
             width: 400px;
@@ -16,31 +20,23 @@
     </style>
     <h3>Module 1 - Explanation</h3>
     <p>
-        We make about 40,000 decisions a day. You already know some are easy and some are not. Different kinds of
-        thinking benefits different decisions.
-    </p>
-    <p>
-        Make big decisions better with The AREA Method
-    </p>
-    <p>
-        Build your:
+        The AREA Method is a decision making system that will build your:
     </p>
     <ul>
-        <li id="1" class="anim">Self awareness as a decision-maker</li>
-        <li id="2" class="anim">Empathy and understanding for how others make decisions</li>
-        <li id="3" class="anim">Your process for making decisions</li>
-        <li id="4" class="anim">Your confidence in your decision making skills</li>
-        <li id="5" class="anim">Your conviction that you can arrive at a successful decision outcome for you
-            personally
+        <li id="1" style="display:none;">Introduction</li>
+        <li id="2" class="anim">Self awareness as a decision-maker</li>
+        <li id="3" class="anim">Empathy and understanding with the others involved in your decisions</li>
+        <li id="4" class="anim">Toolkit to solve complex problems</li>
+        <li id="5" class="anim">Confidence that you can make decisions better</li>
+        <li id="6" class="anim">Conviction that your decisions will help you reach your goals</li>
+        <li>
+            <button id="next"><a href="video">Let's look again...</a></button>
         </li>
-    <li>
-        <button id="next"><a href="area">What is the AREA Method?</a></button>
-    </li>
     </ul>
-    <a href="game_results" id="back">Back</a>
+    <a href="area" id="back">Back</a>
 
     <script type="text/javascript">
-        var base_duration = 2000;
+        var base_duration = 4000;
         $('ul').each(function (i) {
             var li_count = $(this).children().length,
                 hide_timeout = ((i + 1) * base_duration * li_count);
