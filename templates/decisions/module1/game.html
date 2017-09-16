@@ -45,6 +45,7 @@
         var animation_direction = 'left';
 
         function next_question() {
+            $('#game').css('position', 'absolute');
             question_num++;
             if (question_num > num_questions) {
                 $('form:last').submit();
@@ -57,11 +58,11 @@
             }
             $('#question').text(questions[question_num]);
             if (animation_direction == 'right') {
-                $('#game').css('left', '100%');
-                $('#game').animate({ 'left': '50%' });
+                $('#game').css('left', '60%');
+                $('#game').animate({ 'left': '30%' }, function(){$('#game').css('position', 'inherit');});
             } else {
                 $('#game').css('left', '0%');
-                $('#game').animate({ 'left': '50%' });
+                $('#game').animate({ 'left': '30%' }, function(){$('#game').css('position', 'inherit');});
             }
             $('#timer').click();
             return false;
@@ -82,15 +83,18 @@
     </div>
     {% endif %}
 
-    <div id="game" style="position: absolute; width: 100%; height: 200px; font-size: 24px; margin-left: -10%;">
+    <h2>Deciding...</h2>
+    <div style="height: 150px;">
+    <div id="game" style="position: absolute; font-size: 24px; text-align: center; overflow: visible">
         <div id="question_wrapper">
             <div id="question"></div>
-            <div id="answers" style="margin-left: 5%; margin-top: 10px;">
+            <div id="answers" style="margin-left: 5%; margin-top: 10px; white-space: nowrap;">
                 <button onclick="$(this).blur(); return easy();">{{ labels.0 }}</button>
                 &nbsp;
                 <button onclick="$(this).blur(); return hard();">{{ labels.1 }}</button>
             </div>
         </div>
+    </div>
     </div>
 
     <a href="instructions" id="back" style="margin-top: 100px;">Back</a>

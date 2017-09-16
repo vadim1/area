@@ -2,14 +2,17 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Introduction to Decision Making 2{% endblock %}{% endblock %}
 {% block content %}
-    <p>
+    <p style="text-align: center; font-size: x-large; margin-bottom: 20px;">
         Whew! That’s a lot of decisions that we have to make!
+    </p>
+    <p>
         Sometimes we know just how to solve our problems, sometimes not so much.
         In this round, there's no countdown clock.
         Think about whether you are confident that you know how to solve your problems or not.
-        For each decision select Confident or Unsure.
+        For each decision select <span style="font-size: x-large; font-weight: 900;">Confident</span> or
+        <span style="font-size: x-large; font-weight: 900;">Unsure</span>.
     </p>
-    <p>
+    <p class="center">
         <button id="next"><a href="game2">Play Game</a></button>
         <a href="/decisions/1/game" id="back">Back</a>
     </p>

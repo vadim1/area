@@ -50,6 +50,15 @@ def tour(request):
     })
 
 
+def journal(request):
+    """
+    Journal to keep track of old decisions
+    """
+    module1 = load_module1(request, '')
+    return render(request, 'decisions/journal.html', {
+    })
+
+
 def terms_conditions(request):
     return render(request, 'decisions/terms_conditions.html', {
     })
@@ -109,6 +118,8 @@ module1game_questions = {
     'Hair': 'What to do with my hair?',
     'Friend': 'Share a problem with a friend',
 }
+
+# TODO - randomize quesitons
 
 game_labels = {
     'easy': ['Easy', 'Hard'],

@@ -6,7 +6,8 @@
     <p>The quality of your decisions determines the quality of your life</p>
     <p>With this app you will learn how to make your big decisions better!</p>
     {% if user.is_authenticated %}
-        <h4 class="text-center">Signed in as {{ request.user.email }}</h4>
+        <h4 class="text-center">Signed in as {{ request.user.email }} <a class="btn btn-sm btn-warning" href="{% url 'account_logout' %}">Sign Out</a>
+</h4>
         <p>
             {% if module1.completed_on %}
                 &#10004;
@@ -24,7 +25,7 @@
         <p>
             <a href="2">Module 2 - Cognitive Bias, You're Not As Open Minded As You Think</a>
         </p>
-        <a class="btn btn-warning" href="{% url 'account_logout' %}">Sign Out</a>
+        <p style="margin-top: 20px;"><a href="journal">AREA Journal</a></p>
     {% else %}
         <p>
             {% blocktrans %}Already have an account? Then please <a href="/accounts/login/">Sign In</a>

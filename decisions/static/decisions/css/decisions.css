@@ -1,7 +1,42 @@
 #back {
     float: left;
+    background-color: inherit;
+    margin-top: 150px;
+    font-size: x-small;
+}
+
+#next, #answers button {
+    text-align: center;
+    font-size: x-large;
+    background-color: #f6653c;
+    color: #ffffff;
+    padding: 10px 25px;
+    border-radius: 10px;
 }
 
 #next {
-    float: right;
+    margin-top: 50px;
+}
+
+#next:hover {
+    background-color: #f6956c;
+}
+
+.center {
+    text-align: center;
+}
+
+#next a {
+    color: #ffffff;
+}
+
+#next a:hover {
+    text-decoration: none;
+}
+
+body {
+    font-size: larger;
+    font-family: "Open Sans Condensed", Helvetica, Arieal, sans-seif !important;
+    font-weight: 700;
+    font-style: normal;
 }
