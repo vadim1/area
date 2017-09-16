@@ -34,6 +34,11 @@
     text-decoration: none;
 }
 
+.button-instructions {
+    font-size: x-large;
+    font-weight: 900;
+}
+
 body {
     font-size: larger;
     font-family: "Open Sans Condensed", Helvetica, Arieal, sans-seif !important;

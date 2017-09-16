@@ -116,7 +116,7 @@ module1game_questions = {
     'College': 'Go to a 2-year college or a 4-year university?',
     'Coat': 'Wear a winter coat or just grab a sweatshirt?',
     'Hair': 'What to do with my hair?',
-    'Friend': 'Share a problem with a friend',
+    'Friend': 'Share a problem with a friend?',
 }
 
 # TODO - randomize quesitons
@@ -138,8 +138,11 @@ def game(request, module1, attr, next):
             question_i = module1game_questions.values()[i]
             attr_i = request.POST.get('answer[' + index + ']')
             attrs.append(attr_i)
+            if question_i not in answers:
+                answers[question_i] = {
+                    'title': module1game_questions.keys()[i]
+                }
             answers[question_i][attr] = attr_i
-            answers[question_i]['title'] = module1game_questions.keys()[i],
         module1.answers = json.dumps(answers)
         module1.save()
         return redirect('/decisions/1/'+next)
