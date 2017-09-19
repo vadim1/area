@@ -1,10 +1,47 @@
-<td class="{{ class }}">
+<td class="{{ class }}" style="height: 310px; width: 310px; padding: 0; margin: 0;">
     <h3 style="text-align: center;">
         {{ t1 }}, {{ t2 }}
     </h3>
-    {% for question, answer in answers.items %}
-        {% if answer.easy == v1 and answer.confident == v2 %}
-            <div title="{{ question }}">{{ answer.title.0 }}</div>
-        {% endif %}
-    {% endfor %}
+    <div style="display: none" id="answers{{ v1 }}{{ v2 }}">
+        {% for question, answer in answers.items %}
+            {% if answer.easy == v1 and answer.confident == v2 %}
+                <a href="#" onclick="$('#question{{ v1 }}{{ v2 }}').text('{{ question }}'); return false;"
+                   title="{{ question }}">{{ answer.title.0 }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <canvas width="310" height="260" id="canvas{{ v1 }}{{ v2 }}">
+    </canvas>
+    <div id="question{{ v1 }}{{ v2 }}" style="text-align: center; margin-top: 0;"></div>
 </td>
+<script type="text/javascript">
+function ResponsiveTCforIE(c) {
+  var e = document.getElementById(c), rw;
+  if(e && e.height && e.width) {
+    rw = parseInt( document.defaultView.getComputedStyle( e ).getPropertyValue( 'width' ) );
+    e.style.height = (rw * e.height / e.width) + 'px';
+  }
+}
+
+if(document.all && document.addEventListener) {
+  window.addEventListener('resize', function() {
+    ResponsiveTCforIE('resCanvas');
+  }, false);
+  window.addEventListener('load', function() {
+    ResponsiveTCforIE('resCanvas');
+  }, false);
+}
+
+    $(document).ready(function () {
+        TagCanvas.Start('canvas{{ v1 }}{{ v2 }}', 'answers{{ v1 }}{{ v2 }}', {
+            textColour: '#f6653c',
+            noTagsMessage: false,
+            shuffleTags: true,
+            textHeight: 24,
+            minBrightness: 0.5,
+            freezeActive: true,
+            initial: [0, 0.1],
+            wheelZoom: 0,
+        });
+    });
+</script>

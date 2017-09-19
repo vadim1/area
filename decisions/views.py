@@ -119,8 +119,6 @@ module1game_questions = {
     'Friend': 'Share a problem with a friend?',
 }
 
-# TODO - randomize quesitons
-
 game_labels = {
     'easy': ['Easy', 'Hard'],
     'confident': ['Confident', 'Unsure'],
@@ -160,7 +158,13 @@ def module1game(request):
 
 def module1game2(request):
     module1 = load_module1(request, 'game2')
-    return game(request, module1, 'confident', 'game_results')
+    return game(request, module1, 'confident', 'game_end')
+
+
+def module1game_end(request):
+    module1 = load_module1(request, 'game_end')
+    return render(request, 'decisions/module1/game_end.html', {
+    })
 
 
 def module1game_results(request):
@@ -193,7 +197,20 @@ def module1video(request):
 
 def module1directions(request):
     module1 = load_module1(request, 'directions')
+    if request.method == 'POST':
+        why_list = Exception(request.POST.getlist('why[]'))
+        # TODO: save why_list
+        return redirect('/decisions/1/sample')
     return render(request, 'decisions/module1/directions.html', {
+        'answers': module1.answers_json,
+        'questions': module1game_questions,
+        'why_options': [
+            'Not sure how to solve my problem',
+            'Not sure what I want from my decision outcome',
+            'Worried I will make a poor decision',
+            'Worried about what other people will think of my decision',
+            'Not sure that I need to make the decision now',
+        ],
     })
 
 

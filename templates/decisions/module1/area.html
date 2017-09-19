@@ -2,25 +2,19 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Module 1 AREA Method{% endblock %}{% endblock %}
 {% block content %}
-    <h3>Module 1 - Module 1 AREA Method</h3>
-    <p>
-        The area that is highlighted represents the ideal "<span class="area">AREA</span>." You want to
-    <ul>
-        <li>Have self awareness</li>
-        <li>Work well with others</li>
-        <li>Use a good process</li>
-        <li>Have confidence in your decision making skills</li>
-        <li>Have conviction that you can arrive at a successful decision outcome for you <b>personally</b></li>
-    </ul>
-    </p>
 <style type="text/css">
 .area {
     background-color: pink;
 }
 </style>
+    <p>
+        The highlighted region represents the ideal "<span class="area">AREA</span>" for decision making.
+        It's where your comfort and your confidence intersect.
+        It's also the name of the decision making system you are learning.
+    </p>
     {% include "decisions/module1/game_results_table.html" %}
     <p class="center">
-        <button id="next"><a href="explain">Go on...</a></button>
-        <a href="explain" id="back">Back</a>
+        <button id="next"><a href="directions">How Does AREA Help?</a></button>
     </p>
+    <a href="game_results" id="back">Back</a>
 {% endblock %}

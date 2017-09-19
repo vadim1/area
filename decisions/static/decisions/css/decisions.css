@@ -1,7 +1,7 @@
 #back {
     float: left;
     background-color: inherit;
-    margin-top: 150px;
+    margin-top: 50px;
     font-size: x-small;
 }
 
@@ -37,6 +37,10 @@
 .button-instructions {
     font-size: x-large;
     font-weight: 900;
+}
+
+.start {
+    opacity: 0.0;
 }
 
 body {

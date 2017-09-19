@@ -18,7 +18,7 @@
         }
 
         {% if attr == 'easy' %}
-        countdown();
+            countdown();
         {% endif %}
 
         var questions = {
@@ -28,7 +28,7 @@
         }
 
         function answer(val) {
-            $('#answer_'+question_num).val(val);
+            $('#answer_' + $('#question_index').text()).val(val);
             return next_question();
         }
 
@@ -44,6 +44,23 @@
         var num_questions = 15; // TODO - live
         var animation_direction = 'left';
 
+        function shuffle(a) {
+            var j, x, i;
+            for (i = a.length; i; i--) {
+                j = Math.floor(Math.random() * i);
+                x = a[i - 1];
+                a[i - 1] = a[j];
+                a[j] = x;
+            }
+            return a;
+        }
+
+        var random_order = [];
+        for (i = 1; i <= num_questions; i++) {
+            random_order.push(i);
+        }
+        shuffle(random_order);
+
         function next_question() {
             $('#game').css('position', 'absolute');
             question_num++;
@@ -56,13 +73,19 @@
             } else {
                 animation_direction = 'right';
             }
-            $('#question').text(questions[question_num]);
+            var question_index = random_order[question_num];
+            $('#question_index').text(question_index);
+            $('#question').text(questions[question_index]);
             if (animation_direction == 'right') {
                 $('#game').css('left', '60%');
-                $('#game').animate({ 'left': '30%' }, function(){$('#game').css('position', 'inherit');});
+                $('#game').animate({'left': '30%'}, function () {
+                    $('#game').css('position', 'inherit');
+                });
             } else {
                 $('#game').css('left', '0%');
-                $('#game').animate({ 'left': '30%' }, function(){$('#game').css('position', 'inherit');});
+                $('#game').animate({'left': '30%'}, function () {
+                    $('#game').css('position', 'inherit');
+                });
             }
             $('#timer').click();
             return false;
@@ -74,32 +97,33 @@
     </script>
 
     {% if attr == 'easy' %}
-    <div style="width: 100%; text-align: center; vertical-align:top; height: 50px;">
-        <div id="timer">
-            <img src="https://rene-henrich.de/content/01-animation/02-chatterfall-introduction-animations/stopwatch.gif"
-                 style="height: 50px; margin-top: -40px; margin-right: 20px;"/>
-            <span style="font-size: 64px; width: 70px; height: 70px;" id="time">&nbsp; &nbsp;</span>
+        <div style="width: 100%; text-align: center; vertical-align:top; height: 50px;">
+            <div id="timer">
+                <img src="https://rene-henrich.de/content/01-animation/02-chatterfall-introduction-animations/stopwatch.gif"
+                     style="height: 50px; margin-top: -40px; margin-right: 20px;"/>
+                <span style="font-size: 64px; width: 70px; height: 70px;" id="time">&nbsp; &nbsp;</span>
+            </div>
         </div>
-    </div>
     {% endif %}
 
     <h2>Deciding...</h2>
     <div style="height: 150px;">
-    <div id="game" style="position: absolute; font-size: 24px; text-align: center; overflow: visible">
-        <div id="question_wrapper">
-            <div id="question"></div>
-            <div id="answers" style="margin-left: 5%; margin-top: 10px; white-space: nowrap;">
-                <button onclick="$(this).blur(); return easy();">{{ labels.0 }}</button>
-                &nbsp;
-                <button onclick="$(this).blur(); return hard();">{{ labels.1 }}</button>
+        <div id="game" style="position: absolute; font-size: 24px; text-align: center; overflow: visible">
+            <div id="question_wrapper">
+                <div id="question"></div>
+                <span id="question_index" style="display: none"></span>
+                <div id="answers" style="margin-left: 5%; margin-top: 10px; white-space: nowrap;">
+                    <button onclick="$(this).blur(); return easy();">{{ labels.0 }}</button>
+                    &nbsp;
+                    <button onclick="$(this).blur(); return hard();">{{ labels.1 }}</button>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 
     <a href="instructions" id="back" style="margin-top: 100px;">Back</a>
 
     {% for question in questions %}
-            <input type="hidden" name="answer[{{ forloop.counter0 }}]" id="answer_{{ forloop.counter }}" value=""/>
+        <input type="hidden" name="answer[{{ forloop.counter0 }}]" id="answer_{{ forloop.counter }}" value=""/>
     {% endfor %}
 {% endblock %}

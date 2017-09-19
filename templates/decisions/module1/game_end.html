@@ -1,0 +1,14 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 1 - Decision Dilemmas - End!{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <h2>How'd you do and how did it feel?</h2>
+    <p>We have grouped your decisions based on how easy or difficult you found each question to
+        answer, and whether you knew how to make the decision.</p>
+    <p class="center">
+        <button id="next"><a href="game_results">Show Me!</a></button>
+    </p>
+    <a href="game2" id="back">Back</a>
+{% endblock %}

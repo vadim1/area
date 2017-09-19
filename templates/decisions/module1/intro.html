@@ -4,11 +4,13 @@
 {% block content %}
     <h3>Module 1 - Introduction to Decision Making</h3>
     <p>This module introduces you to how many decisions you make every day and how to make big decisions better.</p>
-    <div style="width: 100%; text-align: center; margin: 10px;">
-        <img src="https://i.pinimg.com/236x/c7/78/7b/c7787b8f260a88c95ba564626c143181.jpg"/>
+    <div class="start">
+        <div style="width: 100%; text-align: center; margin: 10px;">
+            <img src="https://i.pinimg.com/236x/c7/78/7b/c7787b8f260a88c95ba564626c143181.jpg"/>
+        </div>
+        <p class="center">
+            <button id="next"><a href="1/instructions">Make Big Decisions Better!</a></button>
+        </p>
     </div>
-    <p class="center">
-        <button id="next"><a href="1/instructions">Make Big Decisions Better!</a></button>
-        <a href="/decisions" id="back">Back</a>
-    </p>
+    <a href="/decisions" id="back">Back</a>
 {% endblock %}

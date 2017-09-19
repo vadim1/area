@@ -5,19 +5,15 @@
 {% endblock %}
 {% block content %}
     <h3>Decision Dilemmas - Results!</h3>
-    <p>How'd you do and how did it feel?</p>
-    <p>Here are your results! We have graphed your decisions based on how easy or difficult you found each question to
-        answer, and whether you knew how to make the decision. </p>
+    {% include "decisions/module1/game_results_table.html" %}
     <h4>Why?</h4>
     <p>Because - there is a relationship between <b>ease and difficulty</b> in making a decision and the
         <b>confidence</b> that you have in your ability to make a successful one. There is also a relationship between
         knowing <b>how</b> to tackle a problem and whether or not you have a <b>process</b> or system.
         Explore where your decisions landed!</p>
     </p>
-    <h3>TODO: TAG CLOUD</h3>
-    {% include "decisions/module1/game_results_table.html" %}
     <p class="center">
-        <button id="next"><a href="area">What does this mean?</a></button>
-        <a href="game" id="back">Back</a>
+        <button id="next"><a href="explain">What does this mean?</a></button>
     </p>
+    <a href="game2" id="back">Back</a>
 {% endblock %}

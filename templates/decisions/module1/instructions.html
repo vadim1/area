@@ -7,24 +7,23 @@
         Sometimes we don't know how taxing this is!
     </p>
     <p>
-        On the next page you will be given a countdown clock and a list of decisions that you might have to make.
-        Try to answer every question before it runs off the screen.
+        On the next page you will be given a list of decisions that you might have to make.
+        Try to answer as many questions as you can in the time given.
     </p>
-    <p>
+    <p style="margin-bottom: 20px;">
         The questions will come right at you-just like they do in real life!
         Determine how comfortable you are making each decision.
         Click the <span class="button-instructions">Easy</span> button if it's easy or the
         <span class="button-instructions">Hard</span> button if it's a hard decision for you.
         There are no right answers. But there <i>are</i> right answers for you.
     </p>
-    <p>&nbsp;</p>
-    <p class="center">
+    <p class="center start">
         <button id="next"><a href="#" onclick="return countdown()">Play Game</a></button>
-        <a href="/decisions/1" id="back">Back</a>
     </p>
-    <div style="display: none; background: rgba(54, 25, 25, .5); height: 100%; width: 100%; position: fixed; top: 0; left: 0; float: right; z-index: 99; text-align: center; padding-top: 10%"
+    <a href="/decisions/1" id="back">Back</a>
+    <div style="display: none; background: rgba(54, 25, 25, .8); height: 100%; width: 100%; position: fixed; top: 0; left: 0; float: right; z-index: 99; text-align: center; padding-top: 10%"
          id="timer">
-        <div style="font-size: 128px;" id="time">3</div>
+        <div style="font-size: 128px; color: #f6653c" id="time">3</div>
     </div>
 
     <script type="text/javascript">

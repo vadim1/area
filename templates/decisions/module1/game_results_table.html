@@ -12,6 +12,7 @@
         width: 50%;
     }
 </style>
+<script type="text/javascript" src="/static/decisions/js/jquery.tagcanvas.min.js"></script>
 <table id="results">
     <tr>
         {% include "decisions/module1/game_results_quadrant.html" with t1='Easy' t2='Confident' v1='1' v2='1' %}
@@ -22,3 +23,8 @@
         {% include "decisions/module1/game_results_quadrant.html" with t1='Easy' t2='Unsure' v1='1' v2='0' %}
     </tr>
 </table>
+<script type="text/javascript">
+    var canvas_size = $('#results').width() / 2;
+    // $('canvas').width(canvas_size);
+    // $('canvas').height(canvas_size);
+</script>
