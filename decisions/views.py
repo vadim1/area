@@ -195,12 +195,18 @@ def module1video(request):
     })
 
 
+def module1details(request):
+    module1 = load_module1(request, 'details')
+    return render(request, 'decisions/module1/details.html', {
+    })
+
+
 def module1directions(request):
     module1 = load_module1(request, 'directions')
     if request.method == 'POST':
         why_list = Exception(request.POST.getlist('why[]'))
         # TODO: save why_list
-        return redirect('/decisions/1/sample')
+        return redirect('/decisions/1/details')
     return render(request, 'decisions/module1/directions.html', {
         'answers': module1.answers_json,
         'questions': module1game_questions,
@@ -218,6 +224,12 @@ def module1sample(request):
     module1 = load_module1(request, 'sample')
     return render(request, 'decisions/module1/sample.html', {
         'answers': module1.answers_json,
+    })
+
+
+def module1defining_cc(request):
+    module1 = load_module1(request, 'defining_cc')
+    return render(request, 'decisions/module1/defining_cc.html', {
     })
 
 
