@@ -2,6 +2,32 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Decision Making Game{% endblock %}{% endblock %}
 {% block content %}
+    <style type="text/css">
+        #clock {
+            background: url(https://rene-henrich.de/content/01-animation/02-chatterfall-introduction-animations/stopwatch.gif);
+            background-size: 180px 180px;
+            background-repeat: no-repeat;
+            position: relative;
+            float: none;
+            width: 100%;
+            text-align: center;
+            vertical-align: top;
+            height: 180px;
+            margin-left: 40%;
+        }
+
+        #timer {
+            font-weight: 900;
+            color: #f6653c;
+            text-transform: uppercase;
+            margin: 0;
+            position: absolute;
+            top: 59%;
+            left: 88px;
+            font-size: 2rem;
+            transform: translate(-50%, -50%);
+        }
+    </style>
     <script type="text/javascript">
         function countdown() {
             $('#timer').show()
@@ -92,27 +118,28 @@
         }
 
         $(document).ready(function () {
+            $('#game').width($('h2').width());
             next_question();
         });
     </script>
 
     {% if attr == 'easy' %}
-        <div style="width: 100%; text-align: center; vertical-align:top; height: 50px;">
-            <div id="timer">
-                <img src="https://rene-henrich.de/content/01-animation/02-chatterfall-introduction-animations/stopwatch.gif"
-                     style="height: 50px; margin-top: -40px; margin-right: 20px;"/>
-                <span style="font-size: 64px; width: 70px; height: 70px;" id="time">&nbsp; &nbsp;</span>
+        <div class="center">
+            <div id="clock">
+                <div id="timer">
+                    <span style="font-size: 64px; width: 70px; height: 70px;" id="time">&nbsp; &nbsp;</span>
+                </div>
             </div>
         </div>
     {% endif %}
 
-    <h2>Deciding...</h2>
+    <h2 style="font-size: xx-large;">Deciding...</h2>
     <div style="height: 150px; margin-top: 30px;">
         <div id="game" style="position: absolute; font-size: 24px; text-align: center; overflow: visible">
             <div id="question_wrapper">
-                <div id="question"></div>
+                <div id="question" style="font-size: xx-large; line-height: 1.5em; text-align: left"></div>
                 <span id="question_index" style="display: none"></span>
-                <div id="answers" style="margin-left: 5%; margin-top: 10px; white-space: nowrap;">
+                <div id="answers" style="margin-left: 5%; margin-top: 20px; white-space: nowrap;">
                     <button onclick="$(this).blur(); return easy();">{{ labels.0 }}</button>
                     &nbsp;
                     <button onclick="$(this).blur(); return hard();">{{ labels.1 }}</button>

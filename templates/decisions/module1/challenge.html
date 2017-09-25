@@ -2,7 +2,7 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Critical Concepts Challenge{% endblock %}{% endblock %}
 {% block content %}
-    <h4>{{ decision }}</h4>
+    <p class="directions">{{ decision }}</p>
     <p>
         To add rigor to your thinking answer the following questions:
     </p>
@@ -43,9 +43,9 @@
     </table>
     </p>
     <p class="center">
-        <input id="next" type="submit" class="btn btn-lg btn-primary" name="submit" value="Submit"/>
-        <a href="cheetah" id="back">Back</a>
+        <input id="next" type="submit" name="submit" value="Submit"/>
     </p>
+    <a href="cheetah" id="back">Back</a>
     <script type="text/javascript">
         function validate() {
             var valid = true;

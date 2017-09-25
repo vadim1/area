@@ -2,7 +2,7 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Selecting a Decision{% endblock %}{% endblock %}
 {% block content %}
-    <p>
+    <p class="directions">
         Now let's have you think about making a big decision better!
         Is there an issue that is bothering you that is unresolved?
     </p>
@@ -10,8 +10,8 @@
         Hint: Think of a decision that would benefit from a process and needs some time and attention like the questions
         you've seen.
     </p>
-    <h4>
-        <input type="text" name="decision" class="cc decision" size="40"/>
+    <h4 class="directions">
+        <input type="text" name="decision" class="cc decision" size="40" placeholder="Type Your Decision Here"/>
     </h4>
     <h4>
         &#10004;
@@ -30,9 +30,9 @@
         Have I posed it as a question?
     </h4>
     <p class="center">
-        <input type="submit" id="next" class="btn btn-lg btn-primary" name="submit" value="Submit Decision"/>
-        <a href="exploring_cc" id="back">Back</a>
+        <input type="submit" id="next" name="submit" value="Submit Decision"/>
     </p>
+        <a href="exploring_cc" id="back">Back</a>
     <script type="text/javascript">
         function validate() {
             var valid = true;

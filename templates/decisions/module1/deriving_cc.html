@@ -5,25 +5,17 @@
     <h4>
     Where should I go to college?
     </h4>
-    <p>
-If you had to decide where to go to college. What might be your Critical Concepts?
-    </p>
-    <p>
-How might you solve for your vision of success?
-    </p>
-    <p>
-There's no one right answer. Think of answers that are "RIGHT" for you personally
-    </p>
-    <p>
-You can choose from the selection on the page or you can write your own answers.
-    </p>
-    <p>
-        Remember there is no one right answer but there likely is a right answer for YOU personally.
-    </p>
-    <p>
-        The answers about what constitutes success for you personally tell you how to focus your research so you make a
-        decision that achieves that success.
-    </p>
+    <ul id="list">
+        <li id="2">
+            If you had to decide where to go to college. What might be your Critical Concepts?
+            <button id="and" type="button" onclick="return nextbtn()">go on...</button>
+        </li>
+        <li id="3" class="anim">There's no one right answer. Think of answers that are "RIGHT" for you personally.</li>
+        <li id="4" class="anim">You can choose from the selection on the page or you can write your own answers.</li>
+        <li id="5" class="anim">Remember there is no one right answer but there likely is a right answer for YOU personally.</li>
+        <li id="6" class="anim">The answers about what constitutes success for you personally tell you how to focus your research so you make a
+        decision that achieves that success.</li>
+        <li class="anim">
     <table class="table">
         <thead>
         <tr>
@@ -52,8 +44,10 @@ You can choose from the selection on the page or you can write your own answers.
     </table>
     </p>
     <p class="center">
-        <input type="submit" id="next" class="btn btn-lg btn-primary" name="submit" value="Submit Answers"/>
+        <button id="next">Submit Answers</button>
     </p>
+        </li>
+    </ul>
     <a href="sample" id="back">Back</a>
     <script type="text/javascript">
         function validate() {
