@@ -151,8 +151,15 @@ def game(request, module1, attr, next):
     })
 
 
+def clear_game_answers(module1):
+    if module1.answers:
+        module1.answers = json.dumps({})
+        module1.save()
+
+
 def module1game(request):
     module1 = load_module1(request, 'game')
+    clear_game_answers(module1)  # TODO - save old answers
     return game(request, module1, 'easy', 'instructions2')
 
 
