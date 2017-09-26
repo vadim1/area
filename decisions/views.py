@@ -148,6 +148,7 @@ def game(request, module1, attr, next):
         'questions': module1game_questions.values(),
         'attr': attr,
         'labels': game_labels[attr],
+        'num_questions': len(module1game_questions),
     })
 
 
@@ -268,6 +269,7 @@ def module1decision(request):
         module1.save()
         return redirect('/decisions/1/cheetah')
     return render(request, 'decisions/module1/decision.html', {
+        'decision': module1.decision,
     })
 
 
@@ -314,6 +316,8 @@ def module1commitment(request):
     return render(request, 'decisions/module1/commitment.html', {
         'decision_buddy': module1.decision_buddy,
         'decision_buddy_email': module1.decision_buddy_email,
+        'decision': module1.decision,
+        'cc': json.loads(module1.cc),
     })
 
 

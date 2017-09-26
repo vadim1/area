@@ -2,18 +2,29 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Commitment Contract{% endblock %}{% endblock %}
 {% block content %}
+
+    <p class="directions center">
+        {{ decision }}
+    </p>
+    <p>Critical Concepts:
+    <ul>
+        {% for concept in cc %}
+        <li>{{ concept }}<br/></li>
+        {% endfor %}
+    </ul>
+    </p>
     <p>
         Now that you have defined the decision that you need to make and your critical concepts, commit to answering the
         following questions from
         TODO-LINK: <a href="#" onclick="alert('TODO'); return false;">Cheetah Sheet 1 Getting to Know Your Target</a>
         and sharing them with your Decision Buddy, <a href="mailto:{{ decision_buddy_email }}?subject=Please Be My Decision Buddy!">{{ decision_buddy }}</a>.
-        <ul>
+    </p>
+        <ul class="directions">
             <li>What are the critical entities involved in your decision?</li>
             <li>Who are the...</li>
         </ul>
-    </p>
     <p class="center">
         <button id="next"><a href="summary">I Commit!</a></button>
-        <a href="buddy" id="back">Back</a>
     </p>
+    <a href="buddy" id="back">Back</a>
 {% endblock %}
