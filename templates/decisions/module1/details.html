@@ -2,10 +2,6 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Explanation{% endblock %}{% endblock %}
 {% block content %}
-    <p>
-        <img src="/static/decisions/img/apartment.jpg" height="150px" style="float: left; margin: 10px;"/>
-        <img src="/static/decisions/img/suburbs.jpg" height="150px" style="float: right; margin: 10px;"/>
-    </p>
     <ul style="list-style-type: none; clear: both;" id="list">
         <li id="2">The thing about decision making is that there's no right answer to the questions.
             <button id="and" type="button" onclick="return nextbtn()">and...</button>
@@ -14,7 +10,11 @@
         <li id="4" class="anim">Life has easy and difficult questions and we each have a different idea of what is easy
             and difficult for us.
         </li>
-        <li id="5" class="anim">In fact we might have the very same decision - say where to live - be easy at some point
+        <li id="5" class="anim">
+            <img src="/static/decisions/img/apartment.jpg" height="150px" style="margin: 10px;"/>
+            <img src="/static/decisions/img/suburbs.jpg" height="150px" style="margin: 10px;"/>
+            <br/>
+            In fact we might have the very same decision - say where to live - be easy at some point
             in our lives and yet difficult at another point in time.
         </li>
         <li id="6" class="anim">So how can you solve problems in a way that's both COMFORTABLE for us and where we have

@@ -1,0 +1,23 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 1 - Decision Dilemmas - Explained!{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <h3>Decision Dilemmas - Explanation</h3>
+    <p class="center huge">
+        Why?
+    </p>
+    <p>
+    There is not always a clear relationship between how easy a question may seem and whether we are confident that we
+        know how to solve it. If we hate our hair then what to do with our hair may seem easy but we may be unsure that
+        we know how to make it look good!
+    </p>
+    <p>There is also a relationship between
+        knowing <b>how</b> to tackle a problem and whether or not you have a <b>process</b> or system.
+    </p>
+    <p class="center start2">
+        <button id="next"><a href="explain">Explore where your decisions landed!</a></button>
+    </p>
+    <a href="game_results" id="back">Back</a>
+{% endblock %}

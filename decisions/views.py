@@ -183,6 +183,14 @@ def module1game_results(request):
     })
 
 
+def module1game_explained(request):
+    module1 = load_module1(request, 'game_explained')
+    return render(request, 'decisions/module1/game_explained.html', {
+        'answers': module1.answers_json,
+        'questions': module1game_questions,
+    })
+
+
 def module1explain(request):
     module1 = load_module1(request, 'explain')
     return render(request, 'decisions/module1/explain.html', {

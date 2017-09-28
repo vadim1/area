@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^1/game2$', views.module1game2, name='Module 1 Decision Game 2'),
     url(r'^1/game_end$', views.module1game_end, name='Module 1 Decision Game End'),
     url(r'^1/game_results$', views.module1game_results, name='Module 1 Decision Game Results'),
+    url(r'^1/game_explained$', views.module1game_explained, name='Module 1 Decision Game Explanation'),
     url(r'^1/explain', views.module1explain, name='Module 1 Explanation'),
     url(r'^1/area', views.module1area, name='Module 1 AREA Method'),
     url(r'^1/video', views.module1video, name='Module 1 Video'),
