@@ -111,7 +111,7 @@ module1game_questions = {
     'Vegetarian': 'Eat meat or become a vegetarian?',
     'Action': 'Sit and wait or take action?',
     'Problem': 'Complain or fix the problem?',
-    'Bullying': 'Watch someone get bullied or tell a teacher/take action?',
+    'Bullying': 'Watch someone get bullied or take action?',
     'Honesty': 'Be lied to or told the truth?',
     'College': 'Go to a 2-year college or a 4-year university?',
     'Coat': 'Wear a winter coat or just grab a sweatshirt?',

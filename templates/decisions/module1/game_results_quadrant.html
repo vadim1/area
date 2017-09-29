@@ -12,25 +12,25 @@
     </div>
     <canvas width="310" height="260" id="canvas{{ v1 }}{{ v2 }}">
     </canvas>
-    <div id="question{{ v1 }}{{ v2 }}" style="text-align: center; margin-top: 0;"></div>
+    <div id="question{{ v1 }}{{ v2 }}" style="text-align: center; margin-top: 0; font-size: medium;"></div>
 </td>
 <script type="text/javascript">
-function ResponsiveTCforIE(c) {
-  var e = document.getElementById(c), rw;
-  if(e && e.height && e.width) {
-    rw = parseInt( document.defaultView.getComputedStyle( e ).getPropertyValue( 'width' ) );
-    e.style.height = (rw * e.height / e.width) + 'px';
-  }
-}
+    function ResponsiveTCforIE(c) {
+        var e = document.getElementById(c), rw;
+        if (e && e.height && e.width) {
+            rw = parseInt(document.defaultView.getComputedStyle(e).getPropertyValue('width'));
+            e.style.height = (rw * e.height / e.width) + 'px';
+        }
+    }
 
-if(document.all && document.addEventListener) {
-  window.addEventListener('resize', function() {
-    ResponsiveTCforIE('resCanvas');
-  }, false);
-  window.addEventListener('load', function() {
-    ResponsiveTCforIE('resCanvas');
-  }, false);
-}
+    if (document.all && document.addEventListener) {
+        window.addEventListener('resize', function () {
+            ResponsiveTCforIE('resCanvas');
+        }, false);
+        window.addEventListener('load', function () {
+            ResponsiveTCforIE('resCanvas');
+        }, false);
+    }
 
     $(document).ready(function () {
         TagCanvas.Start('canvas{{ v1 }}{{ v2 }}', 'answers{{ v1 }}{{ v2 }}', {
