@@ -16,12 +16,12 @@
 <p style="font-size: small; margin-bottom: -3px;">Select a <span class="color">word</span> to see which question goes with it.</p>
 <table id="results">
     <tr>
-        {% include "decisions/module1/game_results_quadrant.html" with t1='Hard' t2='Confident' v1='0' v2='1' %}
-        {% include "decisions/module1/game_results_quadrant.html" with t1='Easy' t2='Confident' v1='1' v2='1' class='area' %}
+        {% include "decisions/module1/game_results_quadrant.html" with t1='Hard' t2='Unsure' v1='1' v2='1' %}
+        {% include "decisions/module1/game_results_quadrant.html" with t1='Hard' t2='Confident' v1='1' v2='0' class='area' %}
     </tr>
     <tr>
-        {% include "decisions/module1/game_results_quadrant.html" with t1='Hard' t2='Unsure' v1='0' v2='0' %}
-        {% include "decisions/module1/game_results_quadrant.html" with t1='Easy' t2='Unsure' v1='1' v2='0' %}
+        {% include "decisions/module1/game_results_quadrant.html" with t1='Easy' t2='Unsure' v1='0' v2='1' %}
+        {% include "decisions/module1/game_results_quadrant.html" with t1='Easy' t2='Confident' v1='0' v2='0' class='area' %}
     </tr>
 </table>
 <script type="text/javascript">
