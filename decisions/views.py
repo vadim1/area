@@ -228,7 +228,6 @@ def module1directions(request):
         'questions': module1game_questions,
         'why_options': [
             'Not sure how to solve my problem',
-            'Not sure what I want from my decision outcome',
             'Worried I will make a poor decision',
             'Worried about what other people will think of my decision',
             'Not sure that I need to make the decision now',

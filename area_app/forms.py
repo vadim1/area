@@ -1,4 +1,4 @@
-from django.forms import CharField, Form, ChoiceField, EmailField
+from django.forms import CharField, Form, ChoiceField, EmailField, PasswordInput
 from .models import Question
 
 
@@ -17,6 +17,7 @@ class SignupWithNameForm(Form):
 # TODO - create custom fields for Future Project
 class FutureProjectSignupForm(SignupWithNameForm):
     email = EmailField(required=True)
+    password = CharField(max_length=32, widget=PasswordInput)
     school = CharField(max_length=60, label='School', required=True)
     grade = ChoiceField(required=True, choices=(('', '-'),
                                                 ('9', '9'),
@@ -41,6 +42,7 @@ class FutureProjectSignupForm(SignupWithNameForm):
 
     def signup(self, request, user):
         user.email = self.cleaned_data['email']
+        user.password = self.cleaned_data['password']
         user.school = self.cleaned_data['school']
         user.grade = self.cleaned_data['grade']
         user.dream_director = self.cleaned_data['dream_director']

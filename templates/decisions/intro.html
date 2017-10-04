@@ -6,8 +6,10 @@
     <p>The quality of your decisions determines the quality of your life</p>
     <p>With this app you will learn how to make your big decisions better!</p>
     {% if user.is_authenticated %}
-        <h4 class="text-center">Signed in as {{ request.user.email }} <a class="btn btn-sm btn-warning" href="{% url 'account_logout' %}">Sign Out</a>
-</h4>
+        <h4 class="text-center">
+            Signed in as {{ request.user.email }}
+            <a class="btn btn-sm btn-warning" href="{% url 'account_logout' %}">Sign Out</a>
+        </h4>
         <p>
             {% if module1.completed_on %}
                 &#10004;
@@ -28,9 +30,11 @@
         <p style="margin-top: 20px;"><a href="journal">AREA Journal</a></p>
     {% else %}
         <p>
-            {% blocktrans %}Already have an account? Then please <a href="/accounts/login/">Sign In</a>
-                .{% endblocktrans %}
+            {% blocktrans %}
+                Already have an account? Then please <a href="/accounts/login/">Sign In</a>.
+            {% endblocktrans %}
         </p>
+        </form>
         <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
             {% csrf_token %}
             {{ form|bootstrap }}
@@ -46,6 +50,7 @@
             </div>
             <button type="submit" class="btn btn-success">{% trans "Sign Up" %}</button>
         </form>
+        <form action="{{ request.path }}" method="post">
     {% endif %}
 
     <script type="text/javascript">
