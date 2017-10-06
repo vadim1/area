@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^1/directions', views.module1directions, name='Module 1 Directions'),
     url(r'^1/details', views.module1details, name='Module 1 Details'),
     url(r'^1/sample', views.module1sample, name='Module 1 Sample'),
+    url(r'^1/nylah_decision', views.module1nylah_decision, name='Module 1 Nylah Decision'),
     url(r'^1/defining_cc', views.module1defining_cc, name='Module 1 Defining Critical Concepts'),
     url(r'^1/deriving_cc', views.module1deriving_cc, name='Module 1 Deriving Critical Concepts'),
     url(r'^1/exploring_cc', views.module1exploring_cc, name='Module 1 Exploring Critical Concepts'),

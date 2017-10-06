@@ -14,25 +14,28 @@
         of success.
     </p>
     <p class="directions">Answer this: How would you know that you've made a <b>good</b> decision for <b>you</b>? List three things.</p>
-    <p>TODO: Add 3 inputs (with validation)</p>
-    <p>===TODO: NEW PAGE=== - See Nylah's Decision</p>
-    <p>
-        Let's take Nylah for example.
-        She's a senior living in an apartment in Brooklyn with her mom and dad and two younger sisters.
-    <div class="center">
-        <img src="/static/decisions/img/nylah.png" height="100px" style="margin: 5px;"/>
-        <img src="/static/decisions/img/family.jpg" height="100px" style="margin: 5px;"/>
-        <img src="/static/decisions/img/brooklyn.jpg" height="100px" style="margin: 5px;"/>
-    </div>
-    </p>
-    <p>
-        When she uses the AREA Method and asks herself how she'd know that she's made a good decision about which
-        college to go to she realizes that three things have to happen for the decision to succeed.
-    </p>
-    <p class="directions">Nylah's question: "How will I know that I've made a <b>good</b> decision?"</p>
-    {% include 'decisions/module1/nylah_cc.html' %}
+    <table class="table">
+        <tbody>
+        <tr>
+            <td>1.</td>
+            <td><input type="text" name="cc_nylah[]" class="cc" value="" size="60"/></td>
+        </tr>
+        <tr>
+            <td>2.</td>
+            <td><input type="text" name="cc_nylah[]" class="cc" value="" size="60"/></td>
+        </tr>
+        <tr>
+            <td>3.</td>
+            <td><input type="text" name="cc_nylah[]" class="cc" value="" size="60"/></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        </tbody>
+    </table>
     <p class="center start">
-        <button id="next" type="button"><a href="defining_cc">Why Start With Where You Want To End Up?</a></button>
+        <button id="next" type="button"><a href="nylah_decision">See Nylah's Decision</a></button>
     </p>
     <a href="details" id="back">Back</a>
 {% endblock %}

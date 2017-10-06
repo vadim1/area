@@ -237,7 +237,15 @@ def module1directions(request):
 
 def module1sample(request):
     module1 = load_module1(request, 'sample')
+    # TODO - save POST data
     return render(request, 'decisions/module1/sample.html', {
+        'answers': module1.answers_json,
+    })
+
+
+def module1nylah_decision(request):
+    module1 = load_module1(request, 'nylah_decision')
+    return render(request, 'decisions/module1/nylah_decision.html', {
         'answers': module1.answers_json,
     })
 

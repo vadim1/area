@@ -3,14 +3,12 @@
 {% block title %}{% block h1 %}Module 1 - Explanation{% endblock %}{% endblock %}
 {% block content %}
     <ul style="list-style-type: none; clear: both;" id="list">
-        <li id="2">The thing about decision making is that there's no right answer to the questions.
-            <button id="and" type="button" onclick="return nextbtn()">and...</button>
-        </li>
-        <li id="3" class="anim">HOWEVER, there is likely a right answer for YOU.</li>
-        <li class="anim">
-            TODO!
-            <button>I Agree</button>
-            <button>No Way!</button>
+        <li id="2">
+            The thing about decision making is that often there's no right answer, HOWEVER, there is likely a right answer for YOU.            <button id="and" type="button" onclick="return nextbtn()">and...</button>
+            <div id="extra_buttons">
+                <button type="button" onclick="$('#extra_buttons').hide(); return nextbtn()">I Agree</button>
+                <button type="button" onclick="$('#extra_buttons').hide(); return nextbtn()">No Way</button>
+            </div>
         </li>
         <li id="4" class="anim">Life has easy and difficult questions and we each have a different idea of what is easy
             and difficult for us.
@@ -22,7 +20,7 @@
             In fact we might have the very same decision - say where to live - be easy at some point
             in our lives and yet difficult at another point in time.
         </li>
-        <li id="6" class="anim">So how can you solve problems in a way that's both COMFORTABLE for us and where we have
+        <li id="6" class="anim">So how can you make decisions in a way that's both COMFORTABLE for us and where we have
             CONFIDENCE that we're making decisions that help us reach our goals?
         </li>
         <li class="anim">

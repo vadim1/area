@@ -6,22 +6,25 @@
 }
 
 #next, #answers button {
-    text-align: center;
     font-size: x-large;
-    background-color: #f6653c;
-    color: #ffffff;
     padding: 10px 25px;
     border-radius: 10px;
+    text-align: center;
+    background-color: #f6653c;
+    color: #ffffff;
 }
 
 #and {
     display: block;
+    margin-left: 5px;
+    margin-top: 10px;
+}
+
+button {
+    padding: 3px 8px;
     text-align: center;
     background-color: #f6653c;
     color: #ffffff;
-    padding: 3px 8px;
-    margin-left: 5px;
-    margin-top: 10px;
     border-radius: 5px;
 }
 
