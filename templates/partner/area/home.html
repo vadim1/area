@@ -36,7 +36,8 @@
         margin-bottom: 0px;
     }
 </style>
-<p class="margin-top-30-mob center margin-0-auto" style="font-size: 210%; line-height: 120%; font-weight: bold; margin-bottom: 30px;">
+<p class="margin-top-30-mob center margin-0-auto"
+   style="font-size: 210%; line-height: 120%; font-weight: bold; margin-bottom: 30px;">
     What kind of a {% include "problem_solver.html" %} are you?
 </p>
 <p class="margin-top-30-mob center margin-0-auto">
@@ -75,8 +76,11 @@
     What does your {% include "problem_solver.html" %} Profile say about you? Cheryl explains:
 </p>
 <p class="margin-top-30-mob center margin-0-auto">
-We make thousands of decisions every day - from when to wake up to whether to have a late night snack - and we make them quickly, and largely unconsciously. But what happens when we face a high stakes decision? Knowing your {% include "problem_solver.html" %} Profile will help you learn
-about your decision-making strengths and your potential blind spots, those mental shortcuts that help us make small decisions well but that can hinder our insight, understanding and creativity when solving high stakes problems.
+    We make thousands of decisions every day - from when to wake up to whether to have a late night snack - and we make
+    them quickly, and largely unconsciously. But what happens when we face a high stakes decision? Knowing
+    your {% include "problem_solver.html" %} Profile will help you learn
+    about your decision-making strengths and your potential blind spots, those mental shortcuts that help us make small
+    decisions well but that can hinder our insight, understanding and creativity when solving high stakes problems.
 </p>
 <p class="margin-top-30-mob center margin-0-auto">
     With
@@ -92,7 +96,8 @@ about your decision-making strengths and your potential blind spots, those menta
     <li>Receive Problem Solving tools customized to your {% include "problem_solver.html" %} Profile</li>
 </ul>
 </p>
-<p class="margin-top-30-mob margin-0-auto" style="font-size: x-large; font-weight: bold; line-height: 120%; text-align: center; margin-top: 30px;">
+<p class="margin-top-30-mob margin-0-auto"
+   style="font-size: x-large; font-weight: bold; line-height: 120%; text-align: center; margin-top: 30px;">
     A Good Process + Good Information = Great Decisions
 </p>
 
@@ -104,7 +109,8 @@ about your decision-making strengths and your potential blind spots, those menta
     {% else %}
         <a class="btn btn-info" href="{% provider_login_url 'facebook' %}">Facebook Sign In</a>
         <a class="btn btn-danger" href="{% provider_login_url 'google' %}">Google Sign In</a>
-        <a class="btn btn-success" href="{% url 'account_login' %}">Sign In</a>
+        <a class="btn btn-success" href="{% url 'account_login' %}">Email Sign In</a>
+        <a class="btn btn-warning" href="{% url 'mobile_login' %}">Phone Sign In</a>
     {% endif %}
 </div>
 

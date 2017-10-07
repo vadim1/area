@@ -93,3 +93,6 @@ ENV/
 .gitignore
 .idea
 run
+.DS_Store
+area_method
+*/.DS_Store/*

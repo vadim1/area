@@ -5,35 +5,28 @@
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 
 {% block content %}
-    <h1>{% trans "Sign Up" %}</h1>
-    <p>
-        Problem Solved is a digital coach powered by the AREA Method, a decision making system that helps you solve
-        complex problems. It provides you with tips and action steps that are uniquely customized to the way that
-        you make decisions. It’s a tool that gives you control over your life and allows you to chart a decision
-        path forward into your best future.
-    </p>
-
-    <p>
-        {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">Sign In</a>.{% endblocktrans %}
-    </p>
-
-    <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+    <h1>{% if not mobile %}{% trans "Sign Up" %}{% else %}Mobile Signup {% endif %}</h1>
+    <p>Already have an account? Then please <a href="{% url 'account_login' %}">sign in</a></p>
+    <form class="signup" id="signup_form" method="post">
         {% csrf_token %}
         {{ form|bootstrap }}
         {% if redirect_field_value %}
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
         {% endif %}
-        {% if request.session.partner == "fp" %}
-            <div class="form-group">
-                <label class="control-label" for="dream_director">Dream Director Name</label>
-                <div>
-                    <input class="form-control" id="dream_director" name="dream_director" placeholder="Dream Director"
-                           type="text"/>
-                </div>
-            </div>
-        {% endif %}
+{#        {% if request.session.partner == "fp" %}#}
+{#            <div class="form-group">#}
+{#                <label class="control-label" for="dream_director">Dream Director Name</label>#}
+{#                <div>#}
+{#                    <input class="form-control" id="dream_director" name="dream_director" placeholder="Dream Director"#}
+{#                           type="text"/>#}
+{#                </div>#}
+{#            </div>#}
+{#        {% endif %}#}
         <button type="submit" class="btn btn-success">{% trans "Sign Up" %} &raquo;</button>
-        <a class="btn btn-info" href="{% provider_login_url 'facebook' %}">Facebook Sign Up</a>
-        <a class="btn btn-danger" href="{% provider_login_url 'google' %}">Google Sign up</a>
+        {% if not mobile %}
+            <a class="btn btn-warning" href="{% url 'mobile_signup' %}">Mobile Signup</a>
+            <a class="btn btn-info" href="{% provider_login_url 'facebook' %}">Facebook Signup</a>
+            <a class="btn btn-danger" href="{% provider_login_url 'google' %}">Google Signup</a>
+        {% endif %}
     </form>
 {% endblock %}

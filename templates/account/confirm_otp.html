@@ -1,0 +1,37 @@
+{% extends "account/base.html" %}
+{% load i18n bootstrap %}
+{% block head_title %}{% trans "Enter OTP" %}{% endblock %}
+{% block content %}
+    <h1>{% trans "Enter OTP sent to your phone." %}</h1>
+    <form class="login" method="POST">
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+        {% endif %}
+        <p id="message"></p>
+        <a class="button secondaryAction" href="" id="resend_otp">{% trans "Didn't recive OTP? Resend" %}</a>
+        <button class="primaryAction btn btn-success" type="submit">{% trans "Submit" %}</button>
+    </form>
+    <script>
+        message = $('#message');
+        $('#resend_otp').click(function () {
+            $.getJSON(
+                    '/accounts/resend/otp',
+                    "",
+                    function (data) {
+                        if (data.result) {
+                            message.text(data.result);
+                            message.fadeIn(300);
+                            message.fadeOut(1000);
+                        }
+                        else {
+                            message.text("Something went wrong retry!");
+                            message.fadeIn(300);
+                            message.fadeOut(4000);
+                        }
+                    }
+            )
+        });
+    </script>
+{% endblock %}

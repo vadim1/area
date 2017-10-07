@@ -1,40 +1,24 @@
 {% extends "account/base.html" %}
 
-{% load account socialaccount bootstrap i18n %}
+{% load  account socialaccount bootstrap %}
+{% load i18n %}
 
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
+
     <h1>{% trans "Sign In" %}</h1>
-
-    <p>
-        {% if request.session.start == '/decisions' %}
-            Sign In to your Future Project AREA Modules account.
-        {% else %}
-            Problem Solved is a digital coach powered by the AREA Method, a decision making system that helps you solve
-            complex problems. It provides you with tips and action steps that are uniquely customized to the way that
-            you make decisions. It's a tool that gives you control over your life and allows you to chart a decision
-            path forward into your best future.
-        {% endif %}
-    </p>
-    <p>
-        If you have not created an account yet, then please
-        {% if request.session.start == '/decisions' %}
-            <a href="/decisions">Sign Up</a>
-        {% else %}
-            <a href="{{ signup_url }}">Sign Up</a>
-        {% endif %}
-        first.
-    </p>
-
-    <form class="login" method="POST" action="{% url 'account_login' %}">
+    <p>If you have not created an account yet, then please <a href="{% url 'account_signup' %}">sign up</a> first.</p>
+    <form class="login" method="POST">
         {% csrf_token %}
         {{ form|bootstrap }}
         {% if redirect_field_value %}
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
         {% endif %}
-        <button class="primaryAction btn btn-success" type="submit">{% trans "Sign In" %}</button>
         <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+        <button class="primaryAction btn btn-success" type="submit">{% trans "Sign In" %}</button>
     </form>
-
+    {% if not mobile %}
+        <p>Login using mobile number <a href="{% url 'mobile_login' %}">Login</a></p>
+    {% endif %}
 {% endblock %}

@@ -125,6 +125,7 @@ DEFAULT_PARTNER = 'area'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
+    'area_app.backend.MobileAuthenticationBackend',
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -145,8 +146,8 @@ ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
-ACCOUNT_SIGNUP_FORM_CLASS = 'area_app.forms.SignupWithNameForm'
-
+ACCOUNT_SIGNUP_FORM_CLASS = 'area_app.forms.FutureProjectSignupForm'
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 SOCIALACCOUNT_PROVIDERS = {
     'facebook': {
         'METHOD': 'oauth2',
@@ -187,6 +188,27 @@ DATABASES = {
         'PORT': 1234,
     }
 }
+AUTH_USER_MODEL = "area_app.User"
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'django.log'),
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'propagate': True,
+        },
+    },
+}
+BANDWIDTH_USER_ID = "XXXX"
+BANDWIDTH_TOKEN = "tXXXX"
+BANDWIDTH_SECRET_KEY = "XXXX"
+SENDER_MOBILE_NUMBER = "XXXX"
 
 try:
     from local_settings import *

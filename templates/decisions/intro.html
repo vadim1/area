@@ -34,7 +34,6 @@
                 Already have an account? Then please <a href="/accounts/login/">Sign In</a>.
             {% endblocktrans %}
         </p>
-        </form>
         <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
             {% csrf_token %}
             {{ form|bootstrap }}
@@ -50,7 +49,6 @@
             </div>
             <button type="submit" class="btn btn-success">{% trans "Sign Up" %}</button>
         </form>
-        <form action="{{ request.path }}" method="post">
     {% endif %}
 
     <script type="text/javascript">

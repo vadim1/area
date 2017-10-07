@@ -1,7 +1,13 @@
 from __future__ import unicode_literals
-
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+
+
+class User(AbstractUser):
+    phone_number = models.CharField(max_length=16, null=True, blank=True)
+    school = models.CharField(max_length=256)
+    grade = models.CharField(max_length=8)
+    dream_director = models.CharField(max_length=256, null=True, blank=True)
 
 
 class QuestionModel(models.Model):
@@ -74,7 +80,7 @@ class DecisionTypes(models.Model):
 
 
 class CriticalConcepts(models.Model):
-    problem = models.ForeignKey(Problem, unique=True)
+    problem = models.OneToOneField(Problem)
     concept1 = models.CharField(max_length=256, default='')
     concept2 = models.CharField(max_length=256, default='')
     concept3 = models.CharField(max_length=256, default='')

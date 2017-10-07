@@ -81,3 +81,4 @@ xattr==0.6.4
 zope.interface==4.1.1
 django-allauth==0.30.0
 django-bootstrap-form==3.2.1
+git+https://github.com/bandwidth/python-bandwidth.git#egg=bandwidth_sdk

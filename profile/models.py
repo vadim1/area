@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from area_app.models import User
 
 
 class Profile(models.Model):

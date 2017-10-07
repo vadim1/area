@@ -19,17 +19,15 @@ def load_course(request):
     return course
 
 
+@login_required
 def home(request):
     request.session['start'] = '/decisions'
     request.session['partner'] = 'fp'
-    # TODO - fix signup
-    module1 = None
-    if request.user.is_authenticated():
-        course = load_course(request)
-        module1 = load_module1(request)
-        # If it's the first time, take them to the tour
-        if not course.intro_on:
-            return redirect('/decisions/tour')
+    course = load_course(request)
+    module1 = load_module1(request)
+    # If it's the first time, take them to the tour
+    if not course.intro_on:
+        return redirect('/decisions/tour')
     return render(request, 'decisions/intro.html', {
         'form': forms.FutureProjectSignupForm,
         'module1': module1,
@@ -143,7 +141,7 @@ def game(request, module1, attr, next):
             answers[question_i][attr] = attr_i
         module1.answers = json.dumps(answers)
         module1.save()
-        return redirect('/decisions/1/'+next)
+        return redirect('/decisions/1/' + next)
     return render(request, 'decisions/module1/game.html', {
         'questions': module1game_questions.values(),
         'attr': attr,
