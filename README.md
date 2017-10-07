@@ -1,18 +1,25 @@
 # area
 The Area Method Application for Making Important Decisions
 
-# Setting up Social account
+## Setting up Social account
     1. Add more and more providers in installed app e.g. allauth.socialaccount.providers.facebook
     2. Get app id and secret code from their website see http://django-allauth.readthedocs.io/en/latest/providers.html
     3. Go to admin portal and add those credential one after other
-
-# Email setting
+    
+## Setting up mobile signup
+    1. Login to bandwith account and obtain the following credentials and set them in settins.py/local_settings.py 
+    a. BANDWIDTH_USER_ID = "vadim"
+    b. BANDWIDTH_TOKEN = "xyz323498894y1"
+    c. BANDWIDTH_SECRET_KEY = "pqrs"
+    d. SENDER_MOBILE_NUMBER = "+1236789754"
+    
+## Email setting
     1. EMAIL_HOST_USER = 'test@example.com'
     2. EMAIL_HOST_PASSWORD = 'example'
     3. EMAIL_HOST = "imap.example.net"
     4. EMAIL_PORT = 465
-
-# Database setting
+    
+## Database setting
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
@@ -23,7 +30,7 @@ The Area Method Application for Making Important Decisions
             'PORT': database_port,
         }
     }
-# Installation Nginx
+## Installation Nginx
     1. Installed Nginx, Gunicorn
     2. Configure Gunicorn with wsgi app
     3. Configure Nginx proxy with Gunicorn socket
@@ -63,15 +70,16 @@ The Area Method Application for Making Important Decisions
     }
 
 
-# Gunicorn command : Django app is served via this
+## Gunicorn command : Django app is served via this
     1. sudo service gunicorn status : Give the status Gunicorn (You can see running/stoped/failed)
     2. sudo service gunicorn restart : Restart Gunicorn
     3. sudo service gunicorn start :  Start WSGI Gunicorn
     4. sudo service gunicorn stop  : Stop WSGI Gunicorn
 
-# Nginx command
+## Nginx command
     1. similar command exist for nginx( replace gunicorn with nginx)
 
-# Once you change static file then don't forgot to run below command 
+## Once you change static file then don't forgot to run below command 
     python manage.py collectstatic
     NOTE: It may ask for override, enter `yes`
+
