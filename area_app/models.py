@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    phone_number = models.CharField(max_length=16, null=True, blank=True)
+    phone_number = models.CharField(max_length=32, null=True, blank=True)
     school = models.CharField(max_length=256)
     grade = models.CharField(max_length=8)
     dream_director = models.CharField(max_length=256, null=True, blank=True)
