@@ -172,7 +172,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-LOGIN_URL = '/accounts/login'
+LOGIN_URL = '/accounts/login/'
 LOGOUT_URL = '/accounts/logout'
 LOGIN_REDIRECT_URL = '/'
 

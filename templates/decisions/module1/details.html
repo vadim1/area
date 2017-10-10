@@ -5,26 +5,32 @@
     <ul style="list-style-type: none; clear: both;" id="list">
         <li id="2">
             The thing about decision making is that often there's no right answer, HOWEVER, there is likely a right answer for YOU.            <button id="and" type="button" onclick="return nextbtn()">and...</button>
-            <div id="extra_buttons">
-                <button type="button" onclick="$('#extra_buttons').hide(); return nextbtn()">I Agree</button>
-                <button type="button" onclick="$('#extra_buttons').hide(); return nextbtn()">No Way</button>
+            <div class="center">
+                <button type="button" onclick="return nextbtn()">I Agree</button>
+                <span style="margin: 30px;">
+                </span>
+                <button type="button" onclick="return nextbtn()">No Way</button>
             </div>
         </li>
-        <li id="4" class="anim">Life has easy and difficult questions and we each have a different idea of what is easy
+        <li id="4" class="anim">
+            Life has easy and difficult questions and we each have a different idea of what is easy
             and difficult for us.
-        </li>
-        <li id="5" class="anim">
-            <img src="/static/decisions/img/apartment.jpg" height="150px" style="margin: 10px;"/>
-            <img src="/static/decisions/img/suburbs.jpg" height="150px" style="margin: 10px;"/>
-            <br/>
-            In fact we might have the very same decision - say where to live - be easy at some point
-            in our lives and yet difficult at another point in time.
-        </li>
-        <li id="6" class="anim">So how can you make decisions in a way that's both COMFORTABLE for us and where we have
-            CONFIDENCE that we're making decisions that help us reach our goals?
+            <div class="center" id="extrabutton">
+                <button type="button" onclick="$('#extrabutton').hide(); return nextbtn()">Show Me an Example</button>
+            </div>
         </li>
         <li class="anim">
-            <button id="next" type="button"><a href="sample">Let's Try It...</a></button>
+            We might have the very same decision - say where to live - be easy at some point
+            in our lives and yet difficult at another point in time.
+            <div class="center directions" style="margin-top: 40px; white-space: nowrap;">
+            Select which life looks good to you.
+                <br/>
+            <img id="b1" src="/static/decisions/img/apartment.jpg" height="150px" style="border: 2px solid orange; margin: 10px;" onclick="return nextbtn()"/>
+            <img id="b2" src="/static/decisions/img/suburbs.jpg" height="150px" style="margin: 10px;" onclick="return nextbtn()"/>
+            </div>
+        </li>
+        <li class="anim">
+            <button id="next" type="button"><a href="sample">Let's Make Another Decision</a></button>
         </li>
     </ul>
     <a href="area" id="back">Back</a>
