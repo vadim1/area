@@ -78,6 +78,9 @@ def load_module1(request, step=''):
         module1.answers_json = ''
         if module1.answers:
             module1.answers_json = json.loads(module1.answers)
+    if not module1:
+        module1 = Module1()
+        module1.answers_json = None
     return module1
 
 
