@@ -24,9 +24,9 @@
 {#        {% endif %}#}
         <button type="submit" class="btn btn-success">{% trans "Sign Up" %} &raquo;</button>
         {% if not mobile %}
-            <a class="btn btn-warning" href="{% url 'mobile_signup' %}">Mobile Signup</a>
-            <a class="btn btn-info" href="{% provider_login_url 'facebook' %}">Facebook Signup</a>
-            <a class="btn btn-danger" href="{% provider_login_url 'google' %}">Google Signup</a>
+            <a class="btn btn-warning" href="{% url 'mobile_signup' %}">Mobile Sign Up</a>
+            <a class="btn btn-info" href="{% provider_login_url 'facebook' %}">Facebook Sign Up</a>
+            <a class="btn btn-danger" href="{% provider_login_url 'google' %}">Google Sign Up</a>
         {% endif %}
     </form>
 {% endblock %}

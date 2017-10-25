@@ -24,6 +24,7 @@
                 <h4 class="text-center">Signed in as {{ request.user.email }}</h4>
                 <a class="btn btn-default" href="/decision">Make a Good Decision!</a>
             {% else %}
+            <a class="btn btn-warning" href="{% url 'mobile_signup' %}">Mobile Sign Up</a>
                 <a class="btn btn-info" href="{% provider_login_url 'facebook' %}">Facebook Sign Up</a>
                 <a class="btn btn-danger" href="{% provider_login_url 'google' %}">Google Sign Up</a>
                 <a class="btn btn-success" href="/accounts/signup">Sign Up</a>
