@@ -146,7 +146,9 @@ ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = "https"
-ACCOUNT_SIGNUP_FORM_CLASS = 'area_app.forms.FutureProjectSignupForm'
+ACCOUNT_SIGNUP_FORM_CLASS = 'area_app.forms.SignupWithNameForm'
+# TODO - need to use this form for /decisions:
+# ACCOUNT_SIGNUP_FORM_CLASS = 'area_app.forms.FutureProjectSignupForm'
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 SOCIALACCOUNT_PROVIDERS = {
     'facebook': {
