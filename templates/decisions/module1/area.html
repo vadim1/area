@@ -4,15 +4,15 @@
 {% block content %}
 <style type="text/css">
 .area {
-    background-color: pink;
+    color: #1dcd9f;
 }
 </style>
-    <p>
-        The highlighted region represents the ideal "<span class="area">AREA</span>" for decision making.
+    <div>
+        The <span class="area">highlighted</span> region represents the ideal "AREA" for decision making.
         It's where your comfort and your confidence intersect.
         It's also the name of the decision making system you are learning.
-    </p>
-    {% include "decisions/module1/game_results_table.html" %}
+    </div>
+    {% include "decisions/module1/game_results_table.html" with textcolor="1dcd9f" %}
     <p class="center">
         <button id="next" type="button"><a href="directions">How Does AREA Help?</a></button>
     </p>

@@ -2,18 +2,18 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Introduction to Decision Making 2{% endblock %}{% endblock %}
 {% block content %}
-    <p class="center" style="font-size: xx-large">
-        Whew!
-    </p>
-    <p>
-        That's a lot of decisions that we have to make!
-    </p>
-    <p>
-        Sometimes we are confident we know how to make decisions,<br/> sometimes not so much.
-    </p>
-    <p class="center" style="font-size: xx-large">
-        Ready for Round 2?
-    </p>
+    <div class="center">
+        <div>
+            WHEW!
+            That's a lot of decisions that we have to make!
+        </div>
+        <div>
+            Sometimes we are confident we know how to make decisions,<br/> sometimes not so much.
+        </div>
+        <h1>
+            Ready for Round 2?
+        </h1>
+    </div>
     <ol class="directions">
         <li>For each decision select <span class="button-instructions">Confident</span> or
             <span class="button-instructions">Unsure</span>.
@@ -23,5 +23,5 @@
     <p class="center start">
         <button id="next" type="button"><a href="game2">Play Game</a></button>
     </p>
-        <a href="/decisions/1/game" id="back">Back</a>
+    <a href="/decisions/1/game" id="back">Back</a>
 {% endblock %}

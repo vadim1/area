@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.conf import settings
 from area_app import forms
-from .models import Course, Module1
+from .models import Course, Module1, Module2
 from datetime import datetime
 import json
 
@@ -87,6 +87,34 @@ def load_module1(request, step=''):
 def module1(request):
     module1 = load_module1(request, '')
     return render(request, 'decisions/module1/intro.html', {
+    })
+
+
+def load_module2(request, step=''):
+    module2 = None
+    course = load_course(request)
+    if course:
+        module2list = Module2.objects.filter(course=course)
+        if module2list:
+            module2 = module2list.first()
+            if step:
+                module2.step = step
+                module2.save()
+        else:
+            module2 = Module2(course=course, step=step)
+            module2.save()
+        module2.answers_json = ''
+        if module2.answers:
+            module2.answers_json = json.loads(module2.answers)
+    if not module2:
+        module2 = Module1()
+        module2.answers_json = None
+    return module2
+
+
+def module2(request):
+    module2 = load_module2(request, '')
+    return render(request, 'decisions/module2/intro.html', {
     })
 
 
@@ -360,3 +388,81 @@ Module 2
 def module2(request):
     return render(request, 'decisions/module2/intro.html', {
     })
+
+
+def module2instructions(request):
+    module2 = load_module1(request, 'instructions')
+    return render(request, 'decisions/module2/instructions.html', {
+    })
+
+
+module2game_questions = {
+    'authority1': {
+        'question': 'When your mom asks you to do something do you...',
+        'yes': 'Do it automatically',
+        'no': 'Question it first'
+    },
+    'liking1': {
+        'question': 'When your friend asks you to get ice cream when it\'s late do you...',
+        'yes': 'Go because your friend asked you',
+        'no': 'Say no because it late'
+    },
+    'todo1': {
+        'question': 'When you go down the cereal aisle do you...',
+        'yes': 'Automatically look for the color of the box you want',
+        'no': 'Look at all of the boxes individually'
+    },
+    'todo2': {
+        'question': 'When you head to school in the morning do you...',
+        'yes': 'Go the same way every day',
+        'no': 'Think about all the different ways to get to your location'
+    },
+    'planning1': {
+        'question': 'You look at your list of homework and...',
+        'yes': 'You just start and it will take you until you are done or run out of time',
+        'no': 'You look at each assignment and assess how much time you need and check to make sure you protect your time'
+    },
+    'optimism1': {
+        'question': 'You just got your license so...',
+        'yes': 'You think you are a better than average driver',
+        'no': 'You think that\'s silly, how could you be'
+    },
+    'social1': {
+        'question': 'All your friends are wearing the new sneakers so you...',
+        'yes': 'Save up for the new shoes too',
+        'no': 'Stick with the pair you\'ve got'
+    },
+    'todo3': {
+        'question': 'You\'re going to a party and you know some kids will sneak in alcohol so...',
+        'yes': 'You know you\'ll have some, it\'s just easier',
+        'no': 'You know what you want, easy doesn\'t matter'
+    },
+    'projection1': {
+        'question': 'Your favorite performer has a show nearby so...',
+        'yes': 'You buy two tickets, you don\'t need to ask, of course your friend wants to go',
+        'no': 'You ask your friend first, they\'re pricey tickets'
+    },
+    'planning2': {
+        'question': 'The big math test is in two days so...',
+        'yes': 'You begin studying now to see what you do and don\'t know',
+        'no': 'You figure tomorrow is fine'
+    },
+    'todo4': {
+        'question': 'Your Spanish teacher asks you to come see her during your free period so...',
+        'yes': 'You show up even though your friends will be hanging out',
+        'no': 'You tell her that you can\'t make but appreciate her asking'
+    },
+}
+
+
+def module2game(request):
+    module2 = load_module2(request, 'game')
+    clear_game_answers(module2)  # TODO - save old answers
+    return game(request, module2, 'easy', 'instructions2')
+
+
+def module2restart(request):
+    module2 = load_module2(request, 'intro')
+    module2.completed_on = None
+    module2.save()
+    return redirect('/decisions/2')

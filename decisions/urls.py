@@ -5,6 +5,7 @@ urlpatterns = [
     url(r'^tour/?$', views.tour, name='Tour'),
     url(r'^journal/?$', views.journal, name='Journal'),
     url(r'^terms_conditions/?$', views.terms_conditions, name='Terms and Conditions'),
+
     url(r'^1/?$', views.module1, name='Module 1'),
     url(r'^1/restart/?', views.module1restart, name='Module 1 Restart'),
     url(r'^1/instructions/?$', views.module1instructions, name='Module 1 Instructions'),
@@ -30,5 +31,9 @@ urlpatterns = [
     url(r'^1/buddy/?$', views.module1buddy, name='Module 1 Decision Buddy'),
     url(r'^1/commitment/?$', views.module1commitment, name='Module 1 Commitment'),
     url(r'^1/summary/?$', views.module1summary, name='Module 1 Summary'),
+
     url(r'^2/?$', views.module2, name='Module 2'),
+    url(r'^2/restart/?', views.module2restart, name='Module 2 Restart'),
+    url(r'^2/instructions/?$', views.module2instructions, name='Module 2 Instructions'),
+    url(r'^2/game/?$', views.module2game, name='Module 2 Game'),
 ]

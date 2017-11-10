@@ -41,79 +41,82 @@
             line-height: normal;
         }
     </style>
-    <h4>
-        The AREA Method is a decision making system that will build your:
-    </h4>
-    <p>Click / tap to turn over the images...</p>
-    <table class="reveal">
-        <tr>
-            <td>
-                <div class="flip">
-                    <div class="front">
-                        <img src="/static/decisions/img/self-awareness.jpg"/>
+    <div class="center">
+    {% include 'decisions/_map.html' with top=20 left=250 %}
+        <h3>
+            The AREA Method is a decision making system that will build your:
+        </h3>
+        <p>Click / tap to turn over the images...</p>
+        <table class="reveal">
+            <tr>
+                <td>
+                    <div class="flip">
+                        <div class="front">
+                            <img src="/static/decisions/img/self-awareness.jpg"/>
+                        </div>
+                        <div class="back">
+                            <p>
+                                Self awareness as a decision-maker
+                            </p>
+                        </div>
                     </div>
-                    <div class="back">
-                        <p>
-                            Self awareness as a decision-maker
-                        </p>
+                </td>
+                <td>
+                    <div class="flip">
+                        <div class="front">
+                            <img src="/static/decisions/img/empathy.jpg"/>
+                        </div>
+                        <div class="back">
+                            <p>
+                                Empathy and understanding with the others involved in your decisions
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </td>
-            <td>
-                <div class="flip">
-                    <div class="front">
-                        <img src="/static/decisions/img/empathy.jpg"/>
+                </td>
+                <td>
+                    <div class="flip">
+                        <div class="front">
+                            <img src="/static/decisions/img/toolkit.jpg"/>
+                        </div>
+                        <div class="back">
+                            <p>
+                                Toolkit to solve complex problems
+                            </p>
+                        </div>
                     </div>
-                    <div class="back">
-                        <p>
-                            Empathy and understanding with the others involved in your decisions
-                        </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="flip">
+                        <div class="front">
+                            <img src="/static/decisions/img/confidence.jpg"/>
+                        </div>
+                        <div class="back">
+                            <p>
+                                Confidence that you can make decisions better
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </td>
-            <td>
-                <div class="flip">
-                    <div class="front">
-                        <img src="/static/decisions/img/toolkit.jpg"/>
+                </td>
+                <td>
+                    <div class="flip">
+                        <div class="front">
+                            <img src="/static/decisions/img/conviction.jpg"/>
+                        </div>
+                        <div class="back">
+                            <p>
+                                Conviction that your decisions will help you reach your goals
+                            </p>
+                        </div>
                     </div>
-                    <div class="back">
-                        <p>
-                            Toolkit to solve complex problems
-                        </p>
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div class="flip">
-                    <div class="front">
-                        <img src="/static/decisions/img/confidence.jpg"/>
-                    </div>
-                    <div class="back">
-                        <p>
-                            Confidence that you can make decisions better
-                        </p>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="flip">
-                    <div class="front">
-                        <img src="/static/decisions/img/conviction.jpg"/>
-                    </div>
-                    <div class="back">
-                        <p>
-                            Conviction that your decisions will help you reach your goals
-                        </p>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </table>
+                </td>
+            </tr>
+        </table>
 
-    <p class="center">
-        <button id="next" type="button"><a href="instructions">Shall We Play A Game?</a></button>
-    </p>
+        <p>
+            <button id="next" type="button"><a href="instructions">Shall We Play A Game?</a></button>
+        </p>
+    </div>
     <a href="area" id="back">Back</a>
 {% endblock %}

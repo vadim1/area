@@ -1,6 +1,10 @@
 $(document).ready(function () {
     $(".start").delay(1000).fadeTo("slow", 1.0);
     $(".start2").delay(2000).fadeTo("slow", 1.0);
+    $('#next').click(function(){
+        var next = $(this).find('a').attr('href');
+        window.location.href=next;
+    });
 });
 
 function nextbtn() {

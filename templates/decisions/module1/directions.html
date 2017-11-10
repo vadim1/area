@@ -2,6 +2,22 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Directions for Reflection{% endblock %}{% endblock %}
 {% block content %}
+    <style type="text/css">
+    #why_options div {
+        margin-bottom: 10px;
+    }
+
+    label {
+        font-size: large;
+        border: 1px solid #dddddd;
+        width: 100%;
+        padding: 5px;
+    }
+
+    :checked + span {
+        font-weight: bold;
+    }
+    </style>
     <!--
     <p>
         So let's look again at your results.
@@ -11,16 +27,16 @@
         For the questions you didn't know how to answer, why not?
     </p>
     -->
-    <p>
+    <div style="font-weight: 700; font-size: 150%; margin-top: 50px;">
         Why were some easy questions difficult and some difficult questions easy for you?
         <span class="font-size: small">(Check at least one)</span>
-    </p>
+    </div>
     <div id="why_options" style="margin-top:20px;">
     {% for option in why_options %}
         <div>
-            <label style="font-size: large">
+            <label>
                 <input type="checkbox" name="why[]" value="{{ option }}"/>
-                {{ option }}
+                <span>{{ option }}</span>
             </label>
         </div>
     {% endfor %}

@@ -310,8 +310,12 @@ def archetype(request):
         })
     top_archetypes = request.session['archetypes']
     top_archetype = top_archetypes[0]
+    arch = top_archetype[0]
+    if 't' in request.GET:
+        # For manual override of archetype
+        arch = request.GET['t']
     return render(request, 'archetype.html', {
-        'archetype': top_archetype[0],
+        'archetype': arch,
         'strength': top_archetype[1],
         'step': 4,
     })

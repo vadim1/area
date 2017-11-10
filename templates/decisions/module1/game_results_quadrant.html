@@ -1,4 +1,4 @@
-<td class="{{ class }}" style="height: 310px; width: 310px; padding: 0; margin: 0;">
+<td class="{{ class }}" style="height: 310px; width: 310px; padding: 0; margin: 0;{% if v2 == '1' %} border-right: 1px solid black;{% endif %}">
     <h3 style="text-align: center;">
         {{ t1 }}, {{ t2 }}
     </h3>
@@ -34,7 +34,7 @@
 
     $(document).ready(function () {
         TagCanvas.Start('canvas{{ v1 }}{{ v2 }}', 'answers{{ v1 }}{{ v2 }}', {
-            textColour: '#f6653c',
+            textColour: '#{{ textcolor }}',
             noTagsMessage: false,
             shuffleTags: true,
             textHeight: 24,

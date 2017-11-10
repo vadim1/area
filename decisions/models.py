@@ -22,3 +22,10 @@ class Module1(models.Model):
     cc_not = models.CharField(max_length=255, default='')
     decision_buddy = models.CharField(max_length=80, default='')
     decision_buddy_email = models.EmailField(max_length=80, default='')
+
+
+class Module2(models.Model):
+    course = models.ForeignKey(Course)
+    completed_on = models.DateField(null=True)
+    step = models.CharField(max_length=20, default='')
+    answers = models.TextField(default='')

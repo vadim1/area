@@ -13,7 +13,7 @@
             text-align: center;
             vertical-align: top;
             height: 180px;
-            margin-left: 35%;
+            margin-left: 40%;
         }
 
         #timer {
@@ -26,25 +26,6 @@
             left: 88px;
             font-size: 2rem;
             transform: translate(-50%, -50%);
-        }
-
-        #game {
-            position: absolute;
-            font-size: 24px;
-            text-align: center;
-            overflow: visible;
-        }
-
-        #question {
-            font-size: x-large;
-            line-height: 1.5em;
-            text-align: center;
-        }
-
-        #answers {
-            margin-left: 5%;
-            margin-top: 50px;
-            white-space: nowrap;
         }
     </style>
     <script type="text/javascript">
@@ -124,12 +105,12 @@
             if (animation_direction == 'right') {
                 $('#game').css('left', '60%');
                 $('#game').animate({'left': '30%'}, function () {
-                    $('#game').css('left', 'inherit');
+                    $('#game').css('position', 'inherit');
                 });
             } else {
                 $('#game').css('left', '0%');
                 $('#game').animate({'left': '30%'}, function () {
-                    $('#game').css('left', 'inherit');
+                    $('#game').css('position', 'inherit');
                 });
             }
             $('#timer').click();
@@ -152,14 +133,13 @@
         </div>
     {% endif %}
 
-    <div class="center">
-    <h1>Deciding...</h1>
-    <div style="height: 150px;">
-        <div id="game">
+    <h2 style="font-size: xx-large;">Deciding...</h2>
+    <div style="height: 150px; margin-top: 30px;">
+        <div id="game" style="position: absolute; font-size: 24px; text-align: center; overflow: visible">
             <div id="question_wrapper">
-                <div id="question"></div>
+                <div id="question" style="font-size: xx-large; line-height: 1.5em; text-align: left"></div>
                 <span id="question_index" style="display: none"></span>
-                <div id="answers">
+                <div id="answers" style="margin-left: 5%; margin-top: 20px; white-space: nowrap;">
                     <button onclick="$(this).blur(); return easy();">{{ labels.0 }}</button>
                     &nbsp;
                     <button onclick="$(this).blur(); return hard();">{{ labels.1 }}</button>
@@ -167,9 +147,8 @@
             </div>
         </div>
     </div>
-    </div>
 
-    <a href="instructions" id="back">Back</a>
+    <a href="instructions" id="back" style="margin-top: 100px;">Back</a>
 
     {% for question in questions %}
         <input type="hidden" name="answer[{{ forloop.counter0 }}]" id="answer_{{ forloop.counter }}" value=""/>

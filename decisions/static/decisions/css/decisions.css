@@ -1,16 +1,70 @@
+/** Colors **/
+.orange {
+    color: #f6653c;
+}
+.red {
+    color: #f2502a;
+}
+.orange-bg {
+    color: #ffffff;
+    background-color: #f6653c;
+}
+.yellow {
+    color: #ffc253;
+}
+.green {
+    color: #1dcd9f;
+}
+.blue {
+    color: #1e2846;
+}
+.light-blue {
+    color: #52c0d8;
+}
+
 #back {
     float: left;
     background-color: inherit;
     margin-top: 50px;
     font-size: x-small;
+    color: #1e2846;
 }
 
 #next, #answers button {
-    font-size: x-large;
-    padding: 10px 25px;
-    border-radius: 10px;
+    font-size: 18pt;
+    font-weight: 400;
+    height: 55px;
+    padding: 14px 25px 18px 25px;
+    border-radius: 27.5px;
     text-align: center;
+    text-transform: uppercase;
     background-color: #f6653c;
+    color: #ffffff;
+    border: 0;
+    min-width: 300px;
+}
+
+#next:hover, #answers button:hover {
+    position: relative;
+    top: -5px;
+    background-color: #f6653c;
+    box-shadow: 0px 5px #f2502a;
+}
+
+#next:active, #answers button:active, #next:focus, #answers button:focus {
+    background-color: #f6653c!important;
+}
+
+button {
+    outline: none;
+}
+
+button:focus {
+    background-color: inherit !important;
+}
+
+a, a:hover, a:visited, a:link, a:active {
+    text-decoration: none;
     color: #ffffff;
 }
 
@@ -20,7 +74,7 @@
     margin-top: 10px;
 }
 
-button {
+#todo-button {
     padding: 3px 8px;
     text-align: center;
     background-color: #f6653c;
@@ -30,10 +84,6 @@ button {
 
 #next {
     margin-top: 50px;
-}
-
-#next:hover {
-    background-color: #f6956c;
 }
 
 .color {
@@ -50,14 +100,6 @@ button {
 
 .center {
     text-align: center;
-}
-
-#next a {
-    color: #ffffff;
-}
-
-#next a:hover {
-    text-decoration: none;
 }
 
 .button-instructions {
@@ -78,21 +120,93 @@ button {
     opacity: 0.0;
 }
 
-body {
-    font-size: larger;
-    font-family: "Open Sans Condensed", Helvetica, Arieal, sans-seif !important;
-    font-weight: 700;
-    font-style: normal;
-}
-
 .directions {
     margin: 20px;
     padding: 20px;
     padding-left: 40px;
-    background-color: lightcyan;
-    border: 1px dotted lightblue;
+    border: 1px dotted #1dcd9f;
+}
+
+.directions li {
+    font-weight: 500;
+    font-size: 120%;
 }
 
 p {
     margin-top: 20px;
+}
+
+@font-face {
+    font-family: 'Museo_Slab_500_2';
+    src: url('/static/decisions/css/Museo_Slab_500_2-webfont.woff2') format('woff2'),
+         url('/static/decisions/css/Museo_Slab_500_2-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.header, .footer {
+    font-family: 'Museo_Slab_500_2';
+    color: #f6653c;
+    background-color: #ffffff;
+    letter-spacing: 2px;
+    font-size: 16px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 150%;
+}
+
+.footer {
+    font-size: 12px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.footer a {
+    color: #f6653c;
+}
+
+.main {
+    font-family: 'Avenir';
+    background-color: #eeeeee;
+    line-height: 150%;
+}
+
+.main div:first-child {
+    margin-top: 20px;
+}
+
+h1 {
+    color: #52c0d8;
+    font-size: 48px;
+    font-weight: 800;
+}
+
+h2 {
+    color: #52c0d8;
+    font-size: 26px;
+    font-weight: 600;
+}
+
+h3 {
+    color: #1e2846;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+h4 {
+    color: #52c0d8;
+    font-size: 16px;
+    font-weight: 200;
+}
+
+.map {
+    margin: 30px;
+}
+
+.map .pin {
+    position: relative;
+}
+
+label {
+    font-weight: inherit;
 }
