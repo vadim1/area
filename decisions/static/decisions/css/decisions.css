@@ -63,7 +63,7 @@ button:focus {
     background-color: inherit !important;
 }
 
-a, a:hover, a:visited, a:link, a:active {
+button a, button a:hover, button a:visited, button a:link, button a:active {
     text-decoration: none;
     color: #ffffff;
 }
