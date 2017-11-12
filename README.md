@@ -82,4 +82,6 @@ The Area Method Application for Making Important Decisions
 ## Once you change static file then don't forgot to run below command 
     python manage.py collectstatic
     NOTE: It may ask for override, enter `yes`
-
+    
+Ref:
+https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-debian-8#create-a-gunicorn-systemd-service-file 
