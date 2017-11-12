@@ -34,6 +34,8 @@ def get_randomized_questions():
 
 
 def home(request):
+    if getattr(settings, "SITE_NAME", "") == "fp":
+        return redirect('/decisions/')
     if 'start' not in request.session:
         request.session['start'] = '/'
     elif request.session['start'] != '/':
