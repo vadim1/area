@@ -102,7 +102,7 @@ button a, button a:hover, button a:visited, button a:link, button a:active {
 }
 
 .button-instructions {
-    font-size: larger;
+    font-size: 100%;
     font-weight: 500;
     text-transform: uppercase;
 }
