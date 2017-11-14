@@ -60,8 +60,17 @@
     </h3>
     <div class="center">
         <button id="next" type="submit" style="white-space: nowrap;">
-            <a href="sample">Let's Make Another Decision</a>
+            Let's Make Another Decision
         </button>
     </div>
     <a href="details2" id="back">Back</a>
+    <script type="text/javascript">
+        function validate() {
+            if (!$('input[name="living"]:checked').length) {
+                alert("Please select one by clicking / tapping on it.");
+                return false;
+            }
+            return true;
+        }
+    </script>
 {% endblock %}

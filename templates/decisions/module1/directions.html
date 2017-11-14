@@ -41,9 +41,9 @@
         </div>
     {% endfor %}
     </div>
-    <p class="center">
+    <div class="center">
         <input id="next" type="submit" value="Submit"></input>
-    </p>
+    </div>
     <a href="area" id="back">Back</a>
     <script type="text/javascript">
         function validate() {
@@ -54,7 +54,5 @@
                 return false;
             }
         }
-
-        $('form').submit(validate);
     </script>
 {% endblock %}

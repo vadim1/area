@@ -41,7 +41,21 @@
         </tbody>
     </table>
     <p class="center">
-        <button id="next" type="button"><a href="nylah_decision">See Nylah's Decision</a></button>
+        <button id="next" type="submit">See Nylah's Decision</button>
     </p>
     <a href="details" id="back">Back</a>
+    <script type="text/javascript">
+        function validate() {
+            var valid = true;
+            $('.cc').each(function () {
+                if ($(this).val().length < 3) {
+                    if (valid) {
+                        alert("Please provide three things.");
+                    }
+                    valid = false;
+                }
+            });
+            return valid;
+        }
+    </script>
 {% endblock %}

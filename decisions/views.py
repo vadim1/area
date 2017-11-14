@@ -260,6 +260,10 @@ def module1details2(request):
 
 def module1details3(request):
     module1 = load_module1(request, 'details3')
+    if request.method == 'POST':
+        living = request.POST.get('living')
+        # TODO: save living
+        return redirect('/decisions/1/sample')
     return render(request, 'decisions/module1/details3.html', {
     })
 
@@ -284,7 +288,9 @@ def module1directions(request):
 
 def module1sample(request):
     module1 = load_module1(request, 'sample')
-    # TODO - save POST data
+    if request.method == 'POST':
+        # TODO - save POST data
+        return redirect('/decisions/1/nylah_decision')
     return render(request, 'decisions/module1/sample.html', {
         'answers': module1.answers_json,
     })
