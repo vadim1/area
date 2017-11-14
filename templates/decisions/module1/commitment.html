@@ -8,24 +8,21 @@
                size="40" value="{{ decision }}" readonly="readonly"/>
     </h3>
 
-    <div class="center">Critical Concepts:
-        {% for concept in cc %}
-            <div>&bull; {{ concept }}</div>
-        {% endfor %}
-    </div>
+    <h2>Critical Concepts</h2>
+    {% for concept in cc %}
+        <h3>&bull; {{ concept }}</h3>
+    {% endfor %}
 
-    <div class="center" style="margin-top: 50px;">
+    <h3>
         Now that you have defined the decision that you need to make and your critical concepts, commit to answering the
         following questions from
         TODO-LINK: <a href="#" onclick="alert('TODO'); return false;">Cheetah Sheet 1 Getting to Know Your Target</a>
         and sharing them with your Decision Buddy, <a
             href="mailto:{{ decision_buddy_email }}?subject=Please Be My Decision Buddy!">{{ decision_buddy }}</a>.
-    </div>
+    </h3>
 
-    <div class="center">
-        <h3>1. What are the critical entities involved in your decision?</h3>
-        <h3>2. Who are the...</h3>
-    </div>
+    <h3>1. What are the critical entities involved in your decision?</h3>
+    <h3>2. Who are the...</h3>
 
     <div class="center">
         <button id="next" type="button"><a href="summary">I Commit!</a></button>

@@ -2,11 +2,11 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Selecting a Decision{% endblock %}{% endblock %}
 {% block content %}
-    <h3 class="center">
+    <h3>
         Now let's have you think about making a big decision better!
         Is there an issue that is bothering you that is unresolved?
     </h3>
-    <div class="center">
+    <div>
         Hint: Think of a decision that would benefit from a process and needs some time and attention like the questions
         you've seen.
     </div>
@@ -15,31 +15,26 @@
         <input type="text" name="decision" class="cc decision" size="40" placeholder="Type Your Decision Here" value="{{ decision }}"/>
     </h3>
 
-    <div class="center">
-    <br/>
+    <h3>
     Now read your decision above and check the following:
-    <div>
-    <br/>
+    </h3>
+    <h3>
         <span class="light-blue" style="font-size: larger;">&#10004;</span>
         Do I need facts or evidence?
-    </div>
-    <div>
+        <br/>
         <span class="light-blue" style="font-size: larger;">&#10004;</span>
         Would it be useful to learn from other people?
-    </div>
-    <div>
+        <br/>
         <span class="light-blue" style="font-size: larger;">&#10004;</span>
         Do I need to develop better self awareness about how I understand my decision?
-    </div>
-    <div>
+        <br/>
         <span class="light-blue" style="font-size: larger;">&#10004;</span>
         Have I posed it as a question?
-    </div>
-    </div>
-    </p>
-    <p class="center">
+    </h3>
+
+    <div class="center">
         <input type="submit" id="next" name="submit" value="Submit Decision"/>
-    </p>
+    </div>
         <a href="exploring_cc" id="back">Back</a>
     <script type="text/javascript">
         function validate() {

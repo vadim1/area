@@ -1,0 +1,21 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 1 - Introduction to Decision Making 2{% endblock %}{% endblock %}
+{% block content %}
+    <div class="center">
+
+        {% include 'decisions/_map.html' with top=110 left=170 %}
+
+        <h3>
+            WHEW!
+        </h3>
+        <h3>
+            That's a lot of decisions that we have to make!
+        </h3>
+    </div>
+
+    <div class="center start">
+        <button id="next" type="button"><a href="instructions2">Keep Going</a></button>
+    </div>
+    <a href="/decisions/1/game" id="back">Back</a>
+{% endblock %}

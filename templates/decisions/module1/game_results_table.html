@@ -15,12 +15,12 @@
 <h3 class="center">Select a <span class="color">word</span> to see which question goes with it.</h3>
 <table id="results">
     <tr style="border-bottom: 1px solid black">
-        {% include "decisions/module1/game_results_quadrant.html" with t1='Hard' t2='Unsure' v1='1' v2='1' textcolor="f6653c"  %}
-        {% include "decisions/module1/game_results_quadrant.html" with t1='Hard' t2='<span class="area">Confident</span>' v1='1' v2='0' class='area' %}
+        {% include "decisions/module1/game_results_quadrant.html" with t1='Hard' t2='Unsure' v1='1' v2='1' textcolor=textcolor_noarea %}
+        {% include "decisions/module1/game_results_quadrant.html" with t1='Hard' t2='<span class="area">Confident</span>' v1='1' v2='0' class='area' textcolor=textcolor_area %}
     </tr>
     <tr>
-        {% include "decisions/module1/game_results_quadrant.html" with t1='Easy' t2='Unsure' v1='0' v2='1' textcolor="f6653c"  %}
-        {% include "decisions/module1/game_results_quadrant.html" with t1='Easy' t2='<span class="area">Confident</span>' v1='0' v2='0' class='area' %}
+        {% include "decisions/module1/game_results_quadrant.html" with t1='Easy' t2='Unsure' v1='0' v2='1' textcolor=textcolor_noarea %}
+        {% include "decisions/module1/game_results_quadrant.html" with t1='Easy' t2='<span class="area">Confident</span>' v1='0' v2='0' class='area' textcolor=textcolor_area %}
     </tr>
 </table>
 <script type="text/javascript">

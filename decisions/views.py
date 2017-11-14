@@ -124,6 +124,12 @@ def module1instructions(request):
     })
 
 
+def module1game1_end(request):
+    module1 = load_module1(request, 'game1_end')
+    return render(request, 'decisions/module1/game1_end.html', {
+    })
+
+
 def module1instructions2(request):
     module1 = load_module1(request, 'instructions')
     return render(request, 'decisions/module1/instructions2.html', {
@@ -190,7 +196,7 @@ def clear_game_answers(module1):
 def module1game(request):
     module1 = load_module1(request, 'game')
     clear_game_answers(module1)  # TODO - save old answers
-    return game(request, module1, 'easy', 'instructions2')
+    return game(request, module1, 'easy', 'game1_end')
 
 
 def module1game2(request):

@@ -2,31 +2,19 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Introduction to Decision Making 2{% endblock %}{% endblock %}
 {% block content %}
-    <div class="center">
-
-        {% include 'decisions/_map.html' with top=110 left=170 %}
-
-        <h3>
-            WHEW!
-        </h3>
-        <h3>
-            That's a lot of decisions that we have to make!
-        </h3>
-        <div class="start2">
-
-        <h1>
+        <h1 class="center">
             Ready for Round 2?
         </h1>
 
-        <h3>1. For each decision select <span class="button-instructions">Confident</span> or
+        <h3>
+            <br/>
+            1. For each decision select <span class="button-instructions">Confident</span> or
             <span class="button-instructions">Unsure</span>.</h3>
         <h3>2. In this round there's no countdown clock.</h3>
         </div>
 
-    </div>
-
-    <div class="center start2">
+    <div class="center start">
         <button id="next" type="button"><a href="game2">Play Game</a></button>
     </div>
-    <a href="/decisions/1/game" id="back">Back</a>
+    <a href="/decisions/1/game1_end" id="back">Back</a>
 {% endblock %}

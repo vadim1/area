@@ -2,18 +2,23 @@
 {% load account bootstrap i18n %}
 {% block title %}{% block h1 %}Future Project AREA Method{% endblock %}{% endblock %}
 {% block content %}
-    <h3>Future Project AREA Method</h3>
-    <p>The quality of your decisions determines the quality of your life</p>
-    <p>With this app you will learn how to make your big decisions better!</p>
     {% if user.is_authenticated %}
-        <h4 class="text-center">
-            Signed in as {{ request.user.email }}
+        <div style="float: right; margin-right: -100px;" class="center">
+            {{ request.user.email }}<br/>
             <a class="btn btn-sm btn-warning" href="{% url 'account_logout' %}">Sign Out</a>
-        </h4>
-        <p>
+        </div>
+    {% endif %}
+    <h2>
+        Future Project AREA Method
+    </h2>
+    <h3>The quality of your decisions determines the quality of your life.</h3>
+    <h3>With this app you will learn how to make your big decisions better!</h3>
+    <hr />
+    {% if user.is_authenticated %}
+        <h3>
             {% if module1.completed_on %}
                 &#10004;
-                <img src="/static/decisions/img/Module1_badge.png" style="float: right;"/>
+                <img src="/static/decisions/img/Module1_badge.png" style="float: right; margin-right: -70px;"/>
                 Module 1 - Introduction to Decision Making Completed!
                 (<a href="1/restart">Restart</a>)
             {% else %}
@@ -24,17 +29,17 @@
                     <a href="1">Module 1 - Introduction to Decision Making</a>
                 {% endif %}
             {% endif %}
-        </p>
-        <p>
+        </h3>
+        <h3>
             <a href="2">Module 2 - Cognitive Bias, You're Not As Open Minded As You Think</a>
-        </p>
-        <p style="margin-top: 20px;"><a href="journal">AREA Journal</a></p>
+        </h3>
+        <h3 style="margin-top: 20px;"><a href="journal">AREA Journal</a></h3>
     {% else %}
-        <p>
+        <h3>
             {% blocktrans %}
                 Already have an account? Then please <a href="/accounts/login/">Sign In</a>.
             {% endblocktrans %}
-        </p>
+        </h3>
         <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
             {% csrf_token %}
             {{ form|bootstrap }}
