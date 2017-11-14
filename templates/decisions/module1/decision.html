@@ -2,36 +2,39 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Selecting a Decision{% endblock %}{% endblock %}
 {% block content %}
-    <p class="directions">
+    <h3 class="center">
         Now let's have you think about making a big decision better!
         Is there an issue that is bothering you that is unresolved?
-    </p>
-    <p>
+    </h3>
+    <div class="center">
         Hint: Think of a decision that would benefit from a process and needs some time and attention like the questions
         you've seen.
-    </p>
-    <h4 class="directions center">
+    </div>
+
+    <h3 class="center">
         <input type="text" name="decision" class="cc decision" size="40" placeholder="Type Your Decision Here" value="{{ decision }}"/>
-    </h4>
-    <p>
+    </h3>
+
+    <div class="center">
+    <br/>
     Now read your decision above and check the following:
-    <div style="margin-left: 30px;">
-    <h4>
-        &#10004;
+    <div>
+    <br/>
+        <span class="light-blue" style="font-size: larger;">&#10004;</span>
         Do I need facts or evidence?
-    </h4>
-    <h4>
-        &#10004;
+    </div>
+    <div>
+        <span class="light-blue" style="font-size: larger;">&#10004;</span>
         Would it be useful to learn from other people?
-    </h4>
-    <h4>
-        &#10004;
+    </div>
+    <div>
+        <span class="light-blue" style="font-size: larger;">&#10004;</span>
         Do I need to develop better self awareness about how I understand my decision?
-    </h4>
-    <h4>
-        &#10004;
+    </div>
+    <div>
+        <span class="light-blue" style="font-size: larger;">&#10004;</span>
         Have I posed it as a question?
-    </h4>
+    </div>
     </div>
     </p>
     <p class="center">

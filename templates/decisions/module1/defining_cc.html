@@ -2,33 +2,53 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Defining Critical Concepts{% endblock %}{% endblock %}
 {% block content %}
-    <p>
+    <div class="center">
         To make big decisions better starting at the end can help you make sure that you are solving for what really
         matters to you in the outcome.
-    </p>
-    <p>
+    </div>
+    <br/>
+    <div class="center">
         By thinking about what you need for the decision to succeed before you solve it you know where you need to end
         up-and you can now tell the story of your success.
-    </p>
-    <p class="center">
-        AREA calls these your CRITICAL CONCEPTS.
-    </p>
-    <div class="center directions">
-    <h4>
-        Critical Concepts are the one, two or three things that really define your decision's success.
-    </h4>
     </div>
-    <p>
-        <img src="/static/decisions/img/nylah.png" style="height: 150px; margin: 5px; float: right;" />
+    <br/>
+    <div class="center">
+        AREA calls these your <b>CRITICAL CONCEPTS</b>.
+    </div>
+    <h3 class="center">
+        Critical Concepts are the one, two or three things that really define your decision's success.
+    </h3>
+    <br/>
+    <div class="center">
         Nylah's three answers clarifying her vision of success are her Critical Concepts.
-        {% include 'decisions/module1/nylah_cc.html' %}
-    </p>
-    <p style="clear: both;" class="directions">
+    </div>
+    <br/>
+    <table>
+        <tr>
+            <td style="border-right: 1px solid black; padding-right: 20px;">
+                <img src="/static/decisions/img/nylah.png" style="height: 100px;"/>
+            </td>
+            <td style="padding-left: 0px;">
+                <ol>
+                    <li>
+                        I'm able to afford it.
+                    </li>
+                    <li>
+                        I want to study graphic design.
+                    </li>
+                    <li>
+                        I still want to help out at home.
+                    </li>
+                </ol>
+            </td>
+        </tr>
+    </table>
+    <h3 class="center">
         Your Critical Concepts may be similar-or they may be different. They will reflect what matters to you
         personally.
-    </p>
-    <p class="center">
-    <button id="next" type="button"><a href="deriving_cc">Now It's Your Turn</a></button>
-    </p>
+    </h3>
+    <div class="center">
+        <button id="next" type="button"><a href="deriving_cc">Now It's Your Turn</a></button>
+    </div>
     <a href="sample" id="back">Back</a>
 {% endblock %}

@@ -2,24 +2,25 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - AREA Method Buddy{% endblock %}{% endblock %}
 {% block content %}
-    <p>
+    <h3 class="center">
         Identify a Decision Making Buddy to help you through making your big decision better!
-        Choose someone who:
-    </p>
-    <ul>
-        <li>Knows you well</li>
-        <li>Will be honest with you</li>
-        <li>Will hold you accountable for solving your Critical Concepts to solve your big decision</li>
-    </ul>
-    <p class="directions">
+        <br/>
+        Choose someone who has:
+    </h3>
+    <div class="center">
+        <div>&bull; Self-awareness as a decision-maker</div>
+        <div>&bull; Empathy and understanding with others involved in your decision</div>
+        <div>&bull; A toolkit to make complex decisions</div>
+    </div>
+    <div class="center" style="margin-top: 50px;">
         Decision Buddy's Name:
         <input type="text" name="decision_buddy" value="" size="30" class="cc"/><br/><br/>
         Decision Buddy's Email:&nbsp;
         <input type="email" name="decision_buddy_email" value="" size="30" class="cc"/>
-    </p>
-    <p class="center">
-        <input id="next" type="submit" name="submit" value="Let My Decision Buddy Know"/>
-    </p>
+    </div>
+    <div class="center" style="margin-top: 50px;">
+        <input id="next" type="submit" name="submit" value="Submit Answers"/>
+    </div>
     <a href="challenge" id="back">Back</a>
     <script type="text/javascript">
         function validate() {

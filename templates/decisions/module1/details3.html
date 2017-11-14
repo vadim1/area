@@ -1,0 +1,64 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 1 - Details{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+        .living-selector input {
+            margin: 0;
+            padding: 0;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .city {
+            background-image: url(/static/decisions/img/City_image.jpeg);
+        }
+
+        .suburbs {
+            background-image: url(/static/decisions/img/Urban_image.jpeg);
+        }
+
+        .living-selector input:active + .living-choice {
+        }
+
+        .living-selector input:checked + .living-choice {
+            border: 4px solid #52c0d8;
+            width: 233px;
+            height: 157px;
+        }
+
+        .living-choice {
+            cursor: pointer;
+            background-size: contain;
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 229px;
+            height: 153px;
+        }
+
+        .living-choice:hover {
+            opacity: 0.8;
+        }
+    </style>
+    <div class="center" style="margin: 100px;">
+        We might have the very same decision - say where to live - be easy at some point
+        in our lives and yet difficult at another point in time.
+    </div>
+    <div class="center" style="white-space: nowrap; margin-top: -50px;">
+        Select which life looks good to you.
+        <br/>
+        <div class="living-selector">
+            <input id="city" type="radio" name="living" value="city"/>
+            <label class="living-choice city" for="city"></label>
+            <input id="suburbs" type="radio" name="living" value="suburbs"/>
+            <label class="living-choice suburbs" for="suburbs"></label>
+        </div>
+    </div>
+    <div class="center">
+        <button id="next" type="submit" style="white-space: nowrap;">
+            <a href="sample">Let's Make Another Decision</a>
+        </button>
+    </div>
+    <a href="details2" id="back">Back</a>
+{% endblock %}

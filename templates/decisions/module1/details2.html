@@ -1,0 +1,13 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 1 - Details{% endblock %}{% endblock %}
+{% block content %}
+    <div class="center" style="margin: 100px;">
+        Life has easy and difficult questions and we each have a different idea of what is easy
+        and difficult for us.
+    </div>
+    <div class="center">
+        <button type="button" id="next"><a href="details3">Show Me an Example</a></button>
+    </div>
+    <a href="details" id="back">Back</a>
+{% endblock %}

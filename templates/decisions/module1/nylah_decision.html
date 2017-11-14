@@ -2,20 +2,20 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Nylah's Decision{% endblock %}{% endblock %}
 {% block content %}
-    <p>
-        Let's take Nylah for example.
-        She's a senior living in an apartment in Brooklyn with her mom and dad and two younger sisters.
     <div class="center">
         <img src="/static/decisions/img/nylah.png" height="100px" style="margin: 5px;"/>
-        <img src="/static/decisions/img/family.jpg" height="100px" style="margin: 5px;"/>
-        <img src="/static/decisions/img/brooklyn.jpg" height="100px" style="margin: 5px;"/>
     </div>
-    </p>
-    <p>
+    <div class="center">
+        Let's take Nylah for example.
+        She's a senior living in an apartment in Brooklyn with her mom and dad and two younger sisters.
+    </div>
+    <div class="center">
+    <br/>
         When she uses the AREA Method and asks herself how she'd know that she's made a good decision about which
         college to go to she realizes that three things have to happen for the decision to succeed.
-    </p>
-    <p class="directions">Nylah's question: "How will I know that I've made a <b>good</b> decision?"</p>
+    </div>
+    <h3 class="center">Nylah's question: "How will I know that I've made a <b>good</b> decision?"</h3>
+    <br/>
     {% include 'decisions/module1/nylah_cc.html' %}
     <p class="center start">
         <button id="next" type="button"><a href="defining_cc">Why Start With Where You Want To End Up?</a></button>

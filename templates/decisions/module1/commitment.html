@@ -3,28 +3,32 @@
 {% block title %}{% block h1 %}Module 1 - Commitment Contract{% endblock %}{% endblock %}
 {% block content %}
 
-    <p class="directions center">
-        {{ decision }}
-    </p>
-    <p>Critical Concepts:
-    <ul>
+    <h3 class="center" style="margin: 40px; font-weight: normal;">
+        <input type="text" name="decision" class="cc decision center" style="border-bottom: 2px solid lightgray;"
+               size="40" value="{{ decision }}" readonly="readonly"/>
+    </h3>
+
+    <div class="center">Critical Concepts:
         {% for concept in cc %}
-        <li>{{ concept }}<br/></li>
+            <div>&bull; {{ concept }}</div>
         {% endfor %}
-    </ul>
-    </p>
-    <p>
+    </div>
+
+    <div class="center" style="margin-top: 50px;">
         Now that you have defined the decision that you need to make and your critical concepts, commit to answering the
         following questions from
         TODO-LINK: <a href="#" onclick="alert('TODO'); return false;">Cheetah Sheet 1 Getting to Know Your Target</a>
-        and sharing them with your Decision Buddy, <a href="mailto:{{ decision_buddy_email }}?subject=Please Be My Decision Buddy!">{{ decision_buddy }}</a>.
-    </p>
-        <ul class="directions">
-            <li>What are the critical entities involved in your decision?</li>
-            <li>Who are the...</li>
-        </ul>
-    <p class="center">
+        and sharing them with your Decision Buddy, <a
+            href="mailto:{{ decision_buddy_email }}?subject=Please Be My Decision Buddy!">{{ decision_buddy }}</a>.
+    </div>
+
+    <div class="center">
+        <h3>1. What are the critical entities involved in your decision?</h3>
+        <h3>2. Who are the...</h3>
+    </div>
+
+    <div class="center">
         <button id="next" type="button"><a href="summary">I Commit!</a></button>
-    </p>
+    </div>
     <a href="buddy" id="back">Back</a>
 {% endblock %}

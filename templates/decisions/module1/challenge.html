@@ -2,48 +2,53 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Critical Concepts Challenge{% endblock %}{% endblock %}
 {% block content %}
-    <p class="directions">{{ decision }}</p>
-    <p>
+    <h3 class="center" style="margin: 40px; font-weight: normal;">
+        <input type="text" name="decision" class="cc decision center" style="border-bottom: 2px solid lightgray;"
+               size="40" value="{{ decision }}" readonly="readonly"/>
+    </h3>
+
+    <h3 class="center">
         To add rigor to your thinking answer the following questions:
-    </p>
-    <ul>
-        <li>Why are you making this decision?</li>
-        <li>What do you want in the outcome?</li>
-        <li>What would happen if you made a poor decision?</li>
-    </ul>
-    <p>
+    </h3>
+
+    <div class="center">
+        <div>&bull; Why are you making this decision?</div>
+        <div>&bull; What do you want in the outcome?</div>
+        <div>&bull; What would happen if you made a poor decision?</div>
+    <h3>
         Challenge yourself to identify reasons for what might not get you a successful outcome, revise your Critical
         Concepts.
-    </p>
+    </h3>
+    </div>
     <table class="table">
         <thead>
         <tr>
-            <th></th>
             <th>Your Critical Concept</th>
             <th>What would NOT allow it to be fulfilled?</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td>1.</td>
-            <td><input type="text" name="cc[]" class="cc" value="{{ cc.0 }}" size="30"/></td>
-            <td><input type="text" name="cc_not[]" class="cc" value="" size="30"/></td>
+            <td>1. <input type="text" name="cc[]" class="cc" value="{{ cc.0 }}" size="30"/></td>
+            <td>1. <input type="text" name="cc_not[]" class="cc" value="" size="30"/></td>
         </tr>
         <tr>
-            <td>2.</td>
-            <td><input type="text" name="cc[]" class="cc" value="{{ cc.1 }}" size="30"/></td>
-            <td><input type="text" name="cc_not[]" class="cc" value="" size="30"/></td>
+            <td>2. <input type="text" name="cc[]" class="cc" value="{{ cc.1 }}" size="30"/></td>
+            <td>2. <input type="text" name="cc_not[]" class="cc" value="" size="30"/></td>
         </tr>
         <tr>
-            <td>3.</td>
-            <td><input type="text" name="cc[]" class="cc" value="{{ cc.2 }}" size="30"/></td>
-            <td><input type="text" name="cc_not[]" class="cc" value="" size="30"/></td>
+            <td>3. <input type="text" name="cc[]" class="cc" value="{{ cc.2 }}" size="30"/></td>
+            <td>3. <input type="text" name="cc_not[]" class="cc" value="" size="30"/></td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td> </td>
         </tr>
         </tbody>
     </table>
     </p>
     <p class="center">
-        <input id="next" type="submit" name="submit" value="Submit"/>
+        <input id="next" type="submit" name="submit" value="Submit Critical Concepts"/>
     </p>
     <a href="cheetah" id="back">Back</a>
     <script type="text/javascript">

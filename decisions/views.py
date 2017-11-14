@@ -246,6 +246,18 @@ def module1details(request):
     })
 
 
+def module1details2(request):
+    module1 = load_module1(request, 'details2')
+    return render(request, 'decisions/module1/details2.html', {
+    })
+
+
+def module1details3(request):
+    module1 = load_module1(request, 'details3')
+    return render(request, 'decisions/module1/details3.html', {
+    })
+
+
 def module1directions(request):
     module1 = load_module1(request, 'directions')
     if request.method == 'POST':

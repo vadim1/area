@@ -2,87 +2,101 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Deriving Critical Concepts{% endblock %}{% endblock %}
 {% block content %}
-    <p>
+    <style type="text/css">
+    .answers a {
+        color: #f6653c;
+    }
+
+    .answers a:hover {
+        cursor: hand;
+    }
+
+    td {
+        margin: 0;
+    }
+    </style>
+    <div class="center">
         AREA calls those few factors Critical Concepts - critical because they determine whether your decision will
         succeed for you personally.
-    </p>
-    <p class="directions">
+    </div>
+    <h3 class="center">
         You are no longer solving for a complex decision now you are solving for and telling the story of YOUR success.
-        <br />
+        <br/>
         Let's practice you envisioning your success in a few decision problems.
-    </p>
-    <p>
-        Need help? Click here to see Nylah's answers.
-    </p>
+    </h3>
 
-    <h3>Do I get an after school job?</h3>
-    <table class="table">
+    <h2>Do I get an after school job?</h2>
+    <table class="table answers">
         <thead>
         <tr>
-            <th></th>
-            <th>Your Answer</th>
+            <th>Your Answers</th>
             <th>Nylah's Answer</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td>1.</td>
-            <td><input type="text" name="cc1[]" class="cc" value="" size="30"/></td>
+            <td>1. <input type="text" name="cc1[]" class="cc" value="" size="30"/></td>
             <td>
-                <button onclick="$(this).hide(); $(this).closest('td').find('div').show(); return false;" tabindex="-1">Show Nylah's Answer</button>
+                <a onclick="$(this).hide(); $(this).closest('td').find('div').show(); return false;" tabindex="-1">
+                    Show Nylah's Answer
+                </a>
                 <div style="display: none;">TODO</div>
             </td>
         </tr>
         <tr>
-            <td>2.</td>
-            <td><input type="text" name="cc1[]" class="cc" value="" size="30"/></td>
+            <td>2. <input type="text" name="cc1[]" class="cc" value="" size="30"/></td>
             <td>
-                <button onclick="$(this).hide(); $(this).closest('td').find('div').show(); return false;" tabindex="-1">Show Nylah's Answer</button>
+                <a onclick="$(this).hide(); $(this).closest('td').find('div').show(); return false;" tabindex="-1">
+                    Show Nylah's Answer
+                </a>
                 <div style="display: none;">TODO</div>
             </td>
         </tr>
         <tr>
-            <td>3.</td>
-            <td><input type="text" name="cc1[]" class="cc" value="" size="30"/></td>
+            <td>3. <input type="text" name="cc1[]" class="cc" value="" size="30"/></td>
             <td>
-                <button onclick="$(this).hide(); $(this).closest('td').find('div').show(); return false;" tabindex="-1">Show Nylah's Answer</button>
+                <a onclick="$(this).hide(); $(this).closest('td').find('div').show(); return false;" tabindex="-1">
+                    Show Nylah's Answer
+                </a>
                 <div style="display: none;">TODO</div>
             </td>
         </tr>
         </tbody>
     </table>
 
-        <h3>Do I tell a friend a difficult truth?</h3>
-    <table class="table">
+    <h2>Do I tell a friend a difficult truth?</h2>
+    <table class="table answers">
         <thead>
         <tr>
-            <th></th>
             <th>Your Answer</th>
             <th>Nylah's Answer</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td>1.</td>
-            <td><input type="text" name="cc2[]" class="cc" value="" size="30"/></td>
+            <td>1. <input type="text" name="cc2[]" class="cc" value="" size="30"/></td>
             <td>
-                <button onclick="$(this).hide(); $(this).closest('td').find('div').show(); return false;" tabindex="-1">Show Nylah's Answer</button>
+                <a onclick="$(this).hide(); $(this).closest('td').find('div').show(); return false;" tabindex="-1">
+                    Show Nylah's Answer
+                </a>
                 <div style="display: none;">TODO</div>
             </td>
         </tr>
         <tr>
-            <td>2.</td>
-            <td><input type="text" name="cc2[]" class="cc" value="" size="30"/></td>
+            <td>2. <input type="text" name="cc2[]" class="cc" value="" size="30"/></td>
             <td>
-                <button onclick="$(this).hide(); $(this).closest('td').find('div').show(); return false;" tabindex="-1">Show Nylah's Answer</button>
+                <a onclick="$(this).hide(); $(this).closest('td').find('div').show(); return false;" tabindex="-1">
+                    Show Nylah's Answer
+                </a>
                 <div style="display: none;">TODO</div>
             </td>
         </tr>
         <tr>
-            <td>3.</td>
-            <td><input type="text" name="cc2[]" class="cc" value="" size="30"/></td>
+            <td>3. <input type="text" name="cc2[]" class="cc" value="" size="30"/></td>
             <td>
-                <button onclick="$(this).hide(); $(this).closest('td').find('div').show(); return false;" tabindex="-1">Show Nylah's Answer</button>
+                <a onclick="$(this).hide(); $(this).closest('td').find('div').show(); return false;" tabindex="-1">
+                    Show Nylah's Answer
+                </a>
                 <div style="display: none;">TODO</div>
             </td>
         </tr>

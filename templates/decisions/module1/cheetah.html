@@ -2,15 +2,22 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Deriving Critical Concepts{% endblock %}{% endblock %}
 {% block content %}
-    <p>
+    <h3 class="center">
         Take the big decision you just identified and let's turn the decision upside down: What constitutes success for
         you personally?
-    </p>
-    <p class="directions center">{{ decision }}</p>
-    <p>
+    </h3>
+
+    <h3 class="center" style="margin: 40px; font-weight: normal;">
+        <input type="text" name="decision" class="cc decision center" style="border-bottom: 2px solid lightgray;"
+               size="40" value="{{ decision }}" readonly="readonly"/>
+    </h3>
+
+    <div class="center">
+    <br/>
         "YOUR CRITICAL CONCEPTS" - solving for and telling the story of YOUR success.
-    </p>
-    <table class="table">
+    </div>
+
+    <table class="table" style="width: 60%; margin-left: 20%; margin-top: 50px;">
         <tbody>
         <tr>
             <td>1.</td>
@@ -23,6 +30,10 @@
         <tr>
             <td>3.</td>
             <td><input type="text" name="cc[]" class="cc" value="" size="50"/></td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td> </td>
         </tr>
         </tbody>
     </table>

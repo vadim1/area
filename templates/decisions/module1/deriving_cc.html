@@ -2,13 +2,21 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Deriving Critical Concepts{% endblock %}{% endblock %}
 {% block content %}
+    <style type="text/css">
+    li, td {
+        font-size: smaller;
+    }
+    </style>
     <h4>
     Where should I go to college?
     </h4>
     <ul id="list">
         <li id="2">
             If you had to decide where to go to college. What might be your Critical Concepts?
-            <button id="and" type="button" onclick="return nextbtn()">go on...</button>
+            <div id="and" class="center">
+
+            <button type="button" class="center" onclick="return nextbtn()">AND</button>
+            </div>
         </li>
         <li id="3" class="anim">There's no one right answer. Think of answers that are "RIGHT" for you personally.</li>
         <li id="4" class="anim">You can choose from the selection on the page or you can write your own answers.</li>
@@ -19,26 +27,22 @@
     <table class="table">
         <thead>
         <tr>
-            <th></th>
             <th>Nylah's Answer</th>
             <th>Your Answer</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td>1.</td>
-            <td>My family is happy with my decision.</td>
-            <td><input type="text" name="cc[]" class="cc" value="" size="30"/></td>
+            <td>1. I still want to help out at home.</td>
+            <td>1. <input type="text" name="cc[]" class="cc" value="" size="30"/></td>
         </tr>
         <tr>
-            <td>2.</td>
-            <td>I'm able to afford it.</td>
-            <td><input type="text" name="cc[]" class="cc" value="" size="30"/></td>
+            <td>2. I'm able to afford it.</td>
+            <td>2. <input type="text" name="cc[]" class="cc" value="" size="30"/></td>
         </tr>
         <tr>
-            <td>3.</td>
-            <td>It has a good graphic design program.</td>
-            <td><input type="text" name="cc[]" class="cc" value="" size="30"/></td>
+            <td>3. I want to study graphic design.</td>
+            <td>3. <input type="text" name="cc[]" class="cc" value="" size="30"/></td>
         </tr>
         </tbody>
     </table>

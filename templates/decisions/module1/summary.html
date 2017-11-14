@@ -2,21 +2,36 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Summary{% endblock %}{% endblock %}
 {% block content %}
-    <h3>Module 1 Complete!</h3>
-    <p>
-    <img src="https://i.pinimg.com/236x/c7/78/7b/c7787b8f260a88c95ba564626c143181.jpg" style="float:right;"/>
-    Congratulations! You received the Module 1 badge! You have learned:
-        <ul>
-            <li>How varied our decisions are and how many of them there are at any one time! </li>
-            <li>Process and Confidence can help your decision making</li>
-            <li>AREA Method and inverting decision making to tell the story of your success </li>
-            <li>How to identify critical concepts to reach your vision of success </li>
-            <li>Identified a decision you want to make + it's critical concepts</li>
-            <li>Identified a Decisions Buddy to support you.</li>
-            <li>Accepted the challenge to… </li>
-        </ul>
-    </p>
-    <p class="center">
-    <button id="next" type="button"><a href="/decisions">Modules List</a></button>
-    </p>
+
+    <div class="center">
+
+    {% include 'decisions/_map.html' with top=90 left=70 %}
+
+    <h1 class="center">Module 1 Complete!</h1>
+
+    <h3 class="center">
+        Congratulations! You received the Module 1 badge!
+    </h3>
+
+        <img src="/static/decisions/img/Module1_badge.png" />
+
+        <h3>You have learned:</h3>
+
+    <div class="center">
+        <div>&bull; How varied our decisions are and how many of them there are at any one time!</div>
+        <div>&bull; Process and Confidence can help your decision making.</div>
+        <div>&bull; AREA Method and inverting decision making to tell the story of your success.</div>
+        <div>&bull; How to identify critical concepts to reach your vision of success.</div>
+        <div>&bull; Identified a decision you want to make + it's critical concepts.</div>
+        <div>&bull; Identified a Decisions Buddy to support you.</div>
+        <div>&bull; Accepted the challenge to...</div>
+    </div>
+
+    <div class="center">
+        <button id="next" type="button"><a href="/decisions">Modules List</a></button>
+    </div>
+
+    </div>
+
+    <a href="commitment" id="back">Back</a>
 {% endblock %}
