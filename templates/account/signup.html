@@ -14,7 +14,7 @@
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
         {% endif %}
         <button type="submit" class="btn btn-success">{% trans "Sign Up" %} &raquo;</button>
-        {% if not mobile %}
+        {% if SITE_NAME != 'fp' and not mobile %}
             <a class="btn btn-warning" href="{% url 'mobile_signup' %}">Mobile Sign Up</a>
             <a class="btn btn-info" href="{% provider_login_url 'facebook' %}">Facebook Sign Up</a>
             <a class="btn btn-danger" href="{% provider_login_url 'google' %}">Google Sign Up</a>
