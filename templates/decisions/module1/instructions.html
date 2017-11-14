@@ -2,7 +2,6 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Introduction to Decision Making{% endblock %}{% endblock %}
 {% block content %}
-    <div class="center">
         <h1 class="center" style="margin: 50px;">
             Ready for Round 1?
         </h1>
@@ -20,7 +19,6 @@
         <div class="center start">
             <button id="next" type="button"><a href="#" onclick="return countdown()">Play Game</a></button>
         </div>
-    </div>
     <a href="/decisions/1" id="back">Back</a>
     <div style="display: none; background: rgba(54, 25, 25, .8); height: 100%; width: 100%; position: fixed; top: 0; left: 0; float: right; z-index: 99; text-align: center; padding-top: 20%"
          id="timer">
