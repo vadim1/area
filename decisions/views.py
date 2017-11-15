@@ -290,7 +290,7 @@ def module1sample(request):
     module1 = load_module1(request, 'sample')
     if request.method == 'POST':
         # TODO - save POST data
-        return redirect('/decisions/1/nylah_decision')
+        return redirect('/decisions/1/cc')
     return render(request, 'decisions/module1/sample.html', {
         'answers': module1.answers_json,
     })
@@ -300,6 +300,12 @@ def module1nylah_decision(request):
     module1 = load_module1(request, 'nylah_decision')
     return render(request, 'decisions/module1/nylah_decision.html', {
         'answers': module1.answers_json,
+    })
+
+
+def module1cc(request):
+    module1 = load_module1(request, 'cc')
+    return render(request, 'decisions/module1/cc.html', {
     })
 
 
