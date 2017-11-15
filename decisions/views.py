@@ -400,6 +400,9 @@ def module1summary(request):
     module1.completed_on = datetime.now()
     module1.save()
     return render(request, 'decisions/module1/summary.html', {
+        'decision_buddy': module1.decision_buddy,
+        'decision': module1.decision,
+        'cc': json.loads(module1.cc),
     })
 
 

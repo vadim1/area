@@ -2,7 +2,7 @@
 
 Congratulations - you're on your way to making big decisions better!
 
-You're receiving this e-mail because {{ user_display }} has registered at PROBLEM SOLVED with the AREA Method.
+You're receiving this e-mail because {{ email }} has registered at PROBLEM SOLVED with the AREA Method.
 
 Verify your email address by going to {{ activate_url }} and you will securely register for the PROBLEM SOLVED app and use it free of charge from any device.
 {% endblocktrans %}{% endautoescape %}
