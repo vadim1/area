@@ -387,11 +387,25 @@ def module1commitment(request):
     module1 = load_module1(request, 'commitment')
     if request.method == 'POST':
         return redirect('/decisions/1/summary')
+    mail_body = module1.decision_buddy + ',' + '%0D%0D' + \
+        'Please help me with a big decision: ' + module1.decision + '%0D%0D'
+    for concept in json.loads(module1.cc):
+        mail_body += concept + '%0D'
+    mail_body += '%0D' + \
+        'Would you help me get started?  Here are a few questions I need to answer:' + '%0D%0D' + \
+        'What are the organizations involved in your decision?' + '%0D' + \
+        'Who are the people who could help you make your decision?' + '%0D' + \
+        'What do you need to find out?' + '%0D' + \
+        'How will getting information help you make your decision?' + '%0D%0D' + \
+        'Thank you!'
+    to = module1.decision_buddy_email + ',' + request.user.email
     return render(request, 'decisions/module1/commitment.html', {
         'decision_buddy': module1.decision_buddy,
         'decision_buddy_email': module1.decision_buddy_email,
         'decision': module1.decision,
         'cc': json.loads(module1.cc),
+        'mail_body': mail_body,
+        'to': to,
     })
 
 

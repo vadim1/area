@@ -14,20 +14,28 @@
     {% endfor %}
 
     <h3>
-        Now that you have defined the decision that you need to make and your critical concepts, commit to answering the
-        following questions from
-        TODO-LINK: <a href="#" onclick="alert('TODO'); return false;">Cheetah Sheet 1 Getting to Know Your Target</a>
-        and sharing them with your Decision Buddy, <a
-            href="mailto:{{ decision_buddy_email }}?subject=Please Be My Decision Buddy!">{{ decision_buddy }}</a>.
+        <a target="_blank" onclick="email_sent = true;"
+           href="mailto:{{ to }}?subject=Please Be My Decision Buddy!&body={{ mail_body }}">
+            Click here to send an email to your decision buddy {{ decision_buddy }} and yourself
+            that has a few questions to help you get started.
+        </a>
     </h3>
 
-    <h3>1. What are the critical entities involved in your decision?</h3>
-    <h3>2. Who are the people I plan on talking to in order to learn more about my decision?</h3>
-    <h3>3. What do I expect to learn from each of them?</h3>
-    <h3>4. What are my strengths or potential weaknesses that I want to watch out for when making my big decision?</h3>
-
     <div class="center">
-        <button id="next" type="button"><a href="summary">I Commit!</a></button>
+        <button id="next" type="button"><a href="summary" onclick="return(validate())">Finish!</a></button>
     </div>
     <a href="buddy" id="back">Back</a>
+
+    <script type="text/javascript">
+    var email_sent = false;
+
+    function validate()
+    {
+        if (!email_sent) {
+            alert("Please click to send the email.");
+            return false;
+        }
+        return true;
+    }
+    </script>
 {% endblock %}
