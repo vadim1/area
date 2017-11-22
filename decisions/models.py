@@ -29,3 +29,4 @@ class Module2(models.Model):
     completed_on = models.DateField(null=True)
     step = models.CharField(max_length=20, default='')
     answers = models.TextField(default='')
+    biases = models.TextField(default='')

@@ -1,6 +1,6 @@
 {% extends 'decisions/base.html' %}
 {% load bootstrap %}
-{% block title %}{% block h1 %}Module 1 - Decision Making Game{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}Module 2 - Bias Quiz{% endblock %}{% endblock %}
 {% block content %}
     <style type="text/css">
         #clock {
@@ -27,6 +27,12 @@
             font-size: 2rem;
             transform: translate(-50%, -50%);
         }
+
+        button {
+            height: inherit !important;
+            text-transform: none !important;
+            line-height: 120%;
+        }
     </style>
     <script type="text/javascript">
         function countdown() {
@@ -49,21 +55,18 @@
 
         var questions = {
             {% for question in questions %}
-                '{{ forloop.counter }}': '{{ question }}',
+                '{{ forloop.counter }}': {
+                    'title': "{{ question.title }}",
+                    'question': "{{ question.question|safe }}",
+                    'answer0': "{{ question.answer0|safe }}",
+                    'answer1': "{{ question.answer1|safe }}",
+                },
             {% endfor %}
         }
 
         function answer(val) {
             $('#answer_' + $('#question_index').text()).val(val);
             return next_question();
-        }
-
-        function easy() {
-            return answer('0');
-        }
-
-        function hard() {
-            return answer('1');
         }
 
         var question_num = 0;
@@ -101,7 +104,9 @@
             }
             var question_index = random_order[question_num];
             $('#question_index').text(question_index);
-            $('#question').text(questions[question_index]);
+            $('#question').text(questions[question_index]['question']);
+            $('#answer0').text(questions[question_index]['answer0']);
+            $('#answer1').text(questions[question_index]['answer1']);
             if (animation_direction == 'right') {
                 $('#game').css('left', '60%');
                 $('#game').animate({'left': '30%'}, function () {
@@ -133,22 +138,21 @@
         </div>
     {% endif %}
 
-    <h2 style="font-size: xx-large;">Deciding...</h2>
-    <div style="height: 150px; margin-top: 30px;">
+    <div style="height: 250px; margin-top: 30px;">
         <div id="game" style="position: absolute; font-size: 24px; text-align: center; overflow: visible">
             <div id="question_wrapper">
                 <div id="question" style="font-size: xx-large; line-height: 1.5em; text-align: left"></div>
                 <span id="question_index" style="display: none"></span>
-                <div id="answers" style="margin-left: 5%; margin-top: 20px; white-space: nowrap;">
-                    <button onclick="$(this).blur(); return easy();">{{ labels.0 }}</button>
-                    &nbsp;
-                    <button onclick="$(this).blur(); return hard();">{{ labels.1 }}</button>
+                <div id="answers" style="margin-left: 5%; margin-top: 20px;">
+                    <button onclick="$(this).blur(); return answer('0');" id="answer0"></button>
+                    <div>&nbsp;</div>
+                    <button onclick="$(this).blur(); return answer('1');" id="answer1"></button>
                 </div>
             </div>
         </div>
     </div>
 
-    <a href="instructions" id="back" style="margin-top: 100px;">Back</a>
+    <a href="instructions" id="back" style="margin-top: 200px;">Back</a>
 
     {% for question in questions %}
         <input type="hidden" name="answer[{{ forloop.counter0 }}]" id="answer_{{ forloop.counter }}" value=""/>

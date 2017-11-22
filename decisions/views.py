@@ -107,7 +107,7 @@ def load_module2(request, step=''):
         if module2.answers:
             module2.answers_json = json.loads(module2.answers)
     if not module2:
-        module2 = Module1()
+        module2 = Module2()
         module2.answers_json = None
     return module2
 
@@ -446,66 +446,174 @@ def module2instructions(request):
 module2game_questions = {
     'authority1': {
         'question': 'When your mom asks you to do something do you...',
-        'yes': 'Do it automatically',
-        'no': 'Question it first'
+        'answer0': 'Do it automatically',
+        'answer1': 'Question it first',
+        'bias': 'authority',
+        'bias_answer': 0,
+    },
+    'authority2': {
+        'question': 'Your Spanish teacher asks you to come see her during your free period. Do you...',
+        'answer0': 'Show up, even though you had planned to hang out with your friends',
+        'answer1': 'Tell her that you\'re busy and can\'t make it',
+        'bias': 'authority',
+        'bias_answer': 1,
     },
     'liking1': {
-        'question': 'When your friend asks you to get ice cream when it\'s late do you...',
-        'yes': 'Go because your friend asked you',
-        'no': 'Say no because it late'
+        'question': 'When a friend asks you to get ice cream late in the evening, do you...',
+        'answer0': 'Say yes, because they\'re your friend',
+        'answer1': 'Say no, because of the time',
+        'bias': 'liking',
+        'bias_answer': 0,
     },
-    'todo1': {
+    'liking2': {
         'question': 'When you go down the cereal aisle do you...',
-        'yes': 'Automatically look for the color of the box you want',
-        'no': 'Look at all of the boxes individually'
-    },
-    'todo2': {
-        'question': 'When you head to school in the morning do you...',
-        'yes': 'Go the same way every day',
-        'no': 'Think about all the different ways to get to your location'
+        'answer0': 'Automatically look for the cereal you want',
+        'answer1': 'Look at all of the cereal boxes',
+        'bias': 'liking',
+        'bias_answer': 0,
     },
     'planning1': {
-        'question': 'You look at your list of homework and...',
-        'yes': 'You just start and it will take you until you are done or run out of time',
-        'no': 'You look at each assignment and assess how much time you need and check to make sure you protect your time'
-    },
-    'optimism1': {
-        'question': 'You just got your license so...',
-        'yes': 'You think you are a better than average driver',
-        'no': 'You think that\'s silly, how could you be'
-    },
-    'social1': {
-        'question': 'All your friends are wearing the new sneakers so you...',
-        'yes': 'Save up for the new shoes too',
-        'no': 'Stick with the pair you\'ve got'
-    },
-    'todo3': {
-        'question': 'You\'re going to a party and you know some kids will sneak in alcohol so...',
-        'yes': 'You know you\'ll have some, it\'s just easier',
-        'no': 'You know what you want, easy doesn\'t matter'
-    },
-    'projection1': {
-        'question': 'Your favorite performer has a show nearby so...',
-        'yes': 'You buy two tickets, you don\'t need to ask, of course your friend wants to go',
-        'no': 'You ask your friend first, they\'re pricey tickets'
+        'question': 'When you head to school in the morning do you...',
+        'answer0': 'Lay out your clothes the night before',
+        'answer1': 'Figure that you want to see what you feel like wearing in the morning',
+        'bias': 'planning',
+        'bias_answer': 1,
     },
     'planning2': {
-        'question': 'The big math test is in two days so...',
-        'yes': 'You begin studying now to see what you do and don\'t know',
-        'no': 'You figure tomorrow is fine'
+        'question': 'When you look at your homework list, do you...',
+        'answer0': 'Start and it will take you until you are done or run out of time',
+        'answer1': 'Go over the entire list and guess how long each will take, so you can budget your time',
+        'bias': 'planning',
+        'bias_answer': 0,
     },
-    'todo4': {
-        'question': 'Your Spanish teacher asks you to come see her during your free period so...',
-        'yes': 'You show up even though your friends will be hanging out',
-        'no': 'You tell her that you can\'t make but appreciate her asking'
+    'planning3': {
+        'question': 'You have a big math test in two days. Do you...',
+        'answer0': 'Start studying tonight so you have time to ask for help tomorrow',
+        'answer1': 'Figure starting tomorrow will be enough time to prepare',
+        'bias': 'planning',
+        'bias_answer': 1,
+    },
+    'optimism1': {
+        'question': 'If you just passed your driver\'s license test, do you...',
+        'answer0': 'Believe you are an above average driver',
+        'answer1': 'Think that\'s silly, how could you be?',
+        'bias': 'optimism',
+        'bias_answer': 0,
+    },
+    'optimism2': {
+        'question': 'You need to pick up your little sister from school do you...',
+        'answer0': 'Remind her that you\'re getting her and tell her where to meet you',
+        'answer1': 'Figure you can show up and it will all work out',
+        'bias': 'optimism',
+        'bias_answer': 1,
+    },
+    'social1': {
+        'question': 'At school all of your friends are wearing a popular new brand of sneakers. Do you...',
+        'answer0': 'Save up for your own pair, too',
+        'answer1': 'Stick with your regular shoes, they\'re fine',
+        'bias': 'social',
+        'bias_answer': 0,
+    },
+    'social2': {
+        'question': 'You overheard some kids are sneaking alcohol into a party you\'re going to. Do you...',
+        'answer0': 'Drink some, because it\'s easier to go along',
+        'answer1': 'Going along with the crowd isn\'t a factor in your decision',
+        'bias': 'social',
+        'bias_answer': 0,
+    },
+    'projection1': {
+        'question': 'You see tickets for your favorite band playing a show nearby. Do you...',
+        'answer0': 'Buy two tickets, of course your friend will want to come',
+        'answer1': 'You ask your friend first, they\'re pricey tickets',
+        'bias': 'projection',
+        'bias_answer': 0,
+    },
+    'projection2': {
+        'question': 'You\'re assigned a group project. Do you...',
+        'answer0': 'Wait for the girl who always leads to to tell you your role',
+        'answer1': 'Pick which part of the project you want to volunteer for',
+        'bias': 'projection',
+        'bias_answer': 0,
     },
 }
 
 
+def calculate_biases(answers):
+    biases = {}
+    for i in range(0, len(module2game_questions.values())):
+        question_i = module2game_questions.values()[i]
+        bias = question_i['bias']
+        if bias not in biases:
+            biases[bias] = {
+                'total': 1,
+                'biased': 0,
+                'ratio': 0,
+            }
+        else:
+            biases[bias]['total'] += 1
+        if answers[question_i['title']] == '':
+            answers[question_i['title']] = 0  # TODO - shouldn't need it
+        if int(answers[question_i['title']]) == int(question_i['bias_answer']):
+            biases[bias]['biased'] += 1
+        biases[bias]['ratio'] = int(float(biases[bias]['biased']) / float(biases[bias]['total']) * 100)
+    return biases
+
+
 def module2game(request):
     module2 = load_module2(request, 'game')
-    clear_game_answers(module2)  # TODO - save old answers
-    return game(request, module2, 'easy', 'instructions2')
+    attr = 'easy'  # For count-down timer
+
+    # Add title to each question
+    for title in module2game_questions.keys():
+        module2game_questions[title]['title'] = title
+
+    if request.method == 'POST':
+        answers = {}
+        if module2.answers:
+            answers = json.loads(module2.answers)
+        for i in range(0, len(module2game_questions.values())):
+            index = str(i)
+            question_i = module2game_questions.values()[i]
+            attr_i = request.POST.get('answer[' + index + ']')
+            answers[question_i['title']] = attr_i
+        module2.answers = json.dumps(answers)
+        module2.biases = json.dumps(calculate_biases(answers))
+        module2.save()
+        return redirect('/decisions/2/game_end')
+    else:
+        clear_game_answers(module2)  # TODO - save old answers
+    return render(request, 'decisions/module2/game.html', {
+        'questions': module2game_questions.values(),
+        'attr': attr,
+        'num_questions': len(module2game_questions),
+    })
+
+
+def module2game_end(request):
+    module2 = load_module2(request, 'game_end')
+    return render(request, 'decisions/module2/game_end.html', {
+    })
+
+
+def module2explain(request):
+    module2 = load_module2(request, 'explain')
+    return render(request, 'decisions/module2/explain.html', {
+    })
+
+
+def module2bias(request):
+    module2 = load_module2(request, 'bias')
+    return render(request, 'decisions/module2/bias.html', {
+    })
+
+
+def module2game_results(request):
+    module2 = load_module2(request, 'game_results')
+    return render(request, 'decisions/module2/game_results.html', {
+        'biases': json.loads(module2.biases),
+        'answers': module2.answers_json,
+        'questions': module2game_questions,
+    })
 
 
 def module2restart(request):

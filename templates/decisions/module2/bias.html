@@ -1,0 +1,16 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 2 - Biases{% endblock %}{% endblock %}
+{% block content %}
+        <h3>
+            See why we need our biases? Researchers tell us we make 40,000 decisions every day!
+        </h3>
+        <h3>
+            The biases help us rely on what we think we know, or on others who we like or trust.
+        </h3>
+
+        <div class="start center">
+            <button id="next" type="button"><a href="game_results">Check my bias</a></button>
+        </div>
+    <a href="explain" id="back">Back</a>
+{% endblock %}
