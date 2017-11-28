@@ -1,0 +1,20 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 2 - Moving into Action{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <h3>
+        For each of your Critical Concepts, provide a couple pieces of evidence.
+    </h3>
+    <h2>Critical Concepts</h2>
+    {% for concept in cc %}
+            <h3>{{ concept }}</h3>
+                <div>1. <input type="text" name="cc{{ forloop.counter0 }}evidence[]" value="" size="50" placeholder="Provide Evidence"/></div>
+                <div>2. <input type="text" name="cc{{ forloop.counter0 }}evidence[]" value="" size="50" placeholder="Provide Evidence"/></div>
+    {% endfor %}
+    <div class="center space">
+        <button type="submit">Submit</button>
+    </div>
+    <a href="steps2" id="back">Back</a>
+{% endblock %}

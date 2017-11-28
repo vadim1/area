@@ -1,0 +1,24 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 2 - Bias{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <h3>
+        Nylah's decision problem: Should Nylah go away to school? She has two out of state options.
+        She assumes the school with the more recognizable name, Ohio State, is better.
+    </h3>
+    <div class="center">
+        <img src="https://cdn.shopify.com/s/files/1/0531/7421/products/bates_collar_banner_9752c263-3d42-4991-ac8f-23a71e92e872.jpg" style="height: 120px;"/>
+        <img src="/static/decisions/img/nylah.png" style="height: 200px;"/>
+        <img src="https://media.kohlsimg.com/is/image/kohls/870230?wid=150&hei=150&op_sharpen=1" style="height: 120px;"/>
+    </div>
+    <h3 class="center" style="margin: 50px;">
+        Do you agree with Nylah?
+    </h3>
+    <div class="center start">
+        <button type="button"><a href="nylah3">Yes</a></button>
+        <button type="button"><a href="nylah3">No</a></button>
+    </div>
+    <a href="nylah1" id="back">Back</a>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 2 - Bias{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <style type="text/css">
+        #facts_options div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: large;
+            border: 1px solid #dddddd;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+    </style>
+
+    <h3>
+        Asking for an opinion adds a layer of bias - an interpretation and personal understanding -
+        on top of the facts and figures available.
+    </h3>
+
+    <h3>
+        How does this influence your own understanding of the facts?
+    </h3>
+
+    <h3 class="center" style="margin-top: 20px;">
+        <button type="button" onclick="$('#findings').show(); return false;">Show Me</button>
+    </h3>
+
+    <div style="display: none;" id="findings">
+        <h3>
+            Opinions reflect someone’s experience, assumption or judgment.
+            They don't necessarily reflect reality, or what would be most important to you.
+        </h3>
+        <h3 style="margin-top: 20px;">
+            What other opinions might Nylah want to think about but want to check with facts?
+            Choose all that might apply.
+        </h3>
+
+        <div id="facts_options" style="margin-top:20px;">
+            {% for option in opinions %}
+                <div>
+                    <label>
+                        <input type="checkbox" name="opinions[]" value="{{ option }}"/>
+                        <span> {{ option }}</span>
+                    </label>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="center">
+            <button type="submit">Submit</button>
+        </div>
+
+    </div>
+
+    <a href="nylah5" id="back">Back</a>
+{% endblock %}

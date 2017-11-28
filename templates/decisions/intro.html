@@ -31,7 +31,19 @@
             {% endif %}
         </h3>
         <h3>
-            <a href="2" style="display: none;">Module 2 - Cognitive Bias, You're Not As Open Minded As You Think</a>
+            {% if module2.completed_on %}
+                &#10004;
+                <img src="/static/decisions/img/Module2_badge.png" style="float: right; margin-right: -70px;"/>
+                Module 2 - Cognitive Bias Completed!
+                (<a href="2/restart">Restart</a>)
+            {% else %}
+                {% if module2.step %}
+                    <a href="2/{{ module2.step }}">Module 2 - Cognitive Bias, You're Not As Open Minded As You Think</a>
+                    (<a href="2/restart">Restart</a>)
+                {% else %}
+                    <a href="2">Module 2 - Cognitive Bias, You're Not As Open Minded As You Think</a>
+                {% endif %}
+            {% endif %}
         </h3>
         <h3 style="display: none; margin-top: 20px;"><a href="journal">AREA Journal</a></h3>
     {% else %}

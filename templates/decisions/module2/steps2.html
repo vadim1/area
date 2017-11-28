@@ -1,0 +1,28 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 2 - Moving into Action{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <div class="center">
+    {% include 'decisions/_map.html' with top=100 left=170 %}
+    </div>
+
+    <h2>
+        Your Decision
+    </h2>
+    <h3 class="center" style="margin: 40px; font-weight: normal;">
+        <input type="text" name="decision" class="cc decision center" style="border-bottom: 2px solid lightgray;"
+               size="40" value="{{ decision }}" readonly="readonly"/>
+    </h3>
+
+    <h2>Your Vision of Success (Critical Concepts)</h2>
+    {% for concept in cc %}
+        <h3>&bull; {{ concept }}</h3>
+    {% endfor %}
+
+    <div class="center start2 space">
+        <button type="button"><a href="steps3">Let's Provide Evidence</a></button>
+    </div>
+    <a href="nylah8" id="back">Back</a>
+{% endblock %}

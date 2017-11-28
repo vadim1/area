@@ -1,6 +1,6 @@
 {% extends 'decisions/base.html' %}
 {% load bootstrap %}
-{% block title %}{% block h1 %}Module 2 - Game Results!{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}Module 2 - Bias{% endblock %}{% endblock %}
 {% block extra_head %}
 {% endblock %}
 {% block content %}
@@ -26,11 +26,7 @@
         }
 
         .front, .flip {
-            height: 150px;
-        }
-
-        .reveal img {
-            height: 120px;
+            height: 180px;
         }
 
         .back {
@@ -49,45 +45,52 @@
     }
 
     .back h3 {
-        padding-top: 30px;
+        padding-top: 10px;
         cursor: pointer;
+    }
+
+    .sel {
+        padding-top: 10px;
+        margin-top: 10px;
+        padding-bottom: 10px;
+        background-color: #cccccc;
+        border: 2px dashed #1e2846;
     }
     </style>
     <div class="center">
-    <h2 class="center">Results!</h2>
-    <h3>Click / tap on the biases below.  Read the definition and see your results.</h3>
+    <h2 class="center">See Your Results!</h2>
+    <h3>Click / tap on the biases below to see its relevance.</h3>
         <table class="reveal">
             <tr>
                 <td colspan="2">
                     <div class="flip">
                         <div class="front">
-                            <h2>Optimism Bias</h2>
+                            <h2{% if nylah_bias == 'optimism' %} class="sel"{% endif %}>Optimism Bias</h2>
                         </div>
                         <div class="back">
-                            <h3>Believing everything will turn out well</h3>
-                            <h2>{{ biases.optimism.ratio }}%</h2>
+                            <h3>This bias is not relevant.
+                                Although Nylah does want things to turn out well generally,
+                                she doesn't assume that she should just pick Ohio State, and is gathering evidence to make the best decision.</h3>
                         </div>
                     </div>
                 </td>
                 <td colspan="2">
                     <div class="flip">
                         <div class="front">
-                            <h2>Projection Bias</h2>
+                            <h2{% if nylah_bias == 'projection' %} class="sel"{% endif %}>Projection Bias</h2>
                         </div>
                         <div class="back">
-                            <h3>Putting your own thoughts and desires onto others around you</h3>
-                            <h2>{{ biases.projection.ratio }}%</h2>
+                            <h3>This bias is not relevant because it is about projecting your own thoughts and feelings onto others, assuming they agree.</h3>
                         </div>
                     </div>
                 </td>
                 <td colspan="2">
                     <div class="flip">
                         <div class="front">
-                            <h2>Liking Bias</h2>
+                            <h2{% if nylah_bias == 'liking' %} class="sel"{% endif %}>Liking Bias</h2>
                         </div>
                         <div class="back">
-                            <h3>Gravitating toward things we like</h3>
-                            <h2>{{ biases.liking.ratio }}%</h2>
+                            <h3>This could be at work, but is not most relevant. If Nylah had a friend who liked Ohio State, she could also be influenced to want to like it.</h3>
                         </div>
                     </div>
                 </td>
@@ -96,33 +99,34 @@
                 <td colspan="2">
                     <div class="flip">
                         <div class="front">
-                            <h2>Authority Bias</h2>
+                            <h2{% if nylah_bias == 'authority' %} class="sel"{% endif %}>Authority Bias</h2>
                         </div>
                         <div class="back">
-                            <h3>Tendency to take on the opinion of someone who is seen as an authority on a subject</h3>
-                            <h2>{{ biases.authority.ratio }}%</h2>
+                            <h3>
+This could be at work, but is not most relevant. If an authority figure like Nylah's dad suggested she choose Ohio State, this bias could be right, too!                            </h3>
                         </div>
                     </div>
                 </td>
                 <td colspan="2">
                     <div class="flip">
                         <div class="front">
-                            <h2>Planning Bias</h2>
+                            <h2{% if nylah_bias == 'planning' %} class="sel"{% endif %}>Planning Bias</h2>
                         </div>
                         <div class="back">
-                            <h3>Underestimating how long a task will take, even if you’ve done it before</h3>
-                            <h2>{{ biases.planning.ratio }}%</h2>
+                            <h3>This bias is not relevant because it is about underestimating how long a task will take even if we have done it before.</h3>
                         </div>
                     </div>
                 </td>
                 <td colspan="2">
                     <div class="flip">
                         <div class="front">
-                            <h2>Social Proof</h2>
+                            <h2{% if nylah_bias == 'social' %} class="sel"{% endif %}>
+                                <span class="orange">&#10004;</span>
+                                Social Proof
+                            </h2>
                         </div>
                         <div class="back">
-                            <h3>Following the crowd, letting your opinion be influenced by reputation</h3>
-                            <h2>{{ biases.social.ratio }}%</h2>
+                            <h3>This bias is most relevant, because she is allowing her opinion to be influenced by Ohio State's recognizable name.</h3>
                         </div>
                     </div>
                 </td>
@@ -131,7 +135,7 @@
         </table>
     </div>
     <p class="center start2">
-        <button id="next" type="button"><a href="nylah1">Tell Me More</a></button>
+        <button id="next" type="button"><a href="nylah5">What should Nylah do?</a></button>
     </p>
-    <a href="game2" id="back">Back</a>
+    <a href="nylah3" id="back">Back</a>
 {% endblock %}

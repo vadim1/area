@@ -25,12 +25,14 @@ def home(request):
     request.session['partner'] = 'fp'
     course = load_course(request)
     module1 = load_module1(request)
+    module2 = load_module2(request)
     # If it's the first time, take them to the tour
     if not course.intro_on:
         return redirect('/decisions/tour')
     return render(request, 'decisions/intro.html', {
         'form': forms.FutureProjectSignupForm,
         'module1': module1,
+        'module2': module2,
     })
 
 
@@ -613,6 +615,151 @@ def module2game_results(request):
         'biases': json.loads(module2.biases),
         'answers': module2.answers_json,
         'questions': module2game_questions,
+    })
+
+
+def module2nylah1(request):
+    module2 = load_module2(request, 'nylah1')
+    return render(request, 'decisions/module2/nylah1.html', {
+    })
+
+
+def module2nylah2(request):
+    module2 = load_module2(request, 'nylah2')
+    return render(request, 'decisions/module2/nylah2.html', {
+    })
+
+
+def module2nylah3(request):
+    module2 = load_module2(request, 'nylah3')
+    if request.method == 'POST':
+        module2.nylah_bias = request.POST['nylah_bias']
+        module2.save()
+        return redirect('/decisions/2/nylah4')
+    return render(request, 'decisions/module2/nylah3.html', {
+        'biases': json.loads(module2.biases).keys(),
+    })
+
+
+def module2nylah4(request):
+    module2 = load_module2(request, 'nylah4')
+    return render(request, 'decisions/module2/nylah4.html', {
+        'nylah_bias': module2.nylah_bias,
+    })
+
+
+def module2nylah5(request):
+    module2 = load_module2(request, 'nylah5')
+    return render(request, 'decisions/module2/nylah5.html', {
+    })
+
+
+def module2nylah6(request):
+    module2 = load_module2(request, 'nylah6')
+    if request.method == 'POST':
+        facts = Exception(request.POST.getlist('facts[]'))
+        # TODO: save facts
+        return redirect('/decisions/2/nylah7')
+    return render(request, 'decisions/module2/nylah6.html', {
+        'facts': [
+            'Tuition',
+            'Housing',
+            'Required Courses',
+            'Average SAT/ACT Scores',
+            'Graduation Rates',
+            'Financial Aid',
+        ],
+    })
+
+
+def module2nylah7(request):
+    module2 = load_module2(request, 'nylah7')
+    if request.method == 'POST':
+        opinions = Exception(request.POST.getlist('opinions[]'))
+        # TODO: save opinions
+        return redirect('/decisions/2/nylah8')
+    return render(request, 'decisions/module2/nylah7.html', {
+        'opinions': [
+            'How cold the weather is in Ohio and Maine',
+            'Ohio State\'s sports teams',
+            'How good the parties are',
+            'How nice the dorms are',
+            'How much homework there is',
+            'What is Greek life like',
+        ],
+    })
+
+
+def module2nylah8(request):
+    module2 = load_module2(request, 'nylah8')
+    return render(request, 'decisions/module2/nylah8.html', {
+    })
+
+
+def module2steps(request):
+    module2 = load_module2(request, 'steps')
+    return render(request, 'decisions/module2/steps.html', {
+    })
+
+
+def module2steps2(request):
+    module1 = load_module1(request)
+    module2 = load_module2(request, 'steps2')
+    return render(request, 'decisions/module2/steps2.html', {
+        'cc': json.loads(module1.cc),
+        'decision': module1.decision,
+    })
+
+
+def module2steps3(request):
+    module1 = load_module1(request)
+    module2 = load_module2(request, 'steps3')
+    if request.method == 'POST':
+        module2.evidence0 = json.dumps(request.POST.getlist('cc0evidence[]'))
+        module2.evidence1 = json.dumps(request.POST.getlist('cc1evidence[]'))
+        module2.evidence2 = json.dumps(request.POST.getlist('cc2evidence[]'))
+        module2.save()
+        return redirect('/decisions/2/cheetah')
+    return render(request, 'decisions/module2/steps3.html', {
+        'cc': json.loads(module1.cc),
+        'decision': module1.decision,
+    })
+
+
+def module2steps4(request):
+    module2 = load_module2(request, 'steps4')
+    return render(request, 'decisions/module2/steps4.html', {
+    })
+
+
+def module2cheetah(request):
+    module1 = load_module1(request)
+    module2 = load_module2(request, 'cheetah')
+    if request.method == 'POST':
+        # TODO: save cheetah
+        #module1.cc = json.dumps(request.POST.getlist('cc[]'))
+        #module1.save()
+        return redirect('/decisions/2/summary')
+    return render(request, 'decisions/module2/cheetah.html', {
+        'decision': module1.decision,
+        'cc': json.loads(module1.cc),
+        'evidence0': json.loads(module2.evidence0),
+        'evidence1': json.loads(module2.evidence1),
+        'evidence2': json.loads(module2.evidence2),
+    })
+
+
+def module2summary(request):
+    module2 = load_module2(request, 'summary')
+    module1 = load_module1(request)
+    module2.completed_on = datetime.now()
+    module2.save()
+    return render(request, 'decisions/module2/summary.html', {
+        'decision': module1.decision,
+        'cc': json.loads(module1.cc),
+        'evidence0': json.loads(module2.evidence0),
+        'evidence1': json.loads(module2.evidence1),
+        'evidence2': json.loads(module2.evidence2),
     })
 
 

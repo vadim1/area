@@ -1,0 +1,41 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 2 - Bias{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <style type="text/css">
+        .row {
+            clear: both;
+            width: 100%;
+        }
+
+    </style>
+    <h2 class="center">
+        How should Nylah confront her bias?
+        <br/>
+        What does she need?
+    </h2>
+
+    <p class="row">
+        <div class="col-sm-6">
+            <h2>Facts</h2>
+            Look at the graphic design program information each school posts on their website?
+        </div>
+        <div class="col-sm-6">
+            <h2>Opinions</h2>
+            Ask her guidance counselor how to think about the differences between Ohio State and Bates?
+        </div>
+    </p>
+
+    <p class="row">
+        <div class="col-sm-6">
+            <button type="button" class="start2"><a href="nylah6">Facts</a></button>
+        </div>
+        <div class="col-sm-6">
+            <button type="button" class="start2"><a href="nylah6">Opinions</a></button>
+        </div>
+    </p>
+
+    <a href="nylah1" id="back">Back</a>
+{% endblock %}

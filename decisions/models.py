@@ -30,3 +30,7 @@ class Module2(models.Model):
     step = models.CharField(max_length=20, default='')
     answers = models.TextField(default='')
     biases = models.TextField(default='')
+    nylah_bias = models.CharField(max_length=40, default='')
+    evidence0 = models.CharField(max_length=255, default='')
+    evidence1 = models.CharField(max_length=255, default='')
+    evidence2 = models.CharField(max_length=255, default='')
