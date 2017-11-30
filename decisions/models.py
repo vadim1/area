@@ -8,6 +8,12 @@ class Course(models.Model):
     user = models.ForeignKey(User, null=True)
     intro_on = models.DateField(null=True)
 
+    def __str__(self):
+        return "FP: " + str(self.user)
+
+    class Meta:
+        verbose_name = "Course Taker"
+
 
 class Module1(models.Model):
     course = models.ForeignKey(Course)
@@ -23,6 +29,10 @@ class Module1(models.Model):
     decision_buddy = models.CharField(max_length=80, default='')
     decision_buddy_email = models.EmailField(max_length=80, default='')
 
+    class Meta:
+        verbose_name = 'Module 1 Data'
+        verbose_name_plural = 'Module 1 Data'
+
 
 class Module2(models.Model):
     course = models.ForeignKey(Course)
@@ -34,3 +44,7 @@ class Module2(models.Model):
     evidence0 = models.CharField(max_length=255, default='')
     evidence1 = models.CharField(max_length=255, default='')
     evidence2 = models.CharField(max_length=255, default='')
+
+    class Meta:
+        verbose_name = 'Module 2 Data'
+        verbose_name_plural = 'Module 2 Data'
