@@ -33,10 +33,7 @@ class Module1Inline(admin.StackedInline):
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     readonly_fields = ('user',)
-    list_display = ('__str__','module1','module2')
-    inlines = [
-        Module1Inline,
-    ]
+    list_display = ('__str__','user_details', 'module1', 'module2')
     readonly_fields = []
 
     def get_readonly_fields(self, request, obj=None):
@@ -44,15 +41,27 @@ class CourseAdmin(admin.ModelAdmin):
                [field.name for field in obj._meta.fields] + \
                [field.name for field in obj._meta.many_to_many]
 
+    def user_details(self, course):
+        user = course.user
+        return \
+            "School: " + user.school + \
+            "<br/>Dream Director: " + str(user.dream_director) + \
+            "<br/>Grade: " + str(user.grade)
+    user_details.allow_tags = True
+
+    @staticmethod
+    def module(model, course):
+        this_module = model.objects.filter(course=course).first()
+        if not this_module:
+            return ""
+        return '<a href="/admin/decisions/module' + str(model.num()) + '/' + str(this_module.id) + '">' + \
+               str(this_module) + '</a>'
+
     def module1(self, course):
-        module = Module1.objects.filter(course=course).first()
-        if not module:
-            return ''
-        return module.step
+        return self.module(Module1, course)
+    module1.allow_tags = True
 
     def module2(self, course):
-        module = Module2.objects.filter(course=course).first()
-        if not module:
-            return ''
-        return module.step
+        return self.module(Module2, course)
+    module2.allow_tags = True
 

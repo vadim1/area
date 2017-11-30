@@ -29,6 +29,17 @@ class Module1(models.Model):
     decision_buddy = models.CharField(max_length=80, default='')
     decision_buddy_email = models.EmailField(max_length=80, default='')
 
+    @staticmethod
+    def num():
+        return 1
+
+    def __str__(self):
+        to_return = "Module 1 "
+        ro_return = to_return + " step " + self.step
+        if self.completed_on:
+            to_return = to_return + " completed on " + str(self.completed_on)
+        return to_return
+
     class Meta:
         verbose_name = 'Module 1 Data'
         verbose_name_plural = 'Module 1 Data'
@@ -44,6 +55,17 @@ class Module2(models.Model):
     evidence0 = models.CharField(max_length=255, default='')
     evidence1 = models.CharField(max_length=255, default='')
     evidence2 = models.CharField(max_length=255, default='')
+
+    @staticmethod
+    def num():
+        return 2
+
+    def __str__(self):
+        to_return = "Module 2 "
+        ro_return = to_return + " step " + self.step
+        if self.completed_on:
+            to_return = to_return + " completed on " + str(self.completed_on)
+        return to_return
 
     class Meta:
         verbose_name = 'Module 2 Data'
