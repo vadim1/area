@@ -1,10 +1,10 @@
-GRADES = (('', '-'),
+GRADES = (('', 'None'),
           ('9', '9'),
           ('10', '10'),
           ('11', '11'),
           ('12', '12'),
           )
-DREAM_DIRECTORS = (('', '-'),
+DREAM_DIRECTORS = (('', 'None'),
                    ('ben.kimmerle', 'Ben'),
                    ('carrie.sangiovanni', 'Carrie'),
                    ('christian.shaboo', 'Christian'),

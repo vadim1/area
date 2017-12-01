@@ -23,11 +23,15 @@
                 &#10004;
                 <img src="/static/decisions/img/Module1_badge.png" style="float: right; margin-right: -70px;"/>
                 Module 1 - Introduction to Decision Making Completed!
-                (<a href="1/restart">Restart</a>)
+                {% if user.is_staff %}
+                    (<a href="1/restart">Restart</a>)
+                {% endif %}
             {% else %}
                 {% if module1.step %}
                     <a href="1/{{ module1.step }}">Module 1 - Introduction to Decision Making</a>
-                    (<a href="1/restart">Restart</a>)
+                    {% if user.is_staff %}
+                        (<a href="1/restart">Restart</a>)
+                    {% endif %}
                 {% else %}
                     <a href="1">Module 1 - Introduction to Decision Making</a>
                 {% endif %}
@@ -38,11 +42,15 @@
                 &#10004;
                 <img src="/static/decisions/img/Module2_badge.png" style="float: right; margin-right: -70px;"/>
                 Module 2 - Cognitive Bias Completed!
-                (<a href="2/restart">Restart</a>)
+                {% if user.is_staff %}
+                    (<a href="2/restart">Restart</a>)
+                {% endif %}
             {% else %}
                 {% if module2.step %}
                     <a href="2/{{ module2.step }}">Module 2 - Cognitive Bias, You're Not As Open Minded As You Think</a>
-                    (<a href="2/restart">Restart</a>)
+                    {% if user.is_staff %}
+                        (<a href="2/restart">Restart</a>)
+                    {% endif %}
                 {% else %}
                     <a href="2">Module 2 - Cognitive Bias, You're Not As Open Minded As You Think</a>
                 {% endif %}

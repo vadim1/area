@@ -1,0 +1,13 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 2 - Cognitive Biases{% endblock %}{% endblock %}
+{% block content %}
+    <div class="center">
+    Click on each pin to see what you'll learn.
+    {% include 'decisions/_map.html' with top=20 left=250 %}
+    </div>
+    <p class="center start2">
+        <button id="next" type="button"><a href="/decisions/2/instructions">Test Your Assumptions</a></button>
+    </p>
+    <a href="/decisions/2" id="back">Back</a>
+{% endblock %}

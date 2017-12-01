@@ -38,6 +38,8 @@ urlpatterns = [
 
     url(r'^2/?$', views.module2, name='Module 2'),
     url(r'^2/restart/?', views.module2restart, name='Module 2 Restart'),
+    url(r'^2/review/?$', views.module2review, name='Module 2 Review'),
+    url(r'^2/map/?$', views.module2map, name='Module 2 Map'),
     url(r'^2/instructions/?$', views.module2instructions, name='Module 2 Instructions'),
     url(r'^2/game/?$', views.module2game, name='Module 2 Game'),
     url(r'^2/game_end/?$', views.module2game_end, name='Module 2 Game End'),

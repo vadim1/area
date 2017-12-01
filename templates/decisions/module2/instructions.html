@@ -2,13 +2,17 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 2 - Cognitive Biases{% endblock %}{% endblock %}
 {% block content %}
+    <div class="center">
+    {% include 'decisions/_map.html' with top=20 left=250 %}
+    </div>
     <h3>
-        We're very good at fooling ourselves into believing that we can avoid biases.
+        We're good at fooling ourselves into believing that we can avoid biases.
+    </h3>
+    <h3>
         Take this quiz and test yourself!
     </h3>
     <h3>
-        Answer each of the following questions based on what you would do!
-        Look for an image of a door to <i>walk</i> through and click that to move on!
+        Answer the questions based on what you would do!
     </h3>
     <p class="center start">
         <button id="next" type="button"><a href="#" onclick="return countdown()">Test Your Assumptions</a></button>

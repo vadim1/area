@@ -439,8 +439,24 @@ def module2(request):
     })
 
 
+def module2review(request):
+    module1 = load_module1(request)
+    module2 = load_module2(request, 'review')
+    return render(request, 'decisions/module2/review.html', {
+        'decision_buddy': module1.decision_buddy,
+        'decision': module1.decision,
+        'cc': json.loads(module1.cc),
+    })
+
+
+def module2map(request):
+    module2 = load_module2(request, 'map')
+    return render(request, 'decisions/module2/map.html', {
+    })
+
+
 def module2instructions(request):
-    module2 = load_module1(request, 'instructions')
+    module2 = load_module2(request, 'instructions')
     return render(request, 'decisions/module2/instructions.html', {
     })
 
@@ -454,9 +470,9 @@ module2game_questions = {
         'bias_answer': 0,
     },
     'authority2': {
-        'question': 'Your Spanish teacher asks you to come see her during your free period. Do you...',
-        'answer0': 'Show up, even though you had planned to hang out with your friends',
-        'answer1': 'Tell her that you\'re busy and can\'t make it',
+        'question': 'Your aunt says you should just apply to safety schools. Do you...',
+        'answer0': 'Follow her advice without questioning it',
+        'answer1': 'You check with your guidance counselor',
         'bias': 'authority',
         'bias_answer': 1,
     },
@@ -473,13 +489,6 @@ module2game_questions = {
         'answer1': 'Look at all of the cereal boxes',
         'bias': 'liking',
         'bias_answer': 0,
-    },
-    'planning1': {
-        'question': 'When you head to school in the morning do you...',
-        'answer0': 'Lay out your clothes the night before',
-        'answer1': 'Figure that you want to see what you feel like wearing in the morning',
-        'bias': 'planning',
-        'bias_answer': 1,
     },
     'planning2': {
         'question': 'When you look at your homework list, do you...',
