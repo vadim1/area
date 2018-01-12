@@ -678,9 +678,9 @@ def module2nylah52(request):
 def module2nylah6(request):
     module2 = load_module2(request, 'nylah6')
     if request.method == 'POST':
-        facts = Exception(request.POST.getlist('facts[]'))
+        facts = request.POST.getlist('facts[]')
         # TODO: save facts
-        return redirect('/decisions/2/nylah7')
+        return redirect('/decisions/2/nylah61')
     return render(request, 'decisions/module2/nylah6.html', {
         'facts': [
             [
@@ -699,6 +699,19 @@ def module2nylah6(request):
     })
 
 
+def module2nylah61(request):
+    module2 = load_module2(request, 'nylah61')
+    if request.method == 'POST':
+        opinions_reality = request.POST.get('opinions_reality')
+        opinions_importance = request.POST.get('opinions_importance')
+        # TODO: save
+        return redirect('/decisions/2/nylah7')
+    return render(request, 'decisions/module2/nylah61.html', {
+    })
+
+
+
+
 def module2nylah7(request):
     module2 = load_module2(request, 'nylah7')
     if request.method == 'POST':
@@ -707,12 +720,14 @@ def module2nylah7(request):
         return redirect('/decisions/2/nylah8')
     return render(request, 'decisions/module2/nylah7.html', {
         'opinions': [
-            'How cold the weather is in Ohio and Maine',
-            'Ohio State\'s sports teams',
-            'How good the parties are',
+            'The weather is in Ohio and Maine',
+            'How interesting the classes are',
+            'Whether the professors are good',
+            'How hard it is to get into classes',
             'How nice the dorms are',
+            'How the food is',
             'How much homework there is',
-            'What is Greek life like',
+            'Greek life',
         ],
     })
 

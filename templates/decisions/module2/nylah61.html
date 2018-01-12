@@ -1,0 +1,101 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 2 - Bias{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <style type="text/css">
+        #facts_options div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: large;
+            border: 1px solid #dddddd;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+
+        td {
+            margin: 3px;
+            padding: 3px;
+            width: 33%;
+        }
+    </style>
+
+    <h2 class="center">
+        Collecting Opinions
+    </h2>
+
+    <h3>
+        Perspective taking teaches you how to engage with, and learn from, others while also managing your own biases.
+    </h3>
+
+    <h3>
+        Opinions reflect someone's experience, assumption or judgment.
+    </h3>
+
+    <h3>
+        Do they reflect reality?
+    </h3>
+
+    <table width="100%">
+        <tr>
+            <td>
+                <label>
+                    <input type="radio" name="opinions_reality" value="always"/>
+                    Always
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="radio" name="opinions_reality" value="sometimes"/>
+                    Sometimes
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="radio" name="opinions_reality" value="never"/>
+                    Never
+                </label>
+            </td>
+        </tr>
+    </table>
+
+    <h3>
+        Do they reflect what’s important to you?
+    </h3>
+
+    <table width="100%">
+        <tr>
+            <td>
+                <label>
+                    <input type="radio" name="opinions_importance" value="always"/>
+                    Always
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="radio" name="opinions_importance" value="sometimes"/>
+                    Sometimes
+                </label>
+            </td>
+            <td>
+                <label>
+                    <input type="radio" name="opinions_importance" value="never"/>
+                    Never
+                </label>
+            </td>
+        </tr>
+    </table>
+
+    <div class="center" style="margin-top: 50px;">
+        <button type="submit">Submit</button>
+    </div>
+
+    <a href="nylah5" id="back">Back</a>
+{% endblock %}

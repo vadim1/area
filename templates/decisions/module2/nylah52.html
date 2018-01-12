@@ -4,9 +4,105 @@
 {% block extra_head %}
 {% endblock %}
 {% block content %}
-    <div>What goes here?</div>
-    <p class="center">
-        <a href="nylah6"><button id="next" type="button">Overcome Bias</button></a>
+    <style type="text/css">
+        label {
+            font-size: large;
+            border: 1px solid #dddddd;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+
+        td {
+            margin: 3px;
+            padding: 3px;
+            height: 100%;
+        }
+
+        label {
+            height: 100%;
+        }
+
+        #canvas {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.perspective').click(function () {
+                var unchecked = $('.perspective').not(':checked');
+                if (unchecked.length < 1) {
+                    $('#next_btn').show();
+                    $('#canvas').show();
+                    StartConfetti();
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript" src="/static/decisions/js/confetti.js"></script>
+    <canvas id="canvas"></canvas>
+    <h2 class="center">Perspective Taking</h2>
+    <h3>
+        Nylah's using perspective-taking to get her facts directly from the sources of information - the colleges
+        - she's interested in so that they can represent their own facts.
+    </h3>
+
+    <p class="center" id="perspectives_button">
+        <button onclick="$('#perspectives').show(); $('#next_btn').hide(); $('#perspectives_button').hide(); return false;">
+            Investigate Different Perspectives
+        </button>
     </p>
+
+    <div id="perspectives" style="display: none;">
+        <h3>Why do you want to sit in someone else's perspective?</h3>
+        <div style="margin-bottom: 20px;">Check all that apply.</div>
+        <div>
+            <label>
+                <input type="checkbox" name="perspective" class="perspective"/>
+                Allows the other person or organization to tell their own story
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" name="perspective" class="perspective"/>
+                Promotes Empathy
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" name="perspective" class="perspective"/>
+                Helps you build self awareness and face your own biases
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" name="perspective" class="perspective"/>
+                Promotes Understanding
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" name="perspective" class="perspective"/>
+                Understand what motivated the person or organization
+            </label>
+        </div>
+
+        <div class="center" id="next_btn" style="display: none; margin-top: 50px;">
+            <h1>YES!</h1>
+            <a href="nylah6">
+                <button id="next" type="button">Learn More</button>
+            </a>
+        </div>
+    </div>
     <a href="nylah51" id="back">Back</a>
 {% endblock %}

@@ -54,6 +54,7 @@ urlpatterns = [
     url(r'^2/nylah51/?$', views.module2nylah51, name='Module 2 Nylah'),
     url(r'^2/nylah52/?$', views.module2nylah52, name='Module 2 Nylah'),
     url(r'^2/nylah6/?$', views.module2nylah6, name='Module 2 Nylah'),
+    url(r'^2/nylah61/?$', views.module2nylah61, name='Module 2 Nylah'),
     url(r'^2/nylah7/?$', views.module2nylah7, name='Module 2 Nylah'),
     url(r'^2/nylah8/?$', views.module2nylah8, name='Module 2 Nylah'),
     url(r'^2/steps/?$', views.module2steps, name='Module 2 Moving into Action'),
