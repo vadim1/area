@@ -2,12 +2,61 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 2 - Cognitive Biases{% endblock %}{% endblock %}
 {% block content %}
+    <style type="text/css">
+    .map .pin {
+        position: absolute;
+    }
+    #title {
+        position: absolute;
+        display: none;
+        text-align: left;
+        background-color: rgba(255,255,255,0.8);
+        padding-left: 5px;
+        padding-right: 5px;
+        border: 1px dashed #1e2846;
+    }
+    </style>
+    <script type="text/javascript">
+        /**
+         * Take a css dimension like "20px" and add to_add pixels to it
+         * @param dimension_in_px
+         * @param to_add
+         */
+    function pixel_add(dimension_in_px, to_add)
+    {
+        var dim = dimension_in_px.substr(0, dimension_in_px.length-2);
+        return parseInt(dim) + to_add + 'px';
+    }
+
+    function pin()
+    {
+        var title_text = $(this).attr('title');
+        var top = pixel_add($(this).css('margin-top'), -150);
+        var left = pixel_add($(this).css('margin-left'), 445);
+        $('#title').css('margin-top', top).css('margin-left', left).text(title_text).show();
+    }
+
+    $(document).ready(function(){
+       $('.pin').click(pin);
+    });
+    </script>
     <div class="center">
-    Click on each pin to see what you'll learn.
-    {% include 'decisions/_map.html' with top=20 left=250 %}
+        <h3>Click on each pin to see what you'll learn.</h3>
+        <div class="map">
+            <img src="/static/decisions/img/Map.png" />
+            <img src="/static/decisions/img/Locator_rotated.png" class="pin"
+                 style="margin-top: 50px; margin-left: -250px;" title="Mental Shortcuts and Biases" />
+            <img src="/static/decisions/img/Locator_rotated.png" class="pin"
+                 style="margin-top: 10px; margin-left: -160px;" title="Facts Versus Opinions" />
+            <img src="/static/decisions/img/Locator_rotated.png" class="pin"
+                 style="margin-top: 45px; margin-left: -155px;" title="Perspective Taking" />
+            <img src="/static/decisions/img/Locator_rotated.png" class="pin"
+                 style="margin-top: 20px; margin-left: -80px;" title="How Facts Beat Biases" />
+            <div id="title"></div>
+        </div>
     </div>
     <p class="center start2">
-        <button id="next" type="button"><a href="/decisions/2/instructions">Test Your Assumptions</a></button>
+        <button id="next" type="button"><a href="/decisions/2/instructions">Ready to Make Better Decisions</a></button>
     </p>
     <a href="/decisions/2" id="back">Back</a>
 {% endblock %}

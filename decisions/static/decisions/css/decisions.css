@@ -2,22 +2,28 @@
 .orange {
     color: #f6653c;
 }
+
 .red {
     color: #f2502a;
 }
+
 .orange-bg {
     color: #ffffff;
     background-color: #f6653c;
 }
+
 .yellow {
     color: #ffc253;
 }
+
 .green {
     color: #1dcd9f;
 }
+
 .blue {
     color: #1e2846;
 }
+
 .light-blue {
     color: #52c0d8;
 }
@@ -48,7 +54,7 @@
     background-color: #f6653c;
     color: #ffffff;
     border: 0;
-    min-width: 300px;
+    min-width: 220px;
 }
 
 #next:hover, #answers button:hover, button:hover {
@@ -59,7 +65,7 @@
 }
 
 #next:active, #answers button:active, #next:focus, #answers button:focus, button:focus {
-    background-color: #f6653c!important;
+    background-color: #f6653c !important;
 }
 
 button a, button a:hover, button a:visited, button a:link, button a:active {
@@ -139,7 +145,7 @@ p {
 @font-face {
     font-family: 'Museo_Slab_500_2';
     src: url('/static/decisions/css/Museo_Slab_500_2-webfont.woff2') format('woff2'),
-         url('/static/decisions/css/Museo_Slab_500_2-webfont.woff') format('woff');
+    url('/static/decisions/css/Museo_Slab_500_2-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -230,4 +236,9 @@ li {
 
 .space {
     margin-top: 40px;
+}
+
+.row {
+    clear: both;
+    width: 100%;
 }

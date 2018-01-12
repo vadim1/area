@@ -19,42 +19,42 @@
         :checked + span {
             font-weight: bold;
         }
+
+        td {
+            margin: 3px;
+            padding: 3px;
+        }
     </style>
 
-    <h3>
-        When learning about something new, often the best option is to get information from the source itself,
-        as facts and figures.
-    </h3>
+    <h2 class="center">
+        Nylah's Facts
+    </h2>
 
     <h3>
         Nylah's sources here will be the school websites for Bates and Ohio State.
     </h3>
 
-    <h3 class="center" style="margin-top: 20px;">
-        <button type="button" onclick="$('#findings').show(); return false;">What might she find?</button>
-    </h3>
-
-    <div style="display: none;" id="findings">
-        <h3>1. The student to teacher ratio</h3>
-        <h3>2. The percent of graphic design students who graduate with a job from Bates and Ohio State</h3>
-        <h3>3. The student to teacher ratio at Bates and Ohio State</h3>
-        <h3>4. The percent of graphic design</h3>
-        <h3>5. Students who graduate with a job from Bates and Ohio State</h3>
-
+    <div>
         <h3 style="margin-top: 20px;">
             What other kinds of facts and figures might Nylah search for?
             Choose below the information you think Nylah will find helpful:
         </h3>
 
-        <div id="facts_options" style="margin-top:20px;">
-            {% for option in facts %}
-                <div>
+        <tr id="facts_options" style="margin-top:20px;">
+        <table width="100%">
+            {% for option_list in facts %}
+                <tr>
+                {% for option in option_list %}
+                <td>
                     <label>
                         <input type="checkbox" name="facts[]" value="{{ option }}"/>
                         <span> {{ option }}</span>
                     </label>
-                </div>
+                </td>
+                {% endfor %}
+                </tr>
             {% endfor %}
+        </table>
         </div>
 
         <div class="center">

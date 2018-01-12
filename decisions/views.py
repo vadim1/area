@@ -390,16 +390,16 @@ def module1commitment(request):
     if request.method == 'POST':
         return redirect('/decisions/1/summary')
     mail_body = module1.decision_buddy + ',' + '%0D%0D' + \
-        'Please help me with a big decision: ' + module1.decision + '%0D%0D'
+                'Please help me with a big decision: ' + module1.decision + '%0D%0D'
     for concept in json.loads(module1.cc):
         mail_body += concept + '%0D'
     mail_body += '%0D' + \
-        'Would you help me get started?  Here are a few questions I need to answer:' + '%0D%0D' + \
-        'What are the organizations involved in your decision?' + '%0D' + \
-        'Who are the people who could help you make your decision?' + '%0D' + \
-        'What do you need to find out?' + '%0D' + \
-        'How will getting information help you make your decision?' + '%0D%0D' + \
-        'Thank you!'
+                 'Would you help me get started?  Here are a few questions I need to answer:' + '%0D%0D' + \
+                 'What are the organizations involved in your decision?' + '%0D' + \
+                 'Who are the people who could help you make your decision?' + '%0D' + \
+                 'What do you need to find out?' + '%0D' + \
+                 'How will getting information help you make your decision?' + '%0D%0D' + \
+                 'Thank you!'
     to = module1.decision_buddy_email + ',' + request.user.email
     return render(request, 'decisions/module1/commitment.html', {
         'decision_buddy': module1.decision_buddy,
@@ -663,6 +663,18 @@ def module2nylah5(request):
     })
 
 
+def module2nylah51(request):
+    module2 = load_module2(request, 'nylah51')
+    return render(request, 'decisions/module2/nylah51.html', {
+    })
+
+
+def module2nylah52(request):
+    module2 = load_module2(request, 'nylah52')
+    return render(request, 'decisions/module2/nylah52.html', {
+    })
+
+
 def module2nylah6(request):
     module2 = load_module2(request, 'nylah6')
     if request.method == 'POST':
@@ -671,12 +683,18 @@ def module2nylah6(request):
         return redirect('/decisions/2/nylah7')
     return render(request, 'decisions/module2/nylah6.html', {
         'facts': [
-            'Tuition',
-            'Housing',
-            'Required Courses',
-            'Average SAT/ACT Scores',
-            'Graduation Rates',
-            'Financial Aid',
+            [
+                'Tuition',
+                'Housing',
+            ],
+            [
+                'Required Courses',
+                'Average SAT/ACT Scores',
+            ],
+            [
+                'Graduation Rates',
+                'Financial Aid',
+            ],
         ],
     })
 
@@ -746,8 +764,8 @@ def module2cheetah(request):
     module2 = load_module2(request, 'cheetah')
     if request.method == 'POST':
         # TODO: save cheetah
-        #module1.cc = json.dumps(request.POST.getlist('cc[]'))
-        #module1.save()
+        # module1.cc = json.dumps(request.POST.getlist('cc[]'))
+        # module1.save()
         return redirect('/decisions/2/summary')
     return render(request, 'decisions/module2/cheetah.html', {
         'decision': module1.decision,

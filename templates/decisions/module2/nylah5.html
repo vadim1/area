@@ -4,38 +4,62 @@
 {% block extra_head %}
 {% endblock %}
 {% block content %}
-    <style type="text/css">
-        .row {
-            clear: both;
-            width: 100%;
+    <script type="text/javascript">
+        function opinions() {
+            $('#opinions').show();
         }
-
-    </style>
+    </script>
     <h2 class="center">
         How should Nylah confront her bias?
-        <br/>
-        What does she need?
     </h2>
+    <h3 style="font-size: 150%; margin-top: 30px;">
+        For Nylah's interest in graphic design, is there data about each college's program?
+    </h3>
+    <h3>1. The student to teacher ratios</h3>
+    <h3>2. The percent of graphic design students who graduate with a job</h3>
+    <h3>3. The student to teacher ratio at Bates and Ohio State</h3>
+    <h3 class="center" style="font-size: 150%; margin-top: 30px;">
+        What does she need?
+    </h3>
 
     <p class="row">
-        <div class="col-sm-6">
-            <h2>Facts</h2>
-            Look at the graphic design program information each school posts on their website?
-        </div>
-        <div class="col-sm-6">
-            <h2>Opinions</h2>
-            Ask her guidance counselor how to think about the differences between Ohio State and Bates?
-        </div>
+    <div class="col-sm-5">
+        <h2>Facts</h2>
+        For Nylah's interest in graphic design, is there data about each college's program?
+    </div>
+    <div class="col-sm-2">
+        <h2 style="margin-top: 100px;">OR</h2>
+    </div>
+    <div class="col-sm-5">
+        <h2>Opinions</h2>
+        Should she ask current graphic design students at each school what they think of their programs?
+    </div>
     </p>
 
     <p class="row">
-        <div class="col-sm-6">
-            <button type="button" class="start2"><a href="nylah6">Facts</a></button>
-        </div>
-        <div class="col-sm-6">
-            <button type="button" class="start2"><a href="nylah6">Opinions</a></button>
-        </div>
+    <div class="col-sm-5">
+        <a href="nylah51">
+            <button type="button" class="start2">Facts</button>
+        </a>
+    </div>
+    <div class="col-sm-2">
+        &nbsp;
+    </div>
+    <div class="col-sm-5">
+        <button type="button" class="start2" onclick="opinions()">Opinions</button>
+    </div>
     </p>
+
+    <div id="opinions" style="display: none; margin-top: 100px; clear: both;">
+        <p row="class">
+        <div class="col-sm-7">
+            &nbsp;
+        </div>
+        <div class="col-sm-5">
+            If Nylah listens to the opinions before she's collected facts it may color how she understands the facts.
+        </div>
+        </p>
+    </div>
 
     <a href="nylah1" id="back">Back</a>
 {% endblock %}
