@@ -3,6 +3,8 @@ import views.view as views
 import views.mobile_auth as mobile
 
 urlpatterns = [
+    url(r'toc/?$', views.toc, name='Table of Contents'),
+
     url(r'^$', views.home, name='Home'),
     url(r'^1$', views.home, name='Home'),
     url(r'^decision$', views.decision, name='Decision'),

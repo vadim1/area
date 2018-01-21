@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load socialaccount %}
+{% block title %}{% block h1 %}Table of Contents{% endblock %}{% endblock %}
+{% block content %}
+    <h2>Table of Contents</h2>
+    <h3>AREA App</h3>
+    <ul>
+    {% for page in area %}
+        <li><a href="/{{ page }}" target="_blank">{{ page }}</a></li>
+    {% endfor %}
+    </ul>
+    <h3>Future Project App</h3>
+    <h4>Module 1</h4>
+    <ul>
+    {% for page in module1 %}
+        <li><a href="/decisions/{{ page }}" target="_blank">{{ page }}</a></li>
+    {% endfor %}
+    </ul>
+    <h4>Module 2</h4>
+    <ul>
+    {% for page in module2 %}
+        <li><a href="/decisions/{{ page }}" target="_blank">{{ page }}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock %}

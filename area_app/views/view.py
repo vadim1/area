@@ -7,8 +7,55 @@ from area_app.utils import send_from_default_email
 from area_app.models import Problem, CriticalConcepts
 
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.conf import settings
+from django.core.urlresolvers import RegexURLResolver, RegexURLPattern
+
+
+@login_required
+def toc(request):
+    views = []
+
+    def get_all_views(patterns):
+        """Retrieve a list of urlpattern names"""
+        for pat in patterns:
+            if isinstance(pat, RegexURLResolver):
+                get_all_views(pat.url_patterns)  # call this function recursively
+            elif isinstance(pat, RegexURLPattern):
+                view_name = pat.lookup_str # get the view name
+                views.append(view_name)  # add the view to the global list
+        return views
+
+    root_urlconf = __import__(settings.ROOT_URLCONF)  # access the root urls.py file
+    views = get_all_views(root_urlconf.urls.urlpatterns)
+    app_views = {'area': [], 'module1': [], 'module2': []}
+    for view in sorted(views):
+        view_parts = view.split('.')
+        view_first_part = view_parts[0]
+        if view_first_part == 'django':
+            pass
+        elif view_first_part == 'allauth':
+            pass
+        elif view_first_part == 'debug_toolbar':
+            pass
+        elif view_first_part == 'area_app':
+            if view_parts[2] != 'mobile_auth':
+                app_views['area'].append(view_parts[3])
+        elif view_first_part == 'decisions':
+            if view_parts[2].startswith('module1'):
+                app_views['module1'].append(view_parts[2].replace('module1', '1/'))
+            elif view_parts[2].startswith('module2'):
+                app_views['module2'].append(view_parts[2].replace('module2', '2/'))
+        else:
+            raise Exception('Unknown view context for ' + view)
+
+    # raise Exception(root_urlconf.urls.urlpatterns)
+    return render(request, 'toc.html',
+                  {
+                      'area': list(set(app_views['area'])),
+                      'module1': list(set(app_views['module1'])),
+                      'module2': list(set(app_views['module2'])),
+                  })
 
 
 def check_partner(request):
