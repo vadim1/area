@@ -43,22 +43,35 @@
                 var unchecked = $('.perspective').not(':checked');
                 if (unchecked.length < 1) {
                     $('#next_btn').show();
+                    $('#more').hide();
                     $('#canvas').show();
                     StartConfetti();
                 }
             });
         });
+
+        function clickPerspectives()
+        {
+            $('#perspectives').show();
+            $('#next_btn').hide();
+            $('#perspectives_button').hide();
+            setTimeout(function(){$('#more').show();}, 6000);
+            return false;
+        }
     </script>
     <script type="text/javascript" src="/static/decisions/js/confetti.js"></script>
     <canvas id="canvas"></canvas>
     <h2 class="center">Perspective Taking</h2>
+    <div class="center">
+        {% include 'decisions/_map.html' with top=30 left=160 %}
+    </div>
     <h3>
         Nylah's using perspective-taking to get her facts directly from the sources of information - the colleges
         - she's interested in so that they can represent their own facts.
     </h3>
 
-    <p class="center" id="perspectives_button">
-        <button onclick="$('#perspectives').show(); $('#next_btn').hide(); $('#perspectives_button').hide(); return false;">
+    <p class="center" id="perspectives_button" style="margin-top: 50px;">
+        <button onclick="return clickPerspectives()">
             Investigate Different Perspectives
         </button>
     </p>
@@ -96,6 +109,11 @@
                 Understand what motivated the person or organization
             </label>
         </div>
+
+        <div id="more" style="display: none; margin-top: 10px;">
+            <h2>Keep going - more apply...</h2>
+        </div>
+
 
         <div class="center" id="next_btn" style="display: none; margin-top: 50px;">
             <h1>YES!</h1>

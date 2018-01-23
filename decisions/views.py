@@ -542,11 +542,20 @@ module2game_questions = {
     'projection2': {
         'question': 'You\'re assigned a group project. Do you...',
         'answer0': 'Wait for the girl who always leads to to tell you your role',
-        'answer1': 'Pick which part of the project you want to volunteer for',
+        'answer1': 'Look at the tasks and sign up for the one you want',
         'bias': 'projection',
         'bias_answer': 0,
     },
 }
+
+biases = [
+    {'key': 'authority', 'label': 'Authority Bias'},
+    {'key': 'liking', 'label': 'Liking Bias'},
+    {'key': 'planning', 'label': 'Planning Bias'},
+    {'key': 'optimism', 'label': 'Optimism Bias'},
+    {'key': 'social', 'label': 'Social Proof'},
+    {'key': 'projection', 'label': 'Projection Bias'},
+]
 
 
 def calculate_biases(answers):
@@ -624,6 +633,21 @@ def module2game_results(request):
         'biases': json.loads(module2.biases),
         'answers': module2.answers_json,
         'questions': module2game_questions,
+    })
+
+
+def module2game2_intro(request):
+    module2 = load_module2(request, 'game2_intro')
+    return render(request, 'decisions/module2/game2_intro.html', {
+    })
+
+
+def module2game2(request):
+    module2 = load_module2(request, 'game2')
+    return render(request, 'decisions/module2/game2.html', {
+        'questions': module2game_questions.values(),
+        'biases': biases,
+        'num_questions': len(module2game_questions),
     })
 
 

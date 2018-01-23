@@ -121,7 +121,7 @@
                         </div>
                         <div class="back">
                             <h3>
-If an authority figure like Nylah's dad suggested she choose Ohio State, this bias could be right, too!
+                                If an authority figure like Nylah's dad suggested she choose Ohio State, this bias could be right.
                             </h3>
                         </div>
                     </div>
@@ -140,7 +140,7 @@ If an authority figure like Nylah's dad suggested she choose Ohio State, this bi
                 </td>
                 <td colspan="2">
                     <div class="flip" id="social">
-                        <div class="front">
+                        <div class="front" onclick="setTimeout(function(){ $('#next').show(); }, 1500);">
                             <h2{% if nylah_bias == 'social' %} class="sel"{% endif %}>
                                 <span class="orange">&#10004;</span>
                                 Social Proof
@@ -148,7 +148,8 @@ If an authority figure like Nylah's dad suggested she choose Ohio State, this bi
                         </div>
                         <div class="back">
                             <h3>
-This bias is most relevant, because Nylah is allowing her opinion to be influenced by Ohio State's popularity.                            </h3>
+                                This bias is most relevant because Nylah is allowing her opinion to be influenced by Ohio State's popularity.
+                            </h3>
                         </div>
                     </div>
                 </td>
@@ -156,8 +157,8 @@ This bias is most relevant, because Nylah is allowing her opinion to be influenc
 
         </table>
     </div>
-    <p class="center start2">
-        <button id="next" type="button"><a href="nylah5">What should Nylah do?</a></button>
+    <p class="center">
+        <button id="next" type="button" style="display: none;"><a href="nylah5">What should Nylah do?</a></button>
     </p>
     <a href="nylah3" id="back">Back</a>
 {% endblock %}
