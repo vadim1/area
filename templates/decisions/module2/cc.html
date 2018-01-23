@@ -1,0 +1,103 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 2 - Your Critical Concepts{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <style type="text/css">
+        label {
+            white-space: nowrap;
+            vertical-align: middle;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+
+        td {
+            margin: 3px;
+            padding: 3px;
+            height: 100%;
+        }
+    </style>
+    <h2 class="center">Your Critical Concepts</h2>
+    <h3>
+        Now it's your turn. Let's work with your decision from Module 1: "{{ decision }}"
+    </h3>
+    <h3>
+        For each of your critical concepts, provide 3 facts and their sources.
+    </h3>
+    <table>
+        {% for concept in cc %}
+            <tr>
+                <td colspan="2"><h3>{{ concept }}</h3></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="cc{{ forloop.counter0 }}fact1" value="" size="40" placeholder="Fact"/>
+                </td>
+                <td>
+                    <input type="text" name="cc{{ forloop.counter0 }}source1" value="" size="40" placeholder="Source"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="cc{{ forloop.counter0 }}fact2" value="" size="40" placeholder="Fact"/>
+                </td>
+                <td>
+                    <input type="text" name="cc{{ forloop.counter0 }}source2" value="" size="40" placeholder="Source"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="cc{{ forloop.counter0 }}fact3" value="" size="40" placeholder="Fact"/>
+                </td>
+                <td>
+                    <input type="text" name="cc{{ forloop.counter0 }}source3" value="" size="40" placeholder="Source"/>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <h3>
+        Now provide 3 assumptions and their biases. For each assumption, what do you need to do to prove or disprove it?
+    </h3>
+    <table>
+        {% for concept in cc %}
+            <tr>
+                <td colspan="2"><h3>{{ concept }}</h3></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" name="cc{{ forloop.counter0 }}assumption1" value="" size="40"
+                           placeholder="Assumption"/>
+                </td>
+                <td>
+                    {% for bias in biases %}
+                        <label><input type="checkbox" class="btn" name="cc{{ forloop.counter0 }}assumption1bias[]"
+                                      value="{{ bias.key }}"/>{{ bias.label }}</label>
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <select name="cc{{ forloop.counter0 }}assumption1fact">
+                        <option value="">What's Needed?</option>
+                        <option value="expert">Find an Expert on:</option>
+                        <option value="article">Find a News Article About:</option>
+                        <option value="internet">Search the Internet for:</option>
+                    </select>
+                    <input type="text" name="cc{{ forloop.counter0 }}assumption1factdetails" value="" size="20"
+                           placeholder="Details"/>
+                    <input type="text" name="cc{{ forloop.counter0 }}actionsource1" value="" size="20"
+                           placeholder="Source"/>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <div class="center" id="next_btn" style="margin-top: 30px;">
+        <button class="next">Submit</button>
+    </div>
+
+    <a href="nylah_cc_evidence" id="back">Back</a>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 2 - Nylah's Assumptions{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <style type="text/css">
+        label {
+            font-size: large;
+            border: 1px solid #dddddd;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+
+        label {
+            height: 100%;
+        }
+    </style>
+    <h2 class="center">Nylah's Assumptions</h2>
+    <h3>
+        Are the facts enough? No, some assumptions also had to be made. Nylah identified the following assumptions.
+    </h3>
+    <h3>
+        Help Nylah figure out which biases may at play for each assumption.
+    </h3>
+
+    <div style="">Check all that apply.</div>
+    <h3>Assumption 1</h3>
+    <div>
+        {% for bias in biases %}
+            <label>
+                <input type="checkbox" name="bias" class="perspective"/>
+                {{ bias.label }}
+            </label>
+        {% endfor %}
+    </div>
+
+    <h3>Assumption 2</h3>
+    <div>
+        {% for bias in biases %}
+            <label>
+                <input type="checkbox" name="bias" class="perspective"/>
+                {{ bias.label }}
+            </label>
+        {% endfor %}
+    </div>
+
+    <h3>Assumption 3</h3>
+    <div>
+        {% for bias in biases %}
+            <label>
+                <input type="checkbox" name="bias" class="perspective"/>
+                {{ bias.label }}
+            </label>
+        {% endfor %}
+    </div>
+
+    <div class="center" id="next_btn" style="margin-top: 30px;">
+        <a href="nylah_cc_evidence">
+            <button id="next" type="button">Let's Test Those Assumptions</button>
+        </a>
+    </div>
+
+    <a href="nylah_cc_facts" id="back">Back</a>
+{% endblock %}

@@ -734,8 +734,6 @@ def module2nylah61(request):
     })
 
 
-
-
 def module2nylah7(request):
     module2 = load_module2(request, 'nylah7')
     if request.method == 'POST':
@@ -759,6 +757,44 @@ def module2nylah7(request):
 def module2nylah8(request):
     module2 = load_module2(request, 'nylah8')
     return render(request, 'decisions/module2/nylah8.html', {
+    })
+
+
+def module2nylah_cc(request):
+    module2 = load_module2(request, 'nylah_cc')
+    return render(request, 'decisions/module2/nylah_cc.html', {
+    })
+
+
+def module2nylah_cc_facts(request):
+    module2 = load_module2(request, 'nylah_cc_facts')
+    return render(request, 'decisions/module2/nylah_cc_facts.html', {
+    })
+
+
+def module2nylah_cc_assumptions(request):
+    module2 = load_module2(request, 'nylah_cc_assumptions')
+    return render(request, 'decisions/module2/nylah_cc_assumptions.html', {
+        'biases': biases,
+    })
+
+
+def module2nylah_cc_evidence(request):
+    module2 = load_module2(request, 'nylah_cc_evidence')
+    return render(request, 'decisions/module2/nylah_cc_evidence.html', {
+    })
+
+
+def module2cc(request):
+    module1 = load_module1(request)
+    module2 = load_module2(request, 'cc')
+    if request.method == 'POST':
+        # TODO: save Critical Concepts
+        return redirect('/decisions/2/summary')
+    return render(request, 'decisions/module2/cc.html', {
+        'cc': json.loads(module1.cc),
+        'decision': module1.decision,
+        'biases': biases,
     })
 
 

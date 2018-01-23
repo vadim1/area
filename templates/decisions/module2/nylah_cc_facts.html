@@ -1,6 +1,6 @@
 {% extends 'decisions/base.html' %}
 {% load bootstrap %}
-{% block title %}{% block h1 %}Module 2 - Bias{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}Module 2 - Nylah's Facts{% endblock %}{% endblock %}
 {% block extra_head %}
 {% endblock %}
 {% block content %}
@@ -25,17 +25,6 @@
         label {
             height: 100%;
         }
-
-        #canvas {
-            display: none;
-            position: fixed;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 100%;
-            z-index: 1;
-            pointer-events: none;
-        }
     </style>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -44,11 +33,6 @@
                 if (unchecked.length < 1) {
                     $('#next_btn').show();
                     $('#more').hide();
-
-                    /** If we want confetti:
-                    $('#canvas').show();
-                    StartConfetti();
-                    */
                 }
             });
         });
@@ -62,68 +46,46 @@
             return false;
         }
     </script>
-    <script type="text/javascript" src="/static/decisions/js/confetti.js"></script>
-    <canvas id="canvas"></canvas>
-    <h2 class="center">Perspective Taking</h2>
-    <div class="center">
-        {% include 'decisions/_map.html' with top=30 left=160 %}
-    </div>
-    <h3>
-        Nylah's using perspective-taking to get her facts directly from the sources of information - the colleges
-        - she's interested in so that they can represent their own facts.
-    </h3>
+    <h2 class="center">Nylah's Facts</h2>
+    <h3>For "I'm able to afford it," which are facts Nylah might have found?</h3>
 
     <p class="center" id="perspectives_button" style="margin-top: 50px;">
         <button onclick="return clickPerspectives()">
-            Investigate Different Perspectives
+            Show potential facts
         </button>
     </p>
 
     <div id="perspectives" style="display: none;">
-        <h3>Why do you want to sit in someone else's perspective?</h3>
         <div style="margin-bottom: 20px;">Check all that apply.</div>
         <div>
             <label>
                 <input type="checkbox" name="perspective" class="perspective"/>
-                Allow the other person or organization to tell their own story
+                Fact 1
             </label>
         </div>
         <div>
             <label>
                 <input type="checkbox" name="perspective" class="perspective"/>
-                Promote empathy
+                Fact 2
             </label>
         </div>
         <div>
             <label>
                 <input type="checkbox" name="perspective" class="perspective"/>
-                Helps you build self awareness and face your own biases
-            </label>
-        </div>
-        <div>
-            <label>
-                <input type="checkbox" name="perspective" class="perspective"/>
-                Promote understanding
-            </label>
-        </div>
-        <div>
-            <label>
-                <input type="checkbox" name="perspective" class="perspective"/>
-                Understand what motivated the person or organization
+                Fact 3
             </label>
         </div>
 
         <div id="more" style="display: none; margin-top: 10px;">
-            <h2>Keep going - more apply...</h2>
+            <h2>Keep going - all of them are facts!</h2>
         </div>
 
 
-        <div class="center" id="next_btn" style="display: none; margin-top: 50px;">
-            <h1>YES!</h1>
-            <a href="nylah6">
-                <button id="next" type="button">Learn More</button>
-            </a>
-        </div>
+    <div class="center" id="next_btn" style="display: none; margin-top: 30px;">
+        <a href="nylah_cc_assumptions">
+            <button id="next" type="button">What Else Does Nylah Need?</button>
+        </a>
     </div>
-    <a href="nylah51" id="back">Back</a>
+
+    <a href="nylah_cc" id="back">Back</a>
 {% endblock %}
