@@ -55,6 +55,15 @@ class Module2(models.Model):
     evidence0 = models.CharField(max_length=255, default='')
     evidence1 = models.CharField(max_length=255, default='')
     evidence2 = models.CharField(max_length=255, default='')
+    fact0 = models.CharField(max_length=255, default='')
+    source0 = models.CharField(max_length=255, default='')
+    bias0 = models.CharField(max_length=255, default='')
+    fact1 = models.CharField(max_length=255, default='')
+    source1 = models.CharField(max_length=255, default='')
+    bias1 = models.CharField(max_length=255, default='')
+    fact2 = models.CharField(max_length=255, default='')
+    source2 = models.CharField(max_length=255, default='')
+    bias2 = models.CharField(max_length=255, default='')
 
     @staticmethod
     def num():

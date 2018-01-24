@@ -825,24 +825,139 @@ def module2steps2(request):
     })
 
 
+nylah_ccs = [
+    "It has a good graphic design program.",
+    "I'm able to afford it.",
+    "My family supports my decision.",
+]
+
+nylah_facts = [
+    [
+        "I gathered facts from the colleges' websites about their graphic design programs. Ohio State has a major and Bates doesn't.",
+        "I got the data I needed directly from searching for graphic design on the colleges' websites.",
+        "I checked my assumptions and am glad I did. Bates doesn't have a program so I won't apply there.",
+    ],
+    [
+        "I don't have facts. My parents say I can choose the college I want to attend.",
+        "I could find facts by searching for tuition facts from all of my college choices. I could also download financial aid forms from the college websites and discuss the facts and forms with my parents.",
+        "The Authority Bias might be at work because my parents are authority figures.",
+    ],
+    [
+        "My facts come from my observation that my family is helping me with my college search.",
+        "I don't think I need more facts.",
+        "I am assuming their support is genuine (even though they will miss me). Social Proof could be at work. They might be doing what they think is best for me. ",
+    ],
+]
+
+
 def module2steps3(request):
     module1 = load_module1(request)
     module2 = load_module2(request, 'steps3')
+    back = '/decisions/2/steps2'
+    cc_num = int(request.GET.get('num', 0))
+    fact = ''
+    source = ''
+    bias = ''
     if request.method == 'POST':
-        module2.evidence0 = json.dumps(request.POST.getlist('cc0evidence[]'))
-        module2.evidence1 = json.dumps(request.POST.getlist('cc1evidence[]'))
-        module2.evidence2 = json.dumps(request.POST.getlist('cc2evidence[]'))
+        cc_num = int(request.POST.get('num'))
+        fact = request.POST['fact']
+        source = request.POST['source']
+        bias = request.POST['bias']
+        if cc_num == 0:
+            module2.fact0 = fact
+            module2.source0 = source
+            module2.bias0 = bias
+        elif cc_num == 1:
+            module2.fact1 = fact
+            module2.source1 = source
+            module2.bias1 = bias
+        elif cc_num == 2:
+            module2.fact2 = fact
+            module2.source2 = source
+            module2.bias2 = bias
+        else:
+            raise Exception("Unexpected index: " + str(cc_num))
         module2.save()
-        return redirect('/decisions/2/cheetah')
+        cc_num = cc_num + 1
+        if cc_num > 2:
+            # Send email
+            mail_body = module1.decision_buddy + ',' + '%0D%0D' + \
+                        'Please help me with a big decision: ' + module1.decision + '%0D%0D'
+            for concept in json.loads(module1.cc):
+                mail_body += concept + '%0D'
+            mail_body += '%0D' + \
+                         'Would you help me get started?  Here are a few questions I need to answer:' + '%0D%0D' + \
+                         'What are the organizations involved in your decision?' + '%0D' + \
+                         'Who are the people who could help you make your decision?' + '%0D' + \
+                         'What do you need to find out?' + '%0D' + \
+                         'How will getting information help you make your decision?' + '%0D%0D' + \
+                         'Thank you!'
+            to = module1.decision_buddy_email + ',' + request.user.email
+            return redirect('/decisions/2/steps4')
+        else:
+            return redirect('/decisions/2/steps3?num=' + str(cc_num))
+    if cc_num > 0:
+        back = '/decisions/2/steps3?num=' + str(cc_num - 1)
+    if cc_num == 0:
+        fact = module2.fact0
+        source = module2.source0
+        bias = module2.bias0
+    elif cc_num == 1:
+        fact = module2.fact1
+        source = module2.source1
+        bias = module2.bias1
+    elif cc_num == 2:
+        fact = module2.fact2
+        source = module2.source2
+        bias = module2.bias2
     return render(request, 'decisions/module2/steps3.html', {
+        'num': cc_num,
+        'n': cc_num + 1,
         'cc': json.loads(module1.cc),
+        'cc_current': json.loads(module1.cc)[cc_num],
         'decision': module1.decision,
+        'nylah_cc': nylah_ccs[cc_num],
+        'nylah_facts': nylah_facts[cc_num],
+        'biases': biases,
+        'back': back,
+        'fact': fact,
+        'source': source,
+        'bias': bias,
     })
 
 
 def module2steps4(request):
+    module1 = load_module1(request)
     module2 = load_module2(request, 'steps4')
+    if request.method == 'POST':
+        return redirect('/decisions/2/summary')
+    mail_body = module1.decision_buddy + ',' + '%0D%0D' + \
+                'Please help me validate facts for a big decision: ' + module1.decision + '%0D%0D'
+    ccs = json.loads(module1.cc)
+    mail_body += 'I have identified 3 Critical Concepts. For each one I need to collect facts and make sure that I am not falling prey to biases. Please help me work through verifying the facts for each Critical Concept.' + '%0D%0D' + \
+                 'Critical Concept: ' + ccs[0] + '%0D' + \
+                 'Fact: ' + module2.fact0 + '%0D' + \
+                 'Source: ' + module2.source0 + '%0D' + \
+                 'Bias: ' + module2.bias0 + '%0D%0D' + \
+                 'Thank you!'
+    to = module1.decision_buddy_email + ',' + request.user.email
     return render(request, 'decisions/module2/steps4.html', {
+        'subject': 'Decision Buddy - Help with fact finding',
+        'decision_buddy': module1.decision_buddy,
+        'decision_buddy_email': module1.decision_buddy_email,
+        'decision': module1.decision,
+        'cc': json.loads(module1.cc),
+        'mail_body': mail_body,
+        'to': to,
+        'fact0': module2.fact0,
+        'source0': module2.source0,
+        'bias0': module2.bias0,
+        'fact1': module2.fact1,
+        'source1': module2.source1,
+        'bias1': module2.bias1,
+        'fact2': module2.fact2,
+        'source2': module2.source2,
+        'bias2': module2.bias2,
     })
 
 

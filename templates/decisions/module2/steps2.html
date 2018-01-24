@@ -1,23 +1,42 @@
 {% extends 'decisions/base.html' %}
 {% load bootstrap %}
-{% block title %}{% block h1 %}Module 2 - Moving into Action{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}Module 2 - Critical Concepts and the Facts{% endblock %}{% endblock %}
 {% block extra_head %}
 {% endblock %}
 {% block content %}
     <h2 class="center">
-    Cheetah Sheet:<br/> Your Critical Concepts and the Facts
+        Cheetah Sheet:<br/>  Critical Concepts and the Facts
     </h2>
     <h3>
-        From Module 1, your decision was: "{{ decision }}"
+        From Module 1, your decision is: "{{ decision }}"
     </h3>
-    
-    <h2>Your Vision of Success (Critical Concepts)</h2>
+
+    <h3>Your Critical Concepts are:</h3>
+    <h3 style="margin-left: 50px; margin-right: 50px;">
     {% for concept in cc %}
-        <h3>&bull; {{ concept }}</h3>
+        &bull; {{ concept }} <br/>
     {% endfor %}
+    </h3>
+
+    <img src="http://clipground.com/images/traveling-car-clipart-17.jpg" style="float: right; height: 150px; margin: 20px;" />
+
+    <h3>
+        Get ready to answer the following questions:
+    </h3>
+    <h3>
+        What facts could support each of your Critical Concepts?
+    </h3>
+
+    <h3>
+        Where could you find sources of information if you need facts?
+    </h3>
+
+    <h3>
+        Can you identify any assumptions or biases that need to be addressed?
+    </h3>
 
     <div class="center start2 space">
-        <button type="button"><a href="steps3">Let's Provide Evidence</a></button>
+        <a href="steps3"><button type="button">Are You Ready?</button></a>
     </div>
-    <a href="nylah8" id="back">Back</a>
+    <a href="nylah61" id="back">Back</a>
 {% endblock %}

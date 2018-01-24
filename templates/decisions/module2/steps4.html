@@ -4,11 +4,53 @@
 {% block extra_head %}
 {% endblock %}
 {% block content %}
-    <h3>
-    TODO - Unused
+    <h3 class="center" style="margin: 40px; font-weight: normal;">
+        <input type="text" name="decision" class="cc decision center" style="border-bottom: 2px solid lightgray;"
+               size="40" value="{{ decision }}" readonly="readonly"/>
     </h3>
-    <div class="center start2 space">
-        <button type="button"><a href="steps2">Let's Go!</a></button>
+
+    <h2>Critical Concepts / Facts / Sources / Biases</h2>
+    <h3>{{ cc.0 }}</h3>
+    <div style="margin-left: 20px;">
+        <h3>Fact: {{ fact0 }}</h3>
+        <h3>Source: {{ source0 }}</h3>
+        <h3>Bias: {{ bias0 }}</h3>
     </div>
-    <a href="nylah8" id="back">Back</a>
+    <h3>{{ cc.1 }}</h3>
+    <div style="margin-left: 20px;">
+        <h3>Fact: {{ fact1 }}</h3>
+        <h3>Source: {{ source1 }}</h3>
+        <h3>Bias: {{ bias1 }}</h3>
+    </div>
+    <h3>{{ cc.2 }}</h3>
+    <div style="margin-left: 20px;">
+        <h3>Fact: {{ fact2 }}</h3>
+        <h3>Source: {{ source2 }}</h3>
+        <h3>Bias: {{ bias2 }}</h3>
+    </div>
+
+    <h3>
+        <a target="_blank" onclick="email_sent = true;"
+           href="mailto:{{ to }}?subject={{ subject }}!&body={{ mail_body }}">
+            Click here to send an email to your decision buddy {{ decision_buddy }} and yourself
+            with a summary of your facts and actions from Module 2.
+        </a>
+    </h3>
+
+    <div class="center">
+        <a href="summary" onclick="return(validate())"><button id="next" type="button">Finish!</button></a>
+    </div>
+    <a href="steps3?num=2" id="back">Back</a>
+
+    <script type="text/javascript">
+        var email_sent = false;
+
+        function validate() {
+            if (!email_sent) {
+                alert("Please click to send the email.");
+                return false;
+            }
+            return true;
+        }
+    </script>
 {% endblock %}
