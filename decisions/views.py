@@ -939,6 +939,14 @@ def module2steps4(request):
                  'Fact: ' + module2.fact0 + '%0D' + \
                  'Source: ' + module2.source0 + '%0D' + \
                  'Bias: ' + module2.bias0 + '%0D%0D' + \
+                 'Critical Concept: ' + ccs[1] + '%0D' + \
+                 'Fact: ' + module2.fact1 + '%0D' + \
+                 'Source: ' + module2.source1 + '%0D' + \
+                 'Bias: ' + module2.bias1 + '%0D%0D' + \
+                 'Critical Concept: ' + ccs[2] + '%0D' + \
+                 'Fact: ' + module2.fact2 + '%0D' + \
+                 'Source: ' + module2.source2 + '%0D' + \
+                 'Bias: ' + module2.bias2 + '%0D%0D' + \
                  'Thank you!'
     to = module1.decision_buddy_email + ',' + request.user.email
     return render(request, 'decisions/module2/steps4.html', {
