@@ -12,8 +12,8 @@
         label {
             font-size: large;
             border: 1px solid #dddddd;
-            width: 100%;
             padding: 5px;
+            width: 200px;
         }
 
         :checked + span {
@@ -27,41 +27,54 @@
     </style>
 
     <h2 class="center">
-        Nylah's Facts
+        More Perspective Taking
     </h2>
 
     <h3>
-        Nylah's sources here will be the school websites for Bates and Ohio State.
+        Nylah just used perspective taking to find facts. Now she can collect opinions and match it up to the facts she has.
+    </h3>
+
+    <h3>
+        Opinions reflect someone's experience, assumption or judgment. Do they reflect reality?
     </h3>
 
     <div>
-        <h3 style="margin-top: 20px;">
-            What other kinds of facts and figures might Nylah search for?
-            Choose below the information you think Nylah will find helpful:
-        </h3>
-
-        <div id="facts_options" style="margin:20px;">
-        <table width="100%">
-            {% for option_list in facts %}
-                <tr>
-                {% for option in option_list %}
-                <td>
-                    <label>
-                        <input type="checkbox" name="facts[]" value="{{ option }}"/>
-                        <span> {{ option }}</span>
-                    </label>
-                </td>
-                {% endfor %}
-                </tr>
-            {% endfor %}
-        </table>
-        </div>
-
-        <div class="center">
-            <button type="submit">Submit</button>
-        </div>
-
+        <label>
+            <input type="radio" name="opinions" value="always" />
+            Always
+        </label>
+        <label>
+            <input type="radio" name="opinions" value="sometimes" />
+            Sometimes
+        </label>
+        <label>
+            <input type="radio" name="opinions" value="never" />
+            Never
+        </label>
     </div>
 
-    <a href="nylah52" id="back">Back</a>
+    <h3>
+        Do they reflect what's important to you?
+    </h3>
+
+    <div>
+        <label>
+            <input type="radio" name="important" value="always" />
+            Always
+        </label>
+        <label>
+            <input type="radio" name="important" value="sometimes" />
+            Sometimes
+        </label>
+        <label>
+            <input type="radio" name="important" value="never" />
+            Never
+        </label>
+    </div>
+
+    <p class="center">
+        <a href="nylah61"><button id="next" type="button">Next</button></a>
+    </p>
+
+    <a href="nylahotherfacts" id="back">Back</a>
 {% endblock %}

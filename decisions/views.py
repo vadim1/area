@@ -687,9 +687,21 @@ def module2nylah5(request):
     })
 
 
+def module2nylah50(request):
+    module2 = load_module2(request, 'nylah50')
+    return render(request, 'decisions/module2/nylah50.html', {
+    })
+
+
 def module2nylah51(request):
     module2 = load_module2(request, 'nylah51')
     return render(request, 'decisions/module2/nylah51.html', {
+    })
+
+
+def module2nylahotherfacts(request):
+    module2 = load_module2(request, 'nylahotherfacts')
+    return render(request, 'decisions/module2/nylahotherfacts.html', {
     })
 
 
