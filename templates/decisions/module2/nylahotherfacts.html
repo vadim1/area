@@ -46,19 +46,18 @@
                     $('#more').hide();
 
                     /** If we want confetti:
-                    $('#canvas').show();
-                    StartConfetti();
-                    */
+                     $('#canvas').show();
+                     StartConfetti();
+                     */
                 }
             });
+            setTimeout(function(){$('#more').show();}, 6000);
         });
 
-        function clickPerspectives()
-        {
+        function clickPerspectives() {
             $('#perspectives').show();
             $('#next_btn').hide();
             $('#perspectives_button').hide();
-            setTimeout(function(){$('#more').show();}, 6000);
             return false;
         }
     </script>
@@ -78,49 +77,51 @@
     </h3>
     <div>
         <label>
-            <input type="checkbox" />
+            <input type="checkbox"/>
             The student to teacher ratio
         </label>
     </div>
     <div>
         <label>
-            <input type="checkbox" />
+            <input type="checkbox"/>
             Graduation rates
         </label>
     </div>
     <div>
         <label>
-            <input type="checkbox" />
+            <input type="checkbox"/>
             Tuition
         </label>
     </div>
     <div>
         <label>
-            <input type="checkbox" />
+            <input type="checkbox"/>
             Housing
         </label>
     </div>
     <div>
         <label>
-                <input type="checkbox" name="perspective" class="perspective"/>
+            <input type="checkbox" name="perspective" class="perspective"/>
             Average SAT/ACT Scores
         </label>
     </div>
     <div>
         <label>
-                <input type="checkbox" name="perspective" class="perspective"/>
+            <input type="checkbox" name="perspective" class="perspective"/>
             Financial Aid
         </label>
     </div>
 
-            <div id="more" style="display: none; margin-top: 10px;">
-            <h2>Keep going - more apply...</h2>
-        </div>
+    <div id="more" style="display: none; margin-top: 10px;">
+        <h2>Keep going - more apply...</h2>
+    </div>
 
 
-        <div class="center" id="next_btn" style="display: none; margin-top: 50px;">
-        <a href="nylah52"><button id="next" type="button">Submit</button></a>
-        </div>
+    <div class="center" id="next_btn" style="display: none; margin-top: 50px;">
+        <a href="nylah52">
+            <button id="next" type="button">Submit</button>
+        </a>
+    </div>
 
     <p class="center">
     </p>

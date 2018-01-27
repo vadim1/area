@@ -35,6 +35,24 @@
         .right {
             background-color: #1dcd9f !important;
         }
+
+        .yesno {
+            font-size: 256px;
+            position: absolute;
+            top: 400px;
+            left: 40%;
+            z-index: 1000;
+        }
+
+        #yes {
+            color: green;
+            display: none;
+        }
+
+        #no {
+            color: red;
+            display: none;
+        }
     </style>
     <script type="text/javascript">
         var questions = {
@@ -52,10 +70,12 @@
 
         function bias(key) {
             if (key == $('#bias').text()) {
-                $('.jumbotron').switchClass('noclick', 'right', 200).switchClass('right', 'noclick', 200);
+                //$('.jumbotron').switchClass('noclick', 'right', 200).switchClass('right', 'noclick', 200);
+                $('#yes').fadeIn(400).fadeOut(400);
                 questions[$('#question_index').text()]['answered'] = true;
             } else {
-                $('.jumbotron').switchClass('noclick', 'wrong', 200).switchClass('wrong', 'noclick', 200);
+                //$('.jumbotron').switchClass('noclick', 'wrong', 200).switchClass('wrong', 'noclick', 200);
+                $('#no').fadeIn(400).fadeOut(400);
             }
             return next_question(false);
         }
@@ -117,6 +137,8 @@
         });
 
     </script>
+    <div id="yes" class="yesno">&#10003;</div>
+    <div id="no" class="yesno">&#10008;</div>
     <h2 class="center">
         Bias In Action Quiz
     </h2>
