@@ -810,6 +810,21 @@ def module2cc(request):
     })
 
 
+def module2cc_edit(request):
+    module1 = load_module1(request)
+    module2 = load_module2(request, 'cc_edit')
+    if request.method == 'POST':
+        # Save Critical Concepts
+        module1.cc = json.dumps(request.POST.getlist('cc[]'))
+        module1.save()
+        return redirect('/decisions/2/steps2')
+    return render(request, 'decisions/module2/cc_edit.html', {
+        'cc': json.loads(module1.cc),
+        'decision': module1.decision,
+        'biases': biases,
+    })
+
+
 def module2steps(request):
     module2 = load_module2(request, 'steps')
     return render(request, 'decisions/module2/steps.html', {

@@ -66,6 +66,7 @@ urlpatterns = [
     url(r'^2/nylah_cc_assumptions/?$', views.module2nylah_cc_assumptions, name='Module 2 Nylah Critical Concept Assumptions'),
     url(r'^2/nylah_cc_evidence/?$', views.module2nylah_cc_evidence, name='Module 2 Nylah Critical Concept Evidence'),
     url(r'^2/cc/?$', views.module2cc, name='Module 2 Critical Concepts'),
+    url(r'^2/cc_edit/?$', views.module2cc_edit, name='Module 2 Edit Critical Concepts'),
     url(r'^2/steps/?$', views.module2steps, name='Module 2 Moving into Action'),
     url(r'^2/steps2/?$', views.module2steps2, name='Module 2 Moving into Action'),
     url(r'^2/steps3/?$', views.module2steps3, name='Module 2 Moving into Action'),
