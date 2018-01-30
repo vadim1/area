@@ -19,6 +19,16 @@ def load_course(request):
     return course
 
 
+def load_json(json_data):
+    json_object = {}
+    try:
+        json_object = json.loads(json_data)
+    except ValueError, e:
+        pass
+        # TODO - log
+    return json_object
+
+
 @login_required
 def home(request):
     request.session['start'] = '/decisions'
@@ -79,7 +89,7 @@ def load_module1(request, step=''):
             module1.save()
         module1.answers_json = ''
         if module1.answers:
-            module1.answers_json = json.loads(module1.answers)
+            module1.answers_json = load_json(module1.answers)
     if not module1:
         module1 = Module1()
         module1.answers_json = None
@@ -107,7 +117,7 @@ def load_module2(request, step=''):
             module2.save()
         module2.answers_json = ''
         if module2.answers:
-            module2.answers_json = json.loads(module2.answers)
+            module2.answers_json = load_json(module2.answers)
     if not module2:
         module2 = Module2()
         module2.answers_json = None
@@ -167,7 +177,7 @@ def game(request, module1, attr, next):
         attrs = []
         answers = {}
         if module1.answers:
-            answers = json.loads(module1.answers)
+            answers = load_json(module1.answers)
         for i in range(0, len(module1game_questions.values())):
             index = str(i)
             question_i = module1game_questions.values()[i]
@@ -368,7 +378,7 @@ def module1challenge(request):
         module1.save()
         return redirect('/decisions/1/buddy')
     return render(request, 'decisions/module1/challenge.html', {
-        'cc': json.loads(module1.cc),
+        'cc': load_json(module1.cc),
         'decision': module1.decision,
     })
 
@@ -391,7 +401,7 @@ def module1commitment(request):
         return redirect('/decisions/1/summary')
     mail_body = module1.decision_buddy + ',' + '%0D%0D' + \
                 'Please help me with a big decision: ' + module1.decision + '%0D%0D'
-    for concept in json.loads(module1.cc):
+    for concept in load_json(module1.cc):
         mail_body += concept + '%0D'
     mail_body += '%0D' + \
                  'Would you help me get started?  Here are a few questions I need to answer:' + '%0D%0D' + \
@@ -405,7 +415,7 @@ def module1commitment(request):
         'decision_buddy': module1.decision_buddy,
         'decision_buddy_email': module1.decision_buddy_email,
         'decision': module1.decision,
-        'cc': json.loads(module1.cc),
+        'cc': load_json(module1.cc),
         'mail_body': mail_body,
         'to': to,
     })
@@ -418,7 +428,7 @@ def module1summary(request):
     return render(request, 'decisions/module1/summary.html', {
         'decision_buddy': module1.decision_buddy,
         'decision': module1.decision,
-        'cc': json.loads(module1.cc),
+        'cc': load_json(module1.cc),
     })
 
 
@@ -445,7 +455,7 @@ def module2review(request):
     return render(request, 'decisions/module2/review.html', {
         'decision_buddy': module1.decision_buddy,
         'decision': module1.decision,
-        'cc': json.loads(module1.cc),
+        'cc': load_json(module1.cc),
     })
 
 
@@ -590,7 +600,7 @@ def module2game(request):
     if request.method == 'POST':
         answers = {}
         if module2.answers:
-            answers = json.loads(module2.answers)
+            answers = load_json(module2.answers)
         for i in range(0, len(module2game_questions.values())):
             index = str(i)
             question_i = module2game_questions.values()[i]
@@ -630,7 +640,7 @@ def module2bias(request):
 def module2game_results(request):
     module2 = load_module2(request, 'game_results')
     return render(request, 'decisions/module2/game_results.html', {
-        'biases': json.loads(module2.biases),
+        'biases': load_json(module2.biases),
         'answers': module2.answers_json,
         'questions': module2game_questions,
     })
@@ -670,7 +680,7 @@ def module2nylah3(request):
         module2.save()
         return redirect('/decisions/2/nylah4')
     return render(request, 'decisions/module2/nylah3.html', {
-        'biases': json.loads(module2.biases).keys(),
+        'biases': load_json(module2.biases).keys(),
     })
 
 
@@ -804,7 +814,7 @@ def module2cc(request):
         # TODO: save Critical Concepts
         return redirect('/decisions/2/summary')
     return render(request, 'decisions/module2/cc.html', {
-        'cc': json.loads(module1.cc),
+        'cc': load_json(module1.cc),
         'decision': module1.decision,
         'biases': biases,
     })
@@ -819,7 +829,7 @@ def module2cc_edit(request):
         module1.save()
         return redirect('/decisions/2/steps2')
     return render(request, 'decisions/module2/cc_edit.html', {
-        'cc': json.loads(module1.cc),
+        'cc': load_json(module1.cc),
         'decision': module1.decision,
         'biases': biases,
     })
@@ -835,7 +845,7 @@ def module2steps2(request):
     module1 = load_module1(request)
     module2 = load_module2(request, 'steps2')
     return render(request, 'decisions/module2/steps2.html', {
-        'cc': json.loads(module1.cc),
+        'cc': load_json(module1.cc),
         'decision': module1.decision,
     })
 
@@ -898,7 +908,7 @@ def module2steps3(request):
             # Send email
             mail_body = module1.decision_buddy + ',' + '%0D%0D' + \
                         'Please help me with a big decision: ' + module1.decision + '%0D%0D'
-            for concept in json.loads(module1.cc):
+            for concept in load_json(module1.cc):
                 mail_body += concept + '%0D'
             mail_body += '%0D' + \
                          'Would you help me get started?  Here are a few questions I need to answer:' + '%0D%0D' + \
@@ -928,8 +938,8 @@ def module2steps3(request):
     return render(request, 'decisions/module2/steps3.html', {
         'num': cc_num,
         'n': cc_num + 1,
-        'cc': json.loads(module1.cc),
-        'cc_current': json.loads(module1.cc)[cc_num],
+        'cc': load_json(module1.cc),
+        'cc_current': load_json(module1.cc)[cc_num],
         'decision': module1.decision,
         'nylah_cc': nylah_ccs[cc_num],
         'nylah_facts': nylah_facts[cc_num],
@@ -948,7 +958,7 @@ def module2steps4(request):
         return redirect('/decisions/2/summary')
     mail_body = module1.decision_buddy + ',' + '%0D%0D' + \
                 'Please help me validate facts for a big decision: ' + module1.decision + '%0D%0D'
-    ccs = json.loads(module1.cc)
+    ccs = load_json(module1.cc)
     mail_body += 'I have identified 3 Critical Concepts. For each one I need to collect facts and make sure that I am not falling prey to biases. Please help me work through verifying the facts for each Critical Concept.' + '%0D%0D' + \
                  'Critical Concept: ' + ccs[0] + '%0D' + \
                  'Fact: ' + module2.fact0 + '%0D' + \
@@ -969,7 +979,7 @@ def module2steps4(request):
         'decision_buddy': module1.decision_buddy,
         'decision_buddy_email': module1.decision_buddy_email,
         'decision': module1.decision,
-        'cc': json.loads(module1.cc),
+        'cc': load_json(module1.cc),
         'mail_body': mail_body,
         'to': to,
         'fact0': module2.fact0,
@@ -994,10 +1004,10 @@ def module2cheetah(request):
         return redirect('/decisions/2/summary')
     return render(request, 'decisions/module2/cheetah.html', {
         'decision': module1.decision,
-        'cc': json.loads(module1.cc),
-        'evidence0': json.loads(module2.evidence0),
-        'evidence1': json.loads(module2.evidence1),
-        'evidence2': json.loads(module2.evidence2),
+        'cc': load_json(module1.cc),
+        'evidence0': load_json(module2.evidence0),
+        'evidence1': load_json(module2.evidence1),
+        'evidence2': load_json(module2.evidence2),
     })
 
 
@@ -1008,10 +1018,10 @@ def module2summary(request):
     module2.save()
     return render(request, 'decisions/module2/summary.html', {
         'decision': module1.decision,
-        'cc': json.loads(module1.cc),
-        'evidence0': json.loads(module2.evidence0),
-        'evidence1': json.loads(module2.evidence1),
-        'evidence2': json.loads(module2.evidence2),
+        'cc': load_json(module1.cc),
+        'evidence0': load_json(module2.evidence0),
+        'evidence1': load_json(module2.evidence1),
+        'evidence2': load_json(module2.evidence2),
     })
 
 

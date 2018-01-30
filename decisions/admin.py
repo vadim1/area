@@ -16,8 +16,11 @@ class Module1Admin(admin.ModelAdmin):
 
 @admin.register(Module2)
 class Module2Admin(admin.ModelAdmin):
-    list_display = ('course', 'completed_on', 'step',
-                    'nylah_bias', 'evidence0', 'evidence1', 'evidence2')
+    list_display = ('course', 'completed_on', 'step', 'nylah_bias',
+                    'fact0', 'source0', 'bias0',
+                    'fact1', 'source1', 'bias1',
+                    'fact2', 'source2', 'bias2',
+                    )
     readonly_fields = []
 
     def get_readonly_fields(self, request, obj=None):
