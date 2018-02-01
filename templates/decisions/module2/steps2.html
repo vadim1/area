@@ -14,11 +14,11 @@
     <h3>Your Critical Concepts are: (<a href="cc_edit" class="button">Update Critical Concepts</a>)</h3>
     <h3 style="margin-left: 50px; margin-right: 50px;">
     {% for concept in cc %}
+        {% if concept %}
         &bull; {{ concept }} <br/>
+        {% endif %}
     {% endfor %}
     </h3>
-
-    <img src="http://clipground.com/images/traveling-car-clipart-17.jpg" style="float: right; height: 150px; margin: 20px;" />
 
     <h3>
         Get ready to answer the following questions:

@@ -13,17 +13,20 @@
 
             var flipper = null;
 
-            $(".flip").on('flip:done', function(){
+            $(".flip").on('flip:done', function () {
                 if (flipper == null) {
                     flipper = $(this);
                 }
-                $('.flip').each(function(){
-                    if ($(this).attr('id') == flipper.attr('id')) {}
+                $('.flip').each(function () {
+                    if ($(this).attr('id') == flipper.attr('id')) {
+                    }
                     else if ($(this).data("flip-model").isFlipped) {
                         $(this).flip(false);
                     }
                 });
-                setTimeout(function(){ flipper = null; }, 600);
+                setTimeout(function () {
+                    flipper = null;
+                }, 600);
             });
             $('.back').css('display', 'block');
         });
@@ -53,27 +56,27 @@
             line-height: normal;
         }
 
-    .front h2, .back h3 {
-        text-align: center;
-        cursor: pointer;
-    }
+        .front h2, .back h3 {
+            text-align: center;
+            cursor: pointer;
+        }
 
-    .back h3 {
-        padding-top: 10px;
-        cursor: pointer;
-    }
+        .back h3 {
+            padding-top: 10px;
+            cursor: pointer;
+        }
 
-    .sel {
-        padding-top: 10px;
-        margin-top: 10px;
-        padding-bottom: 10px;
-        background-color: #cccccc;
-        border: 2px dashed #1e2846;
-    }
+        .sel {
+            padding-top: 10px;
+            margin-top: 10px;
+            padding-bottom: 10px;
+            background-color: #cccccc;
+            border: 2px dashed #1e2846;
+        }
     </style>
     <div class="center">
-    <h2 class="center">See Your Results!</h2>
-    <h3>Click on the biases below to see its relevance.</h3>
+        <h2 class="center">See Your Results!</h2>
+        <h3>Click on the biases below to see its relevance.</h3>
         <table class="reveal">
             <tr>
                 <td colspan="2">
@@ -95,7 +98,8 @@
                         </div>
                         <div class="back">
                             <h3>
-                                This bias is not relevant because it is about projecting your own thoughts and feelings onto others.
+                                This bias is not relevant because it is about projecting your own thoughts and feelings
+                                onto others.
                             </h3>
                         </div>
                     </div>
@@ -121,7 +125,8 @@
                         </div>
                         <div class="back">
                             <h3>
-                                If an authority figure like Nylah's dad suggested she choose Ohio State, this bias could be right.
+                                If an authority figure like Nylah's dad suggested she choose Ohio State, this bias could
+                                be right.
                             </h3>
                         </div>
                     </div>
@@ -133,7 +138,8 @@
                         </div>
                         <div class="back">
                             <h3>
-                                This bias is not relevant because it is about underestimating how long a task will take even if we have done it before.
+                                This bias is not relevant because it is about underestimating how long a task will take
+                                even if we have done it before.
                             </h3>
                         </div>
                     </div>
@@ -148,7 +154,8 @@
                         </div>
                         <div class="back">
                             <h3>
-                                This bias is most relevant because Nylah is allowing her opinion to be influenced by Ohio State's popularity.
+                                This bias is most relevant because Nylah is allowing her opinion to be influenced by
+                                Ohio State's popularity.
                             </h3>
                         </div>
                     </div>

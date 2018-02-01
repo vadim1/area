@@ -6,9 +6,16 @@
 {% block content %}
     <script type="text/javascript" src="/static/decisions/js/jquery.flip.js"></script>
     <script type="text/javascript">
+        var flipped = 0;
+
         $(document).ready(function () {
             $(".flip").flip({
                 trigger: 'click'
+            }).on('flip:done', function(){
+                flipped++;
+                if (flipped > 2) {
+                    $('#done').css('visibility', 'inherit');
+                }
             });
 
             $('.back').css('display', 'block');
@@ -47,14 +54,6 @@
         .back h3 {
             padding-top: 10px;
             cursor: pointer;
-        }
-
-        .sel {
-            padding-top: 10px;
-            margin-top: 10px;
-            padding-bottom: 10px;
-            background-color: #cccccc;
-            border: 2px dashed #1e2846;
         }
     </style>
     <!-- TODO:
@@ -117,8 +116,10 @@
 
         </table>
     </div>
+    <div id="done" style="visibility: hidden;">
     <p class="center">
         <a href="nylahotherfacts"><button id="next" type="button">Overcome Bias</button></a>
     </p>
+    </div>
     <a href="nylah5" id="back">Back</a>
 {% endblock %}
