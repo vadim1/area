@@ -242,3 +242,14 @@ li {
     clear: both;
     width: 100%;
 }
+
+.email {
+    text-align: center;
+    border: 1px dotted black;
+    padding: 3px;
+}
+
+hr {
+    height: 1px;
+    background-color: #52c0d8;
+}

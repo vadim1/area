@@ -9,36 +9,48 @@
                size="40" value="{{ decision }}" readonly="readonly"/>
     </h3>
 
-    <h2>Critical Concepts / Facts / Sources / Biases</h2>
-    <h3>{{ cc.0 }}</h3>
+    <h2 class="center">Critical Concepts / Facts / Sources / Biases</h2>
+    <hr/>
+    <h3>Critical Concept 1: {{ cc.0 }}</h3>
     <div style="margin-left: 20px;">
-        <h3>Fact: {{ fact0 }}</h3>
-        <h3>Source: {{ source0 }}</h3>
-        <h3>Bias: {{ bias0 }}</h3>
+        <h3>
+            Fact: {{ fact0 }}<br/>
+            Source: {{ source0 }}<br/>
+            Bias: {{ bias0 }}
+        </h3>
     </div>
-    <h3>{{ cc.1 }}</h3>
+    <hr/>
+    <h3>Critical Concept 2: {{ cc.1 }}</h3>
     <div style="margin-left: 20px;">
-        <h3>Fact: {{ fact1 }}</h3>
-        <h3>Source: {{ source1 }}</h3>
-        <h3>Bias: {{ bias1 }}</h3>
+        <h3>
+            Fact: {{ fact1 }}<br/>
+            Source: {{ source1 }}<br/>
+            Bias: {{ bias1 }}
+        </h3>
     </div>
-    <h3>{{ cc.2 }}</h3>
+    <hr/>
+    <h3>Critical Concept 3: {{ cc.2 }}</h3>
     <div style="margin-left: 20px;">
-        <h3>Fact: {{ fact2 }}</h3>
-        <h3>Source: {{ source2 }}</h3>
-        <h3>Bias: {{ bias2 }}</h3>
+        <h3>
+            Fact: {{ fact2 }}<br/>
+            Source: {{ source2 }}<br/>
+            Bias: {{ bias2 }}
+        </h3>
     </div>
+    <hr/>
 
-    <h3>
+    <h3 class="email">
         <a target="_blank" onclick="email_sent = true;"
            href="mailto:{{ to }}?subject={{ subject }}!&body={{ mail_body }}">
-            Click here to send an email to your decision buddy {{ decision_buddy }} and yourself
-            with a summary of your facts and actions from Module 2.
+            Click here to send an email to your decision buddy {{ decision_buddy }} <br/>
+            and yourself with a summary of your facts and actions from Module 2.
         </a>
     </h3>
 
     <div class="center">
-        <a href="summary" onclick="return(validate())"><button id="next" type="button">Finish!</button></a>
+        <a href="summary" onclick="return(validate())">
+            <button id="next" type="button">Finish!</button>
+        </a>
     </div>
     <a href="steps3?num=2" id="back">Back</a>
 

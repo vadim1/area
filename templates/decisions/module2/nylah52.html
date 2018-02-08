@@ -46,19 +46,20 @@
                     $('#more').hide();
 
                     /** If we want confetti:
-                    $('#canvas').show();
-                    StartConfetti();
-                    */
+                     $('#canvas').show();
+                     StartConfetti();
+                     */
                 }
             });
         });
 
-        function clickPerspectives()
-        {
+        function clickPerspectives() {
             $('#perspectives').show();
             $('#next_btn').hide();
             $('#perspectives_button').hide();
-            setTimeout(function(){$('#more').show();}, 6000);
+            setTimeout(function () {
+                $('#more').show();
+            }, 6000);
             return false;
         }
     </script>
@@ -69,7 +70,8 @@
         {% include 'decisions/_map.html' with top=30 left=160 %}
     </div>
     <h3>
-Nylah's going directly to the colleges to let them tell their own stories.  That's called perspective taking.
+        Nylah's going directly to the colleges to let them tell their own stories.
+        That's called Perspective Taking.
     </h3>
 
     <p class="center" id="perspectives_button" style="margin-top: 50px;">
@@ -84,7 +86,7 @@ Nylah's going directly to the colleges to let them tell their own stories.  That
         <div>
             <label>
                 <input type="checkbox" name="perspective" class="perspective"/>
-                Allow the other person or organization to tell their own story
+                Allow the other person or organization to tell its own story
             </label>
         </div>
         <div>
@@ -120,12 +122,13 @@ Nylah's going directly to the colleges to let them tell their own stories.  That
         <div id="next_btn" style="display: none; margin-top: 50px;">
             <h1 class="center">YES!</h1>
             <h3>
-        Perspective taking teaches you how to engage with, and learn from, others. By walking in their shoes, you gain distance on your own thoughts. That distance helps you be more aware and manage your own bias.
+                Perspective Taking teaches you how to engage with, and learn from, others. By walking in their shoes,
+                you gain distance on your own thoughts. That distance helps you be more aware and manage your own bias.
             </h3>
             <div class="center">
-            <a href="nylah6">
-                <button id="next" type="button">Learn More</button>
-            </a>
+                <a href="nylah6">
+                    <button id="next" type="button">Learn More</button>
+                </a>
             </div>
         </div>
     </div>

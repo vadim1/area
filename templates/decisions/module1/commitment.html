@@ -9,14 +9,20 @@
     </h3>
 
     <h2>Critical Concepts</h2>
+    <h3>
+        Your critical concepts will focus your decision making.
+        In Module 2 you'll check your bias so you can be openminded when investigating
+        your critical concepts.
+    </h3>
+
     {% for concept in cc %}
         <h3>&bull; {{ concept }}</h3>
     {% endfor %}
 
-    <h3>
-        <a target="_blank" onclick="email_sent = true;"
+    <h3 class="email">
+        <a target="_blank" class="" onclick="email_sent = true;"
            href="mailto:{{ to }}?subject=Please Be My Decision Buddy!&body={{ mail_body }}">
-            Click here to send an email to your decision buddy {{ decision_buddy }} and yourself
+            Click here to send an email to your decision buddy {{ decision_buddy }}<br/> and yourself
             that has a few questions to help you get started.
         </a>
     </h3>

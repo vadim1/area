@@ -2,18 +2,19 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - AREA Method{% endblock %}{% endblock %}
 {% block content %}
-<style type="text/css">
-.area {
-    color: #1dcd9f;
-}
+    <style type="text/css">
+        .area {
+            color: #1dcd9f;
+        }
 
-.noarea {
-    color: #cccccc !important;
-}
-</style>
+        .noarea {
+            color: #cccccc !important;
+        }
+    </style>
     <h3>
-        Below is the AREA where you said you are confident making decisions.
-        AREA is the name of the decision making system you are learning to build your confidence.
+        Below, highlighted in green, is the area where you are confident in making decisions. In the rest of this module
+        you are going to learn the Area Method - a decision making system that is going to give you the skills to have
+        greater confidence in your decision making.
     </h3>
     {% include "decisions/module1/game_results_table.html" with textcolor_area="1dcd9f" textcolor_noarea="cccccc" %}
     <div class="center">

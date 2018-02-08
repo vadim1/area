@@ -20,9 +20,9 @@ class Module1(models.Model):
     completed_on = models.DateField(null=True)
     step = models.CharField(max_length=20, default='')
     answers = models.TextField(default='')
-    cc0 = models.CharField(max_length=255, default='')
-    cc1 = models.CharField(max_length=255, default='')
-    cc2 = models.CharField(max_length=255, default='')
+    cc0 = models.CharField(max_length=255, default='')  # Nylah
+    cc1 = models.CharField(max_length=255, default='')  # Nylah
+    cc2 = models.CharField(max_length=255, default='')  # Nylah
     decision = models.CharField(max_length=255, default='')
     cc = models.CharField(max_length=255, default='')
     cc_not = models.CharField(max_length=255, default='')

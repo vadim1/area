@@ -301,10 +301,16 @@ def module1directions(request):
 def module1sample(request):
     module1 = load_module1(request, 'sample')
     if request.method == 'POST':
-        # TODO - save POST data
+        module1.cc0 = request.POST.get('cc0')
+        module1.cc1 = request.POST.get('cc1')
+        module1.cc2 = request.POST.get('cc2')
+        module1.save()
         return redirect('/decisions/1/cc')
     return render(request, 'decisions/module1/sample.html', {
         'answers': module1.answers_json,
+        'cc0': module1.cc0,
+        'cc1': module1.cc1,
+        'cc2': module1.cc2,
     })
 
 
@@ -330,10 +336,15 @@ def module1defining_cc(request):
 def module1deriving_cc(request):
     module1 = load_module1(request, 'deriving_cc')
     if request.method == 'POST':
-        module1.cc0 = request.POST.getlist('cc[]')
+        module1.cc0 = request.POST.get('cc0')
+        module1.cc1 = request.POST.get('cc1')
+        module1.cc2 = request.POST.get('cc2')
         module1.save()
         return redirect('/decisions/1/exploring_cc')
     return render(request, 'decisions/module1/deriving_cc.html', {
+        'cc0': module1.cc0,
+        'cc1': module1.cc1,
+        'cc2': module1.cc2,
     })
 
 
@@ -488,7 +499,7 @@ module2game_questions = {
     },
     'liking1': {
         'question': 'When a friend asks you to get ice cream late in the evening, do you...',
-        'answer0': 'Say yes, because they\'re your friend',
+        'answer0': 'Say yes, because she is your friend',
         'answer1': 'Say no, because of the time',
         'bias': 'liking',
         'bias_answer': 0,
@@ -503,7 +514,7 @@ module2game_questions = {
     'planning2': {
         'question': 'When you look at your homework list, do you...',
         'answer0': 'Start and it will take you until you are done or run out of time',
-        'answer1': 'Go over the entire list and guess how long each will take, so you can budget your time',
+        'answer1': 'Go over the entire list and guess how long each will take so you can budget your time',
         'bias': 'planning',
         'bias_answer': 0,
     },
