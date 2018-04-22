@@ -2,7 +2,15 @@
 {% load bootstrap %}
 {% block title %}{% block h1 %}Module 1 - Details{% endblock %}{% endblock %}
 {% block content %}
-    <h3 style="margin: 100px;">
+    <h3 class="space">
+    {% if details == 'no' %}
+        How you understand your situation and the facts may be different from how others see and understand them.
+    {% endif %}
+    {% if details == 'yes' %}
+        You recognize that good decision making is personal to you.
+    {% endif %}
+    </h3>
+    <h3>
         Life has easy and difficult decisions and we each have a different idea of what is easy
         and difficult for us.
     </h3>

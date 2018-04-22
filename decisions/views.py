@@ -2,9 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.conf import settings
 from area_app import forms
-from .models import Course, Module1, Module2
+from .models import Course, Module0, Module1, Module2
 from datetime import datetime
 import json
+from area_app.views.view import get_randomized_questions, compute_archetype
 
 
 def load_course(request):
@@ -34,6 +35,7 @@ def home(request):
     request.session['start'] = '/decisions'
     request.session['partner'] = 'fp'
     course = load_course(request)
+    module0 = load_module0(request)
     module1 = load_module1(request)
     module2 = load_module2(request)
     # If it's the first time, take them to the tour
@@ -41,6 +43,7 @@ def home(request):
         return redirect('/decisions/tour')
     return render(request, 'decisions/intro.html', {
         'form': forms.FutureProjectSignupForm,
+        'module0': module0,
         'module1': module1,
         'module2': module2,
     })
@@ -74,6 +77,110 @@ def terms_conditions(request):
     })
 
 
+"""
+
+Module 0
+
+"""
+
+
+def load_module0(request, step=''):
+    module0 = None
+    course = load_course(request)
+    if course:
+        module0list = Module0.objects.filter(course=course)
+        if module0list:
+            module0 = module0list.first()
+            if step:
+                module0.step = step
+                module0.save()
+        else:
+            module0 = Module0(course=course, step=step)
+            module0.save()
+        module0.answers_json = ''
+        if module0.answers:
+            module0.answers_json = load_json(module0.answers)
+    if not module0:
+        module0 = Module0()
+        module0.answers_json = None
+    return module0
+
+
+def module0(request):
+    module0 = load_module0(request, '')
+    return render(request, 'decisions/module0/intro.html', {
+    })
+
+
+def module0restart(request):
+    module0 = load_module0(request, 'summary')
+    module0.completed_on = None
+    module0.save()
+    return redirect('/decisions/0/')
+
+
+def module0instructions(request):
+    module0 = load_module0(request, 'instructions')
+    questions_yes = None
+    if request.method == 'POST':
+        questions_yes = request.POST.getlist('question[]')
+        request.session['questions_yes'] = questions_yes
+        module0.answers = questions_yes
+        top_archetype = compute_archetype(request)
+        request.session['arch'] = top_archetype
+        module0.archetype = top_archetype
+        module0.save()
+        return redirect('/decisions/0/archetype')
+    return render(request, 'decisions/module0/instructions.html', {
+        'questions': get_randomized_questions(),
+        'questions_yes': questions_yes,
+    })
+
+
+def module0archetype(request):
+    module0 = load_module0(request, 'archetype')
+    return render(request, 'decisions/module0/decisions_archetype.html', {
+        'archetype': module0.archetype,
+    })
+
+
+def module0archetypes(request):
+    module0 = load_module0(request, 'archetypes')
+    return render(request, 'decisions/module0/decisions_archetypes.html', {
+        'archetype': module0.archetype,
+    })
+
+
+def module0review(request):
+    module0 = load_module0(request, 'review')
+    if request.method == 'POST':
+        module0.psp_correct = request.POST.get('psp_correct')
+        module0.work_on = request.POST.get('work_on')
+        module0.save()
+        return redirect('/decisions/0/summary')
+    return render(request, 'decisions/module0/review.html', {
+        'archetype': module0.archetype,
+        'psp_correct': module0.psp_correct,
+        'work_on': module0.work_on,
+    })
+
+
+def module0summary(request):
+    module0 = load_module0(request, 'summary')
+    module0.completed_on = datetime.now()
+    module0.save()
+    return render(request, 'decisions/module0/summary.html', {
+        'archetype': module0.archetype,
+    })
+
+
+"""
+
+Module 1
+
+"""
+
+
 def load_module1(request, step=''):
     module1 = None
     course = load_course(request)
@@ -99,34 +206,6 @@ def load_module1(request, step=''):
 def module1(request):
     module1 = load_module1(request, '')
     return render(request, 'decisions/module1/intro.html', {
-    })
-
-
-def load_module2(request, step=''):
-    module2 = None
-    course = load_course(request)
-    if course:
-        module2list = Module2.objects.filter(course=course)
-        if module2list:
-            module2 = module2list.first()
-            if step:
-                module2.step = step
-                module2.save()
-        else:
-            module2 = Module2(course=course, step=step)
-            module2.save()
-        module2.answers_json = ''
-        if module2.answers:
-            module2.answers_json = load_json(module2.answers)
-    if not module2:
-        module2 = Module2()
-        module2.answers_json = None
-    return module2
-
-
-def module2(request):
-    module2 = load_module2(request, '')
-    return render(request, 'decisions/module2/intro.html', {
     })
 
 
@@ -267,6 +346,7 @@ def module1details(request):
 def module1details2(request):
     module1 = load_module1(request, 'details2')
     return render(request, 'decisions/module1/details2.html', {
+        'details': request.GET.get('details', '')
     })
 
 
@@ -455,7 +535,30 @@ Module 2
 """
 
 
+def load_module2(request, step=''):
+    module2 = None
+    course = load_course(request)
+    if course:
+        module2list = Module2.objects.filter(course=course)
+        if module2list:
+            module2 = module2list.first()
+            if step:
+                module2.step = step
+                module2.save()
+        else:
+            module2 = Module2(course=course, step=step)
+            module2.save()
+        module2.answers_json = ''
+        if module2.answers:
+            module2.answers_json = load_json(module2.answers)
+    if not module2:
+        module2 = Module2()
+        module2.answers_json = None
+    return module2
+
+
 def module2(request):
+    module2 = load_module2(request, '')
     return render(request, 'decisions/module2/intro.html', {
     })
 

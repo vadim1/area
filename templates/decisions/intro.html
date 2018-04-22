@@ -19,6 +19,25 @@
     <hr />
     {% if user.is_authenticated %}
         <h3>
+            {% if module0.completed_on %}
+                &#10004;
+                <img src="/static/decisions/img/Module0_badge.png" style="float: right; margin-right: -70px;"/>
+                Module 0 - Problem Solver Profile
+                {% if user.is_staff %}
+                    (<a href="0/restart">Restart</a>)
+                {% endif %}
+            {% else %}
+                {% if module1.step %}
+                    <a href="0/{{ module0.step }}">Module 0 - Problem Solver Profile</a>
+                    {% if user.is_staff %}
+                        (<a href="0/restart">Restart</a>)
+                    {% endif %}
+                {% else %}
+                    <a href="0">Module 0 - Problem Solver Profile</a>
+                {% endif %}
+            {% endif %}
+        </h3>
+        <h3>
             {% if module1.completed_on %}
                 &#10004;
                 <img src="/static/decisions/img/Module1_badge.png" style="float: right; margin-right: -70px;"/>

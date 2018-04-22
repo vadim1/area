@@ -6,6 +6,14 @@ urlpatterns = [
     url(r'^journal/?$', views.journal, name='Journal'),
     url(r'^terms_conditions/?$', views.terms_conditions, name='Terms and Conditions'),
 
+    url(r'^0/?$', views.module0, name='Module 0'),
+    url(r'^0/restart/?', views.module0restart, name='Module 0 Restart'),
+    url(r'^0/instructions/?$', views.module0instructions, name='Module 0 Instructions'),
+    url(r'^0/archetype/?$', views.module0archetype, name='Module 0 Archetype'),
+    url(r'^0/archetypes/?$', views.module0archetypes, name='Module 0 Archetypes'),
+    url(r'^0/review/?$', views.module0review, name='Module 0 Review'),
+    url(r'^0/summary/?$', views.module0summary, name='Module 0 Summary'),
+
     url(r'^1/?$', views.module1, name='Module 1'),
     url(r'^1/restart/?', views.module1restart, name='Module 1 Restart'),
     url(r'^1/instructions/?$', views.module1instructions, name='Module 1 Instructions'),

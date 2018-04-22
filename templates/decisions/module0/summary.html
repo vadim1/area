@@ -1,0 +1,35 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 0 - Summary{% endblock %}{% endblock %}
+{% block content %}
+
+    <div class="center">
+
+        {% include 'decisions/_map.html' with top=90 left=70 %}
+
+        <h1 class="center">Problem Solver Profile Module Complete!</h1>
+
+    </div>
+
+    <h3>Continue onto Module 1 to start your journey through the AREA Method.</h3>
+
+    <h3 class="margin-top-30-mob center margin-0-auto">
+        With
+        <a href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved"
+           target="_blank">PROBLEM SOLVED</a>
+        (powered by the <a href="http://areamethod.com" target="_blank">AREA Method</a>), you will:
+    </h3>
+
+    <ul>
+        <li>Get clear on what problem you're solving</li>
+        <li>Identify what matters most to you and what you'd count as success</li>
+        <li>Take a personality quiz to learn how you make decisions</li>
+        <li>Get into action with some clear next steps</li>
+    </ul>
+
+    <div class="center">
+        <button id="next" type="button"><a href="/decisions">On To Modules List</a></button>
+    </div>
+
+    <a href="review" id="back">Back</a>
+{% endblock %}

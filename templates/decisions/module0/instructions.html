@@ -1,0 +1,108 @@
+{% extends 'decisions/base.html' %}
+{% load static account socialaccount bootstrap i18n %}
+{% block title %}{% block h1 %}Module 0 - Problem Solver Profile{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+        h3 img {
+            height: 60px;
+        }
+
+        .archetype {
+            display: inline;
+            position: relative;
+            border-bottom: 2px dotted #aaaaff;
+        }
+
+        .archetype:hover:after {
+            background: #333;
+            background: rgba(0, 0, 0, .8);
+            border-radius: 5px;
+            bottom: 26px;
+            color: #fff;
+            content: attr(title);
+            left: 20%;
+            padding: 5px 15px;
+            position: absolute;
+            z-index: 98;
+        }
+
+        .archetype:hover:before {
+            border: solid;
+            border-color: #333 transparent;
+            border-width: 6px 6px 0 6px;
+            bottom: 20px;
+            content: "";
+            left: 50%;
+            position: absolute;
+            z-index: 99;
+        }
+
+        .archetype img {
+            height: 18px;
+            margin-bottom: 0px;
+        }
+
+        #next {
+            margin-top: 10px;
+        }
+    </style>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('.done input').attr('value', 'GET YOUR FULL PROFILE');
+        /**
+        $('.done input').remove();
+        $('.done').append("<h2>Select GET YOUR FULL PROFILE Below</h2>");
+        $('#myCarousel').on('slide.bs.carousel', function () {
+            if ($('.done').hasClass('active')) {
+                $('#next').show();
+            }
+        });
+         **/
+    });
+    </script>
+    <h1 class="center" style="margin: 50px;">
+        What does your PROBLEM SOLVER Profile say about you?
+    </h1>
+    <p class="margin-top-30-mob center margin-0-auto"
+       style="font-size: 210%; line-height: 120%; font-weight: bold; margin-bottom: 30px;">
+        What kind of a {% include "problem_solver.html" %} are you?
+    </p>
+    <p class="margin-top-30-mob center margin-0-auto">
+        Are you a
+        <span class="archetype" title="Albert Einstein">
+        <img src="{% static "area_app/img/thinker.png" %}"/>Thinker</span>
+        or a
+        <span class="archetype" title="Marie Curie">
+        <img src="{% static "area_app/img/detective.png" %}"/>Detective</span>?
+        Might you solve problems like famous
+        <span class="archetype" title="Ernest Shackleton">
+        <img src="{% static "area_app/img/adventurer.png" %}"/>Adventurers</span>
+        or
+        <span class="archetype" title="Oprah Winfrey">
+        <img src="{% static "area_app/img/listener.png" %}"/>Listeners</span>?
+        Or are you a
+        <span class="archetype" title="Beyoncé">
+        <img src="{% static "area_app/img/creative.png" %}"/>Visionary</span>
+        going your own way?
+    </p>
+    <p class="margin-top-30-mob center margin-0-auto">
+        Select the answer that feels most right to you.
+    </p>
+    {% include "_quiz.html" %}
+    <p class="clearfix"></p>
+
+    <h3>
+        We make thousands of decisions every day - from when to wake up to whether to have a late night snack - and we
+        make them quickly, and largely unconsciously. But what happens when we face a high stakes decision? Knowing your
+        PROBLEM SOLVER Profile will help you learn about your decision-making strengths and your potential blind spots
+        when solving high stakes problems.
+    </h3>
+    <h3>
+        The problem solver profile is not prospective, it tells you what you tend to do when making decisions. By
+        learning more about you as a decision maker you can make big decisions better.
+    </h3>
+    <div class="center start">
+        <button id="next" type="button" style="display: none;"><a href="#" onclick="return countdown()">Get Your Full Profile</a></button>
+    </div>
+    <a href="/decisions/0" id="back">Back</a>
+{% endblock %}

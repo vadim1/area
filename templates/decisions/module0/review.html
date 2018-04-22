@@ -1,0 +1,47 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 0 - Summary{% endblock %}{% endblock %}
+{% block content %}
+
+    <h2 class="center">
+        How does your profile solver profile<br/>
+        resonate with you?
+    </h2>
+
+    <div style="margin-left: 40%; font-size: 150%;">
+        <div><label><input type="radio" name="psp_correct" value="Spot On"/> Spot On</label></div>
+        <div><label><input type="radio" name="psp_correct" value="Somewhat"/> Somewhat</label></div>
+        <div><label><input type="radio" name="psp_correct" value="Way Off"/> Way Off</label></div>
+    </div>
+
+    <h3>
+        Now that I know a little bit about myself I am happy {{ archetype }},
+        <br/> I want to work on:
+    </h3>
+
+    <div class="center">
+        <input type="text" name="work_on" value="{{ work_on }}" placeholder="What do you want to work on?" size="50"/>
+    </div>
+
+
+    <div class="center">
+        <button id="next" type="submit">Complete Module</button>
+    </div>
+
+    <a href="archetype" id="back">Back</a>
+
+    <script type="text/javascript">
+        function validate() {
+            if (!$('input[name="psp_correct"]:checked').length) {
+                alert("Please select how good your profile is.");
+                return false;
+            }
+            if (!$('input[name="work_on"]').val()) {
+                alert("Please answer what to work on.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+{% endblock %}

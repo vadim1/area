@@ -286,6 +286,7 @@ def compute_archetype(request):
     request.session['archetypes'] = top_archetypes
     top_archetype = top_archetypes[0]
     request.session['top_archetype'] = top_archetype[0]
+    return top_archetype[0]
 
 
 def handle_answers(request):

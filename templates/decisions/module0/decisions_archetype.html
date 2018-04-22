@@ -1,0 +1,30 @@
+{% extends 'decisions/base.html' %}
+{% load static account socialaccount bootstrap i18n %}
+{% block title %}{% block h1 %}Module 0 - Problem Solver Profile{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+        .main div:first-child {
+            margin-top: 0;
+        }
+
+        h3 {
+            color: #52c0d8 !important;
+            font-size: 26px !important;
+            font-weight: 600;
+        }
+    </style>
+    {% if archetype %}
+        <div>{% with 'archetype/'|add:archetype|add:'.html' as path %}{% include path %}{% endwith %}</div>
+    {% endif %}
+        <div class="clearfix"></div>
+
+        <div style="font-size: larger">See <a href="/decisions/0/archetypes">all {% include "problem_solver.html" %} Profiles</a>?
+        </div>
+
+    <div class="center start">
+            <a href="/decisions/0/review">
+                <button id="next" type="button">Are We Right?</button>
+            </a>
+        <a href="/decisions/0/instructions" id="back">Back</a>
+    </div>
+{% endblock %}
