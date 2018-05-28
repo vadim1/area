@@ -14,6 +14,10 @@
     <h2>
         Future Project AREA Method
     </h2>
+    {% if user.is_staff %}
+        {% include 'dd_dashboard.html' %}
+    {% endif %}
+    {% include 'student_dashboard.html' %}
     <h3>The quality of your decisions determines the quality of your life.</h3>
     <h3>With this app you will learn how to make your big decisions better!</h3>
     <hr />
@@ -72,6 +76,25 @@
                     {% endif %}
                 {% else %}
                     <a href="2">Module 2 - Cognitive Bias, You're Not As Open Minded As You Think</a>
+                {% endif %}
+            {% endif %}
+        </h3>
+        <h3>
+            {% if module3.completed_on %}
+                &#10004;
+                <img src="/static/decisions/img/Module3_badge.png" style="float: right; margin-right: -70px;"/>
+                Module 3 - {{ module3.name }}
+                {% if user.is_staff %}
+                    (<a href="/3/restart">Restart</a>)
+                {% endif %}
+            {% else %}
+                {% if module2.step %}
+                    <a href="/3/{{ module3.step }}">Module 3 - {{ module3.name }}</a>
+                    {% if user.is_staff %}
+                        (<a href="/3/restart">Restart</a>)
+                    {% endif %}
+                {% else %}
+                    <a href="/3/">Module 3 - {{ module3.name }}</a>
                 {% endif %}
             {% endif %}
         </h3>

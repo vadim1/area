@@ -48,7 +48,7 @@ class Module1Inline(admin.StackedInline):
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     readonly_fields = ('user',)
-    list_display = ('__str__','user_details', 'module1', 'module2')
+    list_display = ('__str__','user_details', 'module0', 'module1', 'module2')
     readonly_fields = []
 
     def get_readonly_fields(self, request, obj=None):
@@ -72,6 +72,10 @@ class CourseAdmin(admin.ModelAdmin):
         return '<a href="/admin/decisions/module' + str(model.num()) + '/' + str(this_module.id) + '">' + \
                str(this_module) + '</a>'
 
+    def module0(self, course):
+        return self.module(Module0, course)
+    module0.allow_tags = True
+
     def module1(self, course):
         return self.module(Module1, course)
     module1.allow_tags = True
@@ -79,4 +83,3 @@ class CourseAdmin(admin.ModelAdmin):
     def module2(self, course):
         return self.module(Module2, course)
     module2.allow_tags = True
-

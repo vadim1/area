@@ -3,21 +3,11 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 from area_app import forms
 from .models import Course, Module0, Module1, Module2
+from student_class.models import StudentClass
+from module3.views import load_module as load_module3
 from datetime import datetime
 import json
 from area_app.views.view import get_randomized_questions, compute_archetype
-
-
-def load_course(request):
-    course = None
-    if request.user.is_authenticated():
-        courses = Course.objects.filter(user=request.user)
-        if courses:
-            course = courses.first()
-        else:
-            course = Course(user=request.user)
-            course.save()
-    return course
 
 
 def load_json(json_data):
@@ -34,10 +24,14 @@ def load_json(json_data):
 def home(request):
     request.session['start'] = '/decisions'
     request.session['partner'] = 'fp'
-    course = load_course(request)
+    course = Course.load_course(request)
     module0 = load_module0(request)
     module1 = load_module1(request)
     module2 = load_module2(request)
+    module3 = load_module3(request)
+    student_classes = None
+    if request.user.is_staff:
+        student_classes = StudentClass.objects.filter(instructor=request.user)
     # If it's the first time, take them to the tour
     if not course.intro_on:
         return redirect('/decisions/tour')
@@ -46,6 +40,10 @@ def home(request):
         'module0': module0,
         'module1': module1,
         'module2': module2,
+        'module3': module3,
+        'student_classes': student_classes,
+        'my_classes': StudentClass.my_classes(course),
+        'open_classes': StudentClass.open_classes(course),
     })
 
 
@@ -55,7 +53,7 @@ def tour(request):
     """
     if request.method == 'POST':
         # Mark as seen, go on
-        course = load_course(request)
+        course = Course.load_course(request)
         course.intro_on = datetime.now()
         course.save()
         return redirect('/decisions')
@@ -86,7 +84,7 @@ Module 0
 
 def load_module0(request, step=''):
     module0 = None
-    course = load_course(request)
+    course = Course.load_course(request)
     if course:
         module0list = Module0.objects.filter(course=course)
         if module0list:
@@ -183,7 +181,7 @@ Module 1
 
 def load_module1(request, step=''):
     module1 = None
-    course = load_course(request)
+    course = Course.load_course(request)
     if course:
         module1list = Module1.objects.filter(course=course)
         if module1list:
@@ -537,7 +535,7 @@ Module 2
 
 def load_module2(request, step=''):
     module2 = None
-    course = load_course(request)
+    course = Course.load_course(request)
     if course:
         module2list = Module2.objects.filter(course=course)
         if module2list:

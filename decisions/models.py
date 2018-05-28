@@ -15,6 +15,22 @@ class Course(models.Model):
     class Meta:
         verbose_name = "Course Taker"
 
+    @staticmethod
+    def load_course(request):
+        course = None
+        if request.user.is_authenticated():
+            courses = Course.objects.filter(user=request.user)
+            if courses:
+                course = courses.first()
+            else:
+                course = Course(user=request.user)
+                course.save()
+        return course
+
+    @staticmethod
+    def num_modules():
+        return 4
+
 
 class Module0(models.Model):
     course = models.ForeignKey(Course)
@@ -28,6 +44,10 @@ class Module0(models.Model):
     @staticmethod
     def num():
         return 0
+
+    @staticmethod
+    def name():
+        return 'Problem Solver Profile'
 
     def __str__(self):
         to_return = "Module 0 "
@@ -77,6 +97,10 @@ class Module1(models.Model):
     def num():
         return 1
 
+    @staticmethod
+    def name():
+        return 'Introduction to Decision Making'
+
     def __str__(self):
         to_return = "Module 1 "
         ro_return = to_return + " step " + self.step
@@ -112,6 +136,10 @@ class Module2(models.Model):
     @staticmethod
     def num():
         return 2
+
+    @staticmethod
+    def name():
+        return 'Cognitive Bias'
 
     def __str__(self):
         to_return = "Module 2 "

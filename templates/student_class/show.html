@@ -1,0 +1,64 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}
+    {{ student_class }}
+{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+        th, td {
+            padding: 10px;
+        }
+    </style>
+    <form action="/class/{{ student_class.id }}" id="form" method="post">
+        <div>
+            <h3>{{ student_class }}</h3>
+            <table border="1" style="margin: 30px; padding: 30px;">
+                <tr>
+                    <th>Instructor</th>
+                    <td>{{ student_class.instructor }}</td>
+                </tr>
+                <tr>
+                    <th>Created Date</th>
+                    <td>{{ student_class.created_on }}</td>
+                </tr>
+                <tr>
+                    <th>Starting Module</th>
+                    <td>
+                        <select name="starting_module" onchange="$('form').submit()">
+                            {% for i in "x"|rjust:num_modules %}
+                                <option value="{{ forloop.counter0 }}"
+                                        {% if student_class.starting_module == forloop.counter0 %}
+                                        selected="true"{% endif %}>{{ forloop.counter0 }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Students</th>
+                    <td>
+                        <ul>
+                            {% for student in student_class.students %}
+                                <li>{{ student.course }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Completed Date</th>
+                    <td>
+                        {{ student_class.completed_on }} -
+                        {% if student_class.completed_on %}
+                            <a href="/class/{{ student_class.id }}/reopen">Reopen</a>
+                        {% else %}
+                            <a href="/class/{{ student_class.id }}/close">Close</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+    <a href="/class">All Classes</a>
+    <div style="float: right;">
+        <a href="/class/{{ student_class.id }}/delete" onclick="return(confirm('Are you sure?'))">Delete Class</a>
+    </div>
+{% endblock %}

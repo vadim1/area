@@ -1,0 +1,23 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}
+    {{ user }}Student Classes
+{% endblock %}{% endblock %}
+{% block content %}
+    <div>
+        <h3>{{ user|capfirst }}'s Student Classes</h3>
+        <ul>
+            {% for student_class in student_classes %}
+                <li><a href="/class/{{ student_class.id }}">{{ student_class }} on {{ student_class.created_on }}</a></li>
+            {% endfor %}
+        </ul>
+        <h4 style="margin-top: 100px;">
+            <a href="/class/create">
+                <button type="button">Create Class</button>
+            </a>
+        </h4>
+    </div>
+    <div>
+    <a href="/">Home</a>
+    </div>
+{% endblock %}

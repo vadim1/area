@@ -1,0 +1,20 @@
+<div style="border: 1px solid black; padding: 5px;">
+    <h3>Student Dashboard</h3>
+    <ul>
+        {% for my_class in my_classes %}
+            <li>
+            {% if my_class.completed_on %}
+                COMPLETED:
+            {% else %}
+                ENROLLED:
+            {% endif %}
+            <a href="/class/student/{{ my_class.id }}">{{ my_class }}</a>
+            </li>
+        {% endfor %}
+        {% if open_classes %}
+            {% for student_class in open_classes %}
+                <li>OPEN: {{ student_class }} - <a href="/class/{{ student_class.id }}/join">Join</a></li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+</div>

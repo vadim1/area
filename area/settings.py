@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'area_app',
     'decisions',
+    'module3',
+    'student_class',
     'profile',
     'allauth',
     'allauth.account',

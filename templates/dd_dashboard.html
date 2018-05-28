@@ -1,0 +1,10 @@
+<div style="border: 1px solid black; padding: 5px;">
+    <h3>Dream Director Dashboard</h3>
+    <ul>
+        {% for student_class in student_classes %}
+            <li><a href="/class/{{ student_class.id }}">{{ student_class }}</a></li>
+        {% endfor %}
+        <li><a href="/class/create" onclick="return(confirm('Are you sure?'))">Create Class</a></li>
+    </ul>
+
+</div>

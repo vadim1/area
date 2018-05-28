@@ -18,7 +18,8 @@ from django.contrib import admin
 from area_app import urls as area_app_urls
 from decisions import urls as decisions_urls
 from django.conf import settings
-
+from module3 import urls as module3_urls
+from student_class import urls as student_class_urls
 admin.autodiscover()
 
 urlpatterns = [
@@ -26,6 +27,8 @@ urlpatterns = [
     url(r'^', include(area_app_urls)),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^decisions/', include(decisions_urls)),
+    url(r'^class/', include(student_class_urls)),
+    url(r'^3/', include(module3_urls)),
 ]
 
 if settings.DEBUG:
