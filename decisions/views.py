@@ -61,6 +61,7 @@ def tour(request):
     })
 
 
+@login_required
 def journal(request):
     """
     Journal to keep track of old decisions
@@ -110,6 +111,7 @@ def module0(request):
     })
 
 
+@login_required
 def module0restart(request):
     module0 = load_module0(request, 'summary')
     module0.completed_on = None
@@ -117,6 +119,7 @@ def module0restart(request):
     return redirect('/decisions/0/')
 
 
+@login_required
 def module0instructions(request):
     module0 = load_module0(request, 'instructions')
     questions_yes = None
@@ -135,6 +138,7 @@ def module0instructions(request):
     })
 
 
+@login_required
 def module0archetype(request):
     module0 = load_module0(request, 'archetype')
     return render(request, 'decisions/module0/decisions_archetype.html', {
@@ -142,6 +146,7 @@ def module0archetype(request):
     })
 
 
+@login_required
 def module0archetypes(request):
     module0 = load_module0(request, 'archetypes')
     return render(request, 'decisions/module0/decisions_archetypes.html', {
@@ -149,6 +154,7 @@ def module0archetypes(request):
     })
 
 
+@login_required
 def module0review(request):
     module0 = load_module0(request, 'review')
     if request.method == 'POST':
@@ -163,6 +169,7 @@ def module0review(request):
     })
 
 
+@login_required
 def module0summary(request):
     module0 = load_module0(request, 'summary')
     module0.completed_on = datetime.now()
@@ -201,24 +208,28 @@ def load_module1(request, step=''):
     return module1
 
 
+@login_required
 def module1(request):
     module1 = load_module1(request, '')
     return render(request, 'decisions/module1/intro.html', {
     })
 
 
+@login_required
 def module1instructions(request):
     module1 = load_module1(request, 'instructions')
     return render(request, 'decisions/module1/instructions.html', {
     })
 
 
+@login_required
 def module1game1_end(request):
     module1 = load_module1(request, 'game1_end')
     return render(request, 'decisions/module1/game1_end.html', {
     })
 
 
+@login_required
 def module1instructions2(request):
     module1 = load_module1(request, 'instructions')
     return render(request, 'decisions/module1/instructions2.html', {
@@ -249,6 +260,7 @@ game_labels = {
 }
 
 
+@login_required
 def game(request, module1, attr, next):
     if request.method == 'POST':
         attrs = []
@@ -276,29 +288,34 @@ def game(request, module1, attr, next):
     })
 
 
+@login_required
 def clear_game_answers(module1):
     if module1.answers:
         module1.answers = json.dumps({})
         module1.save()
 
 
+@login_required
 def module1game(request):
     module1 = load_module1(request, 'game')
     clear_game_answers(module1)  # TODO - save old answers
     return game(request, module1, 'easy', 'game1_end')
 
 
+@login_required
 def module1game2(request):
     module1 = load_module1(request, 'game2')
     return game(request, module1, 'confident', 'game_end')
 
 
+@login_required
 def module1game_end(request):
     module1 = load_module1(request, 'game_end')
     return render(request, 'decisions/module1/game_end.html', {
     })
 
 
+@login_required
 def module1game_results(request):
     module1 = load_module1(request, 'game_results')
     return render(request, 'decisions/module1/game_results.html', {
@@ -307,6 +324,7 @@ def module1game_results(request):
     })
 
 
+@login_required
 def module1game_explained(request):
     module1 = load_module1(request, 'game_explained')
     return render(request, 'decisions/module1/game_explained.html', {
@@ -315,12 +333,14 @@ def module1game_explained(request):
     })
 
 
+@login_required
 def module1explain(request):
     module1 = load_module1(request, 'explain')
     return render(request, 'decisions/module1/explain.html', {
     })
 
 
+@login_required
 def module1area(request):
     module1 = load_module1(request, 'area')
     return render(request, 'decisions/module1/area.html', {
@@ -329,18 +349,21 @@ def module1area(request):
     })
 
 
+@login_required
 def module1video(request):
     module1 = load_module1(request, 'video')
     return render(request, 'decisions/module1/video.html', {
     })
 
 
+@login_required
 def module1details(request):
     module1 = load_module1(request, 'details')
     return render(request, 'decisions/module1/details.html', {
     })
 
 
+@login_required
 def module1details2(request):
     module1 = load_module1(request, 'details2')
     return render(request, 'decisions/module1/details2.html', {
@@ -348,6 +371,7 @@ def module1details2(request):
     })
 
 
+@login_required
 def module1details3(request):
     module1 = load_module1(request, 'details3')
     if request.method == 'POST':
@@ -358,6 +382,7 @@ def module1details3(request):
     })
 
 
+@login_required
 def module1directions(request):
     module1 = load_module1(request, 'directions')
     if request.method == 'POST':
@@ -376,6 +401,7 @@ def module1directions(request):
     })
 
 
+@login_required
 def module1sample(request):
     module1 = load_module1(request, 'sample')
     if request.method == 'POST':
@@ -392,6 +418,7 @@ def module1sample(request):
     })
 
 
+@login_required
 def module1nylah_decision(request):
     module1 = load_module1(request, 'nylah_decision')
     return render(request, 'decisions/module1/nylah_decision.html', {
@@ -399,18 +426,21 @@ def module1nylah_decision(request):
     })
 
 
+@login_required
 def module1cc(request):
     module1 = load_module1(request, 'cc')
     return render(request, 'decisions/module1/cc.html', {
     })
 
 
+@login_required
 def module1defining_cc(request):
     module1 = load_module1(request, 'defining_cc')
     return render(request, 'decisions/module1/defining_cc.html', {
     })
 
 
+@login_required
 def module1deriving_cc(request):
     module1 = load_module1(request, 'deriving_cc')
     if request.method == 'POST':
@@ -426,6 +456,7 @@ def module1deriving_cc(request):
     })
 
 
+@login_required
 def module1exploring_cc(request):
     module1 = load_module1(request, 'exploring_cc')
     if request.method == 'POST':
@@ -437,6 +468,7 @@ def module1exploring_cc(request):
     })
 
 
+@login_required
 def module1decision(request):
     module1 = load_module1(request, 'decision')
     if request.method == 'POST':
@@ -448,6 +480,7 @@ def module1decision(request):
     })
 
 
+@login_required
 def module1cheetah(request):
     module1 = load_module1(request, 'cheetah')
     if request.method == 'POST':
@@ -459,6 +492,7 @@ def module1cheetah(request):
     })
 
 
+@login_required
 def module1challenge(request):
     module1 = load_module1(request, 'challenge')
     if request.method == 'POST':
@@ -472,6 +506,7 @@ def module1challenge(request):
     })
 
 
+@login_required
 def module1buddy(request):
     module1 = load_module1(request, 'buddy')
     if request.method == 'POST':
@@ -484,6 +519,7 @@ def module1buddy(request):
     })
 
 
+@login_required
 def module1commitment(request):
     module1 = load_module1(request, 'commitment')
     if request.method == 'POST':
@@ -510,6 +546,7 @@ def module1commitment(request):
     })
 
 
+@login_required
 def module1summary(request):
     module1 = load_module1(request, 'summary')
     module1.completed_on = datetime.now()
@@ -521,6 +558,7 @@ def module1summary(request):
     })
 
 
+@login_required
 def module1restart(request):
     module1 = load_module1(request, 'summary')
     module1.completed_on = None
@@ -555,12 +593,14 @@ def load_module2(request, step=''):
     return module2
 
 
+@login_required
 def module2(request):
     module2 = load_module2(request, '')
     return render(request, 'decisions/module2/intro.html', {
     })
 
 
+@login_required
 def module2review(request):
     module1 = load_module1(request)
     module2 = load_module2(request, 'review')
@@ -571,12 +611,14 @@ def module2review(request):
     })
 
 
+@login_required
 def module2map(request):
     module2 = load_module2(request, 'map')
     return render(request, 'decisions/module2/map.html', {
     })
 
 
+@login_required
 def module2instructions(request):
     module2 = load_module2(request, 'instructions')
     return render(request, 'decisions/module2/instructions.html', {
@@ -701,6 +743,7 @@ def calculate_biases(answers):
     return biases
 
 
+@login_required
 def module2game(request):
     module2 = load_module2(request, 'game')
     attr = 'easy'  # For count-down timer
@@ -731,24 +774,28 @@ def module2game(request):
     })
 
 
+@login_required
 def module2game_end(request):
     module2 = load_module2(request, 'game_end')
     return render(request, 'decisions/module2/game_end.html', {
     })
 
 
+@login_required
 def module2explain(request):
     module2 = load_module2(request, 'explain')
     return render(request, 'decisions/module2/explain.html', {
     })
 
 
+@login_required
 def module2bias(request):
     module2 = load_module2(request, 'bias')
     return render(request, 'decisions/module2/bias.html', {
     })
 
 
+@login_required
 def module2game_results(request):
     module2 = load_module2(request, 'game_results')
     return render(request, 'decisions/module2/game_results.html', {
@@ -758,12 +805,14 @@ def module2game_results(request):
     })
 
 
+@login_required
 def module2game2_intro(request):
     module2 = load_module2(request, 'game2_intro')
     return render(request, 'decisions/module2/game2_intro.html', {
     })
 
 
+@login_required
 def module2game2(request):
     module2 = load_module2(request, 'game2')
     return render(request, 'decisions/module2/game2.html', {
@@ -773,18 +822,21 @@ def module2game2(request):
     })
 
 
+@login_required
 def module2nylah1(request):
     module2 = load_module2(request, 'nylah1')
     return render(request, 'decisions/module2/nylah1.html', {
     })
 
 
+@login_required
 def module2nylah2(request):
     module2 = load_module2(request, 'nylah2')
     return render(request, 'decisions/module2/nylah2.html', {
     })
 
 
+@login_required
 def module2nylah3(request):
     module2 = load_module2(request, 'nylah3')
     if request.method == 'POST':
@@ -796,6 +848,7 @@ def module2nylah3(request):
     })
 
 
+@login_required
 def module2nylah4(request):
     module2 = load_module2(request, 'nylah4')
     return render(request, 'decisions/module2/nylah4.html', {
@@ -803,36 +856,42 @@ def module2nylah4(request):
     })
 
 
+@login_required
 def module2nylah5(request):
     module2 = load_module2(request, 'nylah5')
     return render(request, 'decisions/module2/nylah5.html', {
     })
 
 
+@login_required
 def module2nylah50(request):
     module2 = load_module2(request, 'nylah50')
     return render(request, 'decisions/module2/nylah50.html', {
     })
 
 
+@login_required
 def module2nylah51(request):
     module2 = load_module2(request, 'nylah51')
     return render(request, 'decisions/module2/nylah51.html', {
     })
 
 
+@login_required
 def module2nylahotherfacts(request):
     module2 = load_module2(request, 'nylahotherfacts')
     return render(request, 'decisions/module2/nylahotherfacts.html', {
     })
 
 
+@login_required
 def module2nylah52(request):
     module2 = load_module2(request, 'nylah52')
     return render(request, 'decisions/module2/nylah52.html', {
     })
 
 
+@login_required
 def module2nylah6(request):
     module2 = load_module2(request, 'nylah6')
     if request.method == 'POST':
@@ -857,6 +916,7 @@ def module2nylah6(request):
     })
 
 
+@login_required
 def module2nylah61(request):
     module2 = load_module2(request, 'nylah61')
     if request.method == 'POST':
@@ -868,6 +928,7 @@ def module2nylah61(request):
     })
 
 
+@login_required
 def module2nylah7(request):
     module2 = load_module2(request, 'nylah7')
     if request.method == 'POST':
@@ -888,24 +949,28 @@ def module2nylah7(request):
     })
 
 
+@login_required
 def module2nylah8(request):
     module2 = load_module2(request, 'nylah8')
     return render(request, 'decisions/module2/nylah8.html', {
     })
 
 
+@login_required
 def module2nylah_cc(request):
     module2 = load_module2(request, 'nylah_cc')
     return render(request, 'decisions/module2/nylah_cc.html', {
     })
 
 
+@login_required
 def module2nylah_cc_facts(request):
     module2 = load_module2(request, 'nylah_cc_facts')
     return render(request, 'decisions/module2/nylah_cc_facts.html', {
     })
 
 
+@login_required
 def module2nylah_cc_assumptions(request):
     module2 = load_module2(request, 'nylah_cc_assumptions')
     return render(request, 'decisions/module2/nylah_cc_assumptions.html', {
@@ -913,12 +978,14 @@ def module2nylah_cc_assumptions(request):
     })
 
 
+@login_required
 def module2nylah_cc_evidence(request):
     module2 = load_module2(request, 'nylah_cc_evidence')
     return render(request, 'decisions/module2/nylah_cc_evidence.html', {
     })
 
 
+@login_required
 def module2cc(request):
     module1 = load_module1(request)
     module2 = load_module2(request, 'cc')
@@ -932,6 +999,7 @@ def module2cc(request):
     })
 
 
+@login_required
 def module2cc_edit(request):
     module1 = load_module1(request)
     module2 = load_module2(request, 'cc_edit')
@@ -947,12 +1015,14 @@ def module2cc_edit(request):
     })
 
 
+@login_required
 def module2steps(request):
     module2 = load_module2(request, 'steps')
     return render(request, 'decisions/module2/steps.html', {
     })
 
 
+@login_required
 def module2steps2(request):
     module1 = load_module1(request)
     module2 = load_module2(request, 'steps2')
@@ -987,6 +1057,7 @@ nylah_facts = [
 ]
 
 
+@login_required
 def module2steps3(request):
     module1 = load_module1(request)
     module2 = load_module2(request, 'steps3')
@@ -1063,6 +1134,7 @@ def module2steps3(request):
     })
 
 
+@login_required
 def module2steps4(request):
     module1 = load_module1(request)
     module2 = load_module2(request, 'steps4')
@@ -1106,6 +1178,7 @@ def module2steps4(request):
     })
 
 
+@login_required
 def module2cheetah(request):
     module1 = load_module1(request)
     module2 = load_module2(request, 'cheetah')
@@ -1123,6 +1196,7 @@ def module2cheetah(request):
     })
 
 
+@login_required
 def module2summary(request):
     module2 = load_module2(request, 'summary')
     module1 = load_module1(request)
@@ -1137,6 +1211,7 @@ def module2summary(request):
     })
 
 
+@login_required
 def module2restart(request):
     module2 = load_module2(request, 'intro')
     module2.completed_on = None

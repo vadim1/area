@@ -31,6 +31,7 @@ def load_json(json_data):
     return json_object
 
 
+@login_required
 def load_module(request, step=''):
     module = None
     course = load_course(request)
@@ -53,6 +54,7 @@ def load_module(request, step=''):
     return module
 
 
+@login_required
 def intro(request):
     module = load_module(request, 'intro')
     return render(request, prefix+'intro.html', {
@@ -60,6 +62,7 @@ def intro(request):
     })
 
 
+@login_required
 def review(request):
     module = load_module(request, 'review')
     module2 = Module2
@@ -69,6 +72,7 @@ def review(request):
     })
 
 
+@login_required
 def map(request):
     module = load_module(request, 'map')
     return render(request, prefix+'map.html', {
@@ -76,6 +80,7 @@ def map(request):
     })
 
 
+@login_required
 def instructions(request):
     module = load_module(request, 'instructions')
     return render(request, prefix+'instructions.html', {
@@ -83,6 +88,7 @@ def instructions(request):
     })
 
 
+@login_required
 def summary(request):
     module = load_module(request, 'summary')
     module.completed_on = datetime.now()
@@ -92,6 +98,7 @@ def summary(request):
     })
 
 
+@login_required
 def restart(request):
     module = load_module(request, 'intro')
     module.completed_on = None
