@@ -1,0 +1,71 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 2 - Nylah's Evidence{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <style type="text/css">
+        label {
+            font-size: large;
+            border: 1px solid #dddddd;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+
+        td {
+            margin: 3px;
+            padding: 3px;
+            height: 100%;
+        }
+
+        label {
+            height: 100%;
+        }
+    </style>
+    <h2 class="center">Nylah's Evidence</h2>
+    <h3>
+        Nylah must figure out if her assumptions are true.  Here is the evidence she gathers with a source for each:
+    </h3>
+    <ul>
+        <li>"Evidence 1" -dad</li>
+        <li>"Evidence 2" -friend</li>
+        <li>"Evidence 3" -teacher</li>
+        <li>"Evidence 4" -friend</li>
+        <li>"Evidence 5" -friend</li>
+    </ul>
+    <h3>
+        Given that evidence, which assumptions are proved to be true?
+    </h3>
+
+    <div style="">Check all that apply.</div>
+        <div>
+            <label>
+                <input type="checkbox" name="perspective" class="perspective"/>
+                Assumption 1
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" name="perspective" class="perspective"/>
+                Assumption 2
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" name="perspective" class="perspective"/>
+                Assumption 3
+            </label>
+        </div>
+
+    <div class="center" id="next_btn" style="margin-top: 30px;">
+        <a href="cc">
+            <button id="next" type="button">Let's Me Try!</button>
+        </a>
+    </div>
+
+    <a href="nylah_cc_evidence" id="back">Back</a>
+{% endblock %}

@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import Module3 as Module, Course
-from decisions.models import Module2
+from module2.models import Module2 as PreviousModule
 from datetime import datetime
 import json
 
@@ -65,10 +65,9 @@ def intro(request):
 @login_required
 def review(request):
     module = load_module(request, 'review')
-    module2 = Module2
     return render(request, prefix+'review.html', {
         'module': module,
-        'previous_module': module2,
+        'previous_module': PreviousModule,
     })
 
 

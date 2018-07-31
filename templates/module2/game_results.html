@@ -1,0 +1,142 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 2 - Game Results!{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <script type="text/javascript" src="/static/decisions/js/jquery.flip.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".flip").flip({
+                trigger: 'click'
+            });
+
+            $('.back').css('display', 'block');
+        });
+    </script>
+    <style type="text/css">
+        .reveal {
+            width: 100%;
+        }
+
+        .reveal td {
+            text-align: center;
+            width: 30%;
+            padding: 5px;
+        }
+
+        .front, .flip {
+            height: 150px;
+        }
+
+        .reveal img {
+            height: 120px;
+        }
+
+        .back {
+            display: none;
+        }
+
+        .back p {
+            display: inline-block;
+            vertical-align: middle;;
+            line-height: normal;
+        }
+
+    .front h2, .back h3 {
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .back h3 {
+        padding-top: 30px;
+        cursor: pointer;
+    }
+    </style>
+    <h2 class="center">Results!</h2>
+    <h3>
+        Click on the biases below.
+        You'll see the definition of a few common biases and
+        what percentage <u>tricked</u> you.
+    </h3>
+        <table class="reveal center">
+            <tr>
+                <td colspan="2">
+                    <div class="flip">
+                        <div class="front">
+                            <h2>Optimism Bias</h2>
+                        </div>
+                        <div class="back">
+                            <h3>Believing everything will turn out well</h3>
+                            <h2>{{ biases.optimism.ratio }}%</h2>
+                        </div>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="flip">
+                        <div class="front">
+                            <h2>Projection Bias</h2>
+                        </div>
+                        <div class="back">
+                            <h3>Putting your own thoughts and desires onto others around you</h3>
+                            <h2>{{ biases.projection.ratio }}%</h2>
+                        </div>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="flip">
+                        <div class="front">
+                            <h2>Liking Bias</h2>
+                        </div>
+                        <div class="back">
+                            <h3>Gravitating toward things and people we like</h3>
+                            <h2>{{ biases.liking.ratio }}%</h2>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="flip">
+                        <div class="front">
+                            <h2>Authority Bias</h2>
+                        </div>
+                        <div class="back">
+                            <h3>Tendency to take on the opinion of someone who is seen as an authority on a subject</h3>
+                            <h2>{{ biases.authority.ratio }}%</h2>
+                        </div>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="flip">
+                        <div class="front">
+                            <h2>Planning Bias</h2>
+                        </div>
+                        <div class="back">
+                            <h3>Underestimating how long a task will take, even if you’ve done it before</h3>
+                            <h2>{{ biases.planning.ratio }}%</h2>
+                        </div>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="flip">
+                        <div class="front">
+                            <h2>Social Proof</h2>
+                        </div>
+                        <div class="back">
+                            <h3>Following the crowd, letting your opinion be influenced by reputation</h3>
+                            <h2>{{ biases.social.ratio }}%</h2>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    <h3 class="start2 space">
+        Note you have seen what percentage tricked you - most of us are biased to think of 100% as a perfect score.
+        This is an example of relying too heavily on our past associations.
+    </h3>
+    <p class="center start2">
+        <a href="game2_intro"><button id="next" type="button">Tell Me More</button></a>
+    </p>
+    <a href="game" id="back">Back</a>
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 2 - Bias{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <style type="text/css">
+        #facts_options div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: large;
+            border: 1px solid #dddddd;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+
+        td {
+            margin: 3px;
+            padding: 3px;
+            width: 33%;
+        }
+    </style>
+
+    <h2 class="center">
+        Collecting Opinions
+    </h2>
+
+    <h3>
+        For Nylah, what kinds of opinions might she want to learn?
+    </h3>
+    <div>
+        Choose all that apply.
+    </div>
+    <div>
+        <label>
+            <input type="checkbox"/>
+            The weather in Ohio and Maine
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="checkbox"/>
+            How interesting the classes are
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="checkbox"/>
+            Whether the professors are good
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="checkbox"/>
+            How hard it is to get into classes
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="checkbox"/>
+            How nice the dorms are
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="checkbox"/>
+            How the food is
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="checkbox"/>
+            How much homework there is
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="checkbox"/>
+            How the Greek life is
+        </label>
+    </div>
+
+    <p class="center">
+        <a href="steps2">
+            <button id="next" type="button">Now It's Your Turn</button>
+        </a>
+    </p>
+
+    <a href="nylah6" id="back">Back</a>
+{% endblock %}

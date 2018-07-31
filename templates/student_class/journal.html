@@ -1,0 +1,56 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}
+    {{ student_class }}
+{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+        th, td {
+            padding: 10px;
+        }
+    </style>
+    <div>
+        <h3>{{ student_class }}</h3>
+        Link to Module
+        <table border="1" style="margin: 30px; padding: 30px;">
+            <tr>
+                <th>Instructor</th>
+                <td>
+                    {{ student_class.instructor.name }}
+                    - Send Note, Raise Hand
+                </td>
+            </tr>
+            <tr>
+                <th>Joined</th>
+                <td>{{ student.joined_on }}</td>
+            </tr>
+            <tr>
+                <th>Current Module</th>
+                <td>{{ student.current_module }}</td>
+            </tr>
+            <tr>
+                <th>Decision</th>
+                <td>{{ student.current_module }}</td>
+            </tr>
+            <tr>
+                <th>Current Page</th>
+                <td>{{ student.current_module }}</td>
+            </tr>
+            <tr>
+                <th>Students</th>
+                <td>
+                <table>
+                        {% for student in student_class.students %}
+                            <tr>
+                                <th>{{ student.course.user.name }}</th>
+                            </tr>
+                        {% endfor %}
+                </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!--
+    <a href="/class/{{ student_class.id }}/leave">Leave Class</a>
+    -->
+{% endblock %}

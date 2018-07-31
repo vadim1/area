@@ -1,28 +1,7 @@
-{% extends 'decisions/base.html' %}
-{% load bootstrap %}
-{% block title %}{% block h1 %}Module {{ module.num }} - Review{% endblock %}{% endblock %}
-{% block content %}
-
-    <h1 class="center">
-        Review: {{ previous_module.name }}
-    </h1>
-
-    <div class="center">
-        <img src="/static/decisions/img/Module{{ previous_module.num }}_badge.png" />
-    </div>
-
-    <h3 class="center">In Module {{ previous_module.num }}<br/>You Learned:</h3>
-
-    <h3 style="margin-left: 30%;">
-        <div>&bull; Mental Shortcuts &amp; Bias</div>
-        <div>&bull; Facts Bersus Opinion</div>
-        <div>&bull; Perspective Taking</div>
-        <div>&bull; How Facts Beat Bias</div>
-    </h3>
-
-    <div class="center">
-        <button id="next" type="button"><a href="map">On to Module {{ module.num }}</a></button>
-    </div>
-
-    <a href="/decisions" id="back">Back</a>
+{% extends 'decisions/base/review.html' %}
+{% block review %}
+    <div>&bull; Mental Shortcuts &amp; Bias</div>
+    <div>&bull; Facts versus Opinion</div>
+    <div>&bull; Perspective Taking</div>
+    <div>&bull; How Facts Beat Bias</div>
 {% endblock %}

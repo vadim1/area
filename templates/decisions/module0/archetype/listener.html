@@ -1,0 +1,63 @@
+{% load static %}
+<h3>
+    <img src="{% static 'area_app/img/listener.png' %}"/>
+    {% if list != 'true' %}
+        You are...
+    {% endif %}
+    The Listener!
+</h3>
+<p class="quote">"For everyone of us that succeeds, it's because there's somebody there to show you the way out." -Oprah
+    Winfrey</p>
+<p>
+    You've got a whole village of people in your life who you trust and who support you. When you are faced with a
+    challenge or a decision, you know you can rely on your people. They love you, and you love them - and it means you
+    always have great advice ready for you when you ask.
+</p>
+<h4>{% include "problem_solver.html" %}S Like You!</h4>
+<div class="bio">
+
+    <div class="bio col-md-4">
+        <div>
+            <img src="{% static 'area_app/img/archetype/mandela.jpg' %}"/>
+        </div>
+        <div>
+            <div class="archetype-name">
+            <a href="http://en.wikipedia.org/wiki/Nelson_Mandela" target="_blank">Nelson Mandela</a>
+            </div>
+            Anti-Apartheid Revolutionary
+        </div>
+    </div>
+
+    <div class="bio col-md-4">
+        <div>
+            <img src="{% static 'area_app/img/archetype/gandhi.jpg' %}"/>
+        </div>
+        <div>
+            <div class="archetype-name">
+            <a href="https://en.wikipedia.org/wiki/Mahatma_Gandhi" target="_blank">Mahatma Gandhi</a>
+            </div>
+            Pacifist Leader of India
+        </div>
+    </div>
+
+    <div class="bio col-md-4">
+        <div>
+            <img src="{% static 'area_app/img/archetype/oprah.jpg' %}"/>
+        </div>
+        <div>
+            <div class="archetype-name">
+            <a href="https://en.wikipedia.org/wiki/Oprah_Winfrey" target="_blank">Oprah Winfrey</a>
+            </div>
+            Media Personality and Icon
+        </div>
+    </div>
+
+</div>
+<div class="clearfix"></div>
+<p>
+    Why is Mahatma Gandhi a listener?
+    Mahatma Gandhi was able to change India through non-violence because of his ability to listen to others and
+    understand the needs of his people and their arguments. In turn his listening enabled him to be persuasive, able to
+    reason and negotiate between conflicting parties, whether it was Muslims and Hindus, or between the British
+    government and its Indian subjects.
+</p>

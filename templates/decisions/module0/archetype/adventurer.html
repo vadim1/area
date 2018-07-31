@@ -1,0 +1,58 @@
+{% load static %}
+<h3>
+    <img src="{% static 'area_app/img/adventurer.png' %}"/>
+    {% if list != 'true' %}
+        You are...
+    {% endif %}
+    The Adventurer!
+</h3>
+<p class="quote">"Courage is the price that life exacts for granting peace." -Amelia Earhart</p>
+<p>
+    You make decisions quickly and you trust your gut feeling. When faced with a challenge, big or small, you'd rather
+    do what feels right than spend your time thinking through all the choices. You know who you are, and you know what
+    you want—so you aren't afraid to go get it.
+</p>
+<h4>{% include "problem_solver.html" %}S Like You!</h4>
+<div class="bio">
+    <div class="bio col-md-4">
+        <div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Amelia_Earhart_1935.jpg"/>
+        </div>
+        <div>
+            <div class="archetype-name">
+            <a href="http://en.wikipedia.org/wiki/Amelia_Earhart" target="_blank">Amelia Earhart</a>
+            </div>
+            Aviation Pioneer and Author
+        </div>
+    </div>
+
+    <div class="bio col-md-4">
+        <div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Shackletonhead.jpg/180px-Shackletonhead.jpg"/>
+        </div>
+        <div>
+            <div class="archetype-name">
+            <a href="http://en.wikipedia.org/wiki/Ernest_Shackleton" target="_blank">Ernest Shackleton</a>
+            </div>
+            Antarctic Explorer
+        </div>
+    </div>
+
+    <div class="bio col-md-4">
+        <div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/John_D._Rockefeller_1885.jpg/220px-John_D._Rockefeller_1885.jpg"/>
+        </div>
+        <div>
+            <div class="archetype-name">
+            <a href="http://en.wikipedia.org/wiki/John_D._Rockefeller" target="_blank">John D. Rockefeller</a>
+            </div>
+            Oil industry magnate and philanthropist
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<p>
+    What makes Ernest Shackleton an Adventurer?
+    Ernest Shackleton explored areas that other people were afraid to go to but this adventuresome streak also led him
+    to be restless and make decisions so quickly that his business ventures failed. Learn from his mistakes.
+</p>

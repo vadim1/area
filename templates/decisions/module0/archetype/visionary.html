@@ -1,0 +1,61 @@
+{% load static %}
+<h3>
+    <img src="{% static 'area_app/img/visionary.png' %}"/>
+    {% if list != 'true' %}
+        You are...
+    {% endif %}
+    The Visionary!
+</h3>
+<p class="quote">"Everything around you that you call life, was made up by people that were no smarter than you." -Steve
+    Jobs</p>
+<p>
+    In any situation, you believe that there's always another, better way. When you see two options, you immediately
+    think of what a more powerful third option could be. You don't like to settle for the ordinary, and you like to go
+    your own way. You keep everyone guessing—and usually, you surprise those around you with your decisions!
+</p>
+<h4>{% include "problem_solver.html" %}S Like You!</h4>
+<div class="bio">
+    <div class="bio col-md-4">
+        <div>
+            <img src="{% static 'area_app/img/archetype/jobs.jpg' %}"/>
+        </div>
+        <div>
+            <div class="archetype-name">
+            <a href="https://en.wikipedia.org/wiki/Steve_Jobs" target="_blank">Steve Jobs</a>
+            </div>
+            Entrepreneur and Inventor, Apple and Pixar
+        </div>
+    </div>
+
+    <div class="bio col-md-4">
+        <div>
+            <img src="{% static 'area_app/img/archetype/beyonce.jpg' %}"/>
+        </div>
+        <div>
+            <div class="archetype-name">
+            <a href="https://en.wikipedia.org/wiki/Beyoncé" target="_blank">Beyoncé</a>
+            </div>
+            Singer and Entertainment Icon
+        </div>
+    </div>
+
+    <div class="bio col-md-4">
+        <div>
+            <img src="{% static 'area_app/img/archetype/lebron.jpg' %}"/>
+        </div>
+        <div>
+            <div class="archetype-name">
+            <a href="https://en.wikipedia.org/wiki/Lebron_James" target="_blank">Lebron James</a>
+            </div>
+            NBA All-Star
+        </div>
+    </div>
+</div>
+<div class="clearfix"></div>
+<p>
+    What makes Beyoncé a Visionary?
+    Beyoncé is a legendary musician who continually stretches and changes what she's doing musically. She began as part
+    of the group Destiny’s Child and then went solo. Most recently, she's taken to political commentary in her music,
+    using her album Lemonade to make a statement that connected one woman's troubles to the broader struggles faced
+    by women of color.
+</p>

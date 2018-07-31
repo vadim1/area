@@ -44,6 +44,14 @@
         background-image: linear-gradient(rgb(179, 217, 140), rgb(153, 204, 102));
     }
 
+    .carousel-inner {
+        min-height: 350px;
+        text-align: center;
+        font-size: large;
+        background-color: #3d96ff;
+        color: #ffffff;
+    }
+
     .carousel-control {
         background: none;
     }
@@ -67,6 +75,10 @@
         line-height: 120% !important;
         margin-left: 40px;
         margin-right: 40px;
+    }
+
+    .why_div a {
+        color: #ffffff;
     }
 
     .question {
@@ -112,8 +124,7 @@
     </ol>
 
     <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox"
-         style="min-height: 350px; text-align: center; font-size: large; background-color: #3d96ff; color: #ffffff;">
+    <div class="carousel-inner" role="listbox">
         {% for question, details in questions %}
             <div class="item{% if forloop.counter0 == 0 %} active{% endif %}" style="margin-top: 50px;">
                 <div class="question" rel="{{ forloop.counter0 }}">{{ question }}</div>
@@ -127,8 +138,7 @@
                     <label for="n{{ forloop.counter0 }}" class="btnv"><span><span></span></span>No</label>
                 </div>
                 <div class="why_div">
-                    <a href="#" onclick="$(this).next('div').show(); $(this).hide(); return false;"
-                       style="color: #ffffff">Why this question?</a>
+                    <a href="#" onclick="$(this).next('div').show(); $(this).hide(); return false;">Why this question?</a>
                     <div id="why" style="display:none;">{{ details.why }}</div>
                 </div>
             </div>

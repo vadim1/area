@@ -8,13 +8,19 @@ class StudentClass(models.Model):
     instructor = models.ForeignKey(User, null=True)
     created_on = models.DateField(auto_now_add=True, blank=True)
     starting_module = models.IntegerField(default=0)
+    name = models.CharField(max_length=255, default=None)
+    intro_note = models.CharField(max_length=255, default=None)
     completed_on = models.DateField(null=True)
 
     def __str__(self):
         to_return = ''
         if self.completed_on:
             to_return = "Closed "
-        to_return += "Module " + str(self.starting_module) + " Class by " + str(self.instructor.get_short_name())
+        if self.name:
+            to_return += self.name
+        else:
+            to_return += "Module " + str(self.starting_module)
+        to_return += " Class by " + str(self.instructor.get_short_name())
         return to_return
 
     class Meta:
@@ -74,3 +80,10 @@ class StudentClassStudent(models.Model):
     class Meta:
         verbose_name = 'Class Student'
         verbose_name_plural = 'Class Students'
+
+    def current_page(self):
+        return self.course.page(self.current_module)
+
+    def decision(self):
+        # TODO - use versions
+        return self.course.decision()

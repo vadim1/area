@@ -1,0 +1,39 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 2 - Game 2 Introduction{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <style type="text/css">
+        #yes {
+            color: green;
+            font-size: 200%;
+        }
+
+        #no {
+            color: red;
+            font-size: 200%;
+        }
+    </style>
+
+    <h2 class="center">
+        Bias In Action!
+    </h2>
+    <div class="center" style="margin: 50px;">
+    </div>
+    <h3>
+        Now that you've matched each definition to its bias, can you match the quiz scenario to the bias it
+        refers to?
+    </h3>
+    <h3>
+        If you get it right
+        <span id="yes" class="yesno">&#10003;</span>
+        will flash on the screen. If not,
+        <span id="no" class="yesno">&#10008;</span>
+        will flash.
+    </h3>
+    <div class="center start">
+        <button id="next" type="button"><a href="game2">Spot Bias!</a></button>
+    </div>
+    <a href="game_results" id="back">Back</a>
+{% endblock %}

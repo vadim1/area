@@ -22,6 +22,8 @@ def show(request, id):
     student_class = StudentClass.objects.get(pk=id)
     if request.method == 'POST':
         student_class.starting_module = int(request.POST.get('starting_module'))
+        student_class.name = request.POST.get('name')
+        student_class.intro_note = request.POST.get('intro_note')
         student_class.save()
     return render(request, 'student_class/show.html', {
         'student_class': student_class,
@@ -65,6 +67,16 @@ def leave(request, id):
     scs = StudentClassStudent.objects.filter(student_class=student_class, course=Course.load_course(request)).first()
     scs.delete()
     return redirect('/')
+
+
+@login_required
+def unenroll(request, id):
+    if not request.user.is_staff:
+        raise Exception('Not allowed for non-staff')
+    student_class_student = StudentClassStudent.objects.get(pk=id)
+    class_id = student_class_student.student_class_id
+    student_class_student.delete()
+    return redirect('/class/'+str(class_id))
 
 
 @login_required

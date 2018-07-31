@@ -2,7 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.conf import settings
 from area_app import forms
-from .models import Course, Module0, Module1, Module2
+from .models import Course
+from module0.models import Module0
+from module1.models import Module1
+from module2.models import Module2
 from student_class.models import StudentClass
 from module3.views import load_module as load_module3
 from datetime import datetime
@@ -18,6 +21,41 @@ def load_json(json_data):
         pass
         # TODO - log
     return json_object
+
+
+def load_course(request):
+    course = None
+    if request.user.is_authenticated():
+        courses = Course.objects.filter(user=request.user)
+        if courses:
+            course = courses.first()
+        else:
+            course = Course(user=request.user)
+            course.save()
+    return course
+
+
+@login_required
+def load_module(request, module_class, step=''):
+    module = None
+    course = load_course(request)
+    if course:
+        module_list = module_class.objects.filter(course=course)
+        if module_list:
+            module = module_list.first()
+            if step:
+                module.step = step
+                module.save()
+        else:
+            module = module_class(course=course, step=step)
+            module.save()
+        module.answers_json = ''
+        if module.answers:
+            module.answers_json = load_json(module.answers)
+    if not module:
+        module = module_class()
+        module.answers_json = None
+    return module
 
 
 @login_required
@@ -74,6 +112,60 @@ def journal(request):
 def terms_conditions(request):
     return render(request, 'decisions/terms_conditions.html', {
     })
+
+
+"""
+
+Common Methods
+
+"""
+
+
+def base_intro(request, module_class, prefix):
+    module = load_module(request, module_class, 'intro')
+    return render(request, prefix+'intro.html', {
+        'module': module,
+    })
+
+
+def base_review(request, module_class, previous_module_class, extra_map, prefix):
+    module = load_module(request, module_class, 'review')
+    return render(request, prefix+'review.html', {
+        'module': module,
+        'previous_module': previous_module_class,
+    })
+
+
+def base_map(request, module_class, prefix):
+    module = load_module(request, module_class, 'map')
+    return render(request, prefix+'map.html', {
+        'module': module,
+    })
+
+
+def base_instructions(request, module_class, prefix):
+    module = load_module(request, module_class, 'instructions')
+    if request.method == 'POST':
+        return redirect('/' + str(module_class.num()) + '/game')
+    return render(request, prefix+'instructions.html', {
+        'module': module,
+    })
+
+
+def base_summary(request, module_class, prefix):
+    module = load_module(request, module_class, 'summary')
+    module.completed_on = datetime.now()
+    module.save()
+    return render(request, prefix+'summary.html', {
+        'module': module,
+    })
+
+
+def base_restart(request, module_class, prefix):
+    module = load_module(request, module_class, 'intro')
+    module.completed_on = None
+    module.save()
+    return redirect('/' + str(module_class.num()) + '/')
 
 
 """
@@ -260,7 +352,6 @@ game_labels = {
 }
 
 
-@login_required
 def game(request, module1, attr, next):
     if request.method == 'POST':
         attrs = []
@@ -288,7 +379,6 @@ def game(request, module1, attr, next):
     })
 
 
-@login_required
 def clear_game_answers(module1):
     if module1.answers:
         module1.answers = json.dumps({})
@@ -1118,11 +1208,15 @@ def module2steps3(request):
         fact = module2.fact2
         source = module2.source2
         bias = module2.bias2
+    cc_json = load_json(module1.cc)
+    cc_current = cc_num
+    if 'cc_num' in cc_json:
+        cc_current = cc_json['cc_num']
     return render(request, 'decisions/module2/steps3.html', {
         'num': cc_num,
         'n': cc_num + 1,
-        'cc': load_json(module1.cc),
-        'cc_current': load_json(module1.cc)[cc_num],
+        'cc': cc_json,
+        'cc_current': cc_current,
         'decision': module1.decision,
         'nylah_cc': nylah_ccs[cc_num],
         'nylah_facts': nylah_facts[cc_num],

@@ -1,0 +1,171 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 2 - Bias{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <script type="text/javascript" src="/static/decisions/js/jquery.flip.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".flip").flip({
+                trigger: 'click'
+            });
+
+            var flipper = null;
+
+            $(".flip").on('flip:done', function () {
+                if (flipper == null) {
+                    flipper = $(this);
+                }
+                $('.flip').each(function () {
+                    if ($(this).attr('id') == flipper.attr('id')) {
+                    }
+                    else if ($(this).data("flip-model").isFlipped) {
+                        $(this).flip(false);
+                    }
+                });
+                setTimeout(function () {
+                    flipper = null;
+                }, 600);
+            });
+            $('.back').css('display', 'block');
+        });
+    </script>
+    <style type="text/css">
+        .reveal {
+            width: 100%;
+        }
+
+        .reveal td {
+            text-align: center;
+            width: 30%;
+            padding: 5px;
+        }
+
+        .front, .flip {
+            height: 180px;
+        }
+
+        .back {
+            display: none;
+        }
+
+        .back p {
+            display: inline-block;
+            vertical-align: middle;;
+            line-height: normal;
+        }
+
+        .front h2, .back h3 {
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .back h3 {
+            padding-top: 10px;
+            cursor: pointer;
+        }
+
+        .sel {
+            padding-top: 10px;
+            margin-top: 10px;
+            padding-bottom: 10px;
+            background-color: #cccccc;
+            border: 2px dashed #1e2846;
+        }
+    </style>
+    <div class="center">
+        <h2 class="center">See Your Results!</h2>
+        <h3>Click on the biases below to see its relevance.</h3>
+        <table class="reveal">
+            <tr>
+                <td colspan="2">
+                    <div class="flip" id="optimism">
+                        <div class="front">
+                            <h2{% if nylah_bias == 'optimism' %} class="sel"{% endif %}>Optimism Bias</h2>
+                        </div>
+                        <div class="back">
+                            <h3>
+                                Nylah's optimism and enthusiasm about going to college isn't at work here.
+                            </h3>
+                        </div>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="flip" id="projection">
+                        <div class="front">
+                            <h2{% if nylah_bias == 'projection' %} class="sel"{% endif %}>Projection Bias</h2>
+                        </div>
+                        <div class="back">
+                            <h3>
+                                This bias is not relevant because it is about projecting your own thoughts and feelings
+                                onto others.
+                            </h3>
+                        </div>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="flip" id="liking">
+                        <div class="front">
+                            <h2{% if nylah_bias == 'liking' %} class="sel"{% endif %}>Liking Bias</h2>
+                        </div>
+                        <div class="back">
+                            <h3>
+                                If Nylah's friend liked Ohio State that might influence Nylah to like it.
+                            </h3>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="flip" id="authority">
+                        <div class="front">
+                            <h2{% if nylah_bias == 'authority' %} class="sel"{% endif %}>Authority Bias</h2>
+                        </div>
+                        <div class="back">
+                            <h3>
+                                If an authority figure like Nylah's dad suggested she choose Ohio State, this bias could
+                                be right.
+                            </h3>
+                        </div>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="flip" id="planning">
+                        <div class="front">
+                            <h2{% if nylah_bias == 'planning' %} class="sel"{% endif %}>Planning Bias</h2>
+                        </div>
+                        <div class="back">
+                            <h3>
+                                This bias is not relevant because it is about underestimating how long a task will take
+                                even if we have done it before.
+                            </h3>
+                        </div>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="flip" id="social">
+                        <div class="front" onclick="setTimeout(function(){ $('#next').show(); }, 1500);">
+                            <h2{% if nylah_bias == 'social' %} class="sel"{% endif %}>
+                                <span class="orange">&#10004;</span>
+                                Social Proof
+                            </h2>
+                        </div>
+                        <div class="back">
+                            <h3>
+                                This bias is most relevant because Nylah is allowing her opinion to be influenced by
+                                Ohio State's popularity.
+                            </h3>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+    <p class="center">
+        <button id="next" type="button" style="display: none;"><a href="nylah5">What should Nylah do?</a></button>
+    </p>
+    <a href="nylah3" id="back">Back</a>
+{% endblock %}

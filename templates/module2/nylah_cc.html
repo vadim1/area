@@ -1,0 +1,20 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 2 - Nylah's Critical Concepts{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <h2 class="center">Nylah's Critical Concepts</h2>
+    <h3>From Module 1, Nylah's Critical Concepts were:</h3>
+    {% include 'decisions/module1/nylah_cc.html' %}
+    <h3>
+        Let's take the first one: "I'm able to afford it."
+        Nylah has to think about what facts entered into it.
+        Which are facts she could use to support it?
+    </h3>
+
+    <p class="center">
+        <button id="next" type="button"><a href="nylah_cc_facts">Show Nylah's Facts</a></button>
+    </p>
+    <a href="nylah7" id="back">Back</a>
+{% endblock %}

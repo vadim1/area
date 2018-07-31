@@ -15,6 +15,9 @@ class User(AbstractUser):
     def label(self):
         return self.first_name + " " + self.last_name + "<br/>" + self.email
 
+    def name(self):
+        return self.first_name + " " + self.last_name
+
     label.allow_tags = True
 
 

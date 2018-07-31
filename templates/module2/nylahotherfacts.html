@@ -1,0 +1,129 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 2 - Bias{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <style type="text/css">
+        label {
+            font-size: large;
+            border: 1px solid #dddddd;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+
+        td {
+            margin: 3px;
+            padding: 3px;
+            height: 100%;
+        }
+
+        label {
+            height: 100%;
+        }
+
+        #canvas {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.perspective').click(function () {
+                var unchecked = $('.perspective').not(':checked');
+                if (unchecked.length < 1) {
+                    $('#next_btn').show();
+                    $('#more').hide();
+
+                    /** If we want confetti:
+                     $('#canvas').show();
+                     StartConfetti();
+                     */
+                }
+            });
+            setTimeout(function(){$('#more').show();}, 4000);
+        });
+
+        function clickPerspectives() {
+            $('#perspectives').show();
+            $('#next_btn').hide();
+            $('#perspectives_button').hide();
+            return false;
+        }
+    </script>
+    <h2 class="center">
+        Other Facts?
+    </h2>
+    <!-- TODO
+    <div class="center">
+        {% include 'decisions/_map.html' with top=100 left=160 %}
+    </div>
+    -->
+    <h3>
+        What other kinds of facts and figures might Nylah search for to help choose a college?
+    </h3>
+    <h3>
+        Select all the options below that you think Nylah will find useful:
+    </h3>
+    <div>
+        <label>
+            <input type="checkbox"/>
+            The student to teacher ratio
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="checkbox"/>
+            Graduation rates
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="checkbox"/>
+            Tuition
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="checkbox"/>
+            Housing
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="checkbox" name="perspective" class="perspective"/>
+            Average SAT/ACT Scores
+        </label>
+    </div>
+    <div>
+        <label>
+            <input type="checkbox" name="perspective" class="perspective"/>
+            Financial Aid
+        </label>
+    </div>
+
+    <div id="more" style="display: none; margin-top: 10px;">
+        <h2>Keep going - more apply...</h2>
+    </div>
+
+
+    <div class="center" id="next_btn" style="display: none; margin-top: 50px;">
+        <a href="nylah52">
+            <button id="next" type="button">Submit</button>
+        </a>
+    </div>
+
+    <p class="center">
+    </p>
+    <a href="nylah51" id="back">Back</a>
+{% endblock %}

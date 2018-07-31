@@ -14,17 +14,13 @@
         }
     </style>
     {% if archetype %}
-        <div>{% with 'archetype/'|add:archetype|add:'.html' as path %}{% include path %}{% endwith %}</div>
+        <div>{% with 'decisions/module0/archetype/'|add:archetype|add:'.html' as path %}{% include path %}{% endwith %}</div>
     {% endif %}
-        <div class="clearfix"></div>
 
-        <div style="font-size: larger">See <a href="/decisions/0/archetypes">all {% include "problem_solver.html" %} Profiles</a>?
-        </div>
-
-    <div class="center start">
-            <a href="/decisions/0/review">
+    <div class="center">
+            <a href="/0/right">
                 <button id="next" type="button">Are We Right?</button>
             </a>
-        <a href="/decisions/0/instructions" id="back">Back</a>
+        <a href="/0/instructions" id="back">Back</a>
     </div>
 {% endblock %}

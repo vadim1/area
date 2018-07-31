@@ -1,0 +1,52 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 2 - Bias{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <style type="text/css">
+        #facts_options div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: large;
+            border: 1px solid #dddddd;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+    </style>
+
+    <h2 class="center">Getting Opinions</h2>
+    <h3>
+For Nylah, what kinds of opinions might she want to learn?
+    </h3>
+
+    <div>
+Check all that apply.
+    </div>
+
+    <div id="findings">
+        <div id="facts_options" style="margin-top:20px;">
+            {% for option in opinions %}
+                <div>
+                    <label>
+                        <input type="checkbox" name="opinions[]" value="{{ option }}"/>
+                        <span> {{ option }}</span>
+                    </label>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="center">
+            <button type="submit">Submit</button>
+        </div>
+
+    </div>
+
+    <a href="nylah61" id="back">Back</a>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}AREA Method Module {{ module.num }} - {{ module.name }}{% endblock %}{% endblock %}
+{% block content %}
+    <div class="center">
+        <div style="font-weight: bolder">MODULE {{ module.num }}</div>
+        <div style="margin-top: 50px; margin-bottom: 50px;">
+            <img src="/static/decisions/img/Homepage_Door.png"/>
+        </div>
+        {% block pre_title %}{% endblock %}
+        <div style="font-size: 60px; letter-spacing: -9px; font-weight: 900; margin-top: 20px;">
+            {% block module_title %}{% endblock %}
+        </div>
+        {% block post_title %}{% endblock %}
+
+        <h3 style="margin-top: 40px; margin-bottom: 40px;">
+            {% block module_subtitle %}{% endblock %}
+        </h3>
+
+        <div class="start">
+            <p class="center">
+                <button id="next" type="button"><a href="review">
+                    Let's Review
+                </a></button>
+            </p>
+        </div>
+    </div>
+    <a href="/decisions" id="back">Back</a>
+{% endblock %}

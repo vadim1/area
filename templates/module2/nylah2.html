@@ -1,0 +1,31 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 2 - Bias{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <h2 class="center">
+        Nylah's Decision Problem
+    </h2>
+    <h3>
+        Nylah's been deciding whether or not to go away to school.
+        Part of the decision hinges upon evaluating her top out of state options. They present different opportunities.
+    </h3>
+    <h3>
+        She's heard good things about Ohio State. She is unfamiliar with Bates.
+    </h3>
+    <div class="center">
+        <img src="http://www.bates.edu/communications/files/2013/01/bates-bobcat-primary1.jpg"
+             style="max-width: 300px; height: 300px; margin-right: 20px;"/>
+        <img src="http://buckeyefansonly.com/images/brutusbuckeyeandflag.gif"
+             style="max-width: 300px; height: 300px;"/>
+    </div>
+    <h3 class="center" style="margin: 50px;">
+        Does popular mean better?
+    </h3>
+    <div class="center start">
+        <a href="nylah3"><button type="button">Yes</button></a>
+        <a href="nylah3"><button type="button">No</button></a>
+    </div>
+    <a href="nylah1" id="back">Back</a>
+{% endblock %}

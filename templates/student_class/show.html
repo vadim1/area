@@ -15,36 +15,100 @@
             <table border="1" style="margin: 30px; padding: 30px;">
                 <tr>
                     <th>Instructor</th>
-                    <td>{{ student_class.instructor }}</td>
+                    <td>{{ student_class.instructor.name }}</td>
                 </tr>
                 <tr>
-                    <th>Created Date</th>
+                    <th>Created</th>
                     <td>{{ student_class.created_on }}</td>
                 </tr>
                 <tr>
-                    <th>Starting Module</th>
+                    <th>Details</th>
                     <td>
-                        <select name="starting_module" onchange="$('form').submit()">
-                            {% for i in "x"|rjust:num_modules %}
-                                <option value="{{ forloop.counter0 }}"
-                                        {% if student_class.starting_module == forloop.counter0 %}
-                                        selected="true"{% endif %}>{{ forloop.counter0 }}</option>
-                            {% endfor %}
-                        </select>
+                        <table border="1" id="show">
+                            <tr>
+                                <th>Name</th>
+                                <td>{{ student_class.name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Student Note</th>
+                                <td>{{ student_class.intro_note }}</td>
+                            </tr>
+                            <tr>
+                                <th>Start Module</th>
+                                <td>{{ student_class.starting_module }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="padding-left: 40%">
+                                    <a href="#" onclick="return(edit());">Edit</a>
+                                </td>
+                            </tr>
+                        </table>
+                        <table border="1" id="edit" style="display:none;">
+                            <tr>
+                                <th>Name</th>
+                                <td>
+                                    <input type="text" name="name" value="{{ student_class.name }}" size="30"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Student Note</th>
+                                <td>
+                                    <textarea name="intro_note" cols="30" rows="3">{{ student_class.intro_note }}</textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Start Module</th>
+                                <td>
+                                    <select title="Starting Module" name="starting_module"">
+                                    {% for i in "x"|rjust:num_modules %}
+                                        <option value="{{ forloop.counter0 }}"
+                                                {% if student_class.starting_module == forloop.counter0 %}
+                                                selected="selected"{% endif %}>{{ forloop.counter0 }}</option>
+                                    {% endfor %}
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="padding-left: 40%">
+                                    <input type="submit" class="btn" name="submit" value="Save"/>
+                                </td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
                 <tr>
                     <th>Students</th>
                     <td>
-                        <ul>
+                        <table border="1">
+                            <tr>
+                                <th>Student</th>
+                                <th>Module</th>
+                                <th>Page</th>
+                                <th>Decision</th>
+                                <th>Action</th>
+                            </tr>
                             {% for student in student_class.students %}
-                                <li>{{ student.course }}</li>
+                                <tr>
+                                    <th><a href="/class/journal/{{ student.id }}">{{ student.course.user.name }}</a></th>
+                                    <td>{{ student.current_module }}</td>
+                                    <td>{{ student.current_page }}</td>
+                                    <td>{{ student.decision }}</td>
+                                    <td>
+                                        <div>Send Note</div>
+                                        <div>Restart</div>
+                                        <div>Send to Expert</div>
+                                        <div>
+                                            <a href="/class/unenroll/{{ student.id }}">Unenroll</a>
+                                        </div>
+                                    </td>
+                                </tr>
                             {% endfor %}
-                        </ul>
+                        </table>
+                        TODO - add missing students - enroll, beginning - only from their dream directors
                     </td>
                 </tr>
                 <tr>
-                    <th>Completed Date</th>
+                    <th>Completed</th>
                     <td>
                         {{ student_class.completed_on }} -
                         {% if student_class.completed_on %}
@@ -61,4 +125,16 @@
     <div style="float: right;">
         <a href="/class/{{ student_class.id }}/delete" onclick="return(confirm('Are you sure?'))">Delete Class</a>
     </div>
+    <script type="text/javascript">
+    function edit()
+    {
+        $('#edit').show();
+        $('#show').hide();
+        return false;
+    }
+    {% if not student_class.name %}
+        edit();
+    {% endif %}
+    </script>
+
 {% endblock %}

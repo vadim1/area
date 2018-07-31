@@ -18,6 +18,9 @@ from django.contrib import admin
 from area_app import urls as area_app_urls
 from decisions import urls as decisions_urls
 from django.conf import settings
+from module0 import urls as module0_urls
+from module1 import urls as module1_urls
+from module2 import urls as module2_urls
 from module3 import urls as module3_urls
 from student_class import urls as student_class_urls
 admin.autodiscover()
@@ -28,6 +31,9 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
     url(r'^decisions/', include(decisions_urls)),
     url(r'^class/', include(student_class_urls)),
+    url(r'^0/', include(module0_urls)),
+    url(r'^1/', include(module1_urls)),
+    url(r'^2/', include(module2_urls)),
     url(r'^3/', include(module3_urls)),
 ]
 

@@ -1,0 +1,125 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 2 - Bias{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <script type="text/javascript" src="/static/decisions/js/jquery.flip.js"></script>
+    <script type="text/javascript">
+        var flipped = 0;
+
+        $(document).ready(function () {
+            $(".flip").flip({
+                trigger: 'click'
+            }).on('flip:done', function(){
+                flipped++;
+                if (flipped > 2) {
+                    $('#done').css('visibility', 'inherit');
+                }
+            });
+
+            $('.back').css('display', 'block');
+        });
+    </script>
+    <style type="text/css">
+        .reveal {
+            width: 100%;
+        }
+
+        .reveal td {
+            text-align: center;
+            width: 30%;
+            padding: 5px;
+        }
+
+        .front, .flip {
+            height: 180px;
+        }
+
+        .back {
+            display: none;
+        }
+
+        .back p, .back h3 {
+            display: inline-block;
+            vertical-align: middle;;
+            line-height: normal;
+        }
+
+        .front h2, .back h3 {
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .back h3 {
+            padding-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+    <!-- TODO:
+        <h2 class="center">
+        Facts Versus Opinions
+    </h2>
+    <div class="center">
+        {% include 'decisions/_map.html' with top=100 left=160 %}
+    </div>
+    <h3 style="font-size: 150%; margin-top: 30px;">
+        For Nylah's interest in graphic design, is there data about each college's program?
+    </h3>
+    <h3>1. The student to teacher ratios</h3>
+    <h3>2. The percent of graphic design students who graduate with a job</h3>
+    <h3>3. The student to teacher ratio at Bates and Ohio State</h3>
+    -->
+
+    <div class="center">
+        <h2 class="center">Finding Facts</h2>
+        <h3>Click on each question to see Nylah beat bias by getting facts from the websites of OSU and Bates.</h3>
+        <table class="reveal">
+            <tr>
+                <td colspan="2">
+                    <div class="flip">
+                        <div class="front">
+                            <h2>Is graphic design a major at each college?</h2>
+                        </div>
+                        <div class="back">
+                            <h3>
+                                OSU has three  design majors to choose from, Bates has courses but not a major.
+                            </h3>
+                        </div>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="flip">
+                        <div class="front">
+                            <h2>What courses are required to graduate?</h2>
+                        </div>
+                        <div class="back">
+                            <h3>
+                                A handful  at OSU, no requirements at Bates.
+                            </h3>
+                        </div>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="flip">
+                        <div class="front">
+                            <h2>How each college helps with internships and jobs?</h2>
+                        </div>
+                        <div class="back">
+                            <h3>
+                                Both OSU and Bates have online job boards but OSU is more targeted to the career.
+                            </h3>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+    <div id="done" style="visibility: hidden;">
+    <p class="center">
+        <a href="nylahotherfacts"><button id="next" type="button">Overcome Bias</button></a>
+    </p>
+    </div>
+    <a href="nylah5" id="back">Back</a>
+{% endblock %}

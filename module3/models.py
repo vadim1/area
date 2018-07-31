@@ -1,13 +1,10 @@
 from __future__ import unicode_literals
 
 from django.db import models
-from decisions.models import Course
+from decisions.models import Course, BaseModule
 
 
-class Module3(models.Model):
-    course = models.ForeignKey(Course)
-    completed_on = models.DateField(null=True)
-    step = models.CharField(max_length=20, default='')
+class Module3(BaseModule):
     answers = models.TextField(default='')
 
     @staticmethod

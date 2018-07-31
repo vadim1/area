@@ -1,0 +1,60 @@
+{% load static %}
+<h3>
+    <img src="{% static 'area_app/img/detective.png' %}"/>
+    {% if list != 'true' %}
+        You are...
+    {% endif %}
+    The Detective!
+</h3>
+<p class="quote">"I am turned into a sort of machine for observing facts and grinding out conclusions." -Charles Darwin</p>
+<p>
+    You value information and are always looking for the facts. You don't make your decisions based on how you feel—you
+    see what the evidence says, and you listen to it. You believe that the more you learn, the better you'll do—and
+    you're committed to gathering as much information as you can.
+</p>
+<h4>{% include "problem_solver.html" %}S Like You!</h4>
+<div class="bio">
+
+    <div class="bio col-md-4">
+        <div>
+            <img src="{% static 'area_app/img/archetype/curie.jpg' %}"/>
+        </div>
+        <div>
+            <div class="archetype-name">
+            <a href="http://en.wikipedia.org/wiki/Marie_Curie" target="_blank">Marie Curie</a>
+            </div>
+            Noble Prize-Winning Scientist
+        </div>
+    </div>
+
+    <div class="bio col-md-4">
+        <div>
+            <img src="{% static 'area_app/img/archetype/darwin.jpg' %}"/>
+        </div>
+        <div>
+            <div class="archetype-name">
+            <a href="http://en.wikipedia.org/wiki/Charles_Darwin" target="_blank">Charles Darwin</a>
+            </div>
+            Naturalist, Geologist, Biologist, Evolutionary
+        </div>
+    </div>
+
+    <div class="bio col-md-4">
+        <div>
+            <img src="{% static 'area_app/img/archetype/wells.jpg' %}"/>
+        </div>
+        <div>
+            <div class="archetype-name">
+            <a href="http://en.wikipedia.org/wiki/Ida_B._Wells" target="_blank">Ida B. Wells</a>
+            </div>
+            Suffragist and Civil Rights Leader
+        </div>
+    </div>
+
+</div>
+<div class="clearfix"></div>
+<p>
+    Why is Marie Curie a Detective? Marie Curie was the only woman to ever win two Nobel Prizes.
+    She did it by systematically gathering data and testing it out to make the discovery of not one, but two,
+    new elements: polonium and radium. That's why she is a detective like you.
+</p>

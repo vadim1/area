@@ -1,48 +1,9 @@
 from django.contrib import admin
-from .models import Course, Module0, Module1, Module2
-
-
-@admin.register(Module0)
-class Module0Admin(admin.ModelAdmin):
-    list_display = ('course', 'completed_on', 'step',
-                    'archetype', 'psp_correct', 'work_on')
-    readonly_fields = []
-
-    def get_readonly_fields(self, request, obj=None):
-        return list(self.readonly_fields) + \
-               [field.name for field in obj._meta.fields] + \
-               [field.name for field in obj._meta.many_to_many]
-
-
-@admin.register(Module1)
-class Module1Admin(admin.ModelAdmin):
-    list_display = ('course', 'completed_on', 'step',
-                    'cc0', 'cc1', 'cc2', 'decision', 'cc', 'cc_not')
-    readonly_fields = []
-
-    def get_readonly_fields(self, request, obj=None):
-        return list(self.readonly_fields) + \
-               [field.name for field in obj._meta.fields] + \
-               [field.name for field in obj._meta.many_to_many]
-
-
-@admin.register(Module2)
-class Module2Admin(admin.ModelAdmin):
-    list_display = ('course', 'completed_on', 'step', 'nylah_bias',
-                    'fact0', 'source0', 'bias0',
-                    'fact1', 'source1', 'bias1',
-                    'fact2', 'source2', 'bias2',
-                    )
-    readonly_fields = []
-
-    def get_readonly_fields(self, request, obj=None):
-        return list(self.readonly_fields) + \
-               [field.name for field in obj._meta.fields] + \
-               [field.name for field in obj._meta.many_to_many]
-
-
-class Module1Inline(admin.StackedInline):
-    model = Module1
+from .models import Course
+from module0.admin import Module0
+from module1.admin import Module1
+from module2.admin import Module2
+from module3.admin import Module3
 
 
 @admin.register(Course)
@@ -83,3 +44,7 @@ class CourseAdmin(admin.ModelAdmin):
     def module2(self, course):
         return self.module(Module2, course)
     module2.allow_tags = True
+
+    def module3(self, course):
+        return self.module(Module3, course)
+    module3.allow_tags = True

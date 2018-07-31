@@ -1,0 +1,31 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}AREA Method Module {{ module.num }} - {{ module.name }}{% endblock %}{% endblock %}
+{% block content %}
+
+    <div class="center">
+
+    {% include 'decisions/_map.html' with top=90 left=70 %}
+
+    <h1 class="center">Module {{ module.num }} Complete!</h1>
+
+    <h3 class="center">
+        Congratulations! You received the Module {{ module.num }} badge!
+        {% block whats_next %}{% endblock %}
+    </h3>
+
+        <img src="/static/decisions/img/Module{{ module.num }}_badge.png" />
+
+        <h3>You have learned:</h3>
+    </div>
+
+    <h3 style="margin-left: 30%">
+    {% block summary %}{% endblock %}
+    </h3>
+
+    <div class="center">
+        <button id="next" type="button"><a href="/decisions">Modules List</a></button>
+    </div>
+
+    <a href="{% block back %}commitment{% endblock %}" id="back">Back</a>
+{% endblock %}

@@ -1,0 +1,147 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 2 - Bias{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <script type="text/javascript" src="/static/decisions/js/jquery.flip.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".flip").flip({
+                trigger: 'click'
+            });
+
+            $('.back').css('display', 'block');
+        });
+    </script>
+    <style type="text/css">
+        .reveal {
+            width: 100%;
+        }
+
+        .reveal td {
+            text-align: center;
+            width: 30%;
+            padding: 5px;
+        }
+
+        .front, .flip {
+            height: 180px;
+        }
+
+        .back {
+            display: none;
+        }
+
+        .back p {
+            display: inline-block;
+            vertical-align: middle;;
+            line-height: normal;
+        }
+
+        .front h2, .back h3 {
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .back h3 {
+            padding-top: 10px;
+            cursor: pointer;
+        }
+
+        .sel {
+            padding-top: 10px;
+            margin-top: 10px;
+            padding-bottom: 10px;
+            background-color: #cccccc;
+            border: 2px dashed #1e2846;
+        }
+    </style>
+    <div class="center">
+        <h2 class="center">How Facts Beat Bias</h2>
+        <div class="center">
+            {% include 'decisions/_map.html' with top=80 left=80 %}
+        </div>
+        <h3 style="text-align: left;">
+            Every perspective has some kind of bias.
+            <br/>
+            Click the AREA Method steps below to see the different kinds of bias in each perspective.
+        </h3>
+        <table class="reveal">
+            <tr>
+                <td colspan="3">
+                    <div class="flip">
+                        <div class="front">
+                            <h2>Absolute</h2>
+                        </div>
+                        <div class="back">
+                            <h3>
+                                Absolute information is primary source information from the targets of your
+                                decision, it's the least influenced information, having the bias of the targets
+                                alone. For Nylah that would be Ohio State and Bates.
+                            </h3>
+                        </div>
+                    </div>
+                </td>
+                <td colspan="3">
+                    <div class="flip">
+                        <div class="front">
+                            <h2>Relative</h2>
+                        </div>
+                        <div class="back">
+                            <h3>
+                                Relative sources are sources that are somehow connected - related - to your
+                                research target, but are not from the target itself, such as news media or
+                                industry groups and so there is an extra layer of bias embedded in it from
+                                those secondary sources.
+                            </h3>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="flip">
+                        <div class="front">
+                            <h2>Exploration</h2>
+                        </div>
+                        <div class="back">
+                            <h3>
+                                TODO
+                            </h3>
+                        </div>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="flip">
+                        <div class="front">
+                            <h2>Exploitation</h2>
+                        </div>
+                        <div class="back">
+                            <h3>
+                                TODO
+                            </h3>
+                        </div>
+                    </div>
+                </td>
+                <td colspan="2">
+                    <div class="flip">
+                        <div class="front">
+                            <h2>Analysis</h2>
+                        </div>
+                        <div class="back">
+                            <h3>
+                                TODO
+                            </h3>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+    <p class="center">
+        <a href="nylah_cc"><button id="next" type="button">How did Nylah Use This?</button></a>
+    </p>
+    <a href="nylah7" id="back">Back</a>
+{% endblock %}

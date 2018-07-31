@@ -1,9 +1,9 @@
 {% extends 'decisions/base.html' %}
 {% load bootstrap %}
-{% block title %}{% block h1 %}Module 0 - Problem Solver Profile{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}AREA Method Module {{ module.num }} - {{ module.name }}{% endblock %}{% endblock %}
 {% block content %}
     <div class="center">
-        <div style="font-weight: bolder">MODULE 00</div>
+        <div style="font-weight: bolder">MODULE {{ module.num }}</div>
         <div style="margin-top: 50px; margin-bottom: 50px;">
             <img src="/static/decisions/img/Homepage_Door.png"/>
         </div>

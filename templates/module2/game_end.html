@@ -1,0 +1,18 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 2 - Game End!{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <h2 class="center">Done!</h2>
+    <h3 class="center">
+            <img src="/static/decisions/img/Homepage_Door.png"/>
+    </h3>
+    <h3 class="center">
+        Come on in, get comfortable, let's learn about bias.
+    </h3>
+    <div class="center start">
+        <button id="next" type="button"><a href="explain">Tell Me More</a></button>
+    </div>
+    <a href="game" id="back">Back</a>
+{% endblock %}

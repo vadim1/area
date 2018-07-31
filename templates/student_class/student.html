@@ -11,10 +11,14 @@
     </style>
     <div>
         <h3>{{ student_class }}</h3>
+        Link to Module
         <table border="1" style="margin: 30px; padding: 30px;">
             <tr>
                 <th>Instructor</th>
-                <td>{{ student_class.instructor }}</td>
+                <td>
+                    {{ student_class.instructor.name }}
+                    - Send Note, Raise Hand
+                </td>
             </tr>
             <tr>
                 <th>Joined</th>
@@ -25,16 +29,28 @@
                 <td>{{ student.current_module }}</td>
             </tr>
             <tr>
+                <th>Decision</th>
+                <td>{{ student.decision }}</td>
+            </tr>
+            <tr>
+                <th>Current Page</th>
+                <td>{{ student.current_page }}</td>
+            </tr>
+            <tr>
                 <th>Students</th>
                 <td>
-                    <ul>
+                    <table>
                         {% for student in student_class.students %}
-                            <li>{{ student.course }}</li>
+                            <tr>
+                                <th>{{ student.course.user.name }}</th>
+                            </tr>
                         {% endfor %}
-                    </ul>
+                    </table>
                 </td>
             </tr>
         </table>
     </div>
+    <!--
     <a href="/class/{{ student_class.id }}/leave">Leave Class</a>
+    -->
 {% endblock %}

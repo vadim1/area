@@ -1,0 +1,24 @@
+{% extends 'decisions/base.html' %}
+{% load static account socialaccount bootstrap i18n %}
+{% block title %}{% block h1 %}Module 0 - Problem Solver Profile{% endblock %}{% endblock %}
+{% block content %}
+    <div class="center">
+        <h2>Does this sound like you?</h2>
+
+        <p>Do you agree that you're a {{ archetype }}?</p>
+
+        <input type="hidden" name="agree" value="" id="agree"/>
+
+        <div class="space">
+            <button onclick=";$('#agree').val('good'); $('form').submit(); return false;">Spot On</button>
+        </div>
+        <div class="space">
+            <button onclick="$('#agree').val('medium'); $('form').submit(); return false;">Somewhat</button>
+        </div>
+        <div class="space">
+            <button onclick="$('#agree').val('poor'); $('form').submit(); return false;">Way Off</button>
+        </div>
+
+        <a href="archetype" id="back">Back</a>
+    </div>
+{% endblock %}

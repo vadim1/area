@@ -1,0 +1,47 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module 2 - Bias{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <style type="text/css">
+    #why_options div {
+        margin-bottom: 10px;
+    }
+
+    label {
+        font-size: large;
+        border: 1px solid #dddddd;
+        width: 100%;
+        padding: 5px;
+    }
+
+    :checked + span {
+        font-weight: bold;
+    }
+
+    </style>
+    <div class="center">
+        <img src="http://cdn.bleacherreport.net/images/team_logos/328x328/ohio_state.png" style="height: 200px;"/>
+    </div>
+    <h3>
+        Nylah doesn't want bias to influence her college decision.
+    </h3>
+    <h3>
+        Which bias might be at work?
+    </h3>
+    <div id="why_options" style="margin-top:20px;">
+    {% for option in biases %}
+        <div>
+            <label>
+                <input type="radio" name="nylah_bias" value="{{ option }}" onclick="$('#next').css('visibility', 'inherit')"/>
+                <span>{{ option|title }} {% if option == 'social' %}Proof{% else %}Bias{% endif %}</span>
+            </label>
+        </div>
+    {% endfor %}
+    </div>
+    <div class="center">
+        <input id="next" type="submit" style="visibility: hidden" value="Submit"></input>
+    </div>
+    <a href="nylah2" id="back">Back</a>
+{% endblock %}

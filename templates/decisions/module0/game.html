@@ -1,0 +1,25 @@
+{% extends 'decisions/base.html' %}
+{% load static account socialaccount bootstrap i18n %}
+{% block title %}{% block h1 %}Module 0 - Problem Solver Profile{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+        .carousel-inner {
+
+            background-color: inherit !important;
+            color: inherit !important;
+        }
+
+        .why_div a {
+            color: inherit !important;
+        }
+    </style>
+
+    <p class="margin-top-30-mob center margin-0-auto">
+        Select the answer that feels most right to you.
+    </p>
+
+    {% include "_quiz.html" %}
+
+    <a href="/0/instructions" id="back">Back</a>
+
+{% endblock %}
