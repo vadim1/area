@@ -1,0 +1,189 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load static %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Your Problem Solver Profile{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <style type="text/css">
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #eee;
+            margin: auto;
+            padding: 20px;
+            /* border: 1px solid #888888; */
+            width: 70%;
+        }
+
+        #pro_con {
+            background-color: #eee;
+        }
+
+        #pro_con p {
+            font-size: 1em;
+        }
+
+        .table .cheetahQuestions {
+            width: 60%;
+            margin-top: 10px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var minTextLength = 2;
+
+            function validate() {
+                var valid = true;
+
+                /* Scan each text field and ensure that it has at least min chars length */
+                $('input[type=text]').each(function() {
+                   /* console.log($(this).val()); */
+                   var fieldValue = $(this).val();
+                   var id = $(this).attr('id').split("_");
+                   var questionId = id[0].replace("q", "");
+                   var answerId = id[1].replace("a", "");
+
+                   if (fieldValue.length <= minTextLength) {
+                       alert("Please answer question " + questionId + " with at least " + minTextLength + " characters!");
+                       $(this).focus();
+                       valid = false;
+                       return false;
+                   }
+                });
+                console.log(valid);
+
+                return valid;
+            }
+
+            -
+            $('#showProfileBtn').click(function () {
+                /* Show modal */
+                $('.modal').css('display', 'block');
+                return false;
+            });
+
+            $('#closeBtn').click(function () {
+                /* Hide modal */
+                $('.modal').css('display', 'none');
+                return false;
+            });
+
+            /* Validate the form and submit */
+            $('#completeBtn').click(function () {
+                var results = validate();
+                if (results) {
+                    $('form').submit();
+                }
+                return results;
+            });
+
+            /* Clicking anywhere outside of the modal closes the modal */
+            $(window).click(function (e) {
+                $('.modal').css('display', 'none');
+                return false;
+            });
+        })
+    </script>
+
+    <h2 class="center">
+        Cheetah Sheet 1: Bolstering Strengths, Limiting Blind Spots
+    </h2>
+
+    <br/>
+
+    <div class="center">
+        <button id="showProfileBtn">Show Your {{ archetype }} Profile</button>
+    </div>
+
+    <div id="pro_con" class="modal">
+        {% if archetype %}
+            <div class="modal-content">
+                <div>{% with 'module0/archetype/'|add:archetype|add:'.html' as path %}
+                    {% include path with pro_con=True %}{% endwith %}
+                </div>
+
+                <p class="center">
+                    <button id="closeBtn">Click to Close</button>
+                </p>
+            </div>
+
+        {% endif %}
+    </div>
+
+    <input type="hidden" name="cheetahAnswers" id="cheetahAnswers" value=""/>
+
+    <h3>What do you think of your Problem Solver Profile (PSP)'s strengths and blind spots?</h3>
+    <table class="table cheetahQuestions">
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td><input type="text" name="ca[]" id="q1_a1" value="{{ ca.1 }}" size="50"/></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><input type="text" name="ca[]" id="q1_a2" value="{{ ca.2 }}" size="50"/></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>How can you capitalize on your strengths?</h3>
+    <table class="table cheetahQuestions">
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td><input type="text" name="ca[]" id="q2_a1" value="{{ ca.3 }}" size="50"/></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><input type="text" name="ca[]" id="q2_a2" value="{{ ca.4 }}" size="50"/></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>How can you limit your blind spots?</h3>
+    <table class="table cheetahQuestions">
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td><input type="text" name="ca[]" id="q3_a1" value="{{ ca.5 }}" size="50"/></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><input type="text" name="ca[]" id="q3_a2" value="{{ ca.6 }}" size="50"/></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>How might other PSPs interact more effectively with your PSP?</h3>
+    <table class="table cheetahQuestions">
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td><input type="text" name="ca[]" id="q4_a1" value="{{ ca.7 }}" size="50"/></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><input type="text" name="ca[]" id="q4_a2" value="{{ ca.8 }}" size="50"/></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="center">
+        <button id="completeBtn" value="Complete Cheetah Sheet">Complete Cheetah Sheet</button>
+    </div>
+    <a href="/{{ module.num }}/cheetah" id="back">Back</a>
+{% endblock %}

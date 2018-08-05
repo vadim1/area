@@ -1,14 +1,12 @@
 from django.contrib import admin
 from .models import Course, Module0
 
-
 @admin.register(Module0)
 class Module0Admin(admin.ModelAdmin):
     list_display = ('course', 'completed_on', 'step',
-                    'archetype', 'psp_correct', 'work_on')
+                    'archetype', 'display_other_archetypes', 'psp_correct')
     readonly_fields = []
-
-    def get_readonly_fields(self, request, obj=None):
-        return list(self.readonly_fields) + \
-               [field.name for field in obj._meta.fields] + \
-               [field.name for field in obj._meta.many_to_many]
+    # Do not display work_on
+    # In the module0 refactor its not being referenced
+    # TODO: Perhaps we should just get rid of this in the future
+    exclude = ('work_on',)

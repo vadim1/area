@@ -1,0 +1,27 @@
+{% extends 'decisions/base.html' %}
+{% load static account socialaccount bootstrap i18n %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Strengths and Blind Spots{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+        h3 {
+            color: #52c0d8 !important;
+            font-size: 26px !important;
+            font-weight: 600;
+        }
+        h4 {
+            padding-top: 10px;
+        }
+    </style>
+
+    {% include 'module0/maps/map_3.html' %}
+
+    {% if archetype %}
+        <div>{% with 'module0/archetype/'|add:archetype|add:'.html' as path %}
+            {% include path with pro_con=True show_nav=True %}{% endwith %}</div>
+    {% endif %}
+
+    <div class="center">
+        <a href="/{{ module.num }}/archetype" id="back">Back</a>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'decisions/base.html' %}
+{% load static account socialaccount bootstrap i18n %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Pause Like the Cheetah{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+        h3 {
+            color: #52c0d8 !important;
+            font-size: 26px !important;
+            font-weight: 600;
+        }
+    </style>
+
+    <div class="center">
+        <h3>Pause Like the Cheetah</h3>
+        <img src="/static/decisions/img/cheetah.png" width="450"/>
+    </div>
+
+    <p>On the next page, you'll find a Cheetah Sheet, the graphic organizers of the AREA
+        Method decision making system.</p>
+
+    <p>Why the Cheetah? Because although she accelerates like a race car, she slows down
+        up to 9 miles an hour <em>in a single stride</em> making her a fearsome hunter.</p>
+
+    <p>She's <strong>agile and flexible</strong>, her <em>pause</em> is perfect for
+        good decision making!</p>
+
+    <p class="center start2">
+        <button id="next" type="button"><a href="/{{ module.num }}/eval">Got It</a></button>
+    </p>
+    <a href="/{{ module.num }}/archetypes" id="back">Back</a>
+
+{% endblock %}

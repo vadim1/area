@@ -1,0 +1,77 @@
+{% extends 'decisions/base.html' %}
+{% load static account socialaccount bootstrap i18n %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Problem Solver Profile{% endblock %}{% endblock %}
+{% block content %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            {% if module.psp_correct %}
+                <!-- Check the selected answer and display the button if we previously selected -->
+                $("input[name='your_profile'][value='{{ module.psp_correct }}']").prop("checked",true);
+                $('#agree').val('{{ module.psp_correct }}');
+                $('#continue').css("display", "inline-block");
+            {% endif %}
+
+            $("input[name='your_profile']").change(function () {
+                var selectedValue = $(this).val();
+                $('#agree').val(selectedValue);
+
+                $('#continue').css("display", "inline-block");
+            });
+
+        });
+    </script>
+    <style type="text/css">
+        #your_profile_options {
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: large;
+            border: 1px solid #ddd;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+
+        #read_other_psp_btn {
+            display: none;
+        }
+    </style>
+    <h2>Does your {% include "problem_solver.html" %} Profile sound like you?</h2>
+
+    <p>We are all inconsistent decision makers, impacted by our environment so
+        at different times we may fit into different Profiles.</p>
+
+    <p>Is your {% include "problem_solver.html" %} Profile:</p>
+
+    <input type="hidden" name="agree" value="" id="agree"/>
+
+    <div id="your_profile_options">
+        <label>
+            <input type="radio" name="your_profile" value="good"/>
+            <span>Spot On</span>
+        </label>
+
+        <label>
+            <input type="radio" name="your_profile" value="medium"/>
+            <span>Somewhat Accurate</span>
+        </label>
+
+        <label>
+            <input type="radio" name="your_profile" value="poor"/>
+            <span>Way Off</span>
+        </label>
+    </div>
+
+
+    <div class="center">
+        <button id="continue" type="submit" value="Read Other Problem Solver Profiles" style="display: none;">Read Other Problem Solver
+            Profiles
+        </button>
+        <a href="{{ back_url|default:"/0/pro_con" }}" id="back">Back</a>
+    </div>
+
+{% endblock %}

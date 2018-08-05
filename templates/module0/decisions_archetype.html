@@ -1,0 +1,55 @@
+{% extends 'decisions/base.html' %}
+{% load static account socialaccount bootstrap i18n %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Description of Problem Solver
+{% endblock %}{% endblock %}
+{% block content %}
+    <script type="text/javascript" src="/static/decisions/js/jquery.flip.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".flip").flip({
+                trigger: 'click'
+            });
+            $('.back').css('display', 'block');
+        });
+    </script>
+
+    <style type="text/css">
+        /* Override the top padding for the first element in a div set in decisions.css
+           since it adds unecessary padding to the image for the bio
+        */
+        .main div:first-child {
+            margin-top: 0px !important;
+        }
+
+        .front, .flip {
+            height: 400px;
+            background-color: #eee;
+        }
+
+        .back p {
+            display: inline-block;
+            vertical-align: middle;;
+            line-height: normal;
+        }
+
+        h3 {
+            color: #52c0d8 !important;
+            font-size: 26px !important;
+            font-weight: 600;
+        }
+    </style>
+
+    <div class="space"></div>
+
+    {% include 'module0/maps/map_2.html' %}
+
+    {% if archetype %}
+        <div>{% with 'module0/archetype/'|add:archetype|add:'.html' as path %}
+            {% include path with show_nav=True %}{% endwith %}</div>
+    {% endif %}
+
+    <div class="center">
+        <a href="/0/game" id="back">Back</a>
+    </div>
+
+{% endblock %}

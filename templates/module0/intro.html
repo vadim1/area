@@ -1,0 +1,44 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - {{ module.name }}{% endblock %}{% endblock %}
+{% block content %}
+    <div class="center">
+        <div style="font-weight: bolder">MODULE {{ module.display_num }}</div>
+        <div style="margin-top: 50px; margin-bottom: 50px;">
+            <img src="/static/decisions/img/Homepage_Door.png"/>
+        </div>
+        <h1>The</h1>
+        <div style="font-size: 60px; letter-spacing: -8px; font-weight: 900; margin-top: 20px;">
+            <span class="green">P</span>
+            <span class="yellow">R</span>
+            <span class="light-blue">O</span>
+            <span class="red">B</span>
+            <span class="yellow">L</span>
+            <span class="light-blue">E</span>
+            <span class="green">M</span>
+
+            &nbsp;
+
+            <span class="red">S</span>
+            <span class="green">O</span>
+            <span class="yellow">L</span>
+            <span class="light-blue">V</span>
+            <span class="red">E</span>
+            <span class="green">R</span>
+        </div>
+        <h1>Profile?</h1>
+
+        <div style="margin-top: 40px; margin-bottom: 40px;">
+            What kind of a decision-maker are you? <br />
+            Find out by using this module. <br />
+            Get your <strong>Problem Solver Profile</strong> and learn about you!
+        </div>
+
+        <div class="start">
+            <p class="center">
+                <button id="next" type="button"><a href="/{{ module.num }}/map">What am I?</a></button>
+            </p>
+        </div>
+    </div>
+    <a href="/decisions" id="back">Back</a>
+{% endblock %}

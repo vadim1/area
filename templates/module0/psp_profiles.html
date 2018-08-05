@@ -1,0 +1,83 @@
+{% extends 'decisions/base.html' %}
+{% load static account socialaccount bootstrap i18n %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Discover your Problem Solver Profile{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+        h3 img {
+            height: 60px;
+        }
+
+        .archetype {
+            display: inline;
+            position: relative;
+            border-bottom: 2px dotted #aaaaff;
+        }
+
+        .archetype:hover:after {
+            background: #333;
+            background: rgba(0, 0, 0, .8);
+            border-radius: 5px;
+            bottom: 26px;
+            color: #fff;
+            content: attr(title);
+            left: 20%;
+            padding: 5px 15px;
+            position: absolute;
+            z-index: 98;
+        }
+
+        .archetype:hover:before {
+            border: solid;
+            border-color: #333 transparent;
+            border-width: 6px 6px 0 6px;
+            bottom: 20px;
+            content: "";
+            left: 50%;
+            position: absolute;
+            z-index: 99;
+        }
+
+        .archetype img {
+            height: 18px;
+            margin-bottom: 0px;
+        }
+
+        #next {
+            margin-top: 10px;
+        }
+    </style>
+
+    <p class="margin-top-30-mob center margin-0-auto"
+       style="font-size: 210%; line-height: 120%; font-weight: bold; margin-bottom: 30px;">
+        Discover your {% include "problem_solver.html" %} Profile
+    </p>
+    <p class="margin-top-30-mob center margin-0-auto">
+        <h3>5 Problem Solver Profiles</h3>
+	<p>
+        Are you a
+        <span class="archetype" title="Albert Einstein">
+        <img src="{% static "area_app/img/thinker.png" %}"/>Thinker</span>
+        or a
+        <span class="archetype" title="Marie Curie">
+        <img src="{% static "area_app/img/detective.png" %}"/>Detective</span>?
+	</p>
+	<p>
+        Might you solve problems like famous
+        <span class="archetype" title="Ernest Shackleton">
+        <img src="{% static "area_app/img/adventurer.png" %}"/>Adventurers</span>
+        or
+        <span class="archetype" title="Oprah Winfrey">
+        <img src="{% static "area_app/img/listener.png" %}"/>Listeners</span>?
+	</p>
+	<p>
+        Or are you a
+        <span class="archetype" title="Beyoncé">
+        <img src="{% static "area_app/img/creative.png" %}"/>Visionary</span>
+        going your own way?
+	</p>
+    </p>
+    <div class="center start">
+        <button id="next" type="button"><a href="/{{ module.num }}/game">Quiz Me</a></button>
+    </div>
+    <a href="/{{ module.num }}/instructions" id="back">Back</a>
+{% endblock %}

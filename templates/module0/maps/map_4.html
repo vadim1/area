@@ -1,0 +1,53 @@
+{% block content %}
+    <style type="text/css">
+    .map .pin {
+        position: absolute;
+        cursor: pointer;
+    }
+    #title {
+        position: absolute;
+        display: none;
+        text-align: left;
+        background-color: rgba(255,255,255,0.8);
+        padding-left: 5px;
+        padding-right: 5px;
+        border: 1px dashed #1e2846;
+        font-size: 150%;
+        cursor: none;
+        pointer-events: none;
+    }
+    </style>
+    <script type="text/javascript">
+        /**
+         * Take a css dimension like "20px" and add to_add pixels to it
+         * @param dimension_in_px
+         * @param to_add
+         */
+    function pixel_add(dimension_in_px, to_add)
+    {
+        var dim = dimension_in_px.substr(0, dimension_in_px.length-2);
+        return parseInt(dim) + to_add + 'px';
+    }
+
+    function show_pin(pinId)
+    {
+        var title_text = $(pinId).attr('title');
+        var top = pixel_add($(pinId).css('margin-top'), -150);
+        var left = pixel_add($(pinId).css('margin-left'), 445);
+        $('#title').css('margin-top', top).css('margin-left', left).text(title_text).show();
+    }
+
+    $(document).ready(function(){
+	show_pin('#you_are_here');
+    });
+    </script>
+    <div class="center">
+        <div class="map">
+            <img src="/static/decisions/img/Map.png" />
+            <img src="/static/decisions/img/Locator_rotated.png" id="you_are_here" class="pin"
+                 style="margin-top: 20px; margin-left: -80px;" title="Your Problem Solving Profile" />
+            <div id="title"></div>
+        </div>
+
+    </div>
+{% endblock %}

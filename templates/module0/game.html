@@ -1,0 +1,17 @@
+{% extends 'decisions/base.html' %}
+{% load static account socialaccount bootstrap i18n %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Problem Solver Profile Quiz{% endblock %}{% endblock %}
+{% block content %}
+    <div class="center">
+        <h2>The {% include "problem_solver.html" %} Profile Quiz</h2>
+
+        <p>
+            Select the answer that feel the most right to you.
+        </p>
+
+        {% include 'module0/_quiz.html' %}
+
+        <a href="/{{ module.num }}/psp_profiles" id="back">Back</a>
+    </div>
+
+{% endblock %}

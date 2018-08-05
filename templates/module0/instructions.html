@@ -1,0 +1,27 @@
+{% extends 'decisions/base.html' %}
+{% load static account socialaccount bootstrap i18n %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Introduction to the Game{% endblock %}{% endblock %}
+{% block content %}
+    <div class="center">
+        <h2>Introduction to the Game</h2>
+    </div>
+    <p>
+        We make thousands of decisions every day - from when to wake up to
+        whether to have a late night snack - and we make them quickly, and
+        largely unconsciously. But what happens when we face a high stakes
+        decision? Knowing your <strong>PROBLEM SOLVER PROFILE</strong> will
+        help you learn about your decision-making strengths and your
+        potential blind spots.
+    </p>
+    <p>
+        The <strong>PROBLEM SOLVER PROFILE</strong> is not prospective, it
+        tells you what you tend to do when making decisions. By learning
+        more about you as a decision maker you can make big decisions better.
+    </p>
+    <div class="center start">
+        <button id="next" type="button"><a href="/{{ module.num }}/psp_profiles">Problem Solver Profiles</a>
+        </button>
+        <a href="/{{ module.num }}/map" id="back">Back</a>
+    </div>
+
+{% endblock %}

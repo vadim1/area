@@ -1,0 +1,111 @@
+{% load static %}
+<h3>
+    <img src="{% static 'area_app/img/detective.png' %}"/>
+    {% if list != 'true' %}
+        You are...
+    {% endif %}
+    The Detective!
+</h3>
+
+{% if pro_con %}
+    <h4>Strengths</h4>
+    <p>
+        Being the Detective means that you are committed to learning, which
+        means that you tend to have more information and be better informed
+        than the people around you. You are focused when you are faced with
+        a decision. You don't let your emotions distract you, and that means
+        you can thoughtfully look at the evidence around you. You are down to
+        earth, and you don't settle for nonsense. You don't have a problem
+        making a decision once you feel like you have the right information.
+    </p>
+    <h4>Blind Spots</h4>
+    <p>
+        Being a Detective comes with a few drawbacks, too. Sometimes, because
+        you are gathering so much evidence, the information can blend together
+        and you can lose your ability to be objective. More information does
+        not always make for a better decision. If you use new information to
+        confirm what you already thought you may fall prey to "confirmation bias."
+        Although you are driven by the facts, sometimes when you make decisions
+        about the future, you assume that your preferences are going to stay
+        the same forever. This "projection bias" makes you interpret the facts
+        based on an outdated idea of success. Finally, because you like
+        to soak up lots of information, you sometimes don't do a good job with
+        time management; this "planning fallacy" means that you get so focused
+        on learning that you don't make your decision on time.
+    </p>
+
+    {% if show_nav %}
+        {% include 'module0/nav/sounds_like_you.html' with show_nav=show_nav %}
+    {% endif %}
+
+{% else %}
+    <div class="flip">
+        <div class="front">
+
+            <p class="quote">"I am turned into a sort of machine for observing facts and grinding out conclusions."
+                -Charles Darwin</p>
+            <p>
+                You value information and are always looking for the facts. You don't make your decisions based on how
+                you feel—you
+                see what the evidence says, and you listen to it. You believe that the more you learn, the better you'll
+                do—and
+                you're committed to gathering as much information as you can.
+            </p>
+
+            <p style="cursor: pointer; color: blue; text-decoration: underline;">Click to view more details...</p>
+        </div>
+
+        <div class="back">
+            <h4>{% include "problem_solver.html" %}S Like You!</h4>
+            <div class="bio">
+
+                <div class="bio col-md-4">
+                    <div>
+                        <img src="{% static 'area_app/img/archetype/curie.jpg' %}"/>
+                    </div>
+                    <div>
+                        <div class="archetype-name">
+                            <a href="http://en.wikipedia.org/wiki/Marie_Curie" target="_blank">Marie Curie</a>
+                        </div>
+                        Noble Prize-Winning Scientist
+                    </div>
+                </div>
+
+                <div class="bio col-md-4">
+                    <div>
+                        <img src="{% static 'area_app/img/archetype/darwin.jpg' %}"/>
+                    </div>
+                    <div>
+                        <div class="archetype-name">
+                            <a href="http://en.wikipedia.org/wiki/Charles_Darwin" target="_blank">Charles Darwin</a>
+                        </div>
+                        Naturalist, Geologist, Biologist, Evolutionary
+                    </div>
+                </div>
+
+                <div class="bio col-md-4">
+                    <div>
+                        <img src="{% static 'area_app/img/archetype/wells.jpg' %}"/>
+                    </div>
+                    <div>
+                        <div class="archetype-name">
+                            <a href="http://en.wikipedia.org/wiki/Ida_B._Wells" target="_blank">Ida B. Wells</a>
+                        </div>
+                        Suffragist and Civil Rights Leader
+                    </div>
+                </div>
+
+            </div>
+            <div class="clearfix"></div>
+            <p>
+                Why is Marie Curie a Detective? Marie Curie was the only woman to ever win two Nobel Prizes.
+                She did it by systematically gathering data and testing it out to make the discovery of not one, but
+                two,
+                new elements: polonium and radium. That's why she is a detective like you.
+            </p>
+
+            {% include 'module0/nav/tell_me_more.html' %}
+
+        </div> <!-- // back -->
+    </div> <!-- // flip -->
+{% endif %}

@@ -1,0 +1,123 @@
+{% extends 'decisions/base.html' %}
+{% load static account socialaccount bootstrap i18n %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Problem Solver Profile{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+        /* Override the top padding for the first element in a div set in decisions.css
+           since it adds unecessary padding to the image for the bio
+         */
+        .main div:first-child {
+            margin-top: 0px !important;
+        }
+    </style>
+
+    <div class="space"></div>
+    {% include 'module0/maps/map_4.html' %}
+
+    {% with 'true' as list %}
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+        {% if archetype != "adventurer" %}
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h5 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <img src="{% static 'area_app/img/adventurer.png' %}" height="50" width="50"/>
+                            The Adventurer - trust your gut and follow your passions
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        {% include 'archetype/adventurer.html' %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if archetype != "visionary" %}
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                    <h5 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <img src="{% static 'area_app/img/creative.png' %}" height="50" width="50"/>
+                            The Visionary - come up with solutions not tried before
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                        {% include 'archetype/visionary.html' %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if archetype != "detective" %}
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingThree">
+                    <h5 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <img src="{% static 'area_app/img/detective.png' %}" height="50" width="50"/>
+                            The Detective - track down clues and gather the evidence
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">
+                        {% include 'archetype/detective.html' %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if archetype != "listener" %}
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingFou">
+                    <h5 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <img src="{% static 'area_app/img/listener.png' %}" height="50" width="50"/>
+                            The Listener - thoughtfully consider others' points of view
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                    <div class="panel-body">
+                        {% include 'archetype/listener.html' %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        {% if archetype != "thinker" %}
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingFive">
+                    <h5 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            <img src="{% static 'area_app/img/thinker.png' %}" height="50" width="50"/>
+                            The Thinker - examine the possibilities before diving in
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                    <div class="panel-body">
+                        {% include 'archetype/thinker.html' %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+</div>
+
+    <p class="center start2">
+        <button id="next" type="button"><a href="/{{ module.num }}/cheetah">Pause like the Cheetah</a></button>
+    </p>
+    <a href="/{{ module.num }}/right" id="back">Back</a>
+
+{% endblock %}
