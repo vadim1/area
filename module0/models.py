@@ -1,9 +1,14 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.forms import ModelForm
+from django.utils.html import format_html_join
+
 from area_app.models import QuestionModel
 from decisions.models import Course, BaseModule
 
+import ast
+import json
 import re
 
 class Module0(BaseModule):
@@ -26,7 +31,7 @@ class Module0(BaseModule):
 
     @staticmethod
     def name():
-        return 'Problem Solver Profile'
+        return 'What kind of a decision maker have you been?'
 
     # The DB is in UTF-8 and the data are stored as text values in UTF-8
     # Utility is to convert to ASCII and strip out out any extraneous
@@ -47,6 +52,19 @@ class Module0(BaseModule):
 
         return (asciidata)
 
+    @staticmethod
+    def load_json(json_data):
+        json_object = {}
+        try:
+            json_object = json.loads(json_data)
+        except Exception as e:
+            if hasattr(e, 'message'):
+                print(e.message)
+            else:
+                print(e)
+
+        return json_object
+
     def __str__(self):
         to_return = "Module 0 step " + self.step
         if self.completed_on:
@@ -57,24 +75,24 @@ class Module0(BaseModule):
         return '[{"id": 1, "answers": [ "", ""]},{"id": 2, "answers": [ "", ""]},{"id": 3, "answers": [ "", ""]},{"id": 4, "answers": [ "", ""]}]'
 
     def display_other_archetypes(self):
-        asciidata = Module0.to_ascii(self.other_archetypes)
-        # Strip out the [ and ]
-        asciidata = re.sub("\[|\]", "", asciidata)
+        # Convert unicode top python object
+        # https://stackoverflow.com/a/28756526
+        obj = ast.literal_eval(self.other_archetypes)
+        print(obj)
 
-        other_archetypes = asciidata.split("), ")
-        other_archetypes = [re.sub("\(|\)", "", x.strip()) for x in other_archetypes]
-
-        # Add the newline
-        other_archetypes = [x + "\n" for x in other_archetypes]
-
-        return other_archetypes
+        return format_html_join(
+            '\n', "<li>{} {}</li>",
+            ((x[0], x[1]) for x in obj)
+        )
 
     def display_answers(self):
-        asciidata = Module0.to_ascii(self.answers)
-        answers_list = asciidata.split(",")
-        answers = [x.strip() for x in answers_list]
+        # Convert unicode top python object
+        # https://stackoverflow.com/a/28756526
+        obj = ast.literal_eval(self.cheetah_answers)
 
-        return answers
+        return format_html_join(
+            '\n', "<li>{}</li>", (x for x in obj)
+        )
 
 
     display_answers.short_description = "Answers"
@@ -102,3 +120,25 @@ class Question(models.Model):
 
     def text(self):
         return self.question.text()
+
+class Module0Form(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(Module0Form, self).__init__(*args, **kwargs)
+        # Not all fields are available all at once so set these to false for now
+        self.fields['answers'].required = False
+        self.fields['archetype'].required = False
+        self.fields['cheetah_answers'].required = False
+        self.fields['other_archetypes'].required = False
+        self.fields['psp_correct'].required = False
+        self.fields['work_on'].required = False
+
+    class Meta:
+        model = Module0
+        fields = [
+            'answers',
+            'archetype',
+            'cheetah_answers',
+            'other_archetypes',
+            'psp_correct',
+            'work_on',
+        ]

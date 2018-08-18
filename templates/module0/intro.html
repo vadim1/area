@@ -1,5 +1,6 @@
 {% extends 'decisions/base.html' %}
 {% load bootstrap %}
+{% load area_tags %}
 {% block title %}{% block h1 %}Module {{ module.display_num }} - {{ module.name }}{% endblock %}{% endblock %}
 {% block content %}
     <div class="center">
@@ -26,17 +27,19 @@
             <span class="red">E</span>
             <span class="green">R</span>
         </div>
-        <h1>Profile?</h1>
+        <h1>PROFILE</h1>
 
-        <div style="margin-top: 40px; margin-bottom: 40px;">
+        <div style="margin-top: 10px; margin-bottom: 10px;">
+            <h3>
             What kind of a decision-maker are you? <br />
             Find out by using this module. <br />
-            Get your <strong>Problem Solver Profile</strong> and learn about you!
+            Get your {% include 'module0/problem_solver.html' %} (PSP) and learn about you!
+            </h3>
         </div>
 
         <div class="start">
             <p class="center">
-                <button id="next" type="button"><a href="/{{ module.num }}/map">What am I?</a></button>
+                <button id="next" type="button"><a href="/{{ module.num }}/map">Get My PSP</a></button>
             </p>
         </div>
     </div>

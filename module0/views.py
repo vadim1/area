@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from .models import Module0 as Module
+from .models import Module0 as Module, Course, Module0Form
 from decisions.views import load_module, load_json, base_intro, base_instructions, base_map, base_restart,\
     base_review, base_summary
 from area_app.views.view import get_randomized_questions, compute_archetype
@@ -13,46 +13,50 @@ prefix = "module" + str(Module.num()) + "/"
 # url location
 url_prefix = "/" + str(Module.num()) + "/"
 
-def load_this_module(request, step=None):
-    return load_module(request, Module, step)
-
-# Page order
-# intro
-# map
-# instructions
-# psp_profiles
-# game (quiz)
-# archetype
-# pro_con
-# right
-# archetypes
-# cheetah
-# eval (cheetah sheet 1)
-# review
-
+"""
+Module Controllers
+"""
 @login_required
-def intro(request):
-    return base_intro(request, Module, prefix)
+def module0_controller(request):
+    parsed = parse_request_path(request)
+    module = load_module(request, parsed['currentStep'])
 
-@login_required
-def map(request):
-    return base_map(request, Module, prefix)
+    if request.method == 'POST':
+        if parsed['section'] == 'game':
+            return (game(request))
+        elif parsed['section'] == 'right':
+            module.psp_correct = request.POST.get('agree')
+        elif parsed['section'] == 'eval':
+            module.cheetah_answers = json.dumps(request.POST.getlist('ca[]'))
 
-@login_required
-def instructions(request):
-    return base_instructions(request, Module, prefix)
+        form = Module0Form(request.POST, instance=module)
+        if form.is_valid():
+            form.save()
+            return redirect(url_prefix + parsed['next'])
+        else:
+            print("Form did not validate")
+            print(form.errors)
+    else:
+        # Add the module to the context by default
+        context = {
+            'module': module,
+            'nav': parsed,
+            'archetype': module.archetype,
+        }
 
-@login_required
-def psp_profiles(request):
-    module0 = load_this_module(request, 'psp_profiles')
-    return render(request, prefix + 'psp_profiles.html', {
-        'module': module0,
-        'archetype': module0.archetype,
-    })
+        if parsed['section'] == 'map':
+            context['display_mode'] = 'all'
+        elif parsed['section'] == 'game':
+            return (game(request))
+        elif parsed['section'] == 'eval':
+            context['ca'] = load_json(module.cheetah_answers)
+
+        return render(request, prefix + parsed['templatePath'], context)
 
 @login_required
 def game(request):
-    module0 = load_this_module(request, 'game')
+    parsed = parse_request_path(request)
+    module0 = load_module(request, parsed['currentStep'])
     questions_yes = None
 
     if request.method == 'POST':
@@ -90,75 +94,12 @@ def game(request):
         'questions': get_randomized_questions(),
         'questions_yes': questions_yes,
         'module': module0,
-    })
-
-@login_required
-def archetype(request):
-    module0 = load_this_module(request, 'archetype')
-    return render(request, prefix + 'decisions_archetype.html', {
-        'archetype': module0.archetype,
-    })
-
-@login_required
-def pro_con(request):
-    module0 = load_this_module(request, 'pro_con')
-    return render(request, prefix + 'pro_con.html', {
-        'archetype': module0.archetype,
-        'module': module0
-    })
-
-@login_required
-def right(request):
-    module0 = load_this_module(request, 'right')
-    if request.method == 'POST':
-        psp_correct = request.POST.get('agree')
-        module0.psp_correct = psp_correct
-        module0.save()
-        return redirect(url_prefix + 'archetypes')
-    return render(request, prefix + 'right.html', {
-        'archetype': module0.archetype,
-        'module': module0
-    })
-
-@login_required
-def archetypes(request):
-    module0 = load_this_module(request, 'archetypes')
-    return render(request, prefix + 'decisions_archetypes.html', {
-        'archetype': module0.archetype,
-        'module': module0
-    })
-
-@login_required
-def cheetah(request):
-    module0 = load_this_module(request, 'cheetah')
-    return render(request, prefix + 'cheetah.html', {
-        'archetype': module0.archetype,
-        'module': module0
-    })
-
-@login_required
-def eval(request):
-    module0 = load_this_module(request, 'eval')
-
-    if request.method == 'POST':
-        # Save any questions that were answered 'Yes'
-        cheetah_answers = json.dumps(request.POST.getlist('ca[]'))
-        module0.cheetah_answers = cheetah_answers
-        module0.save()
-
-        return redirect(url_prefix + 'review')
-    else:
-        cheetah_answers = load_json(module0.cheetah_answers)
-
-    return render(request, prefix + 'eval.html', {
-        'archetype': module0.archetype,
-        'module': module0,
-        'ca': cheetah_answers,
+        'nav': parsed,
     })
 
 @login_required
 def review(request):
-    module0 = load_this_module(request, 'review')
+    module0 = load_module(request, 'review')
     if request.method == 'POST':
         module0.completed_on = datetime.datetime.now()
         module0.save()
@@ -169,3 +110,143 @@ def review(request):
 @login_required
 def restart(request):
     return base_restart(request, Module, prefix)
+
+
+"""
+Helper Utilities
+TODO: Move to its own file
+"""
+def clear_game_answers(module):
+    if module.answers:
+        module.answers = json.dumps({})
+        module.save()
+
+def load_course(request):
+    course = None
+    if request.user.is_authenticated():
+        courses = Course.objects.filter(user=request.user)
+        if courses:
+            course = courses.first()
+        else:
+            course = Course(user=request.user)
+            course.save()
+    return course
+
+def load_json(json_data):
+    json_object = {}
+    try:
+        json_object = json.loads(json_data)
+    except ValueError, e:
+        pass
+        # TODO - log
+    return json_object
+
+@login_required
+def load_module(request, step=''):
+    module = None
+    course = load_course(request)
+    if course:
+        module_list = Module.objects.filter(course=course)
+        if module_list:
+            module = module_list.first()
+            if step:
+                module.step = step
+                module.save()
+        else:
+            module = Module(course=course, step=step)
+            module.save()
+        module.answers_json = ''
+        if module.answers:
+            module.answers_json = load_json(module.answers)
+    if not module:
+        module = Module()
+        module.answers_json = None
+    return module
+
+# Ordered list of URLs, used to calculate back and next
+def navigation():
+    urls = [
+        'intro',
+        'map',
+        'instructions',
+        'psp_profiles',
+        'game',
+        'archetype',
+        'pro_con',
+        'right',
+        'archetypes',
+        'cheetah',
+        'eval',
+        'review',
+    ]
+
+    return urls
+
+def parse_request_path(request):
+    parsed = {
+        'parsed': [],
+        'moduleNum': None,
+        'section': None,
+        'step': None,
+        'currentStep': None,
+        'templatePath': None,
+        'requestPath': request.path,
+        'previous': None,
+        'next': None
+    }
+
+    parts = request.path.split("/")
+
+    # Typical path is /<module_num>/<section>
+    if len(parts) > 2:
+        section = parts[2]
+        step = None
+
+        # Log the step we are on e.g. intro
+        current = section
+        currentStep = section
+        # Path to the template
+        templatePath = section + ".html"
+
+        # There is a sub directory path
+        if len(parts) == 4:
+            step = parts[3]
+            current = section + "/" + step
+            currentStep = section + "_" + step
+            templatePath = section + "/" + step + ".html"
+
+        module_urls = navigation()
+
+        # Calculate the previous and next steps
+        if current in module_urls:
+            currentNdx = module_urls.index(current)
+
+            previousNdx = currentNdx - 1
+            print(module_urls[previousNdx])
+            if previousNdx > 0:
+                previous = module_urls[previousNdx]
+            else:
+                previous = module_urls[0]
+
+            nextNdx = currentNdx + 1
+            if nextNdx < len(module_urls):
+                next = module_urls[nextNdx]
+            else:
+                next = "/decisions"
+
+
+        print("previous: " + previous + ", next: " + next)
+
+        parsed = {
+            'parsed': parts,
+            'moduleNum': parts[1],
+            'section': section,
+            'step': step,
+            'currentStep': currentStep,
+            'templatePath': templatePath,
+            'current': current,
+            'next': next,
+            'previous': previous,
+        }
+
+    return parsed

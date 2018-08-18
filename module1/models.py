@@ -19,6 +19,12 @@ class Module1(BaseModule):
     def num():
         return 1
 
+    # Used to display the number to the user
+    # internally it's still module 0
+    @staticmethod
+    def display_num():
+        return 2
+
     @staticmethod
     def name():
         return 'Introduction to Decision Making'

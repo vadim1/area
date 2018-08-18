@@ -29,3 +29,7 @@ def get_explain(data_dictionary, key):
         return data_dictionary[key]
     else:
         return ''
+
+@register.inclusion_tag('decisions/snippets/module_link.html')
+def get_module_link(moduleObj, userObj):
+    return { 'module': moduleObj, 'user': userObj }

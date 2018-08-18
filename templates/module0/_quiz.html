@@ -125,7 +125,7 @@
 <div id="questionCarousel" class="carousel slide" data-interval="false" style="display: none;">
     <!-- Indicators -->
     <ol class="carousel-indicators">
-        {% for question in questions %}
+        {% for question, details in questions %}
             <li data-target="#questionCarousel" data-slide-to="{{ forloop.counter0 }}"{% if forloop.counter0 == 0 %}
                 class="active"{% endif %}}></li>
         {% endfor %}
@@ -195,9 +195,6 @@
     }
 
     $(document).ready(function () {
-        /*
-        {{  questions_yes }}
-         */
         {% if questions_yes %}
             var question = "";
             // Check all Yes
