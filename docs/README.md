@@ -43,7 +43,7 @@ The image is pretty bare bones so you'll want to install some software
 1. Update package lists
 `sudo apt-get -y update`
 1. Install git, python, mysql, nginx
-`sudo apt-get -y install git python-pip python-dev mysql-server libpq-dev postgresql postgresql-contrib nginx`
+`sudo apt-get -y install git python-pip python-dev mysql-server libmysqlclient-dev libssl-dev nginx`
 1. Install required libraries
 `sudo apt-get -y install build-essential libssl-dev libffi-dev libxml2-dev libxslt1-dev zlib1g-dev`
 1. Install virtualbox guest
@@ -77,14 +77,16 @@ This will clone the project in `area` and put the files in /var/www which will m
 
 # Install freetype2
 The app installs matplotlib which requires freetype. This is not available via normal means so we'll have to install it separately
-`sudo add-apt-repository ppa:glasen/freetype2`
-`sudo apt-get -y update && sudo apt-get -y install freetype2-demos` (freetype2-demos will install the freetype2 libs)
-`sudo apt-get -y install libpng-dev libfreetype6-dev`
+* `sudo add-apt-repository ppa:glasen/freetype2`
+* `sudo apt-get -y update && sudo apt-get -y install freetype2-demos` (freetype2-demos will install the freetype2 libs)
+* `sudo apt-get -y install libpng-dev libfreetype6-dev`
+* `sudo ln -s /usr/include/freetype2/ft2build.h /usr/include/`
 
 References:
 * http://ubuntuhandbook.org/index.php/2017/06/install-freetype-2-8-in-ubuntu-16-04-17-04/
 * https://askubuntu.com/questions/798343/why-wont-python-pip-install-matplotlib-work
 * https://github.com/pypa/pip/issues/5240
+* https://github.com/matplotlib/matplotlib/issues/3029/#issuecomment-43318941
 
 # Update numpy
 The version might no longer be supported. At the time of this writing it was 1.8.0rc1 which no longer exists. The error could
