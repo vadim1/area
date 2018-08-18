@@ -201,3 +201,23 @@ UPDATE area_app_user SET is_superuser=1,is_staff=1,is_active=1;
 select * from account_emailaddress;
 UPDATE account_emailaddress SET verified=1;
 ```
+
+# (Optional) Install supervisor and configure
+Useful (for QE and Prod)
+
+1. Install supervisord: `sudo apt-get install -y supervisor`
+2. Add `area_app` configuration in `/etc/supervisor/conf.d/area_app.conf`
+```
+[program:area_app]
+# https://serversforhackers.com/c/monitoring-processes-with-supervisord
+command=python manage.py runserver 0.0.0.0:80
+directory=/home/ubuntu/area
+autostart=true
+autorestart=true
+startretries=3
+stderr_logfile=/var/log/area_app.err.log
+stdout_logfile=/var/log/area_app.out.log
+user=root
+```
+3. Update log file permissions as needed: `chmod 666 /home/ubuntu/area/django.log`
+4. Start up service: `sudo supervisorctl start area_app`
