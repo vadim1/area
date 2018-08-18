@@ -4,7 +4,8 @@ from .models import Course, Module0
 @admin.register(Module0)
 class Module0Admin(admin.ModelAdmin):
     list_display = ('course', 'completed_on', 'step',
-                    'archetype', 'display_other_archetypes', 'psp_correct')
+                    'archetype', 'display_other_archetypes', 'psp_correct',
+                    )
     readonly_fields = []
     # Do not display work_on
     # In the module0 refactor its not being referenced
