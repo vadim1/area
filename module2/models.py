@@ -25,6 +25,12 @@ class Module2(BaseModule):
     def num():
         return 2
 
+    # Used to display the number to the user
+    # internally it's still module 0
+    @staticmethod
+    def display_num():
+        return 3
+
     @staticmethod
     def name():
         return 'Cognitive Bias'

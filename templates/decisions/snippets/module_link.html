@@ -1,0 +1,19 @@
+<h3>
+    {% if module.completed_on %}
+        &#10004;
+        <img src="/static/decisions/img/Module{{ module.display_num }}_badge.png" style="float: right; margin-right: -70px;"/>
+        Module {{ module.display_num }} - {{ module.name }} Completed!
+        {% if user.is_staff %}
+            (<a href="/{{ module.num }}/restart">Restart</a>)
+        {% endif %}
+    {% else %}
+        {% if module.step %}
+            <a href="/{{ module.num }}/{{ module.step }}">Module {{ module.display_num }} - {{ module.name }}</a>
+            {% if user.is_staff %}
+                (<a href="/{{ module.num }}/restart">Restart</a>)
+            {% endif %}
+        {% else %}
+            <a href="/{{ module.num }}">Module {{ module.display_num }} - {{ module.name }}</a>
+        {% endif %}
+    {% endif %}
+</h3>
