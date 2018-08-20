@@ -16,7 +16,7 @@ urlpatterns = [
     url(r'^archetypes/?$', views.module0_controller, name='module1_archetypes'),
     url(r'^cheetah/?$', views.module0_controller, name='module1_cheetah'),
     url(r'^eval/?$', views.module0_controller, name='module1_eval'),
-    url(r'^review/?$', views.module0_controller, name='module1_review'),
+    url(r'^review/?$', views.review, name='module1_review'),
 
     url(r'^restart/?', views.restart, name='module1_restart'),
 ]
