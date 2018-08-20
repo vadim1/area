@@ -4,16 +4,16 @@
 {% block title %}{% block h1 %}Module {{ module.display_num }} - Introduction to Decision Making{% endblock %}{% endblock %}
 {% block content %}
     <div class="center">
-        <h3>
+        <h2 class="center">
             WHEW!
-        </h3>
+        </h2>
         <h3>
             That's a lot of decisions that we have to make!
         </h3>
     </div>
 
     <div class="center start">
-        {% get_next_btn module "Keep Going" "game2/instructions" %}
+        {% get_next_btn module "Keep Going" nav.next %}
     </div>
-    {% get_back_link module "game1/game" %}
+    {% get_back_link module nav.previous %}
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends 'decisions/base.html' %}
 {% load bootstrap %}
 {% load area_tags %}
-{% block title %}{% block h1 %}Module {{ module.display_num }} - Exploring Critical Concepts{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Cheetah Sheet 1: Critical Concepts Practice{% endblock %}{% endblock %}
 {% block content %}
     <style type="text/css">
     .answers a {
@@ -16,9 +16,9 @@
         margin: 0;
     }
     </style>
-    <h2 class="center">Practice Critical Concepts</h2>
+    <h2 class="center">Cheetah Sheet 1: Critical Concepts Practice</h2>
     <h3>
-        Let's practice you envisioning your success in a few decision problems.
+        Let's practice answering &quot;<i>What am I solving for?</i>&quot; and identifying Critical Concepts.
     </h3>
 
     <h2>Do I get an after school job?</h2>
@@ -101,9 +101,9 @@
 
     </p>
     <p class="center">
-        <input type="submit" id="next" name="submit" value="Submit Answers"/>
+        <input type="submit" id="next" name="submit" value="Solving for my success"/>
     </p>
-    {% get_back_link module "cc/deriving" %}
+    {% get_back_link module nav.previous %}
 
     <script type="text/javascript">
         function validate() {

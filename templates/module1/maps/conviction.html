@@ -1,0 +1,28 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Have Conviction in Your Critical Concepts
+{% endblock %}{% endblock %}
+{% block content %}
+    <h2 class="center">Have Conviction in Your Critical Concepts</h2>
+
+    {% include 'module1/maps/map_content.html' with display_mode='conviction' %}
+
+    <h3>
+        Although your vision of success may not change as you solve your decision problem, your Critical Concepts may
+        change --and they should--as you collect new information and gain new insight.
+    </h3>
+
+    <h3>
+        How do you know that you’ve correctly identified your initial Critical Concepts? Try asking yourself how you
+        might fail to achieve them and then make revisions if necessary.
+    </h3>
+
+    <div class="center">
+        {% get_next_btn module "What Is Conviction?" nav.next %}
+    </div>
+
+    {% get_back_link module nav.previous %}
+    </div>
+
+{% endblock %}

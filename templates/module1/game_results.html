@@ -1,0 +1,17 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Decision Dilemma Results!
+{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <h2 class="center">Decision Dilemma Results!</h2>
+
+    {% include "module1/results/table.html" with textcolor_area="f6653c" textcolor_noarea="f6653c" %}
+
+    <div class="center start2">
+    {% get_next_btn module "Explore Your Results" nav.next %}
+    </div>
+    {% get_back_link module nav.previous %}
+{% endblock %}

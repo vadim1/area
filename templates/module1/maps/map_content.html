@@ -1,0 +1,106 @@
+{% load area_tags %}
+{% block content %}
+        <style type="text/css">
+        .map .pin {
+            position: absolute;
+            cursor: pointer;
+        }
+
+        {% if display_mode == 'all' %}
+        #next {
+            visibility: hidden;
+        }
+        {% endif %}
+
+        #title {
+            position: absolute;
+            display: none;
+            text-align: left;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding-left: 5px;
+            padding-right: 5px;
+            border: 1px dashed #1e2846;
+            font-size: 150%;
+            cursor: none;
+            pointer-events: none;
+        }
+    </style>
+    <script type="text/javascript">
+        /**
+         * Take a css dimension like "20px" and add to_add pixels to it
+         * @param dimension_in_px
+         * @param to_add
+         */
+        function pixel_add(dimension_in_px, to_add) {
+            var dim = dimension_in_px.substr(0, dimension_in_px.length - 2);
+            return parseInt(dim) + to_add + 'px';
+        }
+
+        function pin() {
+            var title_text = $(this).attr('title');
+            var top = pixel_add($(this).css('margin-top'), -150);
+            var left = pixel_add($(this).css('margin-left'), 445);
+            $('#title').css('margin-top', top).css('margin-left', left).text(title_text).show();
+            $('#next').css('visibility', 'visible');
+        }
+
+        function show_pin(pinId) {
+            var title_text = $(pinId).attr('title');
+            var top = pixel_add($(pinId).css('margin-top'), -150);
+            var left = pixel_add($(pinId).css('margin-left'), 445);
+            $('#title').css('margin-top', top).css('margin-left', left).text(title_text).show();
+        }
+
+        {% if display_mode == 'all' %}
+        $(document).ready(function () {
+            $('.pin').click(pin);
+        });
+        {% else %}
+        $(document).ready(function () {
+            show_pin('#you_are_here');
+        });
+        {% endif %}
+
+    </script>
+
+    {% if display_mode == 'all' %}
+    <div class="center">
+        <h2>Map Your Journey</h2>
+        <p>
+            Click on each pin to see what you'll learn in this module.
+        </p>
+    </div>
+    {% endif %}
+
+    <div class="center">
+        <div class="map">
+            <img src="/static/decisions/img/Map.png"/>
+            {% if display_mode == 'all' or display_mode == 'self_awareness' %}
+                <img src="/static/decisions/img/Locator_rotated.png" class="pin"
+                     style="margin-top: 50px; margin-left: -250px;" title="Self-Awareness" id="you_are_here"/>
+            {% endif %}
+            {% if display_mode == 'all' or display_mode == 'vision' %}
+                <img src="/static/decisions/img/Locator_rotated.png" class="pin"
+                     style="margin-top: 10px; margin-left: -160px;" title="Your Vision of Success" id="you_are_here"/>
+            {% endif %}
+            {% if display_mode == 'all' or display_mode == 'confidence' %}
+                <img src="/static/decisions/img/Locator_rotated.png" class="pin"
+                     style="margin-top: 45px; margin-left: -155px;" title="Confidence to Make Better Decisions"
+                     id="you_are_here"/>
+            {% endif %}
+            {% if display_mode == 'all' or display_mode == 'conviction' %}
+                <img src="/static/decisions/img/Locator_rotated.png" class="pin"
+                     style="margin-top: 20px; margin-left: -80px;" title="Conviction in Your Decision"
+                     id="you_are_here"/>
+            {% endif %}
+            <div id="title"></div>
+        </div>
+    </div>
+
+    {% if display_mode == 'all' %}
+    <div class="start">
+        {% get_next_btn module "Shall We Play A Game?" nav.next %}
+    </div>
+    {% get_back_link module nav.previous %}
+    {% endif %}
+{% endblock %}

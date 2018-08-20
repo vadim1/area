@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from .models import Module1 as Module, Course
+from .models import Module1 as Module, Course, Module1Form
 from module0.models import Module0 as PreviousModule
 from datetime import datetime
 
@@ -13,139 +13,98 @@ prefix = "module" + str(Module.num()) + "/"
 # url location
 url_prefix = "/" + str(Module.num()) + "/"
 
+"""
+Module Controllers
+"""
+@login_required
+def game_controller(request):
+    parsed = parse_request_path(request)
+    module = load_module(request, parsed['currentStep'])
+
+    if request.method == 'POST':
+        attr = request.POST.get('attr')
+        attrs = []
+        answers = {}
+        if module.answers:
+            answers = load_json(module.answers)
+        for i in range(0, len(module.game1_questions().values())):
+            index = str(i)
+            question_i = module.game1_questions().values()[i]
+            attr_i = request.POST.get('answer[' + index + ']')
+            attrs.append(attr_i)
+            if question_i not in answers:
+                answers[question_i] = {
+                    'title': module.game1_questions().keys()[i]
+                }
+            answers[question_i][attr] = attr_i
+
+        module.answers = json.dumps(answers)
+        module.save()
+        return redirect(url_prefix + parsed['next'])
+    else:
+        if parsed['section'] == 'game1':
+            clear_game_answers(module)  # TODO - save old answers
+            attr = 'easy'
+        else:
+            attr = 'confident'
+
+    return render(request, prefix+'game.html', {
+        'module': module,
+        'nav': parsed,
+        'attr': attr,
+        'labels': module.game_labels()[attr],
+        'num_questions': len(module.game1_questions()),
+        'questions': module.game1_questions().values(),
+    })
+
 @login_required
 def generic_page_controller(request):
     parsed = parse_request_path(request)
     module = load_module(request, parsed['currentStep'])
 
     if request.method == 'POST':
-        if parsed['section'] == 'decision':
-            module.decision = request.POST.get('decision')
-            next = 'cheetah'
+        if parsed['step'] == 'exploring':
+            module.cc1_list = json.dumps(request.POST.getlist('cc1[]'))
+            module.cc2_list = json.dumps(request.POST.getlist('cc2[]'))
         elif parsed['section'] == 'cheetah':
             module.cc = json.dumps(request.POST.getlist('cc[]'))
-            next = 'challenge'
         elif parsed['section'] == 'challenge':
             module.cc = json.dumps(request.POST.getlist('cc[]'))
             module.cc_not = json.dumps(request.POST.getlist('cc_not[]'))
-            next = 'buddy'
-        elif parsed['section'] == 'buddy':
-            # TODO - *Send buddy name and email to the student entering it and dream director
-            module.decision_buddy = request.POST.get('decision_buddy')
-            module.decision_buddy_email = request.POST.get('decision_buddy_email')
-            next = 'commitment'
-        else:
-            next = ""
 
-        module.save()
-        return redirect(url_prefix + next)
+        form = Module1Form(request.POST, instance=module)
+        if form.is_valid():
+            form.save()
+            return redirect(url_prefix + parsed['next'])
+        else:
+            print("Form did not validate")
+            print(form.errors)
     else:
-        if parsed['section'] == 'cheetah':
-            return render(request, prefix + parsed['templatePath'], {
-                'module': module,
-                'cc': load_json(module.cc),
-            })
+        # Add the module to the context by default
+        context = {
+            'module': module,
+            'nav': parsed,
+        }
+
+        if parsed['section'] == 'map':
+            context['display_mode'] = 'all'
+        elif parsed['section'] == 'success':
+            context['cc'] = load_json(module.cc)
         elif parsed['section'] == 'challenge':
-            return render(request, prefix + parsed['templatePath'], {
-                'module': module,
-                'cc': load_json(module.cc),
-                'cc_not': load_json(module.cc_not),
-            })
-        else:
-            return render(request, prefix + parsed['templatePath'], {
-                'module': module
-            })
-
-@login_required
-def game_controller(request):
-    parsed = parse_request_path(request)
-    module = load_module(request, parsed['currentStep'])
-
-    # Are we playing a game?
-    if parsed['step'] == 'game':
-        # For game1 we clear any previous answers but not for game2
-        if parsed['section'] == 'game1':
-            clear_game_answers(module)  # TODO - save old answers
-            return game(request, module, 'easy', 'game1/instructions', 'game1/end')
-        else:
-            return game(request, module, 'confident', 'game2/instructions', 'game2/end')
-
-    return generic_page_controller(request)
-
-
-@login_required
-def game_results(request):
-    module = load_module(request, 'game_results')
-
-    return render(request, prefix+'results.html', {
-        'module': module,
-        'answers': module.answers_json,
-        'questions': module.game1_questions(),
-    })
-
-@login_required
-def area(request):
-    module = load_module(request, 'area')
-
-    return render(request, prefix+'area.html', {
-        'module': module,
-        'answers': module.answers_json,
-        'questions': module.game1_questions(),
-    })
-
-@login_required
-def decisions_controller(request):
-    parsed = parse_request_path(request)
-    module = load_module(request, parsed['currentStep'])
-
-    if request.method == 'POST':
-        if parsed['step'] == 'living':
-            module.living = request.POST.get('living')
-            next = 'decisions/sample'
-        elif parsed['step'] == 'sample':
-            module.cc0 = request.POST.get('cc0')
-            module.cc1 = request.POST.get('cc1')
-            module.cc2 = request.POST.get('cc2')
-            next = 'cc'
-        elif parsed['step'] == 'directions':
-            module.why_list = request.POST.getlist('why[]')
-            next = 'decisions/details'
-
-        module.save()
-        return redirect(url_prefix + next)
-    else:
-        return generic_page_controller(request)
-
-@login_required
-def cc_controller(request):
-    parsed = parse_request_path(request)
-    module = load_module(request, parsed['currentStep'])
-
-    if request.method == 'POST':
-        if parsed['step'] == 'deriving':
-            module.cc0 = request.POST.get('cc0')
-            module.cc1 = request.POST.get('cc1')
-            module.cc2 = request.POST.get('cc2')
-            next = 'cc/exploring'
+            context['cc'] =  load_json(module.cc)
+            context['cc_not'] = load_json(module.cc_not)
+        elif parsed['section'] == 'area' or parsed['section'] == 'game_results':
+            context['answers'] = module.answers_json
+            context['questions'] = module.game1_questions
         elif parsed['step'] == 'exploring':
-            module.cc1_list = json.dumps(request.POST.getlist('cc1[]'))
-            module.cc2_list = json.dumps(request.POST.getlist('cc2[]'))
-            next = 'decision'
+            context['cc1_list'] = load_json(module.cc1_list)
+            context['cc2_list'] = load_json(module.cc2_list)
 
-        module.save()
-        return redirect(url_prefix + next)
-    else:
-        if parsed['step'] == 'exploring':
-            return render(request, prefix + parsed['templatePath'], {
-                'module': module,
-                'cc1_list': load_json(module.cc1_list),
-                'cc2_list': load_json(module.cc2_list),
-            })
-
-        return generic_page_controller(request)
+        return render(request, prefix + parsed['templatePath'], context)
 
 @login_required
 def commitment(request):
+    parsed = parse_request_path(request)
     module = load_module(request, 'commitment')
 
     if request.method == 'POST':
@@ -156,17 +115,19 @@ def commitment(request):
                 'Please help me with a big decision: ' + module.decision + '%0D%0D'
     for concept in load_json(module.cc):
         mail_body += concept + '%0D'
-        mail_body += '%0D' + \
-                    'Would you help me get started?  Here are a few questions I need to answer:' + '%0D%0D' + \
-                    'What are the organizations involved in your decision?' + '%0D' + \
-                    'Who are the people who could help you make your decision?' + '%0D' + \
-                    'What do you need to find out?' + '%0D' + \
-                    'How will getting information help you make your decision?' + '%0D%0D' + \
-                    'Thank you!'
+
+    mail_body += '%0D' + \
+                'Would you help me get started?  Here are a few questions I need to answer:' + '%0D%0D' + \
+                'What are the organizations involved in your decision?' + '%0D' + \
+                'Who are the people who could help you make your decision?' + '%0D' + \
+                'What do you need to find out?' + '%0D' + \
+                'How will getting information help you make your decision?' + '%0D%0D' + \
+                'Thank you!'
     to = module.decision_buddy_email + ',' + request.user.email
 
     return render(request, prefix + 'commitment.html', {
         'module': module,
+        'nav': parsed,
         'cc': load_json(module.cc),
         'mail_body': mail_body,
         'to': to,
@@ -186,7 +147,6 @@ def restart(request):
     module.save()
     return redirect('/' + str(Module.num()) + '/')
 
-
 """
 Helper Utilities
 TODO: Move to its own file
@@ -195,36 +155,6 @@ def clear_game_answers(module):
     if module.answers:
         module.answers = json.dumps({})
         module.save()
-
-def game(request, module, attr, back, next):
-    if request.method == 'POST':
-        attrs = []
-        answers = {}
-        if module.answers:
-            answers = load_json(module.answers)
-        for i in range(0, len(module.game1_questions().values())):
-            index = str(i)
-            question_i = module.game1_questions().values()[i]
-            attr_i = request.POST.get('answer[' + index + ']')
-            attrs.append(attr_i)
-            if question_i not in answers:
-                answers[question_i] = {
-                    'title': module.game1_questions().keys()[i]
-                }
-            answers[question_i][attr] = attr_i
-
-        module.answers = json.dumps(answers)
-        module.save()
-        return redirect(url_prefix + next)
-
-    return render(request, prefix+'game.html', {
-        'backUrlTarget': url_prefix + back,
-        'module': module,
-        'questions': module.game1_questions().values(),
-        'attr': attr,
-        'labels': module.game_labels()[attr],
-        'num_questions': len(module.game1_questions()),
-    })
 
 def load_course(request):
     course = None
@@ -268,6 +198,45 @@ def load_module(request, step=''):
         module.answers_json = None
     return module
 
+# Ordered list of URLs, used to calculate back and next
+def navigation():
+    urls = [
+        'intro',
+        'review',
+        'map',
+        'game1/instructions',
+        'game1/game',
+        'game1/end',
+        'game2/instructions',
+        'game2/game',
+        'game2/end',
+        'game_results',
+        'area',
+        'decisions/directions',
+        'maps/self_awareness',
+        'decisions/personal',
+        'decisions/living',
+        'decisions/sample',
+        'maps/vision',
+        'cc',
+        'cc/nylah',
+        'cc/cheetah',
+        'cc/deriving',
+        'cc/exploring',
+        'maps/confidence',
+        'decision',
+        'success',
+        'maps/conviction',
+        'conviction',
+        'building',
+        'challenge',
+        'buddy',
+        'commitment',
+        'summary'
+    ]
+
+    return urls
+
 def parse_request_path(request):
     parsed = {
         'parsed': [],
@@ -277,15 +246,19 @@ def parse_request_path(request):
         'currentStep': None,
         'templatePath': None,
         'requestPath': request.path,
+        'previous': None,
+        'next': None
     }
 
     parts = request.path.split("/")
+
     # Typical path is /<module_num>/<section>
     if len(parts) > 2:
         section = parts[2]
         step = None
 
         # Log the step we are on e.g. intro
+        current = section
         currentStep = section
         # Path to the template
         templatePath = section + ".html"
@@ -293,8 +266,30 @@ def parse_request_path(request):
         # There is a sub directory path
         if len(parts) == 4:
             step = parts[3]
+            current = section + "/" + step
             currentStep = section + "_" + step
             templatePath = section + "/" + step + ".html"
+
+        module_urls = navigation()
+
+        # Calculate the previous and next steps
+        if current in module_urls:
+            currentNdx = module_urls.index(current)
+
+            previousNdx = currentNdx - 1
+            print(module_urls[previousNdx])
+            if previousNdx > 0:
+                previous = module_urls[previousNdx]
+            else:
+                previous = module_urls[0]
+
+            nextNdx = currentNdx + 1
+            if nextNdx > len(module_urls):
+                next = module_urls[len(module_urls)]
+            else:
+                next = module_urls[nextNdx]
+
+        print("previous: " + previous + ", next: " + next)
 
         parsed = {
             'parsed': parts,
@@ -302,7 +297,10 @@ def parse_request_path(request):
             'section': section,
             'step': step,
             'currentStep': currentStep,
-            'templatePath': templatePath
+            'templatePath': templatePath,
+            'current': current,
+            'next': next,
+            'previous': previous,
         }
 
     return parsed

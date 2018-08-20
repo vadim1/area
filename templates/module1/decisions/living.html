@@ -1,7 +1,7 @@
 {% extends 'decisions/base.html' %}
 {% load bootstrap %}
 {% load area_tags %}
-{% block title %}{% block h1 %}Module {{ module.display_num }} - Details{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Show Me An Example{% endblock %}{% endblock %}
 {% block content %}
     <style type="text/css">
         .living-selector input {
@@ -42,7 +42,8 @@
             opacity: 0.8;
         }
     </style>
-    <h3 style="margin-top: 100px; margin-bottom: 50px;">
+    <h2 class="center">Show Me An Example</h2>
+    <h3>
         The very same decision - say where to live - may be easy at some point
         in our lives and yet difficult at another.
     </h3>
@@ -65,7 +66,7 @@
         </button>
     </div>
 
-    {% get_back_link module "decisions/details" %}
+    {% get_back_link module nav.previous %}
 
     <script type="text/javascript">
         function validate() {

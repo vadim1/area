@@ -1,7 +1,7 @@
 {% extends 'decisions/base.html' %}
 {% load bootstrap %}
 {% load area_tags %}
-{% block title %}{% block h1 %}Module {{ module.display_num }} - Directions for Reflection{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Decision Dilemma{% endblock %}{% endblock %}
 {% block content %}
     <style type="text/css">
         #why_options div {
@@ -20,7 +20,9 @@
         }
     </style>
 
-    <h3 style="margin-top: 50px;">
+    <h2 class="center">Decision Dilemma</h2>
+
+    <h3>
         Why were some simple decisions hard to make and some complex decisions easy?
         <span class="font-size: small">(Check at least one)</span>
     </h3>
@@ -35,9 +37,9 @@
         {% endfor %}
     </div>
     <div class="center">
-        <input id="next" type="submit" value="Submit"></input>
+        <input id="next" type="submit" value="Becoming More Self-Aware"></input>
     </div>
-    {% get_back_link module "area" %}
+    {% get_back_link module nav.previous %}
     <script type="text/javascript">
         function validate() {
             if ($('#why_options').find(':checked').length > 0) {
