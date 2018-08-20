@@ -1,0 +1,38 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Summary{% endblock %}{% endblock %}
+{% block content %}
+    <h1 class="center">Module {{ module.display_num }} Complete!</h1>
+
+    <h3 class="center">
+        Congratulations! You received the Module {{ module.display_num }} badge!
+    </h3>
+
+    <div class="center">
+        <img src="/static/decisions/img/Module2_badge.png"/>
+    </div>
+
+    <h3>You have learned:</h3>
+
+
+    <h3>
+        <div>&bull; That every day we make a lot of decisions.</div>
+        <div>&bull; Some easy decisions are hard and some hard decisions are easy.</div>
+        <div>&bull; The AREA Method can help by teaching us to identify our Critical Concepts.</div>
+    </h3>
+
+    <h3>You have identified:</h3>
+
+    <h3>
+        <div>&bull; A decision you want to make and it's Critical Concepts.</div>
+        <div>&bull; A Decision Buddy, {{ module.decision_buddy }}, to support you.</div>
+        <div>&bull; Questions to lead you to make a big decision better!</div>
+    </h3>
+
+    <div class="center">
+        <button id="next" type="submit">Modules List</button>
+    </div>
+
+    {% get_back_link module "commitment" %}
+{% endblock %}

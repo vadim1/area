@@ -1,0 +1,26 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Nylah's Decision{% endblock %}{% endblock %}
+{% block content %}
+    <div class="center">
+        <img src="/static/decisions/img/nylah.png" height="100px" style="margin: 5px;"/>
+    </div>
+    <h3>
+        Let's take Nylah for example.
+        She's a senior living in an apartment in Brooklyn with her mom and dad and two younger sisters.
+    </h3>
+    <h3>
+        Using AREA, Nylah begins by asks herself: How will I know I've made a good decision about whether to go away to
+        college? She comes up with three things that have to happen for the decision to succeed.
+    </h3>
+    <h3>
+        Nylah's Critical Concepts for her decision: "Should I go away to college?"
+    </h3>
+    <br/>
+    {% include 'module1/nylah/cc.html' %}
+    <div class="center start">
+    {% get_next_btn module "Now It's Your Turn" "cc/deriving" %}
+    </div>
+    {% get_back_link module "cc" %}
+{% endblock %}

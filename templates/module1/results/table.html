@@ -1,0 +1,30 @@
+<style type="text/css">
+    #results {
+        vertical-align: top;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #results td {
+        vertical-align: top;
+        padding: 10px;
+        width: 50%;
+    }
+</style>
+<script type="text/javascript" src="/static/decisions/js/jquery.tagcanvas.min.js"></script>
+<h3 class="center">Select a <span class="color">word</span> to see which question goes with it.</h3>
+<table id="results">
+    <tr style="border-bottom: 1px solid black">
+        {% include "module1/results//quadrant.html" with t1='Hard' t2='Unsure' v1='1' v2='1' textcolor=textcolor_noarea %}
+        {% include "module1/results//quadrant.html" with t1='Hard' t2='<span class="area">Confident</span>' v1='1' v2='0' class='area' textcolor=textcolor_area %}
+    </tr>
+    <tr>
+        {% include "module1/results//quadrant.html" with t1='Easy' t2='Unsure' v1='0' v2='1' textcolor=textcolor_noarea %}
+        {% include "module1/results//quadrant.html" with t1='Easy' t2='<span class="area">Confident</span>' v1='0' v2='0' class='area' textcolor=textcolor_area %}
+    </tr>
+</table>
+<script type="text/javascript">
+    var canvas_size = $('#results').width() / 2;
+    // $('canvas').width(canvas_size);
+    // $('canvas').height(canvas_size);
+</script>

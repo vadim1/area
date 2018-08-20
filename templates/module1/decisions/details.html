@@ -1,0 +1,64 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Details{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+    #page2 {
+        display: none;
+    }
+
+    #yes {
+        display: none;
+    }
+
+    #no {
+        display: none;
+    }
+    </style>
+    <script type="text/javascript">
+    $(document).ready(function() {
+       $('.detailsBtn').click(function() {
+           $('#page1').css('display', 'none');
+           $('#page2').css('display', 'block');
+
+           var selection = $(this).val();
+           $('#' + selection).css('display', 'block');
+       });
+    });
+    </script>
+    <div id="page1">
+        <h3 style="margin: 100px;">
+            The thing about decision making is that often there's no right answer,
+            however, there is likely a right answer for <i>YOU</i>.
+        </h3>
+        <div class="center" style="white-space: nowrap;">
+            <button type="button" name="details" class="detailsBtn" value="yes">I Agree</button>
+            <span style="margin: 30px;"> </span>
+            <button type="button" name="details" class="detailsBtn" value="no">No Way</button>
+        </div>
+
+        {% get_back_link module "decisions/directions" %}
+    </div>
+
+    <div id="page2">
+        <h3>
+            <div id="yes">How you understand your situation and the facts may be different from how others see and
+                understand them.
+            </div>
+            <div id="no">You recognize that good decision making is personal to you.</div>
+        </h3>
+
+        <h3>
+            Life has easy and difficult decisions and we each have a different idea of what is easy
+            and difficult for us.
+        </h3>
+
+        <div class="center">
+            {% get_next_btn module "Show Me An Example" "decisions/living" %}
+        </div>
+
+        {% get_back_link module "decisions/details" %}
+    </div>
+
+{% endblock %}

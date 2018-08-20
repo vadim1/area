@@ -1,0 +1,48 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Commitment Contract{% endblock %}{% endblock %}
+{% block content %}
+
+    <h3 class="center" style="margin: 40px; font-weight: normal;">
+        <input type="text" name="decision" class="cc decision center" style="border-bottom: 2px solid lightgray;"
+               size="40" value="{{ module.decision }}" readonly="readonly"/>
+    </h3>
+
+    <h2>Critical Concepts</h2>
+    <h3>
+        Your critical concepts will focus your decision making.
+        In Module 2 you'll check your bias so you can be openminded when investigating
+        your critical concepts.
+    </h3>
+
+    {% for concept in cc %}
+        <h3>&bull; {{ concept }}</h3>
+    {% endfor %}
+
+    <h3 class="email">
+        <a target="_blank" class="" onclick="email_sent = true;"
+           href="mailto:{{ to }}?subject=Please Be My Decision Buddy!&body={{ mail_body }}">
+            Click here to send an email to your decision buddy {{ module.decision_buddy }}<br/> and yourself
+            that has a few questions to help you get started.
+        </a>
+    </h3>
+
+    <div class="center">
+        <button id="next" type="button"><a href="summary" onclick="return(validate())">Finish!</a></button>
+    </div>
+
+    {% get_back_link module "buddy" %}
+    <script type="text/javascript">
+    var email_sent = false;
+
+    function validate()
+    {
+        if (!email_sent) {
+            alert("Please click to send the email.");
+            return false;
+        }
+        return true;
+    }
+    </script>
+{% endblock %}

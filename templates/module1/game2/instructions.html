@@ -1,0 +1,16 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Introduction to Decision Making 2{% endblock %}{% endblock %}
+{% block content %}
+    <h3>
+        For each decision select <span class="button-instructions">Confident</span> or
+        <span class="button-instructions">Unsure</span>.</h3>
+    <h3>In this round there's no countdown clock.</h3>
+    </div>
+
+    <div class="center start">
+    {% get_next_btn module "Play Game" "game2/game" %}
+    </div>
+    {% get_back_link module "game1/end" %}
+{% endblock %}

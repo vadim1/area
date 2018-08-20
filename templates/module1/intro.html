@@ -1,0 +1,40 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - {{ module.name }}{% endblock %}{% endblock %}
+{% block content %}
+    <div class="center">
+        <div style="font-weight: bolder">MODULE {{ module.display_num }}</div>
+        <div style="margin-top: 50px; margin-bottom: 50px;">
+            <img src="/static/decisions/img/Homepage_Door.png"/>
+        </div>
+        <h1>Introduction to</h1>
+        <div style="font-size: 60px; letter-spacing: -8px; font-weight: 900; margin-top: 20px;">
+            <span class="green">D</span>
+            <span class="yellow">E</span>
+            <span class="light-blue">C</span>
+            <span class="red">I</span>
+            <span class="yellow">S</span>
+            <span class="light-blue">I</span>
+            <span class="green">O</span>
+            <span class="red">N</span>
+            &nbsp;
+            <span class="green">M</span>
+            <span class="yellow">A</span>
+            <span class="light-blue">K</span>
+            <span class="red">I</span>
+            <span class="green">N</span>
+            <span class="yellow">G</span>
+        </div>
+
+        <div style="margin-top: 40px; margin-bottom: 40px;">
+            This module introduces you to how many decisions you make<br/>
+            every day and how to make big decisions better.
+        </div>
+
+        <div class="start">
+            {% get_next_btn module "Make Big Decisions Better!" "previous_review" %}
+        </div>
+    </div>
+    {% get_back_link module "/decisions" %}
+{% endblock %}
