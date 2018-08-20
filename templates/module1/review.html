@@ -1,0 +1,18 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Review: Problem Solver Profile
+{% endblock %}{% endblock %}
+{% block content %}
+
+    <h2 class="center">
+        Review: Problem Solver Profile
+    </h2>
+
+    {% include 'module0/review/content.html' %}
+
+    <div class="start">
+        {% get_next_btn module "Got It" nav.next %}
+    </div>
+    {% get_back_link module parsed.previous %}
+{% endblock %}

@@ -3,6 +3,7 @@
 {% load area_tags %}
 {% block title %}{% block h1 %}Module {{ module.display_num }} - Decision Making Game{% endblock %}{% endblock %}
 {% block content %}
+    <h2 class="center">Game Intro</h2>
     <h3>
         Just like real life you're about to make a lot of decisions!
         <br/>
@@ -17,7 +18,7 @@
     <div class="center start">
         <button id="next" type="button"><a href="#" onclick="return countdown()">Play Game</a></button>
     </div>
-    {% get_back_link module "map" %}
+    {% get_back_link module nav.previous %}
     <div style="display: none; background: rgba(54, 25, 25, .8); height: 100%; width: 100%; position: fixed; top: 0; left: 0; float: right; z-index: 99; text-align: center; padding-top: 20%"
          id="timer">
         <div style="font-size: 256px; color: #f6653c" id="time">3</div>
@@ -32,7 +33,7 @@
                 $("#time").text(timeleft);
                 if (timeleft <= 0) {
                     clearInterval(downloadTimer);
-                    window.location.href = '/{{ module.num }}/game1/game';
+                    window.location.href = '/{{ module.num }}/{{ nav.next }}';
                 }
             }, 1000);
             return false;

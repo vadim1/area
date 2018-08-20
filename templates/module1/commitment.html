@@ -1,24 +1,26 @@
 {% extends 'decisions/base.html' %}
 {% load bootstrap %}
 {% load area_tags %}
-{% block title %}{% block h1 %}Module {{ module.display_num }} - Commitment Contract{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Cheetah Sheet 3: Starting My Decision Hunt{% endblock %}{% endblock %}
 {% block content %}
+    <div class="center">
+        <img src="/static/decisions/img/cheetah.png" width="450"/>
+    </div>
 
-    <h3 class="center" style="margin: 40px; font-weight: normal;">
+    <h2 class="center">Cheetah Sheet 3: Starting My Decision Hunt</h2>
+
+    <div class="center">
+    <h3>
+        <p>Here is your decision problem and Critical Concepts together:</p>
+
         <input type="text" name="decision" class="cc decision center" style="border-bottom: 2px solid lightgray;"
                size="40" value="{{ module.decision }}" readonly="readonly"/>
-    </h3>
 
-    <h2>Critical Concepts</h2>
-    <h3>
-        Your critical concepts will focus your decision making.
-        In Module 2 you'll check your bias so you can be openminded when investigating
-        your critical concepts.
-    </h3>
-
-    {% for concept in cc %}
-        <h3>&bull; {{ concept }}</h3>
+       {% for concept in cc %}
+        <p>&bull; {{ concept }}</p>
     {% endfor %}
+    </h3>
+    </div>
 
     <h3 class="email">
         <a target="_blank" class="" onclick="email_sent = true;"
@@ -32,7 +34,7 @@
         <button id="next" type="button"><a href="summary" onclick="return(validate())">Finish!</a></button>
     </div>
 
-    {% get_back_link module "buddy" %}
+    {% get_back_link module nav.previous %}
     <script type="text/javascript">
     var email_sent = false;
 

@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.forms import ModelForm
 from decisions.models import Course, BaseModule
 
 class Module1(BaseModule):
@@ -8,13 +9,13 @@ class Module1(BaseModule):
     cc0 = models.CharField(max_length=255, default='')  # Nylah
     cc1 = models.CharField(max_length=255, default='')  # Nylah
     cc2 = models.CharField(max_length=255, default='')  # Nylah
-    decision = models.CharField(max_length=255, default='')
     cc = models.CharField(max_length=255, default='')
     cc_not = models.CharField(max_length=255, default='')
-    decision_buddy = models.CharField(max_length=80, default='')
-    decision_buddy_email = models.EmailField(max_length=80, default='')
     cc1_list = models.TextField(default='')
     cc2_list = models.TextField(default='')
+    decision = models.CharField(max_length=255, default='')
+    decision_buddy = models.CharField(max_length=80, default='')
+    decision_buddy_email = models.EmailField(max_length=80, default='')
     living = models.TextField(default='')
     why_list = models.TextField(default='')
 
@@ -90,3 +91,34 @@ class Module1(BaseModule):
     class Meta:
         verbose_name = 'Module 1 Data'
         verbose_name_plural = 'Module 1 Data'
+
+class Module1Form(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(Module1Form, self).__init__(*args, **kwargs)
+        # Not all fields are available all at once so set these to false for now
+        self.fields['answers'].required = False
+        self.fields['cc0'].required = False
+        self.fields['cc1'].required = False
+        self.fields['cc2'].required = False
+        self.fields['cc'].required = False
+        self.fields['cc_not'].required = False
+        self.fields['decision'].required = False
+        self.fields['decision_buddy'].required = False
+        self.fields['decision_buddy_email'].required = False
+        self.fields['living'].required = False
+        self.fields['why_list'].required = False
+
+    class Meta:
+        model = Module1
+        fields = ['answers',
+                  'cc0',
+                  'cc1',
+                  'cc2',
+                  'cc',
+                  'cc_not',
+                  'decision',
+                  'decision_buddy',
+                  'decision_buddy_email',
+                  'living',
+                  'why_list'
+                  ]

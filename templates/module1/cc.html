@@ -1,20 +1,25 @@
 {% extends 'decisions/base.html' %}
 {% load bootstrap %}
 {% load area_tags %}
-{% block title %}{% block h1 %}Module {{ module.display_num }} - Defining Critical Concepts{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Define Success{% endblock %}{% endblock %}
 {% block content %}
-    <h1 class="center">
-        Critical Concepts
-    </h1>
+    <h2 class="center">
+        Define Success
+    </h2>
     <h3>
-        To make big decisions better, start at the end. What you are solving for?
-        By beginning where you want to end up, you can get there more easily.
+        By starting your decision making where you want to end up you can make big decisions better.
     </h3>
     <h3>
-        The few factors that you are solving for are called Critical Concepts.
+        Instead of open-ended problem solving answering the question:
+        &quot;<i>What am I solving for?</i>&quot; enables you to define your
+        Critical Concepts.
+    </h3>
+    <h3>
+        Critical Concepts are the one, two or three things that need to happen in the outcome of your decision for you
+        to know that the decision has succeeded for you personally.
     </h3>
     <div class="center">
-    {% get_next_btn module "Meet Nylah" "cc/nylah" %}
+        {% get_next_btn module "Critical Concepts" nav.next %}
     </div>
-    {% get_back_link module "decisions/sample" %}
+    {% get_back_link module nav.previous %}
 {% endblock %}

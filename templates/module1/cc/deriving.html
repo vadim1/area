@@ -1,24 +1,27 @@
 {% extends 'decisions/base.html' %}
 {% load bootstrap %}
 {% load area_tags %}
-{% block title %}{% block h1 %}Module {{ module.display_num }} - Deriving Critical Concepts{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Practice Critical Concepts{% endblock %}{% endblock %}
 {% block content %}
     <style type="text/css">
         li, td {
             font-size: smaller;
         }
     </style>
-    <h2>
-        Should I go away to college?
+    <h2 class="center">
+        Practice Critical Concepts
     </h2>
     <ul id="list">
         <li id="2">
-            If you had to decide where to go to college, what might be your Critical Concepts?
+            If you had to decide whether to go away to college, how would you answer What am I solving for? What would
+            might be your Critical Concepts?
             <div id="and" class="center">
                 <button type="button" class="center" onclick="return nextbtn()">Continue</button>
             </div>
         </li>
-        <li id="3" class="anim">There's no one right answer. Think of answers that are "RIGHT" for you personally.</li>
+        <li id="3" class="anim">Remember: There's no one right answer. Think of answers that are "RIGHT" for you
+            personally.
+        </li>
         <li class="anim">
             <table class="table">
                 <thead>
@@ -44,11 +47,11 @@
             </table>
 
             <div class="center">
-                <button type="submit" id="next">Submit Answers</button>
+                <button type="submit" id="next">Meet The Cheetah</button>
             </div>
         </li>
     </ul>
-    {% get_back_link module "cc/nylah" %}
+    {% get_back_link module nav.previous %}
     <script type="text/javascript">
         function validate() {
             var valid = true;

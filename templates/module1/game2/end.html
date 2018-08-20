@@ -5,7 +5,7 @@
 {% block extra_head %}
 {% endblock %}
 {% block content %}
-    <h1 class="center">How'd It Go?</h1>
+    <h2 class="center">How'd It Go?</h2>
     <h3>
         <br/>
         Some decisions that seem easy can be hard to make while other hard ones are right in our comfort zone.
@@ -21,7 +21,7 @@
         <span class="button-instructions">Unsure</span> about them.
     </h3>
     <div class="center start">
-        {% get_next_btn module "Show Me My Results!" "game_results" %}
+        {% get_next_btn module "Show Me My Results!" nav.next %}
     </div>
-    {% get_back_link module "game2/game" %}
+    {% get_back_link module nav.previous %}
 {% endblock %}

@@ -1,18 +1,24 @@
 {% extends 'decisions/base.html' %}
 {% load bootstrap %}
 {% load area_tags %}
-{% block title %}{% block h1 %}Module {{ module.display_num }} - Critical Concepts Challenge{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Cheetah Sheet 2: Edit Critical Concepts
+{% endblock %}{% endblock %}
 {% block content %}
-    <h2 class="center">How Could It Fail?</h2>
+    <div class="center">
+        <img src="/static/decisions/img/cheetah.png" width="450"/>
+    </div>
 
-    <h3 class="center" style="margin: 40px; font-weight: normal;">
-        <input type="text" name="decision" class="cc decision center" style="border-bottom: 2px solid lightgray;"
-               size="40" value="{{ module.decision }}" readonly="readonly"/>
+    <h2 class="center">Cheetah Sheet 2: Edit Critical Concepts</h2>
+
+    <h3>
+        Nylah’s Critical Concepts are personal to her situation. Even if you faced the same decision problem your Critical Concepts would be
+        different because they will be personal to your vision of success.
     </h3>
 
     <h3>
-        Now that you've figured out what is important to you test yourself:<br/>
-        for each Critical Concept, write down what might cause your decision to fail to meet it.
+        By thinking through how her Critical Concepts could fail, Nylah realized that “the school having a good graphic design
+        program” was not specific enough. Nylah edited that Critical Concepts to reflect that a school would have to demonstrate good
+        job placement data for design majors.
     </h3>
     <h3>
         Edit your Critical Concepts if you've realized that they need to be changed.
@@ -39,17 +45,17 @@
             <td>3. <input type="text" name="cc_not[]" class="cc" id="6" value="{{ cc_not.2 }}" size="30"/></td>
         </tr>
         <tr>
-            <td> </td>
-            <td> </td>
+            <td></td>
+            <td></td>
         </tr>
         </tbody>
     </table>
 
     <div class="center">
-        <input id="next" type="submit" name="submit" value="Submit Critical Concepts"/>
+        <input id="next" type="submit" name="submit" value="Commit To Making Your Decision"/>
     </div>
 
-    {% get_back_link module "cheetah" %}
+    {% get_back_link module nav.previous %}
 
     <script type="text/javascript">
         function validate() {

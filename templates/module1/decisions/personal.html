@@ -1,0 +1,20 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Decision Making Is Personal{% endblock %}{% endblock %}
+{% block content %}
+    <h2 class="center">Decision Making Is Personal</h2>
+
+    <h3>
+        Life has easy and difficult decisions but we each have a different idea of what is easy or difficult to decide.
+        How you understand your situation and the facts may be different from how others see and understand them.
+    </h3>
+
+    <div class="center">
+        {% get_next_btn module "Show Me An Example" nav.next %}
+    </div>
+
+    {% get_back_link module nav.previous %}
+    </div>
+
+{% endblock %}
