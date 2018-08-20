@@ -1,0 +1,122 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Exploring Critical Concepts{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+    .answers a {
+        color: #f6653c;
+    }
+
+    .answers a:hover {
+        cursor: hand;
+    }
+
+    td {
+        margin: 0;
+    }
+    </style>
+    <h2 class="center">Practice Critical Concepts</h2>
+    <h3>
+        Let's practice you envisioning your success in a few decision problems.
+    </h3>
+
+    <h2>Do I get an after school job?</h2>
+    <table class="table answers">
+        <thead>
+        <tr>
+            <th>Your Answers</th>
+            <th width="50%">Nylah's Answers</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1. <input type="text" name="cc1[]" class="cc" value="{{ cc1_list.0 }}" size="30"/></td>
+            <td>
+                <a onclick="$(this).hide(); $(this).closest('td').find('div').show(); return false;" tabindex="-1">
+                    Show Nylah's Answer
+                </a>
+                <div style="display: none;">The job is nearby.</div>
+            </td>
+        </tr>
+        <tr>
+            <td>2. <input type="text" name="cc1[]" class="cc" value="{{ cc1_list.1 }}" size="30"/></td>
+            <td>
+                <a onclick="$(this).hide(); $(this).closest('td').find('div').show(); return false;" tabindex="-1">
+                    Show Nylah's Answer
+                </a>
+                <div style="display: none;">I have enough time for the job and homework.</div>
+            </td>
+        </tr>
+        <tr>
+            <td>3. <input type="text" name="cc1[]" class="cc" value="{{ cc1_list.2 }}" size="30"/></td>
+            <td>
+                <a onclick="$(this).hide(); $(this).closest('td').find('div').show(); return false;" tabindex="-1">
+                    Show Nylah's Answer
+                </a>
+                <div style="display: none;">The job pays enough.</div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Do I tell a friend a difficult truth?</h2>
+    <table class="table answers">
+        <thead>
+        <tr>
+            <th>Your Answers</th>
+            <th width="50%">Nylah's Answers</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1. <input type="text" name="cc2[]" class="cc" value="{{ cc2_list.0 }}" size="30"/></td>
+            <td>
+                <a onclick="$(this).hide(); $(this).closest('td').find('div').show(); return false;" tabindex="-1">
+                    Show Nylah's Answer
+                </a>
+                <div style="display: none;">My friend appreciates my honesty.</div>
+            </td>
+        </tr>
+        <tr>
+            <td>2. <input type="text" name="cc2[]" class="cc" value="{{ cc2_list.1 }}" size="30"/></td>
+            <td>
+                <a onclick="$(this).hide(); $(this).closest('td').find('div').show(); return false;" tabindex="-1">
+                    Show Nylah's Answer
+                </a>
+                <div style="display: none;">I feel like I am being a good friend.</div>
+            </td>
+        </tr>
+        <tr>
+            <td>3. <input type="text" name="cc2[]" class="cc" value="{{ cc2_list.2 }}" size="30"/></td>
+            <td>
+                <a onclick="$(this).hide(); $(this).closest('td').find('div').show(); return false;" tabindex="-1">
+                    Show Nylah's Answer
+                </a>
+                <div style="display: none;">The problem my friend has gets resolved.</div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    </p>
+    <p class="center">
+        <input type="submit" id="next" name="submit" value="Submit Answers"/>
+    </p>
+    {% get_back_link module "cc/deriving" %}
+
+    <script type="text/javascript">
+        function validate() {
+            var valid = true;
+            $('.cc').each(function () {
+                if ($(this).val().length < 5) {
+                    if (valid) {
+                        alert("Please provide 3 answers for each topic.");
+                    }
+                    valid = false;
+                }
+            });
+            return valid;
+        }
+    </script>
+{% endblock %}

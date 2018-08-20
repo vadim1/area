@@ -1,0 +1,51 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Directions for Reflection{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+        #why_options div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: large;
+            border: 1px solid #dddddd;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+    </style>
+
+    <h3 style="margin-top: 50px;">
+        Why were some simple decisions hard to make and some complex decisions easy?
+        <span class="font-size: small">(Check at least one)</span>
+    </h3>
+    <div id="why_options" style="margin-top:20px;">
+        {% for option in module.get_why_options %}
+            <div>
+                <label>
+                    <input type="checkbox" name="why[]" value="{{ option }}"/>
+                    <span>{{ option }}</span>
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="center">
+        <input id="next" type="submit" value="Submit"></input>
+    </div>
+    {% get_back_link module "area" %}
+    <script type="text/javascript">
+        function validate() {
+            if ($('#why_options').find(':checked').length > 0) {
+                return true;
+            } else {
+                alert("Please select at least one.");
+                return false;
+            }
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Details{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+        .living-selector input {
+            margin: 0;
+            padding: 0;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .city {
+            background-image: url(/static/decisions/img/City_Image.jpeg);
+        }
+
+        .suburbs {
+            background-image: url(/static/decisions/img/Urban_Image.jpeg);
+        }
+
+        .living-selector input:active + .living-choice {
+        }
+
+        .living-selector input:checked + .living-choice {
+            border: 4px solid #52c0d8;
+            width: 233px;
+            height: 157px;
+        }
+
+        .living-choice {
+            cursor: pointer;
+            background-size: contain;
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 229px;
+            height: 153px;
+        }
+
+        .living-choice:hover {
+            opacity: 0.8;
+        }
+    </style>
+    <h3 style="margin-top: 100px; margin-bottom: 50px;">
+        The very same decision - say where to live - may be easy at some point
+        in our lives and yet difficult at another.
+    </h3>
+
+    <h3 class="center">
+        Select which life looks good to you.
+    </h3>
+
+    <h3 style="white-space: nowrap;" class="center">
+        <div class="living-selector">
+            <input id="city" type="radio" name="living" value="city"/>
+            <label class="living-choice city" for="city"></label>
+            <input id="suburbs" type="radio" name="living" value="suburbs"/>
+            <label class="living-choice suburbs" for="suburbs"></label>
+        </div>
+    </h3>
+    <div class="center">
+        <button id="next" type="submit" style="white-space: nowrap;">
+            Let's Make Another Decision
+        </button>
+    </div>
+
+    {% get_back_link module "decisions/details" %}
+
+    <script type="text/javascript">
+        function validate() {
+            if (!$('input[name="living"]:checked').length) {
+                alert("Please select one by clicking on it.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - AREA Method{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+        .area {
+            color: #1dcd9f;
+        }
+
+        .noarea {
+            color: #cccccc !important;
+        }
+    </style>
+    <h3>
+        Below, highlighted in green, is the area where you are confident in making decisions. In the rest of this module
+        you are going to learn the Area Method - a decision making system that is going to give you the skills to have
+        greater confidence in your decision making.
+    </h3>
+
+    {% include "module1/results/table.html" with textcolor_area="1dcd9f" textcolor_noarea="cccccc" %}
+
+    <div class="center">
+    {% get_next_btn module "How Does AREA Help?" "decisions/directions" %}
+    </div>
+    {% get_back_link module "game_results" %}
+{% endblock %}
