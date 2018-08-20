@@ -1,21 +1,22 @@
 from django.conf.urls import url, include
+from django.views.generic import RedirectView
 import views
+
 urlpatterns = [
-    url(r'^$', views.intro, name='Module 1'),
-    url(r'^intro/?$', views.intro, name='Module 1'),
-    url(r'^restart/?', views.restart, name='Module 1 Restart'),
-    url(r'^review/?$', views.review, name='Module 1 Review'),
-    url(r'^map/?$', views.map, name='Module 1 Map'),
-    url(r'^instructions/?$', views.instructions, name='Module 1 Instructions'),
-    url(r'^psp_profiles/?$', views.psp_profiles, name='Module 1 Problem Solver Profiles'),
+    url(r'^$', RedirectView.as_view(pattern_name='module1_intro', permanent=True)),
 
-    url(r'^game/?$', views.game, name='Module 1 Game'),
-    url(r'^archetype/?$', views.archetype, name='Module 1 Archetype'),
-    url(r'^right/?$', views.right, name='Module 1 Right?'),
-    url(r'^pro_con/?$', views.pro_con, name='Module 1 Pro Con'),
-    url(r'^cheetah/?$', views.cheetah, name='Module 1 Cheetah Sheet'),
-    url(r'^archetypes/?$', views.archetypes, name='Module 1 Archetypes'),
-    url(r'^eval/?$', views.eval, name='Module 1 Evaluation'),
+    url(r'^intro/?$', views.module0_controller, name='module1_intro'),
+    url(r'^map/?$', views.module0_controller, name='module1_map'),
+    url(r'^instructions/?$', views.module0_controller, name='module1_instructions'),
+    url(r'^psp_profiles/?$', views.module0_controller, name='module1_psp_profiles'),
+    url(r'^game/?$', views.game, name='module1_game'),
+    url(r'^archetype/?$', views.module0_controller, name='module1_archetype'),
+    url(r'^pro_con/?$', views.module0_controller, name='module1_pro_con'),
+    url(r'^right/?$', views.module0_controller, name='module1_right'),
+    url(r'^archetypes/?$', views.module0_controller, name='module1_archetypes'),
+    url(r'^cheetah/?$', views.module0_controller, name='module1_cheetah'),
+    url(r'^eval/?$', views.module0_controller, name='module1_eval'),
+    url(r'^review/?$', views.module0_controller, name='module1_review'),
 
-
+    url(r'^restart/?', views.restart, name='module1_restart'),
 ]
