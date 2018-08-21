@@ -1,7 +1,10 @@
 from django.conf.urls import url, include
 from django.views.generic import RedirectView
+
 import views
 
+# If you modify the order of the URLs on this file, please update the list in
+# views.navigation as well
 urlpatterns = [
     url(r'^$', RedirectView.as_view(pattern_name='module1_intro', permanent=True)),
 
@@ -16,7 +19,7 @@ urlpatterns = [
     url(r'^archetypes/?$', views.module0_controller, name='module1_archetypes'),
     url(r'^cheetah/?$', views.module0_controller, name='module1_cheetah'),
     url(r'^eval/?$', views.module0_controller, name='module1_eval'),
-    url(r'^review/?$', views.review, name='module1_review'),
+    url(r'^summary/?$', views.review, name='module1_summary'),
 
     url(r'^restart/?', views.restart, name='module1_restart'),
 ]

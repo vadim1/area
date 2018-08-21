@@ -1,5 +1,6 @@
 {% extends 'decisions/base.html' %}
 {% load static account socialaccount bootstrap i18n %}
+{% load module_tags %}
 {% block title %}{% block h1 %}Module {{ module.display_num }} - Strengths and Blind Spots{% endblock %}{% endblock %}
 {% block content %}
     <style type="text/css">
@@ -15,13 +16,10 @@
 
     {% include 'module0/maps/map_3.html' %}
 
-    {% if archetype %}
-        <div>{% with 'module0/archetype/'|add:archetype|add:'.html' as path %}
+    {% if module.archetype %}
+        <div>{% with 'module0/archetype/'|add:module.archetype|add:'.html' as path %}
             {% include path with pro_con=True show_nav=True %}{% endwith %}</div>
     {% endif %}
 
-    <div class="center">
-        <a href="/{{ module.num }}/archetype" id="back">Back</a>
-    </div>
-
+    {% get_back_link module nav.previousUrl %}
 {% endblock %}

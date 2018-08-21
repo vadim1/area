@@ -1,5 +1,6 @@
 {% extends 'decisions/base.html' %}
 {% load static account socialaccount bootstrap i18n %}
+{% load module_tags %}
 {% block title %}{% block h1 %}Module {{ module.display_num }} - Pause Like the Cheetah{% endblock %}{% endblock %}
 {% block content %}
     <style type="text/css">
@@ -24,9 +25,7 @@
     <p>She's <strong>agile and flexible</strong>, her <em>pause</em> is perfect for
         good decision making!</p>
 
-    <p class="center start2">
-        <button id="next" type="button"><a href="/{{ module.num }}/eval">Got It</a></button>
-    </p>
-    <a href="/{{ module.num }}/archetypes" id="back">Back</a>
+    {% get_next_btn module "Got It" nav.nextUrl %}
 
+    {% get_back_link module nav.previousUrl %}
 {% endblock %}
