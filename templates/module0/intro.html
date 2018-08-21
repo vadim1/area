@@ -1,6 +1,6 @@
 {% extends 'decisions/base.html' %}
 {% load bootstrap %}
-{% load area_tags %}
+{% load module_tags %}
 {% block title %}{% block h1 %}Module {{ module.display_num }} - {{ module.name }}{% endblock %}{% endblock %}
 {% block content %}
     <div class="center">
@@ -30,18 +30,17 @@
         <h1>PROFILE</h1>
 
         <div style="margin-top: 10px; margin-bottom: 10px;">
-            <h3>
-            What kind of a decision-maker are you? <br />
-            Find out by using this module. <br />
-            Get your {% include 'module0/problem_solver.html' %} (PSP) and learn about you!
-            </h3>
+            <h3>What kind of a decision-maker are you?</h3>
+            <h3>Find out by using this module.</h3>
+            <h3>Get your {% include 'module0/problem_solver.html' %} (PSP) and learn about you!</h3>
         </div>
 
+
+
         <div class="start">
-            <p class="center">
-                <button id="next" type="button"><a href="/{{ module.num }}/map">Get My PSP</a></button>
-            </p>
+            {% get_next_btn module "Get My PSP" nav.nextUrl %}
         </div>
     </div>
-    <a href="/decisions" id="back">Back</a>
+
+    {% get_back_link module nav.previousUrl %}
 {% endblock %}

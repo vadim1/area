@@ -1,5 +1,6 @@
 {% extends 'decisions/base.html' %}
 {% load static account socialaccount bootstrap i18n %}
+{% load module_tags %}
 {% block title %}{% block h1 %}Module {{ module.display_num }} - Problem Solver Profile{% endblock %}{% endblock %}
 {% block content %}
     <style type="text/css">
@@ -17,7 +18,7 @@
     {% with 'true' as list %}
         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-        {% if archetype != "adventurer" %}
+        {% if module.archetype != "adventurer" %}
             <div class="panel panel-default">
                 <div class="panel-heading" role="tab" id="headingOne">
                     <h5 class="panel-title">
@@ -36,7 +37,7 @@
             </div>
         {% endif %}
 
-        {% if archetype != "visionary" %}
+        {% if module.archetype != "visionary" %}
             <div class="panel panel-default">
                 <div class="panel-heading" role="tab" id="headingTwo">
                     <h5 class="panel-title">
@@ -55,7 +56,7 @@
             </div>
         {% endif %}
 
-        {% if archetype != "detective" %}
+        {% if module.archetype != "detective" %}
             <div class="panel panel-default">
                 <div class="panel-heading" role="tab" id="headingThree">
                     <h5 class="panel-title">
@@ -74,7 +75,7 @@
             </div>
         {% endif %}
 
-        {% if archetype != "listener" %}
+        {% if module.archetype != "listener" %}
             <div class="panel panel-default">
                 <div class="panel-heading" role="tab" id="headingFou">
                     <h5 class="panel-title">
@@ -93,7 +94,7 @@
             </div>
         {% endif %}
 
-        {% if archetype != "thinker" %}
+        {% if module.archetype != "thinker" %}
             <div class="panel panel-default">
                 <div class="panel-heading" role="tab" id="headingFive">
                     <h5 class="panel-title">
@@ -115,9 +116,7 @@
 
 </div>
 
-    <p class="center start2">
-        <button id="next" type="button"><a href="/{{ module.num }}/cheetah">Pause like the Cheetah</a></button>
-    </p>
-    <a href="/{{ module.num }}/right" id="back">Back</a>
+    {% get_next_btn module "Pause Like The Cheetah" nav.nextUrl %}
 
+    {% get_back_link module nav.previousUrl %}
 {% endblock %}

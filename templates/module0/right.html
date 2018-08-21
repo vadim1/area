@@ -1,5 +1,6 @@
 {% extends 'decisions/base.html' %}
 {% load static account socialaccount bootstrap i18n %}
+{% load module_tags %}
 {% block title %}{% block h1 %}Module {{ module.display_num }} - Problem Solver Profile{% endblock %}{% endblock %}
 {% block content %}
     <script type="text/javascript">
@@ -7,14 +8,13 @@
             {% if module.psp_correct %}
                 <!-- Check the selected answer and display the button if we previously selected -->
                 $("input[name='your_profile'][value='{{ module.psp_correct }}']").prop("checked",true);
-                $('#agree').val('{{ module.psp_correct }}');
+                $('#psp_correct').val('{{ module.psp_correct }}');
                 $('#continue').css("display", "inline-block");
             {% endif %}
 
             $("input[name='your_profile']").change(function () {
                 var selectedValue = $(this).val();
-                $('#agree').val(selectedValue);
-
+                $('#psp_correct').val(selectedValue);
                 $('#continue').css("display", "inline-block");
             });
 
@@ -47,7 +47,7 @@
 
     <p>Is your {% include "problem_solver.html" %} Profile:</p>
 
-    <input type="hidden" name="agree" value="" id="agree"/>
+    <input type="hidden" name="psp_correct" value="" id="psp_correct"/>
 
     <div id="your_profile_options">
         <label>
@@ -66,12 +66,11 @@
         </label>
     </div>
 
-
     <div class="center">
         <button id="continue" type="submit" value="Read Other Problem Solver Profiles" style="display: none;">Read Other Problem Solver
             Profiles
         </button>
-        <a href="{{ back_url|default:"/0/pro_con" }}" id="back">Back</a>
+        {% get_back_link module nav.previousUrl %}
     </div>
 
 {% endblock %}

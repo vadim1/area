@@ -1,6 +1,7 @@
 {% extends 'decisions/base.html' %}
 {% load bootstrap %}
 {% load static %}
+{% load module_tags %}
 {% block title %}{% block h1 %}Module {{ module.display_num }} - Your Problem Solver Profile{% endblock %}{% endblock %}
 {% block extra_head %}
 {% endblock %}
@@ -91,6 +92,11 @@
                 return results;
             });
 
+            /* Force the redirect back to the previous page */
+            $('#back').click(function() {
+                window.location.href = $(this).attr('href');
+            });
+
             /* Clicking anywhere outside of the modal closes the modal */
             $(window).click(function (e) {
                 $('.modal').css('display', 'none');
@@ -106,13 +112,13 @@
     <br/>
 
     <div class="center">
-        <button id="showProfileBtn">Show Your {{ archetype }} Profile</button>
+        <button id="showProfileBtn">Show Your {{ module.archetype }} Profile</button>
     </div>
 
     <div id="pro_con" class="modal">
-        {% if archetype %}
+        {% if module.archetype %}
             <div class="modal-content">
-                <div>{% with 'module0/archetype/'|add:archetype|add:'.html' as path %}
+                <div>{% with 'module0/archetype/'|add:module.archetype|add:'.html' as path %}
                     {% include path with pro_con=True %}{% endwith %}
                 </div>
 
@@ -185,5 +191,5 @@
     <div class="center">
         <button id="completeBtn" value="Complete Cheetah Sheet">Complete Cheetah Sheet</button>
     </div>
-    <a href="/{{ module.num }}/cheetah" id="back">Back</a>
+    {% get_back_link module nav.previousUrl %}
 {% endblock %}

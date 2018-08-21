@@ -1,5 +1,6 @@
 {% extends 'decisions/base.html' %}
 {% load bootstrap %}
+{% load module_tags %}
 {% block title %}{% block h1 %}Module {{ module.display_num }} - Map Your Journey{% endblock %}{% endblock %}
 {% block content %}
     <style type="text/css">
@@ -74,8 +75,8 @@
             <div id="title"></div>
         </div>
     </div>
-    <p class="center">
-        <button id="next" type="button"><a href="/{{ module.num }}/instructions">Got It</a></button>
-    </p>
-    <a href="/{{ module.num }}/intro" id="back">Back</a>
+
+    {% get_next_btn module "Got It" nav.nextUrl %}
+
+    {% get_back_link module nav.previousUrl %}
 {% endblock %}

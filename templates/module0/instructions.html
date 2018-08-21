@@ -1,5 +1,6 @@
 {% extends 'decisions/base.html' %}
 {% load static account socialaccount bootstrap i18n %}
+{% load module_tags %}
 {% block title %}{% block h1 %}Module {{ module.display_num }} - Introduction to the Game{% endblock %}{% endblock %}
 {% block content %}
     <div class="center">
@@ -18,10 +19,8 @@
         tells you what you tend to do when making decisions. By learning
         more about you as a decision maker you can make big decisions better.
     </p>
-    <div class="center start">
-        <button id="next" type="button"><a href="/{{ module.num }}/psp_profiles">Problem Solver Profiles</a>
-        </button>
-        <a href="/{{ module.num }}/map" id="back">Back</a>
-    </div>
 
+    {% get_next_btn module "Problem Solver Profiles" nav.nextUrl %}
+
+    {% get_back_link module nav.previousUrl %}
 {% endblock %}
