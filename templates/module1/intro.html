@@ -27,14 +27,15 @@
             <span class="yellow">G</span>
         </div>
 
-        <div style="margin-top: 40px; margin-bottom: 40px;">
-            This module introduces you to how many decisions you make<br/>
-            every day and how to make big decisions better.
+        <div style="margin-top: 50px; margin-bottom: 10px;">
+            <h3>
+                This module introduces you to how many decisions you make<br />every day and how to make big decisions better.
+            </h3>
         </div>
 
         <div class="start">
-            {% get_next_btn module "Make Big Decisions Better!" nav.next %}
+            {% get_next_btn module "Make Big Decisions Better!" nav.nextUrl %}
         </div>
     </div>
-    {% get_back_link module "/decisions" %}
+    {% get_back_link module nav.previousUrl %}
 {% endblock %}

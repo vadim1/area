@@ -12,7 +12,7 @@
     {% include 'module0/review/content.html' %}
 
     <div class="start">
-        {% get_next_btn module "Got It" nav.next %}
+        {% get_next_btn module "Got It" nav.nextUrl %}
     </div>
-    {% get_back_link module parsed.previous %}
+    {% get_back_link module nav.previousUrl %}
 {% endblock %}

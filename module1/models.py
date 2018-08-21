@@ -41,6 +41,17 @@ class Module1(BaseModule):
             return ""
 
     @staticmethod
+    def get_description():
+        description = {
+            '00': "Re-examine your process for outcomes you didn't like for routine matters",
+            '01': "Use a process to keep routine matters from getting complicated",
+            '10': "Replicate what you did for the ones you're happy, re-examine the rest",
+            '11': "Gather data to help make these decisions",
+        }
+
+        return description
+
+    @staticmethod
     def game1_questions():
         questions = {
             'Breakfast': 'What to eat for breakfast?',

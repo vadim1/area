@@ -11,7 +11,7 @@
     {% include "module1/results/table.html" with textcolor_area="f6653c" textcolor_noarea="f6653c" %}
 
     <div class="center start2">
-    {% get_next_btn module "Explore Your Results" nav.next %}
+    {% get_next_btn module "Explore Your Results" nav.nextUrl %}
     </div>
-    {% get_back_link module nav.previous %}
+    {% get_back_link module nav.previousUrl %}
 {% endblock %}

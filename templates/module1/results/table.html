@@ -28,12 +28,12 @@
 
 <table id="results">
     <tr style="border-bottom: 1px solid black">
-        {% include "module1/results//quadrant.html" with t1='Hard' t2='Unsure' v1='1' v2='1' textcolor=textcolor_noarea %}
-        {% include "module1/results//quadrant.html" with t1='Hard' t2='<span class="area">Confident</span>' v1='1' v2='0' class='area' textcolor=textcolor_area %}
+        {% include "module1/results//quadrant.html" with t1='Hard' t2='Unsure' v1='1' v2='1' textcolor=textcolor_noarea description=mod_description.11 %}
+        {% include "module1/results//quadrant.html" with t1='Hard' t2='<span class="area">Confident</span>' v1='1' v2='0' class='area' textcolor=textcolor_area description=mod_description.10 %}
     </tr>
     <tr>
-        {% include "module1/results//quadrant.html" with t1='Easy' t2='Unsure' v1='0' v2='1' textcolor=textcolor_noarea %}
-        {% include "module1/results//quadrant.html" with t1='Easy' t2='<span class="area">Confident</span>' v1='0' v2='0' class='area' textcolor=textcolor_area %}
+        {% include "module1/results//quadrant.html" with t1='Easy' t2='Unsure' v1='0' v2='1' textcolor=textcolor_noarea description=mod_description.01  %}
+        {% include "module1/results//quadrant.html" with t1='Easy' t2='<span class="area">Confident</span>' v1='0' v2='0' class='area' textcolor=textcolor_area description=mod_description.00 %}
     </tr>
 </table>
 <script type="text/javascript">

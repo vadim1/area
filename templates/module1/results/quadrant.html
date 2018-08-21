@@ -2,6 +2,9 @@
     <h2 style="text-align: center;" class="blue">
         {{ t1 }}, {{ t2 }}
     </h2>
+    <div id="description{{ v1 }}{{ v2 }}" style="text-align: center; padding: 0px 10px 0px 10px; border: dashed; margin: 0px 20px 0px 5px;">
+        {{ description }}
+    </div>
     <div style="display: none" id="answers{{ v1 }}{{ v2 }}">
         {% for question, answer in answers.items %}
             {% if answer.easy == v1 and answer.confident == v2 %}

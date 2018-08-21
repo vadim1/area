@@ -99,8 +99,8 @@
 
     {% if display_mode == 'all' %}
     <div class="start">
-        {% get_next_btn module "Shall We Play A Game?" nav.next %}
+        {% get_next_btn module "Shall We Play A Game?" nav.nextUrl %}
     </div>
-    {% get_back_link module nav.previous %}
+    {% get_back_link module nav.previousUrl %}
     {% endif %}
 {% endblock %}

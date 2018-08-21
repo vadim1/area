@@ -170,7 +170,7 @@
         </div>
     </div>
 
-    {% get_back_link module nav.previous %}
+    {% get_back_link module nav.previousUrl %}
 
     {% for question in questions %}
         <input type="hidden" name="answer[{{ forloop.counter0 }}]" id="answer_{{ forloop.counter }}" value=""/>
