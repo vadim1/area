@@ -6,8 +6,8 @@ on a given ordered list of urls
 def get_nav(current, urls):
     nav = {
         'current': current,
-        'next': "",
-        'previous': "",
+        'nextUrl': "",
+        'previousUrl': "",
     }
 
     if current in urls:
@@ -17,16 +17,16 @@ def get_nav(current, urls):
         next_ndx = current_ndx + 1
         if next_ndx >= max_ndx:
             next_ndx = max_ndx
-            nav['next'] = ""
+            nav['nextUrl'] = ""
         else:
-            nav['next'] = urls[next_ndx]
+            nav['nextUrl'] = urls[next_ndx]
 
         previous_ndx = current_ndx - 1
         if previous_ndx < 0:
             previous_ndx = 0
-            nav['previous'] = ""
+            nav['previousUrl'] = ""
         else:
-            nav['previous'] = urls[previous_ndx]
+            nav['previousUrl'] = urls[previous_ndx]
 
         #print("prev[{0}]: {1}, curr[{2}]: {3}, next[{4}]: {5}"
         #      .format(previous_ndx, nav['previous'],
