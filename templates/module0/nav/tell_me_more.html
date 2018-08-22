@@ -1,6 +1,5 @@
+{% load module_tags %}
       <div class="center start">
-         <a href="/0/pro_con">
-            <button id="next" type="button">Tell Me More</button>
-         </a>
-         <span id="back">&nbsp;</span>
+          {% get_next_btn module "Tell Me More" nav.nextUrl %}
+         <span id="my_padding">  </span>
       </div>

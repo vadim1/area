@@ -1,5 +1,4 @@
+{% load module_tags %}
       <div class="center start">
-         <a href="/0/right">
-            <button id="next" type="button">Sounds like you?</button>
-         </a>
+          {% get_next_btn module "Sounds Like You?" nav.nextUrl %}
       </div>
