@@ -1,0 +1,26 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Explore Your Results{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+        .area {
+            color: #1dcd9f;
+        }
+
+        .noarea {
+            color: #cccccc !important;
+        }
+    </style>
+    <h2 class="center">Explore Your Results</h2>
+
+    {% include "module1/results/table.html" with textcolor_area="1dcd9f" textcolor_noarea="cccccc" display_mode='area' %}
+
+    <h3>At the end of this module you will find a list of the quiz questions and your answers so that
+        you may learn more about yourself as a decision maker.</h3>
+
+    <div class="center">
+    {% get_next_btn module "Decision Dilemmas" nav.nextUrl %}
+    </div>
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

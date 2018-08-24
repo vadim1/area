@@ -1,0 +1,26 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Your Vision of Success{% endblock %}{% endblock %}
+{% block content %}
+    <h2 class="center">Your Vision of Success</h2>
+
+    {% include 'module1/maps/map_content.html' with display_mode='vision' %}
+
+    <h3>
+        To make big decisions better, start at the end. Ask yourself: &quot;<i>What am I solving for?</i>&quot;
+    </h3>
+
+    <h3>
+        Without actually solving your problem you can likely identify what needs happen after the decision is made to
+        know that it succeeded.
+    </h3>
+
+    <div class="center">
+        {% get_next_btn module "Define Success" nav.nextUrl %}
+    </div>
+
+    {% get_back_link module nav.previousUrl %}
+    </div>
+
+{% endblock %}

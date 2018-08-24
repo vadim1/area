@@ -1,0 +1,55 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Making A Big Decision Better
+{% endblock %}{% endblock %}
+{% block content %}
+    <h2 class="center">What's Your Decision?</h2>
+    <h3>
+        What is a decision <b>YOU</b> need to make?
+    </h3>
+    <h3>
+        What is a decision YOU need to make that would benefit from using a process that allows you to answer YES to the
+        below questions:
+    </h3>
+
+    <h3>
+        <span class="light-blue" style="font-size: larger;">&#10004;</span>
+        Would it be useful to find facts or evidence?
+        <br/>
+        <span class="light-blue" style="font-size: larger;">&#10004;</span>
+        Would it be useful to learn from other people?
+        <br/>
+        <span class="light-blue" style="font-size: larger;">&#10004;</span>
+        Have I posed it as a question?
+    </h3>
+
+    <h3>If so, write your decision problem as a question:</h3>
+
+    <h3 class="center" style="margin-top: 50px;">
+        <input type="text" name="decision" class="cc decision" size="40" placeholder="Type Your Decision Here"
+               value="{{ module.decision }}"/>
+    </h3>
+
+    <div class="center">
+        <input type="submit" id="next" name="submit" value="Define Success and Critical Concepts"/>
+    </div>
+    {% get_back_link module "cc/exploring" %}
+
+    <script type="text/javascript">
+        function validate() {
+            var valid = true;
+            $('.cc').each(function () {
+                if ($(this).val().length < 10) {
+                    if (valid) {
+                        alert("Please provide a decision.");
+                    }
+                    valid = false;
+                }
+            });
+            return valid;
+        }
+
+        // TODO - validate that it ends in a "?"
+    </script>
+{% endblock %}

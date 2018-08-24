@@ -1,0 +1,42 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Summary{% endblock %}{% endblock %}
+{% block content %}
+    <h1 class="center">Module {{ module.display_num }} Complete!</h1>
+
+    <h3 class="center">
+        Congratulations! You received the Module {{ module.display_num }} badge!
+    </h3>
+
+    <div class="center">
+        <img src="/static/decisions/img/Module2_badge.png"/>
+    </div>
+
+    <h3>You have learned:</h3>
+
+
+    <h3>
+        <div>&bull; Self-awareness about the different kinds of decisions made every day.</div>
+        <div>&bull; Decision Toolkit Skills: Focusing on Your Vision of Success .</div>
+        <div>&bull; Confidence to make better decisions.</div>
+        <div>&bull; Conviction in your decision process.</div>
+
+    </h3>
+
+    <h3>You have identified:</h3>
+
+    <h3>
+        <div>&bull; A decision you want to make.</div>
+        <div>&bull; Your Vision of Success and your Critical Concepts.</div>
+        <div>&bull; A Decision Buddy, abcde, to support you</div>
+    </h3>
+
+    <h3>Share their Cheetah Sheet with your decision buddy!</h3>
+
+    <div class="center">
+        <button id="next" type="submit">Modules List</button>
+    </div>
+
+    {% get_back_link module "commitment" %}
+{% endblock %}

@@ -1,0 +1,7 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Map Your Journey{% endblock %}{% endblock %}
+{% block content %}
+    {% include 'module1/maps/map_content.html' %}
+{% endblock %}

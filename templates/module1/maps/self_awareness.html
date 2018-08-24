@@ -1,0 +1,22 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Becoming More Self-Aware{% endblock %}{% endblock %}
+{% block content %}
+    <h2 class="center">Becoming More Self-Aware</h2>
+
+    {% include 'module1/maps/map_content.html' with display_mode='self_awareness' %}
+
+    <h3>
+        Many decisions don’t have a single <i>right</i> answer. However, there likely are right answers for you personally.
+        Learning to master a decision making system can help you make big decisions better.
+    </h3>
+
+    <div class="center">
+        {% get_next_btn module "Decision Making Is Personal" nav.nextUrl %}
+    </div>
+
+    {% get_back_link module nav.previousUrl %}
+    </div>
+
+{% endblock %}

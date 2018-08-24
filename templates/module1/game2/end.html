@@ -1,0 +1,27 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Decision Dilemmas - End!{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <h2 class="center">How'd It Go?</h2>
+    <h3>
+        <br/>
+        Some decisions that seem easy can be hard to make while other hard ones are right in our comfort zone.
+    </h3>
+    <h3 style="margin-top: 50px; margin-bottom: 50px;">
+        "Sit and wait or take action?" might seem easy but sometimes we're unsure of what to do.
+    </h3>
+    <h3>
+        Your results will be grouped based on how
+        <span class="button-instructions">Easy</span> or
+        <span class="button-instructions">Hard</span> you found each decision to make and whether you were
+        <span class="button-instructions">Confident</span> or
+        <span class="button-instructions">Unsure</span> about them.
+    </h3>
+    <div class="center start">
+        {% get_next_btn module "Show Me My Results!" nav.nextUrl %}
+    </div>
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

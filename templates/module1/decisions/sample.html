@@ -1,0 +1,63 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module 1 - Another Example{% endblock %}{% endblock %}
+{% block content %}
+    <h2 class="center">Another Example</h2>
+    <h3>
+        Take a question like "Should I go away to college?" This has no right answer but it probably has a right answer
+        for YOU.
+    </h3>
+
+    <div class="center">
+        <img src="/static/decisions/img/college.jpg" height="200px" style="margin: 0px;"/>
+    </div>
+
+    <h3>
+        Instead of answering that question which may be difficult invert your decision making to focus on your vision of
+        success.
+    </h3>
+
+    <h3>Answer this: How would you know that you've made a <b>good</b> decision about whether to go away to college?
+        <span style="font-size: 100%"> List three things.</span>
+    </h3>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <td>1.</td>
+            <td><input type="text" name="cc0" class="cc" value="{{ module.cc0 }}" size="60"/></td>
+        </tr>
+        <tr>
+            <td>2.</td>
+            <td><input type="text" name="cc1" class="cc" value="{{ module.cc1 }}" size="60"/></td>
+        </tr>
+        <tr>
+            <td>3.</td>
+            <td><input type="text" name="cc2" class="cc" value="{{ module.cc2 }}" size="60"/></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        </tbody>
+    </table>
+    <p class="center">
+        <button id="next" type="submit">Your Vision of Success</button>
+    </p>
+    {% get_back_link module nav.previousUrl %}
+    <script type="text/javascript">
+        function validate() {
+            var valid = true;
+            $('.cc').each(function () {
+                if ($(this).val().length < 3) {
+                    if (valid) {
+                        alert("Please provide three things.");
+                    }
+                    valid = false;
+                }
+            });
+            return valid;
+        }
+    </script>
+{% endblock %}

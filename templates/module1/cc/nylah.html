@@ -1,0 +1,28 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Critical Concepts{% endblock %}{% endblock %}
+{% block content %}
+    <div class="center">
+        <img src="/static/decisions/img/nylah.png" height="100px" style="margin: 5px;"/>
+    </div>
+    <h2 class="center">Critical Concepts</h2>
+    <h3>
+        Let's take Nylah for example. She's a high school senior living in Brooklyn with her mom, dad and two younger
+        sisters. She’s deciding whether or not to go away to college. </h3>
+    <h3>
+        Nylah begins her decision making by starting at the end. She asked herself: &quot;<i>What am I solving for?</i>&quot;
+    </h3>
+    <h3>
+        She answered the question with her Critical Concepts, the three things she needs to have happen for the decision
+        to succeed for her personally.
+    </h3>
+    <h3>
+        Nylah's Critical Concepts for her decision: "Should I go away to college?"
+    </h3>
+
+    <div class="center start">
+        {% get_next_btn module "Practice Critical Concepts" nav.nextUrl %}
+    </div>
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

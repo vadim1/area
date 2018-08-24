@@ -1,0 +1,20 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Cheetah Sheet{% endblock %}{% endblock %}
+{% block content %}
+    <div class="center">
+        <img src="/static/decisions/img/cheetah.png" width="450"/>
+    </div>
+    <h2 class="center">Cheetah Sheet</h2>
+    <h3>
+On the next page you’ll find your first Cheetah Sheet, the guides that ask you questions and provide hints to help your decision hunt.    </h3>
+    <h3>
+        Why the Cheetah? Cheetahs are agile and flexible hunters. Their speed is not as important as their ability to quickly slow down which makes their hunt agile and flexible, just like a good decision making process should be.
+    </h3>
+
+    <div class="center start">
+    {% get_next_btn module "Cheetah Sheet 1" nav.nextUrl %}
+    </div>
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

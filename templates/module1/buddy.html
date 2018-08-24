@@ -1,0 +1,45 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - AREA Method Commit to Decision{% endblock %}{% endblock %}
+{% block content %}
+    <h2 class="center">
+        Commit to Making Your Decision!
+    </h2>
+    <h3>
+        Identify a Decision Making Buddy to help you through making your big decision better!
+    </h3>
+    <h3>
+        Choose someone who:
+    </h3>
+    <h3>
+        <div>&bull; Knows you as a decision-maker</div>
+        <div>&bull; Will hold you accountable to make your decision</div>
+    </h3>
+    <h3 class="center" style="margin-top: 50px;">
+        Decision Buddy's Name:
+        <input type="text" name="decision_buddy" value="{{ module.decision_buddy }}" size="30" class="cc"/><br/><br/>
+        Decision Buddy's Email:&nbsp;
+        <input type="email" name="decision_buddy_email" value="{{ module.decision_buddy_email }}" size="30" class="cc"/>
+    </h3>
+    <div class="center" style="margin-top: 50px;">
+        <input id="next" type="submit" name="submit" value="Cheetah Sheet 3: Starting My Decision Hunt"/>
+    </div>
+
+    {% get_back_link module "challenge" %}
+
+    <script type="text/javascript">
+        function validate() {
+            var valid = true;
+            $('.cc').each(function () {
+                if ($(this).val().length < 2) {
+                    if (valid) {
+                        alert("Please provide your decision buddy's name and email address.");
+                    }
+                    valid = false;
+                }
+            });
+            return valid;
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load area_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Solving For My Success{% endblock %}{% endblock %}
+{% block content %}
+    <h2 class="center">Solving For My Success</h2>
+
+    {% include 'module1/maps/map_content.html' with display_mode='confidence' %}
+
+    <h3>
+        The more you can trust that you can define a decision’s successful outcome, the closer you can get to making a good decision for you personally.
+    </h3>
+
+    <h3>
+        The goal: To give you tools and boost your confidence to make big decisions better.
+    </h3>
+
+    <div class="center">
+        {% get_next_btn module "Making A Big Decision Better" nav.nextUrl %}
+    </div>
+
+    {% get_back_link module nav.previousUrl %}
+    </div>
+
+{% endblock %}
