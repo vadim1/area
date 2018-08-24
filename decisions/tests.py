@@ -34,23 +34,23 @@ class ParserTestCase(TestCase):
 
     def test_nav_next(self):
         nav = get_nav('home', self.urls)
-        self.assertEquals(nav['next'], 'body1')
+        self.assertEquals(nav['nextUrl'], 'body1')
 
         nav = get_nav('body2/step1', self.urls)
-        self.assertEquals(nav['next'], 'body3/step2')
+        self.assertEquals(nav['nextUrl'], 'body3/step2')
 
         nav = get_nav('end', self.urls)
-        self.assertEquals(nav['next'], '')
+        self.assertEquals(nav['nextUrl'], '')
 
     def test_nav_previous(self):
         nav = get_nav('home', self.urls)
-        self.assertEquals(nav['previous'], '')
+        self.assertEquals(nav['previousUrl'], '')
 
         nav = get_nav('body3/step2', self.urls)
-        self.assertEquals(nav['previous'], 'body2/step1')
+        self.assertEquals(nav['previousUrl'], 'body2/step1')
 
         nav = get_nav('end', self.urls)
-        self.assertEquals(nav['previous'], 'body3/step2')
+        self.assertEquals(nav['previousUrl'], 'body3/step2')
 
     """
     parse_request_path()
@@ -69,8 +69,8 @@ class ParserTestCase(TestCase):
         self.assertEquals(parsed['section'], 'section')
         self.assertEquals(parsed['step'], 'step')
         self.assertEquals(parsed['current'], 'section/step')
-        self.assertEquals(parsed['next'], 'end')
-        self.assertEquals(parsed['previous'], 'section')
+        self.assertEquals(parsed['nextUrl'], 'end')
+        self.assertEquals(parsed['previousUrl'], 'section')
         self.assertEquals(parsed['currentStep'], 'section_step')
         self.assertEquals(parsed['prefix'], 'module3/')
         self.assertEquals(parsed['templatePath'], 'module3/section/step.html')
