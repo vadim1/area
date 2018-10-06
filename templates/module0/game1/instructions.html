@@ -1,0 +1,20 @@
+{% extends 'modules/base/simple.html' %}
+{% load module_tags %}
+
+{% block title %}
+    {% define 'pageTitle' 'Introduction to the Game' %}
+    {% define 'nextBtnLabel' 'Problem Solver Profiles' %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content_body %}
+    <p>
+        We make thousands of decisions every day.
+    </p>
+    <p>
+        What happens when we are faced with high stakes decisions?
+    </p>
+    <p>
+        By learning more about you as a decision-maker you can make big decisions better.
+    </p>
+{% endblock %}

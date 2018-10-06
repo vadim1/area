@@ -1,0 +1,49 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Commit to Making Your Decision!
+{% endblock %}{% endblock %}
+{% block content %}
+    <h2 class="center">
+        Commit to Making Your Decision!
+    </h2>
+    <p>
+        Identify a Decision Making Buddy to help you through making your big decision better!
+    </p>
+    <p>
+        Choose someone who:
+    <ul>
+        <li>Knows you as a decision-maker</li>
+        <li>Will hold you accountable to make your decision</li>
+    </ul>
+    </p>
+
+    <h3>Decision Buddy's Name:</h3>
+    <input type="text" name="decision_buddy" value="{{ module.decision_buddy }}" size="30" class="cc"/>
+
+    <div class="spacer"></div>
+
+    <h3>Decision Buddy's Email:</h3>
+    <input type="email" name="decision_buddy_email" value="{{ module.decision_buddy_email }}" size="30" class="cc"/>
+
+    <div class="center" style="margin-top: 50px;">
+        <input id="next" type="submit" name="submit" value="Apply It!"/>
+    </div>
+
+    {% get_back_link module nav.previousUrl %}
+
+    <script type="text/javascript">
+        function validate() {
+            var valid = true;
+            $('.cc').each(function () {
+                if ($(this).val().length < 2) {
+                    if (valid) {
+                        alert("Please provide your decision buddy's name and email address.");
+                    }
+                    valid = false;
+                }
+            });
+            return valid;
+        }
+    </script>
+{% endblock %}

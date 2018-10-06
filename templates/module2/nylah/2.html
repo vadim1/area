@@ -1,0 +1,33 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - {{ sample_student.name|title }}'s Decision Problem{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <h2 class="center">
+        {{ sample_student.name|title }}'s Decision Problem
+    </h2>
+    <h3>
+        {{ sample_student.name|title }} has been deciding whether {{ sample_student.pronoun_subject }} should
+        attend Ohio State or Bates College. They present different opportunities.
+    </h3>
+    <h3>
+        {{ sample_student.pronoun_subject|title }}'s heard good things about Ohio State.
+        {{ sample_student.pronoun_subject|title }} is less familiar with Bates.
+    </h3>
+    <div class="center">
+        <img src="http://www.bates.edu/communications/files/2013/01/bates-bobcat-primary1.jpg"
+             style="max-width: 300px; height: 300px; margin-right: 20px;"/>
+        <img src="http://buckeyefansonly.com/images/brutusbuckeyeandflag.gif"
+             style="max-width: 300px; height: 300px;"/>
+    </div>
+    <h3 class="center" style="margin: 50px;">
+        Could {{ sample_student.pronoun_subject }} be biased by what {{ sample_student.pronoun_subject }}’s heard?
+    </h3>
+    <div class="center start">
+        <a href="{{ nav.urlPrefix }}{{ nav.nextUrl }}"><button type="button">Yes</button></a>
+        <a href="{{ nav.urlPrefix }}{{ nav.nextUrl }}"><button type="button">No</button></a>
+    </div>
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

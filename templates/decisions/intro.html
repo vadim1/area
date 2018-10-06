@@ -1,103 +1,31 @@
 {% extends 'decisions/base.html' %}
-{% load account bootstrap i18n %}
+{% load account bootstrap i18n static %}
 {% block title %}{% block h1 %}Future Project AREA Method{% endblock %}{% endblock %}
 {% block content %}
-    {% if user.is_authenticated %}
-        <div style="float: right; margin-right: -100px;" class="center">
-            {{ request.user.email }}<br/>
-            {% if user.is_staff %}
-                <a href="/admin/decisions/">Admin</a><br/>
-            {% endif %}
-            <a href="{% url 'account_logout' %}">Sign Out</a>
+    <div class="center">
+        <div style="margin-top: 50px; margin-bottom: 50px;">
+            <img src="{% static 'decisions/img/Homepage_Door.png' %}"/>
         </div>
-    {% endif %}
-    <h2>
-        Future Project AREA Method
-    </h2>
-    {% if user.is_staff %}
-        {% include 'dd_dashboard.html' %}
-    {% endif %}
-    {% include 'student_dashboard.html' %}
-    <h3>The quality of your decisions determines the quality of your life.</h3>
-    <h3>With this app you will learn how to make your big decisions better!</h3>
+        <h1 class="module_title">
+            <div>
+                <span class="green">D</span>
+                <span class="yellow">E</span>
+                <span class="light-blue">C</span>
+                <span class="red">I</span>
+                <span class="yellow">S</span>
+                <span class="light-blue">I</span>
+                <span class="green">V</span>
+                <span class="red">E</span>
+            </div>
+        </h1>
+        <h3 style="font-size: 1.6em;">Make Big Decisions Better!</h3>
+    </div>
     <hr />
     {% if user.is_authenticated %}
-        <h3>
-            {% if module0.completed_on %}
-                &#10004;
-                <img src="/static/decisions/img/Module0_badge.png" style="float: right; margin-right: -70px;"/>
-                Module 0 - Problem Solver Profile
-                {% if user.is_staff %}
-                    (<a href="/0/restart">Restart</a>)
-                {% endif %}
-            {% else %}
-                {% if module1.step %}
-                    <a href="/0/{{ module0.step }}">Module 0 - Problem Solver Profile</a>
-                    {% if user.is_staff %}
-                        (<a href="/0/restart">Restart</a>)
-                    {% endif %}
-                {% else %}
-                    <a href="/0">Module 0 - Problem Solver Profile</a>
-                {% endif %}
-            {% endif %}
-        </h3>
-        <h3>
-            {% if module1.completed_on %}
-                &#10004;
-                <img src="/static/decisions/img/Module1_badge.png" style="float: right; margin-right: -70px;"/>
-                Module 1 - Introduction to Decision Making Completed!
-                {% if user.is_staff %}
-                    (<a href="1/restart">Restart</a>)
-                {% endif %}
-            {% else %}
-                {% if module1.step %}
-                    <a href="1/{{ module1.step }}">Module 1 - Introduction to Decision Making</a>
-                    {% if user.is_staff %}
-                        (<a href="1/restart">Restart</a>)
-                    {% endif %}
-                {% else %}
-                    <a href="1">Module 1 - Introduction to Decision Making</a>
-                {% endif %}
-            {% endif %}
-        </h3>
-        <h3>
-            {% if module2.completed_on %}
-                &#10004;
-                <img src="/static/decisions/img/Module2_badge.png" style="float: right; margin-right: -70px;"/>
-                Module 2 - Cognitive Bias Completed!
-                {% if user.is_staff %}
-                    (<a href="2/restart">Restart</a>)
-                {% endif %}
-            {% else %}
-                {% if module2.step %}
-                    <a href="2/{{ module2.step }}">Module 2 - Cognitive Bias, You're Not As Open Minded As You Think</a>
-                    {% if user.is_staff %}
-                        (<a href="2/restart">Restart</a>)
-                    {% endif %}
-                {% else %}
-                    <a href="2">Module 2 - Cognitive Bias, You're Not As Open Minded As You Think</a>
-                {% endif %}
-            {% endif %}
-        </h3>
-        <h3>
-            {% if module3.completed_on %}
-                &#10004;
-                <img src="/static/decisions/img/Module3_badge.png" style="float: right; margin-right: -70px;"/>
-                Module 3 - {{ module3.name }}
-                {% if user.is_staff %}
-                    (<a href="/3/restart">Restart</a>)
-                {% endif %}
-            {% else %}
-                {% if module2.step %}
-                    <a href="/3/{{ module3.step }}">Module 3 - {{ module3.name }}</a>
-                    {% if user.is_staff %}
-                        (<a href="/3/restart">Restart</a>)
-                    {% endif %}
-                {% else %}
-                    <a href="/3/">Module 3 - {{ module3.name }}</a>
-                {% endif %}
-            {% endif %}
-        </h3>
+        {% load module_tags %}
+        {% get_module_link module0 user %}
+        {% get_module_link module1 user %}
+
         <h3 style="display: none; margin-top: 20px;"><a href="journal">AREA Journal</a></h3>
     {% else %}
         <h3>

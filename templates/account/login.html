@@ -6,18 +6,38 @@
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
+    <div class="center">
+        <h1 class="module_title">
+            <div>
+                <span class="green">D</span>
+                <span class="yellow">E</span>
+                <span class="light-blue">C</span>
+                <span class="red">I</span>
+                <span class="yellow">S</span>
+                <span class="light-blue">I</span>
+                <span class="green">V</span>
+                <span class="red">E</span>
+            </div>
+        </h1>
+        <h3 style="font-size: 1.6em;">Make Big Decisions Better!</h3>
 
-    <h1>{% trans "Sign In" %}</h1>
-    <p>If you have not created an account yet, then please <a href="{% url 'account_signup' %}">sign up</a> first.</p>
-    <form class="login" method="POST">
-        {% csrf_token %}
+        <p>If you have not created an account <a href="{% url 'account_signup' %}"
+                                                 style="font-size: 24px; font-weight: bolder;">SIGN UP</a></p>
+    </div>
+
+    <form class="login" method="POST">        {% csrf_token %}
         {{ form|bootstrap }}
         {% if redirect_field_value %}
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
         {% endif %}
-        <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-        <button type="submit">{% trans "Sign In" %}</button>
+        <div class="center">
+            <button type="submit">{% trans "Sign In" %}</button>
+            <div class="space"></div>
+            <a class="button secondaryAction"
+               href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+        </div>
     </form>
+
     {% if SITE_NAME != 'fp' and not mobile %}
         <p><a href="{% url 'mobile_login' %}">Login using mobile number</a></p>
     {% endif %}

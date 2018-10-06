@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'bootstrapform',
     'debug_toolbar',
+    'simple_history',
 ]
 
 MIDDLEWARE = [
@@ -62,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
 ]
 
 ROOT_URLCONF = 'area.urls'
@@ -142,7 +144,7 @@ EMAIL_HOST = 'XXX'
 EMAIL_PORT = 465
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-EMAIL_USE_SSL = True
+#EMAIL_USE_SSL = True
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"

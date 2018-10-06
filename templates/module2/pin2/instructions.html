@@ -1,0 +1,21 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Facts Versus Opinions{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <h2 class="center">
+    Facts Versus Opinions
+    </h2>
+
+    {% include 'module2/map_content.html' with display_mode='Facts vs Opinions' %}
+
+    <h3>
+    Facts and opinions are both useful. Which one is better at beating bias?
+    </h3>
+
+    {% get_next_btn module "Learn Mode" nav.nextUrl %}
+
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - New Point of View{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <style type="text/css">
+        label {
+            font-size: large;
+            border: 1px solid #dddddd;
+            height: 100%;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+             {% if selected_perspective %}
+                {% for perspective in selected_perspective %}
+                    var perspective = "{{ perspective }}"
+                    // Strip the beginning and end quotes if present
+                    .replace(/^&#39;/,"").replace(/&#39;$/,"")
+                    .replace(/^&quot;/,"").replace(/&quot;$/,"")
+                    // Escape the single quote in the middle of the string
+                    .replace('\'', '\\\'').replace('&#39;', '\\\'');
+
+                    $('[name="perspective[]"][value="'+perspective+'"]').click();
+                    // console.log(question);
+                {% endfor %}
+            {% endif %}
+
+            $('.perspective').click(function () {
+                var unchecked = $('.perspective').not(':checked');
+                if (unchecked.length < 1) {
+                    $('#next_btn').show();
+                    $('#more').hide();
+                }
+            });
+            setTimeout(function () {
+                $('#more').show();
+            }, 4000);
+        });
+    </script>
+    <h2 class="center">
+        New Point of View
+    </h2>
+    <h3>
+        Why do you want to sit in someone else’s perspective? Click all that apply:
+    </h3>
+
+    <div id="perspective_options">
+    {% for perspective in module.get_perspective %}
+        <div>
+            <label>
+                <input type="checkbox" name="perspective[]" class="perspective" value="{{ perspective }}"/>
+                {{ perspective }}
+            </label>
+        </div>
+    {% endfor %}
+    </div>
+
+    <p class="center">
+        <button id="next" type="submit">Learn More</button>
+    </p>
+    {% get_back_link module nav.previousUrl %}
+    <script type="text/javascript">
+        function validate() {
+            if ($('#perspective_options').find(':checked').length > 0) {
+                return true;
+            } else {
+                alert("Please select at least one perspective.");
+                return false;
+            }
+        }
+    </script>
+{% endblock %}

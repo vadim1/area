@@ -1,46 +1,53 @@
 from django.conf.urls import url, include
+from django.views.generic import RedirectView
 import views
+
 urlpatterns = [
-    url(r'^$', views.intro, name='Module Start'),
-    url(r'^intro/?$', views.intro, name='Module Intro'),
-    url(r'^restart/?', views.restart, name='Module Restart'),
-    url(r'^review/?$', views.review, name='Module Review'),
-    url(r'^map/?$', views.map, name='Module Map'),
-    url(r'^instructions/?$', views.instructions, name='Module Instructions'),
+    url(r'^$', RedirectView.as_view(pattern_name='module2_intro', permanent=True)),
 
-    url(r'^game/?$', views.game, name='Module 2 Game'),
-    url(r'^game_end/?$', views.game_end, name='Module 2 Game End'),
-    url(r'^explain/?$', views.explain, name='Module 2 Explanation'),
-    url(r'^bias/?$', views.bias, name='Module 2 Cognitive Biases'),
-    url(r'^game_results/?$', views.game_results, name='Module 2 Game Results'),
-    url(r'^game2_intro/?$', views.game2_intro, name='Module 2 Game 2 Introduction'),
-    url(r'^game?$', views.game2, name='Module 2 Game 2'),
-    url(r'^nylah1/?$', views.nylah1, name='Module 2 Nylah'),
-    url(r'^nylah?$', views.nylah2, name='Module 2 Nylah'),
-    url(r'^nylah3/?$', views.nylah3, name='Module 2 Nylah'),
-    url(r'^nylah4/?$', views.nylah4, name='Module 2 Nylah'),
-    url(r'^nylah5/?$', views.nylah5, name='Module 2 Nylah'),
-    url(r'^nylah50/?$', views.nylah50, name='Module 2 Nylah'),
-    url(r'^nylah51/?$', views.nylah51, name='Module 2 Nylah'),
-    url(r'^nylahotherfacts/?$', views.nylahotherfacts, name='Module 2 Nylah'),
-    url(r'^nylah5?$', views.nylah52, name='Module 2 Nylah'),
-    url(r'^nylah6/?$', views.nylah6, name='Module 2 Nylah'),
-    url(r'^nylah61/?$', views.nylah61, name='Module 2 Nylah'),
-    url(r'^nylah7/?$', views.nylah7, name='Module 2 Nylah'),
-    url(r'^nylah8/?$', views.nylah8, name='Module 2 Nylah'),
-    url(r'^nylah_cc/?$', views.nylah_cc, name='Module 2 Nylah Critical Concepts'),
-    url(r'^nylah_cc_facts/?$', views.nylah_cc_facts, name='Module 2 Nylah Critical Concept Facts'),
-    url(r'^nylah_cc_assumptions/?$', views.nylah_cc_assumptions,
-        name='Module 2 Nylah Critical Concept Assumptions'),
-    url(r'^nylah_cc_evidence/?$', views.nylah_cc_evidence, name='Module 2 Nylah Critical Concept Evidence'),
-    url(r'^cc/?$', views.cc, name='Module 2 Critical Concepts'),
-    url(r'^cc_edit/?$', views.cc_edit, name='Module 2 Edit Critical Concepts'),
-    url(r'^steps/?$', views.steps, name='Module 2 Moving into Action'),
-    url(r'^steps2/?$', views.steps2, name='Module 2 Moving into Action'),
-    url(r'^steps3/?$', views.steps3, name='Module 2 Moving into Action'),
-    url(r'^steps4/?$', views.steps4, name='Module 2 Moving into Action'),
-    url(r'^cheetah/?$', views.cheetah, name='Module 2 Cheetah Sheet'),
-    url(r'^summary/?$', views.summary, name='Module 2 Summary'),
+    url(r'^intro/?$', views.generic_page_controller, name='module2_intro'),
+    url(r'^review/?$', views.review, name='module2_review'),
+    url(r'^map/?$', views.map, name='module2_map'),
 
-    url(r'^summary/?$', views.summary, name='Module Summary'),
+    url(r'^game1/instructions/?$', views.generic_page_controller, name='module2_game1_instructions'),
+    url(r'^game1/game/?$', views.game, name='module2_game1_game'),
+    url(r'^explain/?$', views.generic_page_controller, name='module2_explain'),
+    url(r'^bias/?$', views.generic_page_controller, name='module2_bias'),
+    url(r'^game1/results/?$', views.game1_results, name='module2_game1_results'),
+
+    url(r'^game2/instructions/?$', views.generic_page_controller, name='module2_game2_instructions'),
+    url(r'^game2/game/$', views.game2_game, name='module2_game2_game'),
+
+    url(r'^nylah/1/$', views.generic_page_controller, name='module2_nylah_1'),
+    url(r'^nylah/2/$', views.generic_page_controller, name='module2_nylah_2'),
+    url(r'^nylah/3/$', views.nylah_3, name='module2_nylah_3'),
+    url(r'^nylah/4/$', views.generic_page_controller, name='module2_nylah_4'),
+
+    url(r'^pin2/instructions/$', views.generic_page_controller, name='module2_pin2_instructions'),
+    url(r'^pin2/2/$', views.generic_page_controller, name='module2_pin2_2'),
+
+    url(r'^pin3/instructions/$', views.generic_page_controller, name='module2_pin3_instructions'),
+    url(r'^pin3/2/$', views.generic_page_controller, name='module2_pin3_2'),
+    url(r'^pin3/3/$', views.pin3_3, name='module2_pin3_3'),
+
+    # Perspective-taking
+    url(r'^pin4$', RedirectView.as_view(pattern_name='module3_pin4_instructions', permanent=True)),
+    url(r'^pin4/instructions/$', views.generic_page_controller, name='module3_pin4_instructions'),
+    url(r'^pin4/2/$', views.pin4_2, name='module3_pin4_2'),
+    url(r'^pin4/3/$', views.generic_page_controller, name='module3_pin4_3'),
+    url(r'^pin4/4/$', views.pin4_4, name='module3_pin4_4'),
+
+    # Cheetah Sheet
+    url(r'^cheetah$', RedirectView.as_view(pattern_name='module3_cheetah_introduction', permanent=True)),
+    url(r'^cheetah/introduction/$', views.generic_page_controller, name='module3_cheetah_introduction'),
+    url(r'^cheetah/2/$', views.cheetah_2, name='module3_cheetah_2'),
+    url(r'^cheetah/cc_edit/$', views.cc_edit, name='module3_cheetah_cc_edit'),
+    # Takes in query string params ?num=X
+    url(r'^cheetah/3/?$', views.cheetah_3, name='module3_cheetah_3'),
+    url(r'^cheetah/4/$', views.cheetah_4, name='module3_cheetah_4'),
+
+    url(r'^eval/?$', views.eval, name='module3_eval'),
+    url(r'^summary/?$', views.summary, name='module3_summary'),
+
+    url(r'^restart/?$', views.restart, name='module3_restart'),
 ]

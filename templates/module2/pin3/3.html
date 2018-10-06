@@ -1,0 +1,82 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - More Facts{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <style type="text/css">
+        label {
+            font-size: large;
+            border: 1px solid #dddddd;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+
+        td {
+            margin: 3px;
+            padding: 3px;
+            height: 100%;
+        }
+
+        label {
+            height: 100%;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            {% if selected_facts %}
+                {% for fact in selected_facts %}
+                    var fact = "{{ fact }}"
+                    // Strip the beginning and end quotes if present
+                    .replace(/^&#39;/,"").replace(/&#39;$/,"")
+                    .replace(/^&quot;/,"").replace(/&quot;$/,"")
+                    // Escape the single quote in the middle of the string
+                    .replace('\'', '\\\'').replace('&#39;', '\\\'');
+
+                    $('[name="more_facts[]"][value="'+fact+'"]').click();
+                    // console.log(question);
+                {% endfor %}
+            {% endif %}
+
+            $('.perspective').click(function () {
+                var unchecked = $('.perspective').not(':checked');
+                if (unchecked.length < 1) {
+                    $('#next_btn').show();
+                    $('#more').hide();
+                }
+            });
+            setTimeout(function () {
+                $('#more').show();
+            }, 4000);
+        });
+    </script>
+    <h2 class="center">
+        More Facts
+    </h2>
+    <h3>
+        What other kinds of facts and figures might {{ sample_student.name|title }} search for to help choose a college?
+    </h3>
+    <h3>
+        Select all the options below that you think {{ sample_student.name|title }} will find useful:
+    </h3>
+
+    {% for more_facts in module.get_more_facts %}
+        <div>
+            <label>
+                <input type="checkbox" name="more_facts[]" class="perspective" value="{{ more_facts }}"/>
+                {{ more_facts }}
+            </label>
+        </div>
+    {% endfor %}
+
+    <div class="center" id="next_btn">
+        <button id="next" type="submit">Perspective-taking</button>
+    </div>
+
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Define Success and Critical Concepts{% endblock %}{% endblock %}
+{% block content %}
+
+    <div class="center">
+        <img src="/static/decisions/img/cheetah.png" width="450"/>
+    </div>
+
+    <h2 class="center">Define Success and Critical Concepts</h2>
+
+    <p>Frame the decision  as a question so you can derive your Critical Concepts.</p>
+
+    <h3>What am I solving for? </h3>
+    <p class="center" style="margin: 40px; font-weight: normal;">
+        <input type="text" name="decision" class="cc decision center" style="border-bottom: 2px solid lightgray;"
+               size="40" value="{{ module.decision }}" readonly="readonly"/>
+    </p>
+
+
+    <h3>Identify Your Critical Concepts</h3>
+    <p class="center">
+        Write your top 3 Critical Concepts to solve for the story of your success.
+    </p>
+
+    <table class="table" style="width: 60%; margin-left: 20%; margin-top: 20px;">
+        <tbody>
+        <tr>
+            <td>1.</td>
+            <td><input type="text" name="cc[]" class="cc" value="{{ cc.0 }}" size="50"/></td>
+        </tr>
+        <tr>
+            <td>2.</td>
+            <td><input type="text" name="cc[]" class="cc" value="{{ cc.1 }}" size="50"/></td>
+        </tr>
+        <tr>
+            <td>3.</td>
+            <td><input type="text" name="cc[]" class="cc" value="{{ cc.2 }}" size="50"/></td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td> </td>
+        </tr>
+        </tbody>
+    </table>
+    <p class="center">
+        <input type="submit" id="next" name="submit" value="Have Conviction in Your Critical Concepts"/>
+    </p>
+    {% get_back_link module nav.previous %}
+    <script type="text/javascript">
+        function validate() {
+            var valid = true;
+            $('.cc').each(function () {
+                if ($(this).val().length < 5) {
+                    if (valid) {
+                        alert("Please provide 3 critical concepts.");
+                    }
+                    valid = false;
+                }
+            });
+            return valid;
+        }
+    </script>
+{% endblock %}

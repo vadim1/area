@@ -1,0 +1,8 @@
+<p><strong>{{ t1 }}, {{ t2 }}</strong>: {{ description }}</p>
+<ul>
+    {% for question, answer in answers.items %}
+        {% if answer.easy == v1 and answer.confident == v2 %}
+            <li>{{ question }} - {{ answer.title }}</li>
+        {% endif %}
+    {% endfor %}
+</ul>

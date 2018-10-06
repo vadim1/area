@@ -1,0 +1,39 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Critical Concepts and the Facts{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <h2 class="center">
+        Cheetah Sheet: Module {{ module.display_num }}<br/>Critical Concepts and the Facts
+    </h2>
+    <h3>
+        From Module 1, your decision is:<br />"{{ decision }}"
+    </h3>
+
+    <h3>Your Critical Concepts are: (<a href="{{ nav.urlPrefix }}cheetah/cc_edit" class="button">Update Critical Concepts</a>)</h3>
+    <h3>
+    <ul>
+    {% for concept in cc %}
+        {% if concept %}
+            <li>{{ concept }}</li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+    </h3>
+
+    <h3>
+        Get ready to answer the following questions:
+        <ul>
+            <li>What facts could support each of your Critical Concepts?</li>
+            <li>Where could you find sources of information if you need facts?</li>
+            <li>Can you identify any assumptions or biases that need to be addressed?</li>
+        </ul>
+    </h3>
+
+    <div class="center start2 space">
+    {% get_next_btn module "Start Your Hunt" nav.nextUrl %}
+    </div>
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

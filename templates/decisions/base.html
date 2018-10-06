@@ -1,4 +1,5 @@
-{% load static area_tags %}
+{% load static %}
+{% load area_tags %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en">
@@ -139,7 +140,7 @@
 </div>
 
 <footer class="footer clearfix">
-    <div class="col-md-5 text-center col-centered"> &copy; 2017 <a href="http://areamethod.com" target="_blank">AreaMethod</a> |
+    <div class="col-md-5 text-center col-centered"> &copy; {% now "Y" %} <a href="http://areamethod.com" target="_blank">AreaMethod</a> |
         <a href="https://www.amazon.com/Problem-Solved-Decisions-Confidence-Conviction/dp/163265086X/ref=sr_1_1?ie=UTF8&qid=1485620336&sr=8-1&keywords=problem+solved"
            target="_blank">{% include "problem_solved.html" %}</a>
         |

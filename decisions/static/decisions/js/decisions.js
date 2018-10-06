@@ -9,6 +9,12 @@ $(document).ready(function () {
             window.location.href = next;
         });
     }
+
+    /* Resize textarea based on actual contents */
+    $('.auto-text-area').on('keyup', function () {
+        $(this).css('height', 'auto');
+        $(this).height(this.scrollHeight);
+    });
 });
 
 function nextbtn() {

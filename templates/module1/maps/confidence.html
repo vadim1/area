@@ -1,0 +1,30 @@
+{% extends 'modules/base/simple.html' %}
+{% load module_tags static %}
+
+{% block title %}
+    {% define 'pageTitle' 'Build Your Confidence' %}
+    {% define 'nextBtnLabel' 'Cheetah Pause' %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content_body %}
+    {% include 'module1/map_content.html' with display_mode='Confidence to Make Better Decisions' %}
+
+    <p>Do you have a decision that you need to make where the:</p>
+
+    <ul>
+        <li>Outcome is unknown</li>
+        <li>Outcome may have a long term impact</li>
+        <li>Wrong decision could be harmful</li>
+    </ul>
+
+    <p>Use the tools from this module to build confidence:</p>
+    <ul>
+        <li>Focus on your <span class="master_term_simple">Vision of Success</span>: Re-frame the decision problem. Picture that you’ve made the decision
+            successfully, what happened?
+        </li>
+        <li>Derive your <span class="master_term_simple">Critical Concepts</span> (CC): The 1, 2 or 3 things that will get you the successful outcomes you’ve
+            identified.
+        </li>
+    </ul>
+{% endblock %}

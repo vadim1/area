@@ -1,0 +1,111 @@
+{% extends 'decisions/base.html' %}
+{% load static account socialaccount bootstrap i18n module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Critical Concepts As Questions
+{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+        #why_options div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: large;
+            border: 1px solid #dddddd;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+
+    .explanation {
+        display: none;
+        font-size: 0.8em;
+        padding-top: 5px;
+        visibility: hidden;
+    }
+    </style>
+    <h2 class="center">Critical Concepts As Questions</h2>
+    <p>{{ sample_student.name|title }} learned about <span class="master_term_simple">Critical Concepts</span> (CC)
+        and {{ sample_student.pronoun_object }} <span
+                class="master_term_simple">Vision of Success</span>. {{ sample_student.pronoun_subject|title }}
+        realized {{ sample_student.pronoun_subject }} needed a <img
+                src="{% static 'decisions/img/cheetah_logo.png' %}" width="20"/>
+        Cheetah Pause to get a clear sense
+        of what {{ sample_student.pronoun_subject }} wanted out of {{ sample_student.pronoun_object }} decision. What
+        was really critical to the decision being successful?</p>
+
+    <p>
+        Help {{ sample_student.name|title }} to ask three questions about the kind of answers that {{ sample_student.pronoun_subject }} really needs to make a successful decision:
+    </p>
+
+    <div id="why_options">
+        {% for value in sample_student.cc_as_question %}
+            <div>
+                <label>
+                    <input type="checkbox" name="cc_as_question[]" value="{{ value.successful }}"/>
+                    <span>{{ value.question }}</span>
+                    {% if value.successful == 1 %}
+                        <span class="explanation"><strong>YES!</strong> {{ value.explanation }}</span>
+                    {% else %}
+                        <span class="explanation"><strong>CHOOSE ANOTHER</strong> {{ value.explanation }}</span>
+                    {% endif %}
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% get_next_btn module "Nylah's Critical Concepts" nav.nextUrl "submit" %}
+    {% get_back_link module nav.previousUrl %}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#next').click(validate);
+            $("input:checkbox[name='cc_as_question[]']").click(showExplanation);
+        });
+
+        function showExplanation() {
+            var checked = $(this).prop('checked');
+            var explanation = $(this).next().next();
+            var current = explanation.css('display');
+            if (current == 'none') {
+                explanation.css('display', 'block').css('visibility', 'visible');
+            } else {
+                explanation.css('display', 'none').css('visibility', 'hidden');
+            }
+        }
+
+        function validate() {
+            var correctTotal = 3;
+            var correct = 0;
+            var incorrect = 0;
+            var error_msg = "";
+
+            $("input:checkbox[name='cc_as_question[]']").each(function() {
+                if ($(this).prop('checked')) {
+                    if ($(this).val() == 1) {
+                        correct++;
+                    } else {
+                        incorrect++;
+                        console.log($(this));
+                    }
+                }
+            });
+
+            if (correct < correctTotal) {
+                error_msg = "Please choose all that apply";
+            }
+            else if (incorrect > 0) {
+                error_msg = "You have selected some incorrect responses. Please try again"
+            }
+
+            if (error_msg != "") {
+                alert(error_msg);
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+{% endblock %}

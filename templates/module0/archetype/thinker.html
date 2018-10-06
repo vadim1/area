@@ -1,0 +1,98 @@
+{% extends 'modules/base/archetype.html' %}
+{% load module_tags static %}
+{% block strength_text %}
+    Being the Thinker means that you will never get caught off guard by
+    the consequences of the decisions you make. You are extremely thorough
+    and thoughtful. You are cautious—you know what warning signs to look
+    for, and you are good at steering yourself away from them. You're a
+    master at making pro and con lists, and you rarely make impulse
+    decisions. This is a powerful thing, because you always know what
+    you're up against. It's hard to trick you, because you never act
+    without considering every possible angle.
+{% endblock %}
+{% block strength_list %}
+    <li><strong>Thorough</strong>: Tends to think things through</li>
+    <li><strong>Thoughtful</strong>: Tends to considers options</li>
+    <li><strong>Cautious</strong>: Tends to be careful and measured</li>
+{% endblock %}
+
+{% block blind_spot_text %}
+    Being a Thinker can have its negatives, too. Sometimes, because you
+    are so cautious, you pick the safe option so that you don't end up
+    failing. This "loss aversion" means that you lose out on the
+    opportunity to fail, and learn from your failures, which is proven
+    to help you grow twice as fast as success does. Because you are a
+    master at comparing and weighing your options, you sometimes don’t
+    weigh the value of each option individually. For example, option 1 may
+    cost less than option 2, but if they are both under your budget,
+    there's no need to eliminate the more expensive option. This
+    "relativity bias" keeps you from seeing things as they actually are,
+    and forces you to see them in comparison to something else. And
+    finally, because you are committed to thoughtfully looking at what the
+    "best" option is, you have the tendency to believe what authority
+    figures say and could fall prey to “authority bias.” If someone you
+    admire suggests a decision path, you'll give that choice more weight
+    than you should.
+{% endblock %}
+{% block blind_spot_list %}
+    <li>Loss Aversion: Tendency to prefer avoiding losses to acquiring equivalent gains: it is better to not lose $5 than to find $5</li>
+    <li><a class="master_term" href="#" data-toggle="tooltip" data-placement="top" title="Coming in Module 3">Relativity Bias</a>: Tendency to make relative, rather than absolute evaluations</li>
+    <li><a class="master_term" href="#" data-toggle="tooltip" data-placement="top" title="Coming in Module 3">Authority Bias</a>: Tendency to attribute greater accuracy to the opinion of an authority figure</li>
+{% endblock %}
+
+{% block your_psp_quote %}Everything should be made as simple as possible, but no simpler.{% endblock %}
+{% block your_psp_author %}Albert Einstein{% endblock %}
+{% block your_psp_explanation %}
+    You are a thoughtful decision maker, and you take your time weighing the options before making a
+    decision. You look at all the possibilities, and because you are able to see the good and the bad in
+    everything, you like to think on it before taking action. You're committed to always making the best
+    possible decision, and you're in no rush to make it.
+{% endblock %}
+{% block your_psp_why %}Why is Albert Einstein a Thinker?
+    Most people think that genius is the primary determinant of intellectual achievement. Yet one of the
+    greatest
+    thinkers of all time, Albert Einstein was not an inexplicable genius, but a questioning mind. His
+    intellectual
+    skills and inquisitive drive enabled him to develop great questions that he then used to search for
+    answers that
+    redesigned our view of the physical world and the universe.
+{% endblock %}
+
+{% block your_psp_bio %}
+    <div class="bio col-md-4">
+        <div>
+            <img src="{% get_static_url %}{% static 'area_app/img/archetype/lincoln.jpg' %}" height="150"/>
+        </div>
+        <div>
+            <div class="archetype-name">
+                <a href="https://en.wikipedia.org/wiki/Abraham_Lincoln" target="_blank">Abraham Lincoln</a>
+            </div>
+            16th President of the United States
+        </div>
+    </div>
+
+    <div class="bio col-md-4">
+        <div>
+            <img src="{% get_static_url %}{% static 'area_app/img/archetype/einstein.jpg' %}" height="150"/>
+        </div>
+        <div>
+            <div class="archetype-name">
+                <a href="https://en.wikipedia.org/wiki/Albert_Einstein" target="_blank">Albert Einstein</a>
+            </div>
+            Scientist who developed the Theory of Relativity
+        </div>
+    </div>
+
+    <div class="bio col-md-4">
+        <div>
+            <img src="{% get_static_url %}{% static 'area_app/img/archetype/mlk.jpg' %}" height="150"/>
+        </div>
+        <div>
+            <div class="archetype-name">
+                <a href="https://en.wikipedia.org/wiki/Martin_Luther_King_Jr." target="_blank">Martin Luther
+                    King Jr.</a>
+            </div>
+            Civil Rights Leader
+        </div>
+    </div>
+{% endblock %}

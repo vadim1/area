@@ -1,0 +1,56 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module 1 - Another Example{% endblock %}{% endblock %}
+{% block content %}
+    <h2 class="center">Another Example</h2>
+    <div class="center">
+        <img src="/static/decisions/img/college.jpg" height="220px" style="margin: 0px;"/>
+    </div>
+
+    <p>
+        Take a question like "Should I go away to college?" This has no right answer but it probably has a right answer
+        for YOU.
+    </p>
+
+    <p>
+        It’s a tough question to answer. Try re-framing it. Ask yourself: “How would I know that I’ve made a good
+        decision about whether to go away to college?” </p>
+
+    <p>Picture that you’ve made a successful decision. What made the decision successful? List 3 things:</p>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <td width="5">1.</td>
+            <td><textarea name="sample_cc[]" class="auto-text-area">{{ sample_cc.0 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">2.</td>
+            <td><textarea name="sample_cc[]" class="auto-text-area">{{ sample_cc.1 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">3.</td>
+            <td><textarea name="sample_cc[]" class="auto-text-area">{{ sample_cc.2 }}</textarea></td>
+        </tr>
+        </tbody>
+    </table>
+
+    {% get_next_btn module "Your Vision of Success" nav.nextUrl "submit" %}
+    {% get_back_link module nav.previousUrl %}
+
+    <script type="text/javascript">
+        function validate() {
+            var valid = true;
+            $('.cc').each(function () {
+                if ($(this).val().length < 3) {
+                    if (valid) {
+                        alert("Please provide three things.");
+                    }
+                    valid = false;
+                }
+            });
+            return valid;
+        }
+    </script>
+{% endblock %}

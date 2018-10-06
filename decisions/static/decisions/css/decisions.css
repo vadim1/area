@@ -205,10 +205,6 @@ h4 {
     font-weight: 200;
 }
 
-.map {
-    margin: 30px;
-}
-
 .map .pin {
     position: relative;
 }
@@ -252,4 +248,144 @@ li {
 hr {
     height: 1px;
     background-color: #52c0d8;
+}
+
+/* Used to center the badge */
+#badge_container {
+    height: 100px;
+    width: 67px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.badge_img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+#badge_label {
+    z-index: 100;
+    position: absolute;
+    color: black;
+    font-size: 32px;
+    font-weight: bold;
+    left: 25px;
+    top: 1px;
+}
+
+/* Used for highlighting Master Terms */
+/* _simple - just the highlight without the tooltip */
+.master_term, .master_term_simple {
+    color: #f6653c;
+    display: inline;
+    position: relative;
+    border-bottom: 2px dotted #f6653c;
+    margin-top: 100px;
+    font-weight: bold;
+}
+
+/* Does not work on iPhones/iPads */
+/*
+.master_term:hover:after {
+    background: #333;
+    background: rgba(0, 0, 0, .8);
+    border-radius: 5px;
+    bottom: 26px;
+    color: #fff;
+    content: attr(title);
+    left: 20%;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+}
+
+.master_term:hover:before {
+    border: solid;
+    border-color: #333 transparent;
+    border-width: 6px 6px 0 6px;
+    bottom: 20px;
+    content: "";
+    left: 50%;
+    position: absolute;
+    z-index: 99;
+}*/
+
+/* Boostrap tooltips
+   Ref: https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_ref_js_tooltip_css&stacked=h
+ */
+.master_term + .tooltip > .tooltip-inner {
+  background-color: #f6653c;
+  color: #FFFFFF;
+  border: 1px solid #f6653c;
+  padding: 15px;
+  font-size: 20px;
+}
+/* Tooltip on top */
+.master_term + .tooltip.top > .tooltip-arrow {
+  border-top: 5px solid green;
+}
+/* Tooltip on bottom */
+.master_term + .tooltip.bottom > .tooltip-arrow {
+  border-bottom: 5px solid blue;
+}
+/* Tooltip on left */
+.master_term + .tooltip.left > .tooltip-arrow {
+  border-left: 5px solid red;
+}
+/* Tooltip on right */
+.master_term + .tooltip.right > .tooltip-arrow {
+  border-right: 5px solid black;
+}
+
+/* Map Pin Positions - these positions assume a wide enough view
+ */
+.pin0 {
+    margin-top: 50px;
+    margin-left: -250px;
+}
+
+.pin1 {
+    margin-top: 10px;
+    margin-left: -160px;
+}
+
+.pin2 {
+    margin-top: 45px;
+    margin-left: -155px;
+}
+
+.pin3 {
+    margin-top: 20px;
+    margin-left: -80px;
+}
+
+/* Dynamic text area */
+/* Ref: https://w3epic.com/create-auto-resize-textarea-jquery/ */
+.auto-text-area {
+    min-height: 14px;
+    width: 85%;
+    overflow: hidden;
+    resize: none;
+    padding: 4px;
+    font-size: 14px;
+    border: 1px solid black;
+}
+
+.pre_title, .post_title {
+}
+
+.module_title {
+    font-size: 55px;
+    font-weight: 900;
+    line-height: 1em;
+    letter-spacing: -7px;
+}
+
+/* http://www.dynamicdrive.com/forums/entry.php?293-3-Ways-to-Resize-Scale-Web-Images-in-Responsive-Design */
+.fixed-ratio-resize {
+    max-width: 100%;
+    height: auto;
+    width: auto\9; /* IE8 */
 }

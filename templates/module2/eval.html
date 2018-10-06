@@ -1,0 +1,78 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - {{ module.name }}{% endblock %}{% endblock %}
+{% block extra_head %}
+
+
+    <style type="text/css">
+        .row {
+            display: table-row;
+            font-size: 1.1em;
+        }
+
+        .leftColumn, .rightColumn, .middleColumn {
+            display: table-cell;
+            width: 33%;
+            vertical-align: middle;
+        }
+
+        .leftColumn {
+            padding-top: 25px;
+            text-align: left;
+        }
+
+        .rightColumn {
+            padding-top: 25px;
+            text-align: right;
+        }
+
+        .space {
+            padding-bottom: 5px;
+        }
+    </style>
+
+{% endblock %}
+{% block content %}
+
+    {% for eval_question in module.get_eval_questions %}
+        <h3>{{ forloop.counter }}. {{ eval_question.question }}</h3>
+        <div class="row">
+            <div class="leftColumn">
+                {{ eval_question.min }}
+            </div>
+
+            <div class="middleColumn">
+                <div class="slider" id="eval_{{ forloop.counter0 }}"></div>
+                <input type="hidden" name="eval_{{ forloop.counter0 }}" />
+            </div>
+
+            <div class="rightColumn">
+                {{ eval_question.max }}
+            </div>
+        </div>
+        <div class="space"></div>
+    {% endfor %}
+
+    <div class="center start">
+        <button id="next" type="submit">Submit</button>
+    </div>
+    {% get_back_link module nav.previousUrl %}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var step = 5;
+            $('.slider').each(function () {
+                var self = $(this);
+                var slider = self.slider({
+                    min: 1,
+                    max: step,
+                    value: 1,
+                    slide: function (event, ui) {
+                        console.log("Option selected for " + self.id);
+                    },
+                });
+            });
+        });
+    </script>
+{% endblock %}

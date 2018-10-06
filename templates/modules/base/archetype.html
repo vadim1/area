@@ -1,0 +1,99 @@
+{% load module_tags static %}
+<style type="text/css">
+    /* Override the top padding for the first element in a div set in decisions.css
+       since it adds unecessary padding to the image for the bio
+     */
+    .main div:first-child {
+        margin-top: 0px !important;
+    }
+
+    h3 {
+        color: #52c0d8 !important;
+        font-size: 26px !important;
+        font-weight: 600;
+    }
+
+    h4 {
+        padding-top: 10px;
+    }
+</style>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+
+{# display_mode #}
+{# all - show all sections #}
+{# strengths - show only the strengths section #}
+{# blind_spots - show only the blind spots section #}
+{# your_psp - show only the profile specific section #}
+
+<h3>{% with 'area_app/img/'|add:archetype|add:'.png' as archetype_img %}
+    <img src="{% get_static_url %}{% static archetype_img %}" width="60"/>{% endwith %}
+    {% if display_mode == 'strengths' %}The {{ archetype|title }}'s Strengths{% endif %}
+    {% if display_mode == 'blind_spots' %}The {{ archetype|title }}'s Blind Spots{% endif %}
+    {% if display_mode == 'your_psp' %}You are ... The {{ archetype|title }}!{% endif %}
+    {% if display_mode == 'report' %}You are ... The {{ archetype|title }}!{% endif %}
+    {% if display_mode == 'all' %}The {{ archetype|title }}!{% endif %}
+</h3>
+
+{% if display_mode == 'all' or display_mode == 'report' or display_mode == 'your_psp' %}
+    <div class="flip">
+        <div class="front">
+            <p class="quote">&quot;{% block your_psp_quote %}{% endblock %}&quot;</p>
+            <p class="quote" style="text-align: right; font-style: italic; ">-
+                {% block your_psp_author %}{% endblock %}</p>
+            <p>{% block your_psp_explanation %}{% endblock %}</p>
+            {% if display_mode == 'your_psp' %}
+                <p style="cursor: pointer; color: blue; text-decoration: underline;">Click to view more details...</p>
+            {% endif %}
+        </div>
+
+        <div class="back">
+            <h4>{% include "problem_solver.html" %}S Like You!</h4>
+            <div class="bio">{% block your_psp_bio %}{% endblock %}</div>
+            <div class="clearfix"></div>
+            <p>{% block your_psp_why %}{% endblock %}</p>
+            {% if display_mode == 'your_psp' %}
+                {% include 'module0/nav/tell_me_more.html' %}
+            {% endif %}
+        </div> <!-- // back -->
+    </div> <!-- // flip -->
+{% endif %}
+
+{% if display_mode == 'all' or display_mode == 'report' or display_mode == 'strengths' %}
+    {% if not show_nav %}
+        {% block strength_title %}<h4>Strengths</h4>{% endblock %}
+    {% endif %}
+
+    {% if display_mode == 'report' %}
+        <p>{% block strength_text %}{% endblock %}</p>
+    {% else %}
+        <ul>
+            {% block strength_list %}{% endblock %}
+        </ul>
+    {% endif %}
+
+    {% if show_nav %}
+        {% include 'module0/nav/blind_spots.html' with show_nav=show_nav %}
+    {% endif %}
+{% endif %}
+
+{% if display_mode == 'all' or display_mode == 'report' or display_mode == 'blind_spots' %}
+    {% if not show_nav %}
+        {% block blind_spot_title %}<h4>Blind Spots</h4>{% endblock %}
+    {% endif %}
+
+    {% if display_mode == 'report' %}
+        <p>{% block blind_spot_text %}{% endblock %}</p>
+    {% else %}
+        <ul>
+            {% block blind_spot_list %}{% endblock %}
+        </ul>
+    {% endif %}
+
+    {% if show_nav %}
+        {% include 'module0/nav/sounds_like_you.html' with show_nav=show_nav %}
+    {% endif %}
+{% endif %}

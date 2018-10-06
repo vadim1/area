@@ -43,7 +43,7 @@ The image is pretty bare bones so you'll want to install some software
 1. Update package lists
 `sudo apt-get -y update`
 1. Install git, python, mysql, nginx
-`sudo apt-get -y install git python-pip python-dev mysql-server libpq-dev postgresql postgresql-contrib nginx`
+`sudo apt-get -y install git python-pip python-dev mysql-server libmysqlclient-dev libssl-dev nginx`
 1. Install required libraries
 `sudo apt-get -y install build-essential libssl-dev libffi-dev libxml2-dev libxslt1-dev zlib1g-dev`
 1. Install virtualbox guest
@@ -77,14 +77,16 @@ This will clone the project in `area` and put the files in /var/www which will m
 
 # Install freetype2
 The app installs matplotlib which requires freetype. This is not available via normal means so we'll have to install it separately
-`sudo add-apt-repository ppa:glasen/freetype2`
-`sudo apt-get -y update && sudo apt-get -y install freetype2-demos` (freetype2-demos will install the freetype2 libs)
-`sudo apt-get -y install libpng-dev libfreetype6-dev`
+* `sudo add-apt-repository ppa:glasen/freetype2`
+* `sudo apt-get -y update && sudo apt-get -y install freetype2-demos` (freetype2-demos will install the freetype2 libs)
+* `sudo apt-get -y install libpng-dev libfreetype6-dev`
+* `sudo ln -s /usr/include/freetype2/ft2build.h /usr/include/`
 
 References:
 * http://ubuntuhandbook.org/index.php/2017/06/install-freetype-2-8-in-ubuntu-16-04-17-04/
 * https://askubuntu.com/questions/798343/why-wont-python-pip-install-matplotlib-work
 * https://github.com/pypa/pip/issues/5240
+* https://github.com/matplotlib/matplotlib/issues/3029/#issuecomment-43318941
 
 # Update numpy
 The version might no longer be supported. At the time of this writing it was 1.8.0rc1 which no longer exists. The error could
@@ -104,14 +106,14 @@ References:
 
 # Install the application requirements
 `rm -rf ~/.cache/pip/`
-`pip install --force-reinstall -I -r requirements.txt`
+`pip install --force-reinstall -I -r requirements.txt --user`
 
 References:
 * https://github.com/scrapy/scrapy/issues/2115
 * https://stackoverflow.com/questions/33669846/forcing-pip-to-recompile-a-previously-installed-package-numpy-after-switchin
 
 # Install django_debug_toolbar
-`pip install django_debug_toolbar --user`
+`pip install django_debug_toolbar --user --upgrade`
 
 # Create the database
 ```
@@ -120,14 +122,22 @@ GRANT ALL ON psp.* TO pspuser@'localhost' IDENTIFIED BY '<password>';
 FLUSH PRIVILEGES;
 ```
 
-# Update area/settings.py with the database info
+# Create a new file in `area/local_settings.py`:
 ```
+EMAIL_HOST_USER = '<smtp_user>'
+EMAIL_HOST_PASSWORD = '<password>'
+EMAIL_HOST = '<smtp_host>'
+EMAIL_PORT = 465
+DEBUG = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_USE_SSL = False
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'psp',
-        'USER': 'pspuser',
-        'PASSWORD': 'password',
+        'USER': '<user>',
+        'PASSWORD': '<password>',
         'HOST': 'localhost',
         'PORT': 3306,
     }
@@ -168,10 +178,46 @@ server {
 
 # Run the static assets script
 ```
-./manage.py collecstatic
+./manage.py collectstatic
 ```
 
 # Start the server
 ```
 ./manage.py runserver 0.0.0.0:8000
 ```
+
+# Set up user
+
+1. Go to http://127.0.0.1:8000/ and sign up
+2. After signing up, you might get an error similar to:
+```angular2html
+gaierror: [Errno 8] nodename nor servname provided, or not known
+[11/Aug/2018 22:09:40] "POST /accounts/signup/ HTTP/1.1" 500 181032
+```
+3. Log into the database and find your user:
+ ```angular2html
+select * from area_app_user;
+UPDATE area_app_user SET is_superuser=1,is_staff=1,is_active=1;
+select * from account_emailaddress;
+UPDATE account_emailaddress SET verified=1;
+```
+
+# (Optional) Install supervisor and configure
+Useful (for QE and Prod)
+
+1. Install supervisord: `sudo apt-get install -y supervisor`
+2. Add `area_app` configuration in `/etc/supervisor/conf.d/area_app.conf`
+```
+[program:area_app]
+# https://serversforhackers.com/c/monitoring-processes-with-supervisord
+command=python manage.py runserver 0.0.0.0:80
+directory=/home/ubuntu/area
+autostart=true
+autorestart=true
+startretries=3
+stderr_logfile=/var/log/area_app.err.log
+stdout_logfile=/var/log/area_app.out.log
+user=root
+```
+3. Update log file permissions as needed: `chmod 666 /home/ubuntu/area/django.log`
+4. Start up service: `sudo supervisorctl start area_app`

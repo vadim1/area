@@ -1,0 +1,118 @@
+{% extends 'modules/layout/web.html' %}
+{% load bootstrap module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Map Your Journey{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+        .map .pin {
+            position: absolute;
+            cursor: pointer;
+        }
+
+        .pin {
+            /*visibility: hidden;*/
+            visibility: visible;
+        }
+
+        {% if display_mode == 'all' %}
+            #next {
+                visibility: hidden;
+            }
+        {% endif %}
+
+        #title {
+            position: absolute;
+            display: none;
+            text-align: left;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding-left: 5px;
+            padding-right: 5px;
+            border: 1px dashed #1e2846;
+            font-size: 150%;
+            cursor: none;
+            pointer-events: none;
+        }
+    </style>
+    <script type="text/javascript">
+        /**
+         * Take a css dimension like "20px" and add to_add pixels to it
+         * @param dimension_in_px
+         * @param to_add
+         */
+        function pixel_add(dimension_in_px, to_add) {
+            var dim = dimension_in_px.substr(0, dimension_in_px.length - 2);
+            return parseInt(dim) + to_add + 'px';
+        }
+
+        function pin() {
+            display_pin($(this), true);
+        }
+
+        function show_pin(pinObj) {
+            display_pin(pinObj, false);
+        }
+
+        function display_pin(pin, nextBtn) {
+            var title_text = pin.attr('title');
+            var top = -150;
+            var left = 445;
+            // console.log(title_text);
+            var top = pixel_add(pin.css('margin-top'), top);
+            var left = pixel_add(pin.css('margin-left'), left);
+            /* Show the pin */
+            pin.css('visibility', 'visible');
+            /* Show the pin title */
+            $('#title').css('margin-top', top).css('margin-left', left).text(title_text).show();
+            if (nextBtn) {
+                $('#next').css('visibility', 'visible');
+            }
+        }
+
+        $(document).ready(function () {
+            /* Set this value in the page that is including this template */
+            var pinObj = $('img.pin[title="{{ display_mode }}"]');
+
+            if (pinObj.length) {
+                // Found the target pin, show only that pin
+                // console.log("Showing only pin: " + pinObj.attr('title'));
+                show_pin(pinObj);
+            } else {
+                // Show all the pins
+                // console.log("Show all pins");
+                $('.pin').css('visibility', 'visible');
+                $('.pin').click(pin);
+            }
+
+        });
+    </script>
+
+    {% if display_mode == 'all' %}
+        <h2 class="center">{% block module_title %}Map Your Journey{% endblock %}</h2>
+    {% endif %}
+
+    <div class="center">
+        <div class="map">
+            <img src="/static/decisions/img/Map.png"/>
+            {% block pins %}
+                {% for pin in module.pins %}
+                    <img src="/static/decisions/img/Locator_rotated.png" class="pin pin{{ forloop.counter0 }}"
+                         title="{{ pin }}"/>
+                {% endfor %}
+            {% endblock %}
+            <div id="title"></div>
+        </div>
+    </div>
+
+    {% if display_mode == 'all' %}
+        {% block pre_instructions %}{% endblock %}
+        {% block instructions %}
+            <p>Click on each pin to see what you'll learn in this module.</p>
+        {% endblock %}
+    {% endif %}
+
+    {% if display_mode == 'all' %}
+        <div class="start">
+            {% get_next_btn module btn_label nav.nextUrl %}
+        </div>
+        {% get_back_link module nav.previousUrl %}
+    {% endif %}
+{% endblock %}

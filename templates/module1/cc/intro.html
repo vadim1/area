@@ -1,0 +1,24 @@
+{% extends 'modules/base/simple.html' %}
+{% load module_tags static %}
+
+{% block title %}
+    {% define 'pageTitle' 'Using Your Definition of Success' %}
+    {% define 'nextBtnLabel' "Critical Concepts" %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content_body %}
+    {% include 'module1/map_content.html' with display_mode='Your Vision of Success' %}
+
+    <p>One <span class="master_term_simple">Vision of Success</span> to determine whether you should go away to college might be:</p>
+    <ol>
+        <li>I can afford it</li>
+        <li>College has a good program in my area of interest</li>
+        <li>Someone else can take care of my younger siblings</li>
+    </ol>
+
+    <p>These 3 success factors make up what are called <span class="master_term_simple">Critical Concepts</span>.</p>
+
+    <p><span class="master_term_simple">Critical Concepts</span> are the one, two or three things that need to happen in the outcome of your decision for you to
+        know that the decision has succeeded for you personally.</p>
+{% endblock %}

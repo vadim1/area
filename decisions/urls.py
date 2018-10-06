@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 import views
 urlpatterns = [
-    url(r'^$', views.home, name='Intro'),
+    url(r'^$', views.home, name='decisions_home'),
     url(r'^tour/?$', views.tour, name='Tour'),
     url(r'^journal/?$', views.journal, name='Journal'),
     url(r'^terms_conditions/?$', views.terms_conditions, name='Terms and Conditions'),

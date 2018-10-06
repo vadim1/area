@@ -1,0 +1,94 @@
+{% extends 'modules/base/archetype.html' %}
+{% load module_tags static %}
+{% block strength_text %}
+    In life, there are few things more powerful than having a tight network
+    of people who support you. As a Listener, your community is one of your
+    biggest assets. You have people who you trust to help you make
+    decisions and move forward in your life, and you know that you can
+    always turn to them. That is a great position to be in. In general,
+    you are a trusting person who believes in the people around you. You
+    have no trouble building relationships with people and continuing to
+    expand your network of support.
+{% endblock %}
+{% block strength_list %}
+    <li><strong>Trusting</strong>: Tends to believe in the people around you</li>
+    <li><strong>Relational</strong>: Tends to build and keep friendships</li>
+    <li><strong>Supportive</strong>: Tends to support others</li>
+{% endblock %}
+
+{% block blind_spot_text %}
+    Being a Listener means that you may rely too heavily on other people
+    to make decisions for you. Because you are loyal to those you trust,
+    you can have a blind spot and make decisions based on what—or who!—
+    you like, rather than on what's actually best. This is called the
+    "liking bias." In addition because you like to listen to others, hearing
+    their stories may lead you to the “narrative bias,” where you overvalue
+    storylines and undervalue data. When you pay too much attention to what
+    others are thinking and doing, you stop thinking for yourself.
+    This "social proof bias" means that you just do what others recommend,
+    instead of thinking about what you actually want.
+{% endblock %}
+{% block blind_spot_list %}
+    <li><a class="master_term" href="#" data-toggle="tooltip" data-placement="top" title="Coming in Module 3">Liking Bias</a>: Tendency to overlook the faults of, and complies with, wishes of well-liked others</li>
+    <li><a class="master_term" href="#" data-toggle="tooltip" data-placement="top" title="Coming in Module 3">Narrative Fallacy</a>: Tendency to make sense of the world through stories</li>
+    <li><a class="master_term" href="#" data-toggle="tooltip" data-placement="top" title="Coming in Module 3">Social Proof Bias</a>: Tendency to adopt the actions of others in an attempt to reflect correct behavior in a given situation</li>
+{% endblock %}
+
+{% block your_psp_quote %}For everyone of us that succeeds, it's because there's somebody there to show you the way
+    out.{% endblock %}
+{% block your_psp_author %}Oprah Winfrey{% endblock %}
+{% block your_psp_explanation %}
+    You've got a whole village of people in your life who you trust and who support you. When you are faced
+    with a
+    challenge or a decision, you know you can rely on your people. They love you, and you love them - and it
+    means you
+    always have great advice ready for you when you ask.
+{% endblock %}
+{% block your_psp_why %}
+    Why is Mahatma Gandhi a listener?
+    Mahatma Gandhi was able to change India through non-violence because of his ability to listen to others
+    and
+    understand the needs of his people and their arguments. In turn his listening enabled him to be
+    persuasive, able to
+    reason and negotiate between conflicting parties, whether it was Muslims and Hindus, or between the
+    British
+    government and its Indian subjects.
+{% endblock %}
+
+{% block your_psp_bio %}
+    <div class="bio col-md-4">
+        <div>
+            <img src="{% get_static_url %}{% static 'area_app/img/archetype/mandela.jpg' %}" width="150"/>
+        </div>
+        <div>
+            <div class="archetype-name">
+                <a href="http://en.wikipedia.org/wiki/Nelson_Mandela" target="_blank">Nelson Mandela</a>
+            </div>
+            Anti-Apartheid Revolutionary
+        </div>
+    </div>
+
+    <div class="bio col-md-4">
+        <div>
+            <img src="{% get_static_url %}{% static 'area_app/img/archetype/gandhi.jpg' %}" width="150"/>
+        </div>
+        <div>
+            <div class="archetype-name">
+                <a href="https://en.wikipedia.org/wiki/Mahatma_Gandhi" target="_blank">Mahatma Gandhi</a>
+            </div>
+            Pacifist Leader of India
+        </div>
+    </div>
+
+    <div class="bio col-md-4">
+        <div>
+            <img src="{% get_static_url %}{% static 'area_app/img/archetype/oprah.jpg' %}" width="150"/>
+        </div>
+        <div>
+            <div class="archetype-name">
+                <a href="https://en.wikipedia.org/wiki/Oprah_Winfrey" target="_blank">Oprah Winfrey</a>
+            </div>
+            Media Personality and Icon
+        </div>
+    </div>
+{% endblock %}

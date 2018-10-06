@@ -1,35 +1,4 @@
-{% extends 'decisions/base.html' %}
-{% load bootstrap %}
-{% block title %}{% block h1 %}Module 2 - Summary{% endblock %}{% endblock %}
-{% block content %}
-
-    <div class="center">
-
-    {% include 'decisions/_map.html' with top=90 left=70 %}
-
-    <h1 class="center">Module 2 Complete!</h1>
-
-    <h3 class="center">
-        Congratulations! You received the Module 2 badge!
-        <br/>
-        You and your buddy will receive a summary of your results in an email.
-    </h3>
-
-        <img src="/static/decisions/img/Module2_badge.png" />
-
-        <h3>You have learned:</h3>
-    </div>
-
-    <h3 class="center">
-        <div>&bull; Mental shortcuts and bias</div>
-        <div>&bull; Perspective Taking</div>
-        <div>&bull; Facts versus Opinion</div>
-        <div>&bull; How Facts beat Bias</div>
-    </h3>
-
-    <div class="center">
-        <button id="next" type="button"><a href="/decisions">Modules List</a></button>
-    </div>
-
-    <a href="commitment" id="back">Back</a>
+{% extends 'modules/base/summary.html' %}
+{% block review_content %}
+    {% include 'module2/review/content.html' %}
 {% endblock %}

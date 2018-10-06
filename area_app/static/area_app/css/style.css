@@ -619,7 +619,8 @@ h4 {
 }
 
 .bio img {
-    height: 120px;
+    height: 150px;
+    padding-bottom: 10px;
 }
 
 .bio div:first-child {

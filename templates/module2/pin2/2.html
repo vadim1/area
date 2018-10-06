@@ -1,0 +1,64 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - How should {{ sample_student.name|title }} confront
+    {{ sample_student.pronoun_subject }} bias?{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <script type="text/javascript">
+        function opinions() {
+            $('#opinions').show();
+        }
+    </script>
+
+    <h2 class="center">
+        How Should {{ sample_student.name|title }} Confront {{ sample_student.pronoun_object|title }} Bias?
+    </h2>
+    <h3 class="center" style="font-size: 150%; margin-top: 30px;">
+        What does she need?
+    </h3>
+
+    <p class="row">
+    <div class="col-sm-5">
+        <h2>Facts</h2>
+        For {{ sample_student.name|title }}'s interest in graphic design, is there data about each college's program?
+    </div>
+    <div class="col-sm-2">
+        <h2 style="margin-top: 100px;">OR</h2>
+    </div>
+    <div class="col-sm-5">
+        <h2>Opinions</h2>
+        Should {{ sample_student.pronoun_subject }} ask current graphic design students at each school what they think
+        of their programs?
+    </div>
+    </p>
+
+    <p class="row">
+    <div class="col-sm-5">
+        <a href="{{ nav.urlPrefix }}{{ nav.nextUrl }}">
+            <button type="button" class="start2">Facts</button>
+        </a>
+    </div>
+    <div class="col-sm-2">
+        &nbsp;
+    </div>
+    <div class="col-sm-5">
+        <button type="button" class="start2" onclick="opinions()">Opinions</button>
+    </div>
+    </p>
+
+    <div id="opinions" style="display: none; margin-top: 100px; clear: both;">
+        <p row="class">
+        <div class="col-sm-7">
+            &nbsp;
+        </div>
+        <div class="col-sm-5">
+            If {{ sample_student.name|title }} listens to the opinions before {{ sample_student.pronoun_subject }}'s
+            collected facts it may color how {{ sample_student.pronoun_subject }} understands the facts.
+        </div>
+        </p>
+    </div>
+
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

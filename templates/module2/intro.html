@@ -1,43 +1,30 @@
-{% extends 'decisions/base.html' %}
-{% load bootstrap %}
-{% block title %}{% block h1 %}AREA Method Module 2 - Cognitive Bias, You're Not As Open Minded As You Think
-{% endblock %}{% endblock %}
-{% block content %}
-    <div class="center">
-        <div style="font-weight: bolder">MODULE 02</div>
-        <div style="margin-top: 50px; margin-bottom: 50px;">
-            <img src="/static/decisions/img/Homepage_Door.png"/>
-        </div>
-        <div style="font-size: 60px; letter-spacing: -9px; font-weight: 900; margin-top: 20px;">
-            <span class="green">M</span>
-            <span class="yellow">E</span>
-            <span class="light-blue">N</span>
-            <span class="red">T</span>
-            <span class="yellow">A</span>
-            <span class="light-blue">L</span>
-            &nbsp;
-            <span class="green">S</span>
-            <span class="red">H</span>
-            <span class="green">O</span>
-            <span class="yellow">R</span>
-            <span class="light-blue">T</span>
-            <span class="red">C</span>
-            <span class="green">U</span>
-            <span class="yellow">T</span>
-            <span class="light-blue">S</span>
-        </div>
+{% extends 'modules/base/intro.html' %}
 
-        <h3 style="margin-top: 40px; margin-bottom: 40px;">
-            You may not be as open-minded as you think!
-        </h3>
+{% block pre_title %}
+    <h1>Introduction to</h1>
+{% endblock %}
 
-        <div class="start">
-            <p class="center">
-                <button id="next" type="button"><a href="review">
-                    Check My Bias!
-                </a></button>
-            </p>
-        </div>
+{% block module_title %}
+    <div>
+        <span class="green">M</span>
+        <span class="yellow">E</span>
+        <span class="light-blue">N</span>
+        <span class="red">T</span>
+        <span class="yellow">A</span>
+        <span class="light-blue">L</span>
+        &nbsp;
+        <span class="green">S</span>
+        <span class="red">H</span>
+        <span class="green">O</span>
+        <span class="yellow">R</span>
+        <span class="light-blue">T</span>
+        <span class="red">C</span>
+        <span class="green">U</span>
+        <span class="yellow">T</span>
+        <span class="light-blue">S</span>
     </div>
-    <a href="/" id="back">Back</a>
+{% endblock %}
+
+{% block module_subtitle %}
+    You’re Not As Open-Minded As You Think
 {% endblock %}

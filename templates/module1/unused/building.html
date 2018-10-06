@@ -1,0 +1,94 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Building Conviction: How Could Your CC’s Fail?
+{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+        .answers a {
+            color: #f6653c;
+        }
+
+        .answers a:hover {
+            cursor: hand;
+        }
+
+        td {
+            margin: 0;
+        }
+    </style>
+    <h2 class="center">Building Conviction: How Could Your Critical Concepts Fail?</h2>
+<h3>
+        Although your vision of success may not change as you solve your decision problem, your Critical Concepts may change --and they should--as you collect new information and gain new insight.
+</h3>
+    <h3>
+To build conviction that you’ve nailed your starting CC’s, test them out: For each Critical Concept, pretend that it “fails.”
+</h3>
+        <h3>
+        The following describes how Nylah tackled her decision Critical Concepts: "Should I go away to college?"
+        </h3>
+
+
+    <table class="table answers">
+        <thead>
+        <tr>
+            <th>Nylah's Critical Concepts</th>
+            <th>Question the assumptions of your CCs</th>
+            <th width="50%">Fails if...</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1. I am able to afford it</td>
+            <td>How much does each college cost?</td>
+            <td>
+                <a onclick="$(this).hide(); $(this).closest('td').find('div').show(); return false;" tabindex="-1">
+                    Show Nylah's Answer
+                </a>
+                <div style="display: none;">I can’t accurately figure out the total costs. What can my family afford?</div>
+            </td>
+        </tr>
+        <tr>
+            <td>2. The school has a good graphic design program</td>
+            <td>What makes a good graphic design program?</td>
+            <td>
+                <a onclick="$(this).hide(); $(this).closest('td').find('div').show(); return false;" tabindex="-1">
+                    Show Nylah's Answer
+                </a>
+                <div style="display: none;">I don’t research schools’ design courses and job placement data</div>
+            </td>
+        </tr>
+        <tr>
+            <td>3. I still want to help out at home</td>
+             <td>What kind of help does my home need from me?</td>
+            <td>
+                <a onclick="$(this).hide(); $(this).closest('td').find('div').show(); return false;" tabindex="-1">
+                    Show Nylah's Answer
+                </a>
+                <div style="display: none;">I am too far from home to help out on a regular basis</div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    </p>
+    <p class="center">
+        {% get_next_btn module "Cheetah Sheet 2: Edit Critical Concepts" nav.nextUrl %}
+    </p>
+    {% get_back_link module nav.previousUrl %}
+
+    <script type="text/javascript">
+        function validate() {
+            var valid = true;
+            $('.cc').each(function () {
+                if ($(this).val().length < 5) {
+                    if (valid) {
+                        alert("Please provide 3 answers for each topic.");
+                    }
+                    valid = false;
+                }
+            });
+            return valid;
+        }
+    </script>
+{% endblock %}

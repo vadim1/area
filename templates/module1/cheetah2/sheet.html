@@ -1,0 +1,17 @@
+{% extends 'modules/cheetah/sheet.html' %}
+{% block cheetah_content %}
+    <p>Now that we’ve seen it in action, let’s try it ourselves!</p>
+    <p>How would you answer <i>"Should I go away to college?"</i></p>
+    <p>What might be your <span class="master_term_simple">Critical Concepts</span> (CC)?
+        What is critical to the decision being successful?</p>
+    <p>Remember: There's no one right answer. Think of answers that are "RIGHT" for you
+        personally.</p>
+
+    {% include 'module1/cheetah2/form.html' %}
+
+    <div class="space"></div>
+
+    <div class="center">
+        <button id="completeBtn" value="Complete Cheetah Sheet">Complete Cheetah Sheet</button>
+    </div>
+{% endblock %}

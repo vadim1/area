@@ -1,0 +1,7 @@
+{% extends 'modules/base/review.html' %}
+{% load module_tags %}
+{% block review_title %}Review: Problem Solver Profiles - PSP{% endblock %}
+{% block review_content %}
+    {% include 'module0/review/content.html' %}
+{% endblock %}
+{% block next_btn %}{% get_next_btn module "Got It" nav.nextUrl %}{% endblock %}

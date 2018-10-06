@@ -1,0 +1,78 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Cheetah Sheet 2: Edit Critical Concepts
+{% endblock %}{% endblock %}
+{% block content %}
+    <div class="center">
+        <img src="/static/decisions/img/cheetah.png" width="450"/>
+    </div>
+
+    <h2 class="center">Cheetah Sheet 4:<br /> Focus Your Critical Concepts</h2>
+
+    <h3>Focus your Critical Concepts by challenging your Assumptions (master term).</h3>
+
+    <h3>
+        By thinking through how her Critical Concepts could fail, Nylah realized that “the school having a good graphic design
+        program” was not specific enough. Nylah focused her Critical Concepts to reflect that a school would have to demonstrate good
+        job placement data for design majors.
+    </h3>
+
+    <h3>Your decision problem is:</h3>
+    <input type="text" name="decision" value="blah blah" />?
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Your Critical Concepts</th>
+            <th>Question the assumptions of your CCs</th>
+            <th>Fails If...</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1. <input type="text" name="cc[]" class="cc" id="1" value="{{ cc.0 }}" size="30"/></td>
+            <td>1. <input type="text" name="cc[]" class="cc" id="1" value="{{ cc.0 }}" size="30"/>?</td>
+            <td>1. <input type="text" name="cc_not[]" class="cc" id="2" value="{{ cc_not.0 }}" size="30"/></td>
+        </tr>
+        <tr>
+            <td>2. <input type="text" name="cc[]" class="cc" id="3" value="{{ cc.1 }}" size="30"/></td>
+            <td>2. <input type="text" name="cc[]" class="cc" id="3" value="{{ cc.1 }}" size="30"/>?</td>
+            <td>2. <input type="text" name="cc_not[]" class="cc" id="4" value="{{ cc_not.1 }}" size="30"/></td>
+        </tr>
+        <tr>
+            <td>3. <input type="text" name="cc[]" class="cc" id="5" value="{{ cc.2 }}" size="30"/></td>
+            <td>3. <input type="text" name="cc[]" class="cc" id="5" value="{{ cc.2 }}" size="30"/>?</td>
+            <td>3. <input type="text" name="cc_not[]" class="cc" id="6" value="{{ cc_not.2 }}" size="30"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="center">
+        <input id="next" type="submit" name="submit" value="Commit To Making Your Decision"/>
+    </div>
+
+    {% get_back_link module nav.previousUrl %}
+
+    <script type="text/javascript">
+        function validate() {
+            var valid = true;
+            $('.cc').each(function () {
+                if ($(this).val().length < 5) {
+                    if (valid) {
+                        // console.log($(this));
+                        alert("Please provide 3 critical concepts and potential issues.");
+                        $(this).focus();
+                    }
+                    valid = false;
+                }
+            });
+            return valid;
+        }
+    </script>
+{% endblock %}
