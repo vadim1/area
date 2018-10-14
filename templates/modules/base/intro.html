@@ -1,0 +1,23 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap module_tags static %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - {{ module.name }}{% endblock %}{% endblock %}
+{% block content %}
+    <div class="center">
+        <div style="font-weight: bolder">MODULE {{ module.display_num }}</div>
+        <div style="margin-top: 50px; margin-bottom: 50px;">
+            <img src="{% static 'decisions/img/Homepage_Door.png' %}"/>
+        </div>
+        <h1 class="pre_title">{% block pre_title %}{% endblock %}</h1>
+        <h1 class="module_title">{% block module_title %}{% endblock %}</h1>
+        <h1 class="post_title">{% block post_title %}{% endblock %}</h1>
+
+        <h3>
+            {% block module_subtitle %}{% endblock %}
+        </h3>
+
+        <div class="start">
+            {% get_next_btn module "Get Started" nav.nextUrl %}
+        </div>
+    </div>
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

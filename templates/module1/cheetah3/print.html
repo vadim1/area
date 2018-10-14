@@ -1,0 +1,16 @@
+{% load module_tags static %}
+
+{% block content %}
+    <img src="{% get_static_url %}{% static 'decisions/img/cheetah_logo.png' %}" style="float: left; margin-right: 15px;" width="60"/>
+    <h2>Cheetah Sheet {{ cheetah_sheet.num }}:<br/>{{ cheetah_sheet.title }}</h2>
+    {% include 'module1/cheetah3/form.html' with mode='print' %}
+
+    <hr noshade="noshade"/>
+    <h2>Decision Dilemma Results!</h2>
+    <hr noshade="noshade"/>
+
+    {% include "module1/results/list.html" with t1='Easy' t2='Confident' v1='0' v2='0' description=mod_description.00 %}
+    {% include "module1/results/list.html" with t1='Hard' t2='Confident' v1='1' v2='0' description=mod_description.10 %}
+    {% include "module1/results/list.html" with t1='Easy' t2='Unsure'    v1='0' v2='1' description=mod_description.01 %}
+    {% include "module1/results/list.html" with t1='Hard' t2='Unsure'    v1='1' v2='1' description=mod_description.11 %}
+{% endblock %}

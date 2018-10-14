@@ -1,0 +1,71 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Getting Opinions{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <style type="text/css">
+        label {
+            font-size: large;
+            border: 1px solid #dddddd;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+    </style>
+
+    <h2 class="center">
+        Getting Opinions
+    </h2>
+
+    <h3>
+        For {{ sample_student.name|title }}, what kinds of opinions might {{ sample_student.pronoun_subject }} want to
+        learn? Choose all that apply.
+    </h3>
+
+    {% for opinion in module.get_opinions %}
+        <div>
+            <label>
+                <input type="checkbox" name="opinions[]" value="{{ opinion }}"/>
+                {{ opinion }}
+            </label>
+        </div>
+    {% endfor %}
+
+    <p class="center">
+        <button id="next" type="submit">Now its your turn!</button>
+    </p>
+    {% get_back_link module nav.previousUrl %}
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            {% if selected_opinions %}
+                {% for opinion in selected_opinions %}
+                    var opinion = "{{ opinion }}"
+                    // Strip the beginning and end quotes if present
+                        .replace(/^&#39;/, "").replace(/&#39;$/, "")
+                        .replace(/^&quot;/, "").replace(/&quot;$/, "")
+                        // Escape the single quote in the middle of the string
+                        .replace('\'', '\\\'').replace('&#39;', '\\\'');
+
+                    $('[name="opinions[]"][value="' + opinion + '"]').click();
+                    // console.log(question);
+                {% endfor %}
+            {% endif %}
+
+            function validate() {
+                if (!$('input[name="opinions[]"]:checked').length) {
+                    alert("Please select at least one option.");
+                    $('input[name="opinions[]"]').focus();
+                    return false;
+                }
+
+                return true;
+            }
+        });
+    </script>
+{% endblock %}

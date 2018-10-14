@@ -11,6 +11,12 @@ class Module3(BaseModule):
     def num():
         return 3
 
+    # Used to display the number to the user
+    # internally it's still module 0
+    @staticmethod
+    def display_num():
+        return 4
+
     @staticmethod
     def name():
         return 'Absolute'

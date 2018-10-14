@@ -1,0 +1,7 @@
+<p class="center">
+    {% if btnType == 'submit' %}
+        <button name="next" id="next" type="{{ btnType }}">{{ btnLabel }}</button>
+    {% else %}
+        <button name="next" id="next" type="{{ btnType }}"><a href="{{ target }}">{{ btnLabel }}</a></button>
+    {% endif %}
+</p>

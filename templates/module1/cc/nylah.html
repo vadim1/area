@@ -1,0 +1,38 @@
+{% extends 'modules/base/simple.html' %}
+{% load module_tags static %}
+
+{% block title %}
+    {% define 'pageTitle' 'Critical Concepts' %}
+    {% define 'nextBtnLabel' "What do you need to resolve?" %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content_body %}
+    <div class="center">
+        <img src="{% static 'decisions/img/nylah.png' %}" height="220px" style="margin: 5px;"/>
+    </div>
+    <p>
+        Let's take {{ sample_student.name|title }} for example. {{ sample_student.pronoun_subject|title }}'s a high
+        school senior living in Brooklyn with {{ sample_student.pronoun_object }} mom, dad and two younger
+        sisters. {{ sample_student.pronoun_subject|title }}’s deciding whether or not to go away to college. </p>
+    <p>
+        {{ sample_student.name|title }} begins {{ sample_student.pronoun_object }} decision-making by starting
+        with {{ sample_student.pronoun_object }} vision of success and asking {{ sample_student.pronoun_reflexive }}:
+        <i>“Should I go away to college?”</i>
+    </p>
+    <p>
+        On {{ sample_student.pronoun_object }} first attempt <i><b>without</b></i> <span class="master_term_simple">Critical Concepts</span>
+        (CC), {{ sample_student.pronoun_subject }} put down:
+    </p>
+
+    <table class="table">
+        <tbody>
+        {% for without_cc in sample_student.without_cc %}
+            <tr>
+                <td width="5">{{ forloop.counter }}.</td>
+                <td style="border-bottom: 1px solid black;">{{ without_cc }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

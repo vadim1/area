@@ -1,0 +1,106 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap module_tags static %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Show Me An Example{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+        .living-selector input {
+            margin: 0;
+            padding: 0;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .city {
+            background-image: url({% static 'decisions/img/City_Image.jpeg' %});
+        }
+
+        .suburbs {
+            background-image: url({% static 'decisions/img/Urban_Image.jpeg' %});
+        }
+
+        .living-selector input:active + .living-choice {
+        }
+
+        .living-selector input:checked + .living-choice {
+            border: 4px solid #52c0d8;
+            width: 233px;
+            height: 157px;
+        }
+
+        .living-choice {
+            cursor: pointer;
+            background-size: contain;
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 229px;
+            height: 153px;
+        }
+
+        .living-choice:hover {
+            opacity: 0.8;
+        }
+    </style>
+    <h2 class="center">Show Me An Example</h2>
+
+    <p>The very same decision - say where to live - may be easy at some point
+        in our lives and yet difficult at another.</p>
+
+    <p>Select which life looks good to you.</p>
+
+    <h3 style="white-space: nowrap;" class="center">
+        <div class="living-selector">
+            <input id="city" type="radio" name="living" value="city"/>
+            <label class="living-choice city" for="city"></label>
+            <input id="suburbs" type="radio" name="living" value="suburbs"/>
+            <label class="living-choice suburbs" for="suburbs"></label>
+        </div>
+    </h3>
+    <p id="city_text" style="display:none;"><i>Fast paced city might be just right for a young go-getter. Might you want a pretty landscape for a more relaxing life in future years?</i></p>
+    <p id="suburbs_text" style="display:none;"><i>A pretty landscape might be just right for a young go-getter. Might you want a fast paced city life in future years?</i></p>
+
+    <div class="start2">
+        {% get_next_btn module "Let's Make Another Decision" nav.nextUrl "submit" %}
+    </div>
+    {% get_back_link module nav.previousUrl %}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input[name="living"]').each(function () {
+                var obj = $(this);
+                var value = obj.val();
+                var textId = '#' + value + '_text';
+
+                if (value == '{{ module.living }}') {
+                    obj.attr('checked', 'checked');
+                    // Render the corresponding text as well
+                    $(textId).css('display', 'block');
+                }
+            });
+
+            $('input[name="living"]').click(function() {
+                var obj = $(this);
+                var value = obj.val();
+                var textId = '#' + value + '_text';
+
+                obj.attr('checked', 'checked');
+                $(textId).css('display', 'block');
+
+                // Hide the others
+                $('input[name="living"]').each(function () {
+                    if ($(this).val() != value) {
+                        $('#'+$(this).val()+'_text').css('display', 'none');
+                    }
+                });
+            });
+        });
+
+        function validate() {
+            if (!$('input[name="living"]:checked').length) {
+                alert("Please select one by clicking on it.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+{% endblock %}

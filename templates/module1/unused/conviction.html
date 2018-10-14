@@ -1,0 +1,22 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Conviction
+{% endblock %}{% endblock %}
+{% block content %}
+    <h2 class="center">Conviction</h2>
+
+    <h3>
+        Ideally you want your decisions to get you closer to your goals and your dreams. Building decision making skills
+        can increase your confidence. Using skills well builds conviction; it gives you the assurance you need, that you
+        are making your big decision better.
+    </h3>
+
+    <div class="center">
+        {% get_next_btn module "Building Conviction" nav.nextUrl %}
+    </div>
+
+    {% get_back_link module nav.previousUrl %}
+    </div>
+
+{% endblock %}

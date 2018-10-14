@@ -1,0 +1,12 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Review{% endblock %}{% endblock %}
+{% block content %}
+    <h2 class="center">{% block review_title %}{% endblock %}</h2>
+
+    {% block review_content %}{% endblock %}
+
+    <div class="start">{% block next_btn %}{% endblock %}</div>
+
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

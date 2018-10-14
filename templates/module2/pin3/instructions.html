@@ -1,0 +1,26 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Facts Beat Bias{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <h2 class="center">
+        Facts Beat Bias
+    </h2>
+
+    {% include 'module2/map_content.html' with display_mode='How Fact Beats Bias' %}
+
+    <h3>
+        Both facts and opinions have value but by checking for facts first, you can weigh the opinions against the
+        facts.
+    </h3>
+    <h3>
+        If you collect opinions first it may bias how you interpret the facts.
+    </h3>
+
+    <div class="center" style="margin-top: 50px;">
+        {% get_next_btn module "Finding Facts" nav.nextUrl %}
+    </div>
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

@@ -1,3 +1,6 @@
+# 1.2.0
+* Change hardcoded copyright year to be dynamic
+
 # 1.1.0
 * Add `docs/` folder
 * Add `CHANGELOG.md` and `VERSION.md` to track changes and have some sense of versioning

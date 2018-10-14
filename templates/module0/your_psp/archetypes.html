@@ -1,0 +1,37 @@
+{% extends 'decisions/base.html' %}
+{% load module_tags static %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Other Problem Solver Profiles{% endblock %}{% endblock %}
+{% block content %}
+    <h2 class="center">{% block module_title %}Other Problem Solver Profiles{% endblock %}</h2>
+    {% include 'module0/map_content.html' with display_mode='Other Problem Solver Profiles' %}
+
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        {% for profile in module.profiles %}
+            {% if profile.id != module.archetype %}
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="heading_{{ forloop.counter }}">
+                        <h5 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                               href="#collapse_{{ forloop.counter }}" aria-expanded="false"
+                               aria-controls="collapse_{{ forloop.counter }}">
+                                {% with 'area_app/img/'|add:profile.id|add:'.png' as path %}
+                                    <img src="{% get_static_url %}{% static path %}" height="50" width="50"/>{% endwith %}
+                                The {{ profile.id|title }} - {{ profile.what }}
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapse_{{ forloop.counter }}" class="panel-collapse collapse" role="tabpanel"
+                         aria-labelledby="heading_{{ forloop.counter }}">
+                        <div class="panel-body">
+                            {% with 'module0/archetype/'|add:profile.id|add:'.html' as path %}
+                                {% include path with archetype=profile.id display_mode='all' show_nav=False %}{% endwith %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    {% get_next_btn module "Pause Like The Cheetah" nav.nextUrl %}
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

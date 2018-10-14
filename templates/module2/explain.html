@@ -1,56 +1,66 @@
 {% extends 'decisions/base.html' %}
-{% load bootstrap %}
-{% block title %}{% block h1 %}Module 2 - Explanation{% endblock %}{% endblock %}
+{% load bootstrap module_tags static %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Quiz Complete! Why Might We Develop Biases?
+{% endblock %}{% endblock %}
 {% block content %}
     <style type="text/css">
-    .main div {
-        margin-top: 20px;
-    }
-    #canvas {
-        display: none;
-        position: fixed;
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 100%;
-        z-index: 1;
-        pointer-events: none;
-    }
+        .main div {
+            margin-top: 20px;
+        }
+
+        #canvas {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        #next {
+            display: none;
+        }
     </style>
-    <script type="text/javascript" src="/static/decisions/js/confetti.js"></script>
+    <script type="text/javascript" src="{% static 'decisions/js/confetti.js' %}"></script>
     <canvas id="canvas"></canvas>
     <script type="text/javascript">
-    $(document).ready(function(){
-        $('.low').click(function(){
-            var title = $(this).text();
-            $(this).text('Too Low!');
-            return false;
+        $(document).ready(function () {
+            $('.low').click(function () {
+                var title = $(this).text();
+                $(this).text('Too Low!');
+                return false;
+            });
+            $('.yes').click(function () {
+                var title = $(this).text();
+                $(this).text('Yes!');
+                $('#canvas').show();
+                StartConfetti();
+                $('#next').show();
+                return false;
+            });
         });
-        $('.yes').click(function(){
-            var title = $(this).text();
-            $(this).text('Yes!');
-            $('#canvas').show();
-            StartConfetti();
-            $('#next').show();
-            return false;
-        });
-    });
     </script>
     <div class="center">
         <h2 class="center">
-            Why might we develop biases?
+            Quiz Complete! Why Might We Develop Biases?
         </h2>
-        <h3>
+        <p>
             Guess how many decisions researchers tell us we make in a single day?
-        </h3>
-
-        <div><button class="low">500</button></div>
-        <div><button class="low">15,000</button></div>
-        <div><button class="yes">40,000</button></div>
+        </p>
 
         <div>
-            <button id="next" type="button" style="display: none;"><a href="bias">Learn More</a></button>
+            <button class="low">500</button>
         </div>
+        <div>
+            <button class="low">15,000</button>
+        </div>
+        <div>
+            <button class="yes">40,000</button>
+        </div>
+
+        {% get_next_btn module "Learn More" nav.nextUrl %}
     </div>
-    <a href="game_end" id="back">Back</a>
+    {% get_back_link module nav.previousUrl %}
 {% endblock %}

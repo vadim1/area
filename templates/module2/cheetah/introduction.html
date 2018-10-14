@@ -1,0 +1,19 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Cheetah Sheet{% endblock %}{% endblock %}
+{% block content %}
+    <div class="center">
+        <img src="/static/decisions/img/cheetah.png" width="450"/>
+    </div>
+    <h2 class="center">Cheetah Sheet</h2>
+    <h3>
+        Conduct your AREA hunt like the cheetah: She’s agile and flexible. Her speed is not as important as her ability
+        to quickly slow down which makes her agile and flexible.
+    </h3>
+
+    <div class="center start">
+        {% get_next_btn module "Cheetah Sheet 1: Module 3" nav.nextUrl %}
+    </div>
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'decisions/base.html' %}
+{% load static account socialaccount bootstrap i18n module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - {{ sample_student.name|title }}'s Critical Concepts{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+        #why_options div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: large;
+            border: 1px solid #dddddd;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+    </style>
+    <h2 class="center">{{ sample_student.name|title }}'s Critical Concepts</h2>
+    <p>On {{ sample_student.name|title }}'s second attempt, when {{ sample_student.pronoun_subject }}
+        asked {{ sample_student.pronoun_reflexive }} what was critical {{ sample_student.pronoun_subject }} came up with
+        three questions about what she
+        really needed to resolve to get to a successful outcome.</p>
+
+    <table class="table">
+        <tbody>
+        {% for value in sample_student.cc_as_question %}
+            {% if value.successful == 1 %}
+                <tr>
+                    <td width="5">{{ value.num }}.</td>
+                    <td style="border-bottom: 1px solid black;">{{ value.question }}</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <p>After {{ sample_student.name|title }} considered what was really critical to making a successful decision, here
+        are {{ sample_student.pronoun_object }} updated <span class="master_term_simple">Critical Concepts</span> (CC):
+    </p>
+
+    <table class="table">
+        <tbody>
+        {% for value in sample_student.cc %}
+            <tr>
+                <td width="5">{{ forloop.counter }}.</td>
+                <td style="border-bottom: 1px solid black;">{{ value }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <p>What changed when {{ sample_student.name|title }} began using <span
+            class="master_term_simple">Critical Concepts</span> (CC)? Choose all that apply:</p>
+    <div id="why_options">
+        {% for option in module.get_what_changed %}
+            <div>
+                <label>
+                    <input type="checkbox" name="what_changed[]" value="{{ option }}"/>
+                    <span>{{ option }}</span>
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% get_next_btn module "Let's Try It" nav.nextUrl "submit" %}
+    {% get_back_link module nav.previousUrl %}
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#next').click(validate);
+        });
+
+        function validate() {
+            var allowed = ['Attainable', 'Focused', 'Realistic'];
+            var valid = [];
+            var error_msg = "";
+
+            $("input:checkbox[name='what_changed[]']").each(function () {
+                if ($(this).prop('checked')) {
+                    var selected = $(this).val();
+                    if (jQuery.inArray(selected, allowed) < 0) {
+                        error_msg = "Choose another! " + selected + " is not valid.";
+                        return false;
+                    } else {
+                        valid.push(selected);
+                    }
+                }
+            });
+
+            if (error_msg == "") {
+                if (valid.length == allowed.length) {
+                    return true;
+                } else {
+                    error_msg = "Please choose all that apply";
+                }
+            }
+
+            alert(error_msg);
+            return false;
+        }
+    </script>
+{% endblock %}

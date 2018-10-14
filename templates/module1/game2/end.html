@@ -1,0 +1,15 @@
+{% extends 'modules/base/simple.html' %}
+{% load module_tags static %}
+
+{% block title %}
+    {% define 'pageTitle' 'Decision Dilemmas' %}
+    {% define 'nextBtnLabel' "Show Me My Results!" %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content_body %}
+    <p>Some decisions that seem easy can be hard to make while other hard ones are right in our comfort zone.</p>
+    <p>"Sit and wait or take action?" might seem easy but sometimes we're unsure of what to do.</p>
+    <p>On the next page, you'll see your answers grouped in four boxes.</p>
+    <p>The boxes are labeled EASY, HARD, CONFIDENT and UNSURE.</p>
+{% endblock %}

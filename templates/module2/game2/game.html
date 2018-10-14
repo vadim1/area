@@ -1,0 +1,170 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Bias In Action Quiz{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <style type="text/css">
+        #biases {
+            width: 100%;
+        }
+
+        #biases button {
+            cursor: pointer;
+            font-size: 100%;
+            line-height: 200%;
+            white-space: nowrap;
+            border-radius: 6px;
+            width: 150px;
+            text-align: center;
+            margin: 5px;
+        }
+
+        #question_div div {
+            color: black;
+        }
+
+        .noclick {
+            background-color: #ffc253;
+        }
+
+        .wrong {
+            background-color: #f2502a !important;
+        }
+
+        .right {
+            background-color: #1dcd9f !important;
+        }
+
+        .yesno {
+            font-size: 256px;
+            position: absolute;
+            top: 400px;
+            left: 40%;
+            z-index: 1000;
+        }
+
+        #yes {
+            color: green;
+            display: none;
+        }
+
+        #no {
+            color: red;
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+        var questions = {
+            {% for question in questions %}
+                '{{ forloop.counter }}': {
+                    'title': "{{ question.title }}",
+                    'question': "{{ question.question|safe }}",
+                {# only display the bias answer and not both #}
+                {% if question.bias_answer == 0 %}
+                    'bias_answer': "{{ question.answer0|safe }}",
+                {% else %}
+                    'bias_answer': "{{ question.answer1|safe }}",
+                {% endif %}
+                    'bias': "{{ question.bias }}",
+                    'answered': false,
+                },
+            {% endfor %}
+        }
+
+        function bias(key) {
+            if (key == $('#bias').text()) {
+                //$('.jumbotron').switchClass('noclick', 'right', 200).switchClass('right', 'noclick', 200);
+                $('#yes').fadeIn(400).fadeOut(400);
+                questions[$('#question_index').text()]['answered'] = true;
+            } else {
+                //$('.jumbotron').switchClass('noclick', 'wrong', 200).switchClass('wrong', 'noclick', 200);
+                $('#no').fadeIn(400).fadeOut(400);
+            }
+            return next_question(false);
+        }
+
+        var question_num = 0;
+        var num_questions = {{ num_questions }};
+        var cycled_through_all_questions = false;
+
+        function shuffle(a) {
+            var j, x, i;
+            for (i = a.length; i; i--) {
+                j = Math.floor(Math.random() * i);
+                x = a[i - 1];
+                a[i - 1] = a[j];
+                a[j] = x;
+            }
+            return a;
+        }
+
+        var random_order = [];
+        for (i = 1; i <= num_questions; i++) {
+            random_order.push(i);
+        }
+        shuffle(random_order);
+
+        function next_question(isAfterSkip) {
+            if (!isAfterSkip) {
+                cycled_through_all_questions = false;
+            }
+            question_num++;
+            if (question_num >= num_questions) {
+                if (!cycled_through_all_questions) {
+                    question_num = 0;
+                    cycled_through_all_questions = true; // On next iteration through, done
+                } else {
+                    // Reached max num of questions and already cycled through
+                    $('#next').show();
+                    return false;
+                }
+            }
+            var question_index = random_order[question_num];
+            if (questions[question_index]['answered'] == true) {
+                // Already answered
+                return next_question(true);
+            } else {
+
+            }
+            $('#question_index').text(question_index);
+            $('#question').text(questions[question_index]['question']);
+            $('#bias_answer').text(questions[question_index]['bias_answer']);
+            $('#bias').text(questions[question_index]['bias']);
+            return false;
+        }
+
+        $(document).ready(function () {
+            $('#game').width($('h2').width());
+            next_question(false);
+        });
+
+    </script>
+    <div id="yes" class="yesno">&#10003;</div>
+    <div id="no" class="yesno">&#10008;</div>
+    <h2 class="center">
+        Bias In Action Quiz
+    </h2>
+    <p class="center">
+        For each scenario, select the bias you think is most relevant.
+    </p>
+    <div class="jumbotron noclick" style="margin-top: 20px; border: 2px solid #f6653c;">
+        <div class="container" style="margin-top: -30px; margin-bottom: -10px;">
+            <div id="question_div" style="height: 100px;">
+                <h3 id="question">Question</h3>
+                <h3 id="bias_answer">Bias Answer</h3>
+                <div id="question_index" style="display: none;"></div>
+                <div id="bias" style="display: none;"></div>
+            </div>
+            <div id="biases">
+                {% for bias in biases %}
+                    <button class="btn" onclick="return bias('{{ bias.key }}')">{{ bias.label }}</button>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="center">
+        <button id="next" type="button" style="display: none;"><a href="{{ nav.urlPrefix }}{{ nav.nextUrl }}">You Got Them All!</a></button>
+    </div>
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

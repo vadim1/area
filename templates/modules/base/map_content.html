@@ -1,0 +1,14 @@
+{# map_content.html - include only the minimum HTML to render the map and its pins #}
+{# This page is meant to be included in other pages #}
+{% extends 'modules/base/map.html' %}
+{% block title %}{% block h1 %}{% endblock %}{% endblock %}
+{% block base_head %}{% endblock %}
+{% block header %}{% endblock %}
+{% block pre_instructions %}
+{% endblock %}
+{% block pins %}
+    {% for pin in module.pins %}
+        <img src="/static/decisions/img/Locator_rotated.png" class="pin pin{{ forloop.counter0 }}" title="{{ pin }}"/>
+    {% endfor %}
+{% endblock %}
+{% block footer %}{% endblock %}

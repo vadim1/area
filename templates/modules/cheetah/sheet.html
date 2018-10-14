@@ -1,0 +1,14 @@
+{% extends 'decisions/base.html' %}
+{% load module_tags static %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Cheetah Sheet {{ cheetah_sheet.num }}: {{ cheetah_sheet.title }}{% endblock %}{% endblock %}
+
+{% block content %}
+    <img src="{% static 'decisions/img/cheetah_logo.png' %}" style="float: left; margin-right: 15px;" width="60"/>
+    <h2>
+        Cheetah Sheet {{ cheetah_sheet.num }}:<br />{{ cheetah_sheet.title }}
+    </h2>
+
+    {% block cheetah_content %}{% endblock %}
+
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

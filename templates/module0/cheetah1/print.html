@@ -1,0 +1,26 @@
+{% load module_tags static %}
+
+{% block content %}
+    <img src="{% get_static_url %}{% static 'decisions/img/cheetah_logo.png' %}" style="float: left; margin-right: 15px;" width="60"/>
+    <h2>Cheetah Sheet {{ cheetah_sheet.num }}:<br/>{{ cheetah_sheet.title }}</h2>
+    {% include 'module0/cheetah1/form.html' with mode='print' %}
+
+    <hr noshade="noshade"/>
+    <h2>Your Problem Solver Profile</h2>
+    <hr noshade="noshade"/>
+
+    <div>{% with 'module0/archetype/'|add:module.archetype|add:'.html' as path %}
+        {% include path with archetype=module.archetype display_mode='report' %}{% endwith %}
+    </div>
+
+    <hr noshade="noshade"/>
+    <h2>Other Problem Solver Profiles</h2>
+    <hr noshade="noshade"/>
+
+    {% for profile in module.profiles %}
+        {% if profile.id != module.archetype %}
+            {% with 'module0/archetype/'|add:profile.id|add:'.html' as path %}
+                {% include path with archetype=profile.id display_mode='report' %}{% endwith %}
+        {% endif %}
+    {% endfor %}
+{% endblock %}

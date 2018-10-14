@@ -1,20 +1,31 @@
 from django.conf.urls import url, include
+from django.views.generic import RedirectView
+
 import views
+
+# If you modify the order of the URLs on this file, please update the list in
+# views.navigation as well
 urlpatterns = [
-    url(r'^$', views.intro, name='Module 0'),
-    url(r'^intro/?$', views.intro, name='Module 0'),
-    url(r'^restart/?', views.restart, name='Module 0 Restart'),
-    url(r'^review/?$', views.review, name='Module 0 Review'),
-    url(r'^map/?$', views.map, name='Module 0 Map'),
-    url(r'^instructions/?$', views.instructions, name='Module 0 Instructions'),
+    url(r'^$', RedirectView.as_view(pattern_name='module0_intro', permanent=True)),
 
-    url(r'^game/?$', views.game, name='Module 0 Game'),
-    url(r'^archetype/?$', views.archetype, name='Module 0 Archetype'),
-    url(r'^right/?$', views.right, name='Module 0 Right?'),
-    url(r'^pro_con/?$', views.pro_con, name='Module 0 Pro Con'),
-    url(r'^cheetah/?$', views.cheetah, name='Module 0 Cheetah Sheet'),
-    url(r'^archetypes/?$', views.archetypes, name='Module 0 Archetypes'),
-    url(r'^eval/?$', views.eval, name='Module 0 Evaluation'),
+    # Module URLs in order
+    url(r'^intro/?$', views.generic_page_controller, name='module0_intro'),
+    url(r'^map/?$', views.map, name='module0_map'),
+    url(r'^game1/instructions/?$', views.generic_page_controller, name='module0_game1_instructions'),
+    url(r'^game1/profiles/?$', views.generic_page_controller, name='module0_game1_profiles'),
+    url(r'^game1/game/?$', views.game1_game, name='module0_game1_game'),
+    url(r'^your_psp/intro/?$', views.generic_page_controller, name='module0_your_psp_intro'),
+    url(r'^your_psp/strengths/?$', views.generic_page_controller, name='module0_your_psp_strengths'),
+    url(r'^your_psp/blind_spots/?$', views.generic_page_controller, name='module0_your_psp_blind_spots'),
+    url(r'^your_psp/right/?$', views.generic_page_controller, name='module0_your_psp_right'),
+    url(r'^your_psp/archetypes/?$', views.generic_page_controller, name='module0_your_psp_archetypes'),
+    url(r'^cheetah1/intro/?$', views.generic_page_controller, name='module0_cheetah1_intro'),
+    url(r'^cheetah1/sheet/?$', views.cheetah1_sheet, name='module0_cheetah1_sheet'),
+    url(r'^cheetah1/apply/?$', views.generic_page_controller, name='module0_cheetah1_apply'),
+    url(r'^summary/?$', views.summary, name='module0_summary'),
 
-    url(r'^summary/?$', views.summary, name='Module 0 Summary'),
+    # Other Module-specific URLs
+    url(r'^cheetah1/email/?$', views.cheetah1_report, name='module0_cheetah1_email'),
+    url(r'^cheetah1/print/?$', views.cheetah1_report, name='module0_cheetah1_print'),
+    url(r'^restart/?', views.restart, name='module0_restart'),
 ]

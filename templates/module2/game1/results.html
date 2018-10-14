@@ -1,0 +1,188 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap module_tags static %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Results!{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <script type="text/javascript" src="{% static 'decisions/js/jquery.flip.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var clicks = [];
+            clicks['optimism'] = 0;
+            clicks['projection'] = 0;
+            clicks['liking'] = 0;
+            clicks['authority'] = 0;
+            clicks['planning'] = 0;
+            clicks['social'] = 0;
+
+            $(".flip").flip({
+                trigger: 'click'
+            });
+
+            $('.back').css('display', 'block');
+            $('#optimism').click(function() {
+                clicks['optimism']++;
+                showNext();
+            });
+            $('#projection').click(function() {
+                clicks['projection']++;
+                showNext();
+            });
+            $('#liking').click(function() {
+                clicks['liking']++;
+                showNext();
+            });
+            $('#authority').click(function() {
+                clicks['authority']++;
+                showNext();
+            });
+            $('#planning').click(function() {
+                clicks['planning']++;
+                showNext();
+            });
+            $('#social').click(function() {
+                clicks['social']++;
+                showNext();
+            });
+
+            function showNext() {
+                for (var key in clicks) {
+                    if (clicks[key] == 0) {
+                        console.log(key + " is still not clicked. Skipping");
+                        return false;
+                    }
+                }
+
+                // Everything has been clicked, show the next button
+                console.log('All items have been clicked at least once');
+                $('#nextBtnSection').css('display', 'block');
+            }
+        });
+    </script>
+    <style type="text/css">
+        .reveal {
+            width: 100%;
+        }
+
+        .reveal td {
+            text-align: center;
+            width: 30%;
+            padding: 5px;
+        }
+
+        .front, .flip {
+            height: 150px;
+        }
+
+        .reveal img {
+            height: 120px;
+        }
+
+        .back {
+            display: none;
+        }
+
+        .back p {
+            display: inline-block;
+            vertical-align: middle;;
+            line-height: normal;
+        }
+
+        .front h2, .back h3 {
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .back h3 {
+            padding-top: 30px;
+            cursor: pointer;
+        }
+
+        #nextBtnSection {
+            display: none;
+        }
+    </style>
+    <h2 class="center">Results!</h2>
+    <p>
+        Click on the biases below and read their definition. The percentages tell you how often you fell prey to that bias.
+    </p>
+    <table class="reveal center">
+        <tr>
+            <td colspan="2">
+                <div class="flip" id="optimism">
+                    <div class="front">
+                        <h2>Optimism Bias</h2>
+                    </div>
+                    <div class="back">
+                        <h3>Believing everything will turn out well</h3>
+                        <h2>{{ biases.optimism.ratio }}%</h2>
+                    </div>
+                </div>
+            </td>
+            <td colspan="2">
+                <div class="flip" id="projection">
+                    <div class="front">
+                        <h2>Projection Bias</h2>
+                    </div>
+                    <div class="back">
+                        <h3>Putting your own thoughts and desires onto others around you</h3>
+                        <h2>{{ biases.projection.ratio }}%</h2>
+                    </div>
+                </div>
+            </td>
+            <td colspan="2">
+                <div class="flip" id="liking">
+                    <div class="front">
+                        <h2>Liking Bias</h2>
+                    </div>
+                    <div class="back">
+                        <h3>Gravitating toward things and people we like</h3>
+                        <h2>{{ biases.liking.ratio }}%</h2>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="flip" id="authority">
+                    <div class="front">
+                        <h2>Authority Bias</h2>
+                    </div>
+                    <div class="back">
+                        <h3>Tendency to take on the opinion of someone who is seen as an authority on a subject</h3>
+                        <h2>{{ biases.authority.ratio }}%</h2>
+                    </div>
+                </div>
+            </td>
+            <td colspan="2">
+                <div class="flip" id="planning">
+                    <div class="front">
+                        <h2>Planning Bias</h2>
+                    </div>
+                    <div class="back">
+                        <h3>Underestimating how long a task will take, even if you’ve done it before</h3>
+                        <h2>{{ biases.planning.ratio }}%</h2>
+                    </div>
+                </div>
+            </td>
+            <td colspan="2">
+                <div class="flip">
+                    <div class="front" id="social">
+                        <h2>Social Proof Bias</h2>
+                    </div>
+                    <div class="back">
+                        <h3>Following the crowd, letting your opinion be influenced by reputation</h3>
+                        <h2>{{ biases.social.ratio }}%</h2>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <p class="space">
+        Most of us think of 100% as a perfect score. That is an example of a mental shortcut.
+    </p>
+    <div id="nextBtnSection">
+        {% get_next_btn module "Tell Me More" nav.nextUrl %}
+    </div>
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

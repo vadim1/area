@@ -1,0 +1,106 @@
+{% extends 'decisions/base.html' %}
+{% load static account socialaccount bootstrap i18n %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Problem Solver Profile{% endblock %}{% endblock %}
+{% block content %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            {% if module.psp_correct %}
+                <!-- Check the selected answer and display the button if we previously selected -->
+                $("input[name='your_profile'][value='{{ module.psp_correct }}']").prop("checked",true);
+                $('#psp_correct').val('{{ module.psp_correct }}');
+                $('#continue').css("display", "inline-block");
+            {% endif %}
+
+            $("input[name='your_profile']").change(function () {
+                var selectedValue = $(this).val();
+                $('#psp_correct').val(selectedValue);
+                $('#continue').css("display", "inline-block");
+            });
+
+        });
+    </script>
+    <style type="text/css">
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #eee;
+            margin: auto;
+            padding: 20px;
+            /* border: 1px solid #888888; */
+            width: 70%;
+        }
+
+        #other_archetypes {
+            background-color: #eee;
+        }
+
+        #other_archetypes p {
+            font-size: 1em;
+        }
+
+        #your_profile_options {
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: large;
+            border: 1px solid #ddd;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+
+        #read_other_psp_btn {
+            display: none;
+        }
+    </style>
+    <h2>Does your Problem Solver Profile sound like you?</h2>
+
+    <p>We are all inconsistent decision makers, impacted by our environment so
+        at different times we may fit into different Profiles.</p>
+
+    <p>Is your <span class="master_term_simple">Problem Solver Profile</span> (PSP):</p>
+
+    <input type="hidden" name="psp_correct" value="" id="psp_correct"/>
+
+    <div id="your_profile_options">
+        <label>
+            <input type="radio" name="your_profile" value="good"/>
+            <span>Spot On</span>
+        </label>
+
+        <label>
+            <input type="radio" name="your_profile" value="medium"/>
+            <span>Somewhat Accurate</span>
+        </label>
+    </div>
+
+    <div id="other_archetypes" class="modal">
+    Other archetypes
+    </div>
+
+    <div class="center">
+        <button id="continue" type="submit" value="Read Other Problem Solver Profiles" style="display: none;">Read Other Problem Solver
+            Profiles
+        </button>
+        {% get_back_link module nav.previousUrl %}
+    </div>
+
+{% endblock %}

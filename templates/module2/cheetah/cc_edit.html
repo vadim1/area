@@ -1,0 +1,47 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Edit Critical Concepts{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <h2 class="center">
+        Update Critical Concepts
+    </h2>
+    <h3>
+        From Module {{ module1.display_num }}, your decision is:
+    </h3>
+
+    <p>
+        <input type="text" name="decision" value="{{ module1.decision }}" size="50">
+    </p>
+
+    <br />
+
+    <h3>Update Your Critical Concepts:</h3>
+    <table class="table" style="margin-top: 5px;">
+        <tbody>
+        <tr>
+            <td>1.</td>
+            <td><input type="text" name="cc[]" class="cc" value="{{ cc.0|safe }}" size="50"/></td>
+        </tr>
+        <tr>
+            <td>2.</td>
+            <td><input type="text" name="cc[]" class="cc" value="{{ cc.1 }}" size="50"/></td>
+        </tr>
+        <tr>
+            <td>3.</td>
+            <td><input type="text" name="cc[]" class="cc" value="{{ cc.2 }}" size="50"/></td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td> </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="center space">
+        <button type="button" onclick="$(this).form().submit();">Update Critical Concepts</button>
+    </div>
+    <a href="{{ nav.urlPrefix }}2/" id="back">Back</a>
+{% endblock %}

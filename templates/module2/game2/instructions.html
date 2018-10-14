@@ -1,0 +1,37 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Spot Bias{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <style type="text/css">
+        #yes {
+            color: green;
+            font-size: 200%;
+        }
+
+        #no {
+            color: red;
+            font-size: 200%;
+        }
+    </style>
+
+    <h2 class="center">
+        Defining Bias
+    </h2>
+    <div class="center" style="margin: 50px;">
+    </div>
+    <p>Can you apply the names of the biases you just learned to real-life situations where they occur?</p>
+    <p>A scenario will pop up. Choose from the biases below which mental shortcut is at work.</p>
+    <p>
+        If you get it right
+        <span id="yes" class="yesno">&#10003;</span>
+        will flash on the screen. If not,
+        <span id="no" class="yesno">&#10008;</span>
+        will flash.
+    </p>
+    <div class="center start">
+    {% get_next_btn module "Spot Bias" nav.nextUrl %}
+    </div>
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

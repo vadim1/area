@@ -1,0 +1,9 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap module_tags static %}
+{% block title %}Module {{ module.display_num }} - {{ pageTitle }}{% endblock %}
+{% block content %}
+    <h2 class="center">{{ pageTitle }}</h2>
+    {% block content_body %}{% endblock %}
+    {% block next_btn %}{% get_next_btn module nextBtnLabel nav.nextUrl %}{% endblock %}
+    {% block previous_btn %}{% get_back_link module nav.previousUrl %}{% endblock %}
+{% endblock %}

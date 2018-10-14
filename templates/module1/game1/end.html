@@ -1,0 +1,15 @@
+{% extends 'modules/base/simple.html' %}
+{% load module_tags static %}
+
+{% block title %}
+    {% define 'pageTitle' 'Lots of Big And Little Decisions' %}
+    {% define 'nextBtnLabel' "Are You Confident?" %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content_body %}
+    <p>Just like real life you made decisions under duress.</p>
+    <p>Next select whether you are CONFIDENT or UNSURE about your decision.</p>
+    <p>You may be UNSURE about an EASY decision or CONFIDENT about a HARD one and vice versa.</p>
+    <p>There is no time constraint.</p>
+{% endblock %}

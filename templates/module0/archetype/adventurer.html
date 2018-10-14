@@ -1,0 +1,95 @@
+{% extends 'modules/base/archetype.html' %}
+{% load module_tags static %}
+{% block strength_text %}
+    Being the Adventurer comes with a lot of perks. One of your defining
+    strengths is your confidence—you believe in yourself, and you know
+    what you stand for. That's a powerful thing! This confidence probably
+    shows up in your life in a lot of ways including when you've got
+    a big decision ahead of you. You are not afraid to make big decisions.
+    Another defining strength is that you are built for speed—you move
+    quickly! You aren't afraid to go boldly toward what you want, and fast.
+    That lets you get a lot done in a short period of time.
+{% endblock %}
+{% block strength_list %}
+    <li><strong>Confident</strong>: Belief in yourself</li>
+    <li><strong>Speedy</strong>: Moves quickly to make decisions</li>
+    <li><strong>Efficient</strong>: Gets a lot done in a short period of time</li>
+{% endblock %}
+
+{% block blind_spot_text %}There are some downfalls to this {% include "problem_solver.html" %}
+    Profile, too. Your confidence can make you believe that things are
+    going to go your way—and sometimes, they won't, especially if you don’t
+    have data to back your decision. This "optimism bias" makes you feel
+    unstoppable, and sometimes, that can lead you into danger. Because you
+    move quickly, you don't always have an accurate sense of how long
+    something really takes, and so this "planning fallacy" makes you run
+    the risk of being behind and not actually accomplishing everything you
+    wanted to. And finally, because you have such strong beliefs in what
+    is right and what is wrong, you aren't always able to look at the full
+    picture. Sometimes, you'll see evidence that tells you that you're
+    going in the wrong direction, but your "confirmation bias" leads you
+    to find a way to make it support what you think is right. Watch out
+    for these biases that you have—if you know what they are, you can make
+    sure to protect yourself from them!
+{% endblock %}
+{% block blind_spot_list %}
+    <li><a class="master_term" href="#" data-toggle="tooltip" data-placement="top" title="Coming in Module 3">Optimism Bias</a>: Optimistic that decisions will work out well</li>
+    <li><a class="master_term" href="#" data-toggle="tooltip" data-placement="top" title="Coming in Module 3">Planning Fallacy</a>: Struggle with timing</li>
+    <li><a class="master_term" href="#" data-toggle="tooltip" data-placement="top" title="Coming in Module 3">Confirmation Bias</a>: Interprets new information to confirm beliefs</li>
+{% endblock %}
+
+{% block your_psp_quote %}Courage is the price that life exacts for granting peace.{% endblock %}
+{% block your_psp_author %}Amelia Earhart{% endblock %}
+{% block your_psp_explanation %}
+    You make decisions quickly and you trust your gut feeling.
+    When faced with a challenge, big or small, you'd rather do what feels
+    right than spend your time thinking through all the choices.
+    You know who you are, and you know what you want—so you aren't
+    afraid to go get it.
+{% endblock %}
+{% block your_psp_why %}What makes Ernest Shackleton an Adventurer?
+    Ernest Shackleton explored areas that other people were afraid to go
+    to but this adventuresome streak also led him
+    to be restless and make decisions so quickly that his business
+    ventures failed. Learn from his mistakes.
+{% endblock %}
+
+{% block your_psp_bio %}
+    <div class="bio col-md-4">
+        <div>
+            <img src="{% get_static_url %}{% static 'area_app/img/archetype/earhart.jpg' %}" height="150"/>
+        </div>
+        <div>
+            <div class="archetype-name">
+                <a href="http://en.wikipedia.org/wiki/Amelia_Earhart" target="_blank">Amelia Earhart</a>
+            </div>
+            Aviation Pioneer and Author
+        </div>
+    </div>
+
+    <div class="bio col-md-4">
+        <div>
+            <img src="{% get_static_url %}{% static 'area_app/img/archetype/shackleton.jpg' %}" height="150"/>
+        </div>
+        <div>
+            <div class="archetype-name">
+                <a href="http://en.wikipedia.org/wiki/Ernest_Shackleton" target="_blank">Ernest
+                    Shackleton</a>
+            </div>
+            Antarctic Explorer
+        </div>
+    </div>
+
+    <div class="bio col-md-4">
+        <div>
+            <img src="{% get_static_url %}{% static 'area_app/img/archetype/rockefeller.jpg' %}" height="150"/>
+        </div>
+        <div>
+            <div class="archetype-name">
+                <a href="http://en.wikipedia.org/wiki/John_D._Rockefeller" target="_blank">John D.
+                    Rockefeller</a>
+            </div>
+            Oil industry magnate and philanthropist
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,72 @@
+<input type="hidden" name="cheetahAnswers" id="cheetahAnswers" value=""/>
+<p class="question">Can you think of how you can use your
+    <a href="#{{ module.archetype }}" data-toggle="modal" class="master_term_simple">{{ module.archetype|title }}</a>'s
+    strengths in the future?</p>
+{% if mode == 'print' %}
+    <ul>
+        <li style="border-bottom: 1px solid black;">{{ ca.0 }}</li>
+        <li style="border-bottom: 1px solid black;">{{ ca.1 }}</li>
+    </ul>
+{% else %}
+    <table class="table cheetahQuestions">
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td><input type="text" name="ca[]" id="q2_a1" value="{{ ca.0 }}" size="50"/></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><input type="text" name="ca[]" id="q2_a2" value="{{ ca.1 }}" size="50"/></td>
+        </tr>
+        </tbody>
+    </table>
+{% endif %}
+
+<p class="question">What can you do to prevent your
+    <a href="#{{ module.archetype }}" data-toggle="modal" class="master_term_simple">{{ module.archetype|title }}</a>'s
+    blind spots from hurting future decisions?</p>
+{% if mode == 'print' %}
+    <ul>
+        <li style="border-bottom: 1px solid black;">{{ ca.2 }}</li>
+        <li style="border-bottom: 1px solid black;">{{ ca.3 }}</li>
+    </ul>
+{% else %}
+    <table class="table cheetahQuestions">
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td><input type="text" name="ca[]" id="q3_a1" value="{{ ca.2 }}" size="50"/></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><input type="text" name="ca[]" id="q3_a2" value="{{ ca.3 }}" size="50"/></td>
+        </tr>
+        </tbody>
+    </table>
+{% endif %}
+
+<p class="question">How might other PSPs ( {% for profile in module.profiles %}{% if profile.id != module.archetype %}
+    <a href="#{{ profile.id }}" data-toggle="modal" class="master_term_simple">{{ profile.id|title }}</a>
+{% endif %}{% endfor %}) interact more effectively with your PSP ( <a href="#{{ module.archetype }}" data-toggle="modal"
+                                                                      class="master_term_simple">{{ module.archetype|title }}</a>)?
+</p>
+{% if mode == 'print' %}
+    <ul>
+        <li style="border-bottom: 1px solid black;">{{ ca.4 }}</li>
+        <li style="border-bottom: 1px solid black;">{{ ca.5 }}</li>
+    </ul>
+{% else %}
+
+    <table class="table cheetahQuestions">
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td><input type="text" name="ca[]" id="q4_a1" value="{{ ca.4 }}" size="50"/></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td><input type="text" name="ca[]" id="q4_a2" value="{{ ca.5 }}" size="50"/></td>
+        </tr>
+        </tbody>
+    </table>
+{% endif %}

@@ -1,0 +1,42 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap module_tags static %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Summary{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+    .main div {
+        margin-top: 20px;
+    }
+    #canvas {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+        pointer-events: none;
+    }
+    </style>
+    <script type="text/javascript" src="{% static 'decisions/js/confetti.js' %}"></script>
+    <canvas id="canvas"></canvas>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $('#canvas').show();
+        StartConfetti();
+        setTimeout(function () {
+            StopConfetti();
+        }, 5000);
+    })
+    </script>
+    <h2 class="center">Module {{ module.display_num }} Complete!</h2>
+    <h3 class="center">
+        Congratulations! You received the Module {{ module.display_num }} badge!
+    </h3>
+
+    {% block review_content %}{% endblock %}
+
+    <div class="center">
+        <button id="next" type="submit">Modules List</button>
+    </div>
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

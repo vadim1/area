@@ -1,0 +1,82 @@
+{% extends 'modules/base/simple.html' %}
+{% load module_tags static %}
+
+{% block title %}
+    {% define 'pageTitle' 'Discover your PROBLEM SOLVER PROFILE' %}
+    {% define 'nextBtnLabel' 'Find Out!' %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content_body %}
+    <style type="text/css">
+        .main div:first-child {
+            margin: 0px auto;
+        }
+
+        .psp_profile {
+            height: 60px;
+            margin-bottom: 0px;
+        }
+
+        #next {
+            margin-top: 10px;
+        }
+
+        /* Three image containers (use 25% for four, and 50% for two, etc) */
+        .column2 {
+            float: left;
+            width: 50%;
+            padding: 5px;
+        }
+
+        .column3 {
+            float: left;
+            width: 33.33%;
+            padding: 5px;
+        }
+
+        /* Clear floats after image containers */
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+    </script>
+    <div class="center">
+        <h3>5 Problem Solver Profiles</h3>
+        <p>Are you :</p>
+
+        <div class="row">
+            <div class="column3">
+                <img src="{% static "area_app/img/adventurer.png" %}" class="psp_profile"/>
+                <a class="master_term" href="#" data-toggle="tooltip" data-placement="top" title="Ernest Shackleton">Adventurer</a>
+            </div>
+            <div class="column3">
+                <img src="{% static "area_app/img/detective.png" %}" class="psp_profile"/>
+                <a class="master_term" href="#" data-toggle="tooltip" data-placement="top" title="Marie Curie">Detective</a>
+            </div>
+            <div class="column3">
+                <img src="{% static "area_app/img/listener.png" %}" class="psp_profile"/>
+                <a class="master_term" href="#" data-toggle="tooltip" data-placement="top" title="Oprah Winfrey">Listener</a>
+            </div>
+        </div>
+
+        <div class="space"></div>
+
+        <div class="row">
+            <div class="column2">
+                <img src="{% static "area_app/img/thinker.png" %}" class="psp_profile"/>
+                <a class="master_term" href="#" data-toggle="tooltip" data-placement="top" title="Albert Einstein">Thinker</a>
+            </div>
+            <div class="column2">
+                <img src="{% static "area_app/img/creative.png" %}" class="psp_profile"/>
+                <a class="master_term" href="#" data-toggle="tooltip" data-placement="top" title="Beyoncé">Visionary</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

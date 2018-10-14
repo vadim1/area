@@ -1,0 +1,12 @@
+{% extends 'decisions/base.html' %}
+{% load static account socialaccount bootstrap i18n %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Strengths{% endblock %}{% endblock %}
+{% block content %}
+    {% if module.archetype %}
+        <div>{% with 'module0/archetype/'|add:module.archetype|add:'.html' as path %}
+            {% include path with archetype=module.archetype display_mode='strengths' show_nav=True %}{% endwith %}</div>
+    {% endif %}
+
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

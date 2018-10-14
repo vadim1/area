@@ -1,0 +1,30 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Managing Mental Shortcuts{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+
+    <h2 class="center">Managing Mental Shortcuts</h2>
+    <h3>
+        Biases are mental shortcuts.
+    </h3>
+    <h3>
+    {{ sample_student.name|title }}, a senior in high school, is deciding about college.
+        {{ sample_student.pronoun_subject|title }} is interested in graphic design.
+    </h3>
+    <div class="center">
+        <img src="/static/decisions/img/nylah.png" style="height: 200px;"/>
+        <img src="/static/decisions/img/bubble.png" style="height: 80px; margin-left: -160px; margin-top: -130px;"/>
+    </div>
+    <h3>
+        How does {{ sample_student.name|title }} manage for mental shortcuts when deciding where to go?
+    </h3>
+    <div class="center start">
+    {% with 'What would '|add:sample_student.name|title|add:' do?' as btnLabel %}
+    {% get_next_btn module btnLabel nav.nextUrl %}
+    {% endwith %}
+    </div>
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

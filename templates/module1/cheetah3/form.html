@@ -1,0 +1,69 @@
+<h3>What is your decision problem?</h3>
+{% if mode == 'print' %}
+    <p style="border-bottom: 1px solid black;">{{ module.decision }}</p>
+{% else %}
+    <input type="text" name="decision" class="cc decision" size="80" placeholder="Type Your Decision Here"
+           value="{{ module.decision }}"/>
+{% endif %}
+
+<h3>Reframe the decision problem as a question</h3>
+{% if mode == 'print' %}
+    <p style="border-bottom: 1px solid black;">{{ module.decision_as_question }}</p>
+{% else %}
+    <input type="text" name="decision_as_question" class="cc decision" size="80" placeholder="Type Your Question Here"
+           value="{{ module.decision_as_question }}"/>?
+{% endif %}
+
+<p>What are you solving for? Picture that you’ve already made the decision and its successful. What has happened?</p>
+
+<h3>List 3 things that have occurred because the decision was successful:</h3>
+{% if mode == 'print' %}
+    <ul>
+        <li><span style="border-bottom: 1px solid black;">{{ cc_occurred.0 }}</li>
+        <li><span style="border-bottom: 1px solid black;">{{ cc_occurred.1 }}</li>
+        <li><span style="border-bottom: 1px solid black;">{{ cc_occurred.2 }}</li>
+    </ul>
+{% else %}
+    <table class="table">
+        <tbody>
+        <tr>
+            <td width="5">1.</td>
+            <td><textarea name="cc_occurred[]" class="auto-text-area">{{ cc_occurred.0 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">2.</td>
+            <td><textarea name="cc_occurred[]" class="auto-text-area">{{ cc_occurred.1 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">3.</td>
+            <td><textarea name="cc_occurred[]" class="auto-text-area">{{ cc_occurred.2 }}</textarea></td>
+        </tr>
+        </tbody>
+    </table>
+{% endif %}
+
+<h3>Now re-frame those 3 items of success as questions and they will serve as your Critical Concepts (CC).</h3>
+{% if mode == 'print' %}
+    <ul>
+        <li><span style="border-bottom: 1px solid black;">{{ cc.0 }}</li>
+        <li><span style="border-bottom: 1px solid black;">{{ cc.1 }}</li>
+        <li><span style="border-bottom: 1px solid black;">{{ cc.2 }}</li>
+    </ul>
+{% else %}
+    <table class="table">
+        <tbody>
+        <tr>
+            <td width="5">1.</td>
+            <td><textarea name="cc[]" class="auto-text-area">{{ cc.0 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">2.</td>
+            <td><textarea name="cc[]" class="auto-text-area">{{ cc.1 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">3.</td>
+            <td><textarea name="cc[]" class="auto-text-area">{{ cc.2 }}</textarea></td>
+        </tr>
+        </tbody>
+    </table>
+{% endif %}

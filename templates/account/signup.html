@@ -5,19 +5,39 @@
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 
 {% block content %}
-    <h1>{% if not mobile %}{% trans "Sign Up" %}{% else %}Mobile Signup {% endif %}</h1>
-    <p>Already have an account? Then please <a href="{% url 'account_login' %}">sign in</a></p>
+    <div class="center">
+        <h1 class="module_title">
+            <div>
+                <span class="green">D</span>
+                <span class="yellow">E</span>
+                <span class="light-blue">C</span>
+                <span class="red">I</span>
+                <span class="yellow">S</span>
+                <span class="light-blue">I</span>
+                <span class="green">V</span>
+                <span class="red">E</span>
+            </div>
+        </h1>
+        <h3 style="font-size: 1.6em;">Make Big Decisions Better!</h3>
+        <p>Already have an account? Then please <a href="{% url 'account_login' %}"
+                                                   style="font-size: 24px; font-weight: bolder;">SIGN IN</a></p>
+    </div>
+
     <form class="signup" id="signup_form" method="post">
         {% csrf_token %}
         {{ form|bootstrap }}
         {% if redirect_field_value %}
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
         {% endif %}
-    {% if SITE_NAME == 'fp' %}
-        <button type="submit">{% trans "Sign Up" %} &raquo;</button>
-    {% else %}
-        <button type="submit" class="btn btn-success">{% trans "Sign Up" %} &raquo;</button>
-    {% endif %}
+
+        <div class="center">
+            {% if SITE_NAME == 'fp' %}
+                <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+            {% else %}
+                <button type="submit" class="btn btn-success">{% trans "Sign Up" %} &raquo;</button>
+            {% endif %}
+        </div>
+
         {% if SITE_NAME != 'fp' and not mobile %}
             <a class="btn btn-warning" href="{% url 'mobile_signup' %}">Mobile Sign Up</a>
             <a class="btn btn-info" href="{% provider_login_url 'facebook' %}">Facebook Sign Up</a>

@@ -1,0 +1,72 @@
+{% extends 'modules/cheetah/sheet.html' %}
+{% block cheetah_content %}
+    <style type="text/css">
+        .question {
+            color: #1e2846;
+            font-size: 18px;
+            font-weight: 800 !important;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var minTextLength = 2;
+
+            function validate() {
+                var valid = true;
+
+                /* Scan each text field and ensure that it has at least min chars length */
+                $('input[type=text]').each(function () {
+                    /* console.log($(this).val()); */
+                    var fieldValue = $(this).val();
+                    var id = $(this).attr('id').split("_");
+                    var questionId = id[0].replace("q", "");
+                    var answerId = id[1].replace("a", "");
+
+                    if (fieldValue.length <= minTextLength) {
+                        alert("Please answer question " + questionId + " with at least " + minTextLength + " characters!");
+                        $(this).focus();
+                        valid = false;
+                        return false;
+                    }
+                });
+                console.log(valid);
+
+                return valid;
+            }
+        })
+    </script>
+
+    <div class="space"></div>
+
+    <p>Apply what you’ve learned from your <span class="master_term">Problem Solver Profile</span> (PSP) in your daily
+        life. Fill out the questions below
+        to challenge yourself to be a better decision-maker and spark dialogue.</p>
+    <div class="space"></div>
+
+    {% for profile in module.profiles %}
+        <div id="{{ profile.id }}" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <div class="modal-header center">
+                        <button type="button" data-dismiss="modal">Click to Close</button>
+                    </div>
+                    <div class="modal-body">
+                        <div>{% with 'module0/archetype/'|add:profile.id|add:'.html' as path %}
+                            {% include path with archetype=profile.id display_mode='all' %}{% endwith %}
+                        </div>
+                    </div>
+                    <div class="modal-footer center">
+                        <button type="button" data-dismiss="modal">Click to Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    {% include 'module0/cheetah1/form.html' %}
+
+    <div class="center">
+        <button id="completeBtn" value="Complete Cheetah Sheet">Complete Cheetah Sheet</button>
+    </div>
+{% endblock %}

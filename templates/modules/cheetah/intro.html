@@ -1,0 +1,15 @@
+{% extends 'decisions/base.html' %}
+{% load static bootstrap module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Pause Like The Cheetah{% endblock %}{% endblock %}
+
+{% block content %}
+    <div class="center">
+        <h2>Pause Like the Cheetah</h2>
+        <img src="{% static 'decisions/img/cheetah.png' %}" class="fixed-ratio-resize"/>
+    </div>
+
+    {% block cheetah_content %}{% endblock %}
+
+    {% get_next_btn module "Cheetah Pause" nav.nextUrl %}
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

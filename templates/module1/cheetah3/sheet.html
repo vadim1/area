@@ -1,0 +1,146 @@
+{% extends 'modules/cheetah/sheet.html' %}
+{% block cheetah_content %}
+    <style type="text/css">
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #eee;
+            margin: auto;
+            padding: 20px;
+            /* border: 1px solid #888888; */
+            width: 70%;
+        }
+
+        #pro_con {
+            background-color: #eee;
+        }
+
+        #pro_con p {
+            font-size: 1em;
+        }
+
+        .table .cheetahQuestions {
+            width: 60%;
+            margin-top: 10px;
+        }
+
+        .question {
+            color: #1e2846;
+            font-size: 18px;
+            font-weight: 800 !important;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var minTextLength = 2;
+
+            function validate() {
+                var valid = true;
+
+                /* Scan each text field and ensure that it has at least min chars length */
+                return valid;
+            }
+
+            $('#showProfileBtn').click(function () {
+                /* Show modal */
+                $('.modal').css('display', 'block');
+                return false;
+            });
+
+            $('#closeBtn').click(function () {
+                /* Hide modal */
+                $('.modal').css('display', 'none');
+                return false;
+            });
+
+            /* Validate the form and submit */
+            $('#completeBtn').click(function () {
+                var results = validate();
+                if (results) {
+                    $('form').submit();
+                }
+                return results;
+            });
+
+            /* Force the redirect back to the previous page */
+            $('#back').click(function () {
+                window.location.href = $(this).attr('href');
+            });
+
+            /* Clicking anywhere outside of the modal closes the modal */
+            $(window).click(function (e) {
+                $('.modal').css('display', 'none');
+                return false;
+            });
+        })
+    </script>
+
+    <div class="space"></div>
+
+    <div class="center">
+        <button id="showProfileBtn">Show {{ sample_student.name|title }}'s Critical Concepts</button>
+    </div>
+
+
+    <div id="pro_con" class="modal">
+        <div class="modal-content">
+            <p>{{ sample_student.name|title }} learned about <span class="master_term_simple">Critical Concepts</span>
+                and {{ sample_student.pronoun_object }} <span
+                        class="master_term_simple">Vision of Success</span>. Below
+                are {{ sample_student.pronoun_object }} CCs and rephrased as questions to
+                help {{ sample_student.pronoun_object }} investigate the answers.</p>
+
+            <p><strong>{{ sample_student.name|title }}'s CCs as questions</strong></p>
+            <table class="table">
+                <tbody>
+                {% for value in sample_student.cc_as_question %}
+                    {% if value.successful == 1 %}
+                        <tr>
+                            <td width="5">{{ value.num }}.</td>
+                            <td style="border-bottom: 1px solid black;">{{ value.question }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <p><strong>{{ sample_student.name|title }}'s CCs</strong></p>
+
+            <table class="table">
+                <tbody>
+                {% for value in sample_student.cc %}
+                    <tr>
+                        <td width="5">{{ forloop.counter }}.</td>
+                        <td style="border-bottom: 1px solid black;">{{ value }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+            <p class="center">
+                <button id="closeBtn">Click to Close</button>
+            </p>
+        </div>
+    </div>
+
+    {% include 'module1/cheetah3/form.html' %}
+    <div class="space"></div>
+
+    <div class="center">
+        <button id="completeBtn" value="Complete Cheetah Sheet">Complete Cheetah Sheet</button>
+    </div>
+{% endblock %}
