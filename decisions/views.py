@@ -10,8 +10,11 @@ from student_class.models import StudentClass
 from module3.views import load_module as load_module3
 from datetime import datetime
 import json
+
 from area_app.views.view import get_randomized_questions, compute_archetype
 
+import stripe
+from django.urls import reverse
 
 def load_json(json_data):
     json_object = {}
@@ -73,6 +76,25 @@ def home(request):
     # If it's the first time, take them to the tour
     if not course.intro_on:
         return redirect('/decisions/tour')
+
+    if request.method == 'POST':
+        token = request.POST.get('stripeToken')
+        print("token: " + token)
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+
+        try:
+            charge = stripe.Charge.create(
+                amount = 999,
+                currency = "usd",
+                source = token,
+                description = "Subscription for Module 2"
+            )
+
+            print("Stripe charge id: " + charge.id)
+        except stripe.error.CardError as ce:
+            print("Exception")
+            print(ce)
+
     return render(request, 'decisions/intro.html', {
         'form': forms.FutureProjectSignupForm,
         'module0': module0,
@@ -82,8 +104,31 @@ def home(request):
         'student_classes': student_classes,
         'my_classes': StudentClass.my_classes(course),
         'open_classes': StudentClass.open_classes(course),
+        'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
     })
 
+def checkout(request):
+    if request.method == 'POST':
+        token = request.POST.get('stripeToken')
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+
+        try:
+            charge = stripe.Charge.create(
+                amount = 999,
+                currency = "usd",
+                source = token,
+                description = "Subscription for Module 2"
+            )
+
+            print("Stripe charge id: " + charge.id)
+        except stripe.error.CardError as ce:
+            print("Exception")
+            print(ce)
+
+        return redirect(reverse('decisions_home'))
+    else:
+        print("Redirecting back to /decisions")
+        return redirect(reverse('decisions_home'))
 
 def tour(request):
     """

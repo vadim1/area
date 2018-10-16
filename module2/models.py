@@ -32,6 +32,14 @@ class Module2(BaseModule):
     def num():
         return 2
 
+    def save_without_historical_record(self, *args, **kwargs):
+        #self.skip_history_when_saving = True
+        #try:
+        ret = self.save(*args, **kwargs)
+        #finally:
+            #del self.skip_history_when_saving
+        return ret
+
     # Used to display the number to the user
     # internally it's still module 0
     @staticmethod

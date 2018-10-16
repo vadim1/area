@@ -5,6 +5,7 @@ urlpatterns = [
     url(r'^tour/?$', views.tour, name='Tour'),
     url(r'^journal/?$', views.journal, name='Journal'),
     url(r'^terms_conditions/?$', views.terms_conditions, name='Terms and Conditions'),
+    url(r'^checkout/?$', views.checkout, name='Checkout'),
 
     url(r'^0/?$', views.module0, name='Module 0'),
     url(r'^0/restart/?', views.module0restart, name='Module 0 Restart'),
