@@ -26,6 +26,8 @@ def navigation():
         reverse('module2_game1_results'),
         reverse('module2_game2_instructions'),
         reverse('module2_game2_game'),
+        reverse('module2_bias_shortcuts'),
+        reverse('module2_bias_action'),
         reverse('module2_nylah_1'),
         reverse('module2_nylah_2'),
         reverse('module2_nylah_3'),
@@ -69,6 +71,7 @@ def render_page(request, module, parsed, context={}):
     context['module'] = module
     context['nav'] = parsed
     context['sample_student'] = ExampleStudent()
+    context['biases'] = module.get_biases()
 
     return render(request, parsed['templatePath'], context)
 

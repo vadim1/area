@@ -18,6 +18,9 @@ urlpatterns = [
     url(r'^game2/instructions/?$', views.generic_page_controller, name='module2_game2_instructions'),
     url(r'^game2/game/$', views.game2_game, name='module2_game2_game'),
 
+    url(r'^bias/shortcuts/$', views.generic_page_controller, name='module2_bias_shortcuts'),
+    url(r'^bias/action/$', views.generic_page_controller, name='module2_bias_action'),
+
     url(r'^nylah/1/$', views.generic_page_controller, name='module2_nylah_1'),
     url(r'^nylah/2/$', views.generic_page_controller, name='module2_nylah_2'),
     url(r'^nylah/3/$', views.nylah_3, name='module2_nylah_3'),

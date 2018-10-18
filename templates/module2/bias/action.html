@@ -1,0 +1,129 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Biases In Action
+{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+        .school-selector input {
+            margin: 0;
+            padding: 0;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .bates {
+            background-image: url('http://www.bates.edu/communications/files/2013/01/bates-bobcat-primary1.jpg');
+        }
+
+        .buckeyes {
+            background-image: url('http://buckeyefansonly.com/images/brutusbuckeyeandflag.gif');
+        }
+
+        .school-selector input:active + .school-choice {
+        }
+
+        .school-selector input:checked + .school-choice {
+            border: 4px solid #52c0d8;
+            width: 180px;
+            height: 157px;
+        }
+
+        .school-choice {
+            cursor: pointer;
+            background-size: contain;
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 180px;
+            height: 153px;
+        }
+
+        .school-choice:hover {
+            opacity: 0.8;
+        }
+
+        .master_term {
+            font-size: 1.2em;
+        }
+    </style>
+
+
+    <h2 class="center">
+        Biases In Action
+    </h2>
+    <p>Since biases are always at work, there are times when we need to challenge them so we can pry open cognitive
+        space to allow for new information and new insight. This is especially true when solving for complex problems or
+        big decisions.</p>
+
+    <h3 style="white-space: nowrap;" class="center">
+        <div class="school-selector">
+            <input id="bates" type="radio" name="school" value="bates"/>
+            <label class="school-choice bates" for="bates"></label>
+            <input id="buckeyes" type="radio" name="school" value="buckeyes"/>
+            <label class="school-choice buckeyes" for="buckeyes"></label>
+        </div>
+    </h3>
+    <p id="bates_text" style="display:none;"><i>Private liberal arts college with under 2000 students</i></p>
+    <p id="buckeyes_text" style="display:none;"><i>A public Big Ten Sports School: 60,000 students</i></p>
+
+
+    <p>Do you think you could have a bias toward a school because of its name recognition?</p>
+    <p>Which biases might be at work?</p>
+
+    <div id="why_options">
+        {% for bias in biases %}
+            <div>
+                <label>
+                    <input type="checkbox" name="bias[]" value="{{ bias.key }}"/>
+                    <a class="master_term" href="#" data-toggle="tooltip" data-placement="top" title="{{ bias.action }}">{{ bias.label }}</a>
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+
+            $('input[name="school"]').each(function () {
+                var obj = $(this);
+                var value = obj.val();
+                var textId = '#' + value + '_text';
+
+                if (value == '{{ module.school }}') {
+                    obj.attr('checked', 'checked');
+                    // Render the corresponding text as well
+                    $(textId).css('display', 'block');
+                }
+            });
+
+            $('input[name="school"]').click(function () {
+                var obj = $(this);
+                var value = obj.val();
+                var textId = '#' + value + '_text';
+
+                obj.attr('checked', 'checked');
+                $(textId).css('display', 'block');
+
+                // Hide the others
+                $('input[name="school"]').each(function () {
+                    if ($(this).val() != value) {
+                        $('#' + $(this).val() + '_text').css('display', 'none');
+                    }
+                });
+            });
+        });
+
+        function validate() {
+            if (!$('input[name="school"]:checked').length) {
+                alert("Please select one by clicking on it.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+    {% get_next_btn module "Checking Bias" nav.nextUrl %}
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

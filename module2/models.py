@@ -100,15 +100,67 @@ class Module2(BaseModule):
     @staticmethod
     def get_biases():
         biases = [
-            {'key': 'authority', 'label': 'Authority Bias'},
-            {'key': 'liking', 'label': 'Liking Bias'},
-            {'key': 'planning', 'label': 'Planning Bias'},
-            {'key': 'optimism', 'label': 'Optimism Bias'},
-            {'key': 'social', 'label': 'Social Proof'},
-            {'key': 'projection', 'label': 'Projection Bias'},
+            {
+                'key': 'authority',
+                'label': 'Authority Bias',
+                'action': 'This bias is less likely but might be at work if an authority figure in your life is favorable towards Ohio State.',
+            },
+            {
+                'key': 'liking',
+                'label': 'Liking Bias',
+                'action': 'This bias might be at work if you know someone who also likes it.',
+            },
+            {
+                'key': 'planning',
+                'label': 'Planning Bias',
+                'action': 'This bias is not relevant because it is about underestimating how long a task will take even if we have done it before.',
+            },
+            {
+                'key': 'optimism',
+                'label': 'Optimism Bias',
+                'action': "This bias about being overly optimistic isn't at work here.",
+            },
+            {
+                'key': 'social',
+                'label': 'Social Proof',
+                'action': 'This bias is most relevant, because it is about being influenced by popularity.',
+            },
+            {
+                'key': 'projection',
+                'label': 'Projection Bias',
+                'action': 'This bias is not relevant because it is about projecting your own thoughts and feelings onto others.',
+            },
         ]
 
         return biases
+
+    @staticmethod
+    def get_mental_shortcuts(self):
+        shortcuts = {
+            'liking2': {
+               'question': 'When you go down the cereal aisle, do you...',
+               'answer0': 'Automatically look for the cereal you want',
+               'answer1': 'Look at all of the cereal boxes',
+               'bias': 'liking',
+               'bias_answer': 0,
+            },
+            'planning1': {
+                'question': 'You have a lab report due in two days. You\'ve done them before so you...',
+                'answer0': 'Look at the directions when you start to do it',
+                'answer1': 'Read the directions now because each lab is a different experiment',
+                'bias': 'planning',
+                'bias_answer': 0,
+            },
+            'optimism1': {
+                'question': 'If you just passed your driver\'s license test, do you...',
+                'answer0': 'Believe you are an above average driver',
+                'answer1': 'Think that\'s silly, how could you be?',
+                'bias': 'optimism',
+                'bias_answer': 0,
+            },
+        }
+
+        return shortcuts
 
     @staticmethod
     def get_sample_student_cheetah_data():

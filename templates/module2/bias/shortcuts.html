@@ -1,0 +1,28 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - The Upside and Downside of Mental Shortcuts
+{% endblock %}{% endblock %}
+{% block content %}
+    <h2 class="center">
+        The Upside and Downside of Mental Shortcuts
+    </h2>
+    <p>As you can tell, biases work as mental shortcuts.</p>
+    <p>From the questions you just answered can you see biases have an upside and a downside?</p>
+    <p>Here are a few of the statements you just read. Which of the statements from the quiz do you think relied upon a
+        bias that had an upside for you? Which had a downside? Choose all that apply</p>
+
+        <div id="why_options">
+        {% for option in module.get_mental_shortcuts %}
+            <div>
+                <label>
+                    <input type="checkbox" name="what_changed[]" value="{{ option }}"/>
+                    <span>{{ option }}</span>
+                </label>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% get_next_btn module "What are the Upsides/Downsides?" nav.nextUrl %}
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}
