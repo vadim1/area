@@ -303,7 +303,7 @@ def game1_results(request):
 
     context = {
         'answers': module.answers_json,
-        'biases': load_json(module.biases),
+        'biases_results': load_json(module.biases),
         'questions': module.get_game_questions(),
     }
 
