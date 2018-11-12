@@ -198,9 +198,9 @@ class Module2(BaseModule):
                 'bias_answer': 0,
             },
             'liking1': {
-                'question': 'When a friend asks you to get ice cream late in the evening, do you...',
-                'answer0': 'Say yes, because she is your friend',
-                'answer1': 'Say no, because of the time',
+                'question': 'When I saw how good my friend looked with her new short haircut do you ...',
+                'answer0': 'Decide to cut your hair the same way',
+                'answer1': 'Keep your own haircut style',
                 'bias': 'liking',
                 'bias_answer': 0,
             },
@@ -212,7 +212,7 @@ class Module2(BaseModule):
                 'bias_answer': 0,
             },
             'planning1': {
-                'question': 'You have a lab report due in two days. You\'ve done them before so you...',
+                'question': 'You have a lab report due in two days. You know you only got partial credit when you didn\'t write in full sentences, do you...',
                 'answer0': 'Look at the directions when you start to do it',
                 'answer1': 'Read the directions now because each lab is a different experiment',
                 'bias': 'planning',
@@ -285,6 +285,112 @@ class Module2(BaseModule):
 
         return game_questions
 
+    @staticmethod
+    def get_game2_questions():
+        game2_questions = {
+            'authority1': {
+                'question': 'When your mom asks you to do something',
+                'answer0': 'you do it automatically',
+                'answer1': '...',
+                'bias': 'authority',
+                'bias_answer': 0,
+            },
+            'authority2': {
+                'question': 'Your aunt says you should just apply to safety schools',
+                'answer0': 'so you follow her advice without question',
+                'answer1': '...',
+                'bias': 'authority',
+                'bias_answer': 0,
+            },
+            'authority3': {
+                'question': 'Your mom tells you that you should take a photograph of your credit card in case you lose it.',
+                'answer0': 'You take out your phone and snap a picture of it and send her a copy to keep',
+                'answer1': '...',
+                'bias': 'authority',
+                'bias_answer': 0,
+            },
+            'liking1': {
+                'question': 'When I saw how good my friend looked with her new short haircut',
+                'answer0': 'I decided to get mine cut the same way',
+                'answer1': '...',
+                'bias': 'liking',
+                'bias_answer': 0,
+            },
+            'liking2': {
+                'question': 'When you go down the cereal aisle',
+                'answer0': 'you automatically look for the cereal you want',
+                'answer1': '...',
+                'bias': 'liking',
+                'bias_answer': 0,
+            },
+            'planning1': {
+                'question': 'When you head to school in the morning',
+                'answer0': 'you don\'t even think about the route you\'ll take',
+                'answer1': '...',
+                'bias': 'planning',
+                'bias_answer': 0,
+            },
+            'planning2': {
+                'question': 'You have a lab report due. You know you only got partial credit when you didn\'t write in full sentences.',
+                'answer0': 'This time you read the report directions more carefully when you start to do the assignment',
+                'answer1': '...',
+                'bias': 'planning',
+                'bias_answer': 0,
+            },
+            'planning3': {
+                'question': 'You have a big math test in two days',
+                'answer0': 'and you wait until the night before to begin studying',
+                'answer1': '...',
+                'bias': 'planning',
+                'bias_answer': 0,
+            },
+            'projection1': {
+                'question': 'You see tickets for your favorite band playing a show nearby.',
+                'answer0': 'You get tickets for you and a friend',
+                'answer1': '...',
+                'bias': 'projection',
+                'bias_answer': 0,
+            },
+            'projection2': {
+                'question': 'You\'re school changes the dress code without warning.',
+                'answer0': ' You think it\'s unfair and you assume your friends do too',
+                'answer1': '...',
+                'bias': 'projection',
+                'bias_answer': 0,
+            },
+            'optimism1': {
+                'question': 'If you just passed your driver\'s license test',
+                'answer0': 'you think you\'re a good driver',
+                'answer1': '...',
+                'bias': 'optimism',
+                'bias_answer': 0,
+            },
+            'optimism2': {
+                'question': 'Adults tell us about the risks of smoking,',
+                'answer0': ' but I don\'t think I\'ll be negatively affected by it',
+                'answer1': '...',
+                'bias': 'optimism',
+                'bias_answer': 0,
+            },
+            'social1': {
+                'question': 'At school all of your friends are wearing a popular new brand of sneakers.',
+                'answer0': 'You need to get them too',
+                'answer1': '...',
+                'bias': 'social',
+                'bias_answer': 0,
+            },
+            'social2': {
+                'question': 'You overheard some kids are sneaking alcohol into a party you\'re going to',
+                'answer0': 'and you decide to go along with it.',
+                'answer1': '...',
+                'bias': 'social',
+                'bias_answer': 0,
+            },
+        }
+
+        return game2_questions
+
+
     def get_more_facts(self):
         more_facts = [
             'The student to teacher ratio',
@@ -325,10 +431,9 @@ class Module2(BaseModule):
     @staticmethod
     def pins():
         pins = [
-            'Mental Shortcuts and Bias',
-            'Facts vs Opinions',
-            'Perspective-taking',
-            'How Facts Beats Bias',
+            'Mental Shortcuts',
+            'Common Biases',
+            'Biases Remedies',
         ]
 
         return pins
