@@ -4,25 +4,41 @@
 {% block title %}{% block h1 %}Module {{ module.display_num }} - The Upside and Downside of Mental Shortcuts
 {% endblock %}{% endblock %}
 {% block content %}
+    <style type="text/css">
+        #explanation {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.no').click(function () {
+                alert('Try again!');
+                return false;
+            });
+            $('.yes').click(function () {
+                $('#yesNo').hide();
+                $('#explanation').show();
+                return false;
+            });
+        });
+    </script>
+
     <h2 class="center">
         The Upside and Downside of Mental Shortcuts
     </h2>
     <p>As you can tell, biases work as mental shortcuts.</p>
     <p>From the questions you just answered can you see biases have an upside and a downside?</p>
-    <p>Here are a few of the statements you just read. Which of the statements from the quiz do you think relied upon a
-        bias that had an upside for you? Which had a downside? Choose all that apply</p>
 
-        <div id="why_options">
-        {% for option in module.get_mental_shortcuts %}
-            <div>
-                <label>
-                    <input type="checkbox" name="what_changed[]" value="{{ option }}"/>
-                    <span>{{ option }}</span>
-                </label>
-            </div>
-        {% endfor %}
+    <div class="space"></div>
+
+    <div id="yesNo" class="center">
+        <button class="yes">Yes</button><span style="padding-left: 30px;"></span><button class="no">No</button>
     </div>
 
-    {% get_next_btn module "What are the Upsides/Downsides?" nav.nextUrl %}
+    <div id="explanation">
+        <p>Biases help us cut corners in our thinking processes to help save time and effort in making judgments. Often they work well, but sometimes, they block us from receiving new information or insights. </p>
+        {% get_next_btn module "What are the Upsides/Downsides?" nav.nextUrl %}
+    </div>
+
     {% get_back_link module nav.previousUrl %}
 {% endblock %}

@@ -19,38 +19,18 @@ urlpatterns = [
     url(r'^game2/game/$', views.game2_game, name='module2_game2_game'),
 
     url(r'^bias/shortcuts/$', views.generic_page_controller, name='module2_bias_shortcuts'),
-    url(r'^bias/action/$', views.generic_page_controller, name='module2_bias_action'),
-
-    url(r'^nylah/1/$', views.generic_page_controller, name='module2_nylah_1'),
-    url(r'^nylah/2/$', views.generic_page_controller, name='module2_nylah_2'),
-    url(r'^nylah/3/$', views.nylah_3, name='module2_nylah_3'),
-    url(r'^nylah/4/$', views.generic_page_controller, name='module2_nylah_4'),
-
-    url(r'^pin2/instructions/$', views.generic_page_controller, name='module2_pin2_instructions'),
-    url(r'^pin2/2/$', views.generic_page_controller, name='module2_pin2_2'),
-
-    url(r'^pin3/instructions/$', views.generic_page_controller, name='module2_pin3_instructions'),
-    url(r'^pin3/2/$', views.generic_page_controller, name='module2_pin3_2'),
-    url(r'^pin3/3/$', views.pin3_3, name='module2_pin3_3'),
-
-    # Perspective-taking
-    url(r'^pin4$', RedirectView.as_view(pattern_name='module3_pin4_instructions', permanent=True)),
-    url(r'^pin4/instructions/$', views.generic_page_controller, name='module3_pin4_instructions'),
-    url(r'^pin4/2/$', views.pin4_2, name='module3_pin4_2'),
-    url(r'^pin4/3/$', views.generic_page_controller, name='module3_pin4_3'),
-    url(r'^pin4/4/$', views.pin4_4, name='module3_pin4_4'),
+    url(r'^bias/pro_con/$', views.generic_page_controller, name='module2_bias_pro_con'),
+    url(r'^bias/remedies/$', views.generic_page_controller, name='module2_bias_remedies'),
 
     # Cheetah Sheet
-    url(r'^cheetah$', RedirectView.as_view(pattern_name='module3_cheetah_introduction', permanent=True)),
-    url(r'^cheetah/introduction/$', views.generic_page_controller, name='module3_cheetah_introduction'),
-    url(r'^cheetah/2/$', views.cheetah_2, name='module3_cheetah_2'),
-    url(r'^cheetah/cc_edit/$', views.cc_edit, name='module3_cheetah_cc_edit'),
-    # Takes in query string params ?num=X
-    url(r'^cheetah/3/?$', views.cheetah_3, name='module3_cheetah_3'),
-    url(r'^cheetah/4/$', views.cheetah_4, name='module3_cheetah_4'),
+    url(r'^cheetah4/intro/$', views.generic_page_controller, name='module3_cheetah4_intro'),
+    #url(r'^cheetah4/sheet/?$', views.cheetah4_sheet, name='module3_cheetah4_sheet'),
+    url(r'^cheetah4/apply/?$', views.cheetah4_report, name='module3_cheetah4_apply'),
 
-    url(r'^eval/?$', views.eval, name='module3_eval'),
     url(r'^summary/?$', views.summary, name='module3_summary'),
 
+    # Other Module-specific URLs
+    url(r'^cheetah4/email/?$', views.cheetah4_report, name='module3_cheetah4_email'),
+    url(r'^cheetah4/print/?$', views.cheetah4_report, name='module3_cheetah4_print'),
     url(r'^restart/?$', views.restart, name='module3_restart'),
 ]

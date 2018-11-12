@@ -135,6 +135,34 @@ class Module2(BaseModule):
         return biases
 
     @staticmethod
+    def get_bias_remedies():
+        remedies = [
+            {
+                'key': 'Be more conscious and aware of your actions',
+                'comment': 'Yes! Pay close attention to whether you do things like make a full stop at stop signs, or need to hit the brake hard when you approach a red light',
+            },
+            {
+                'key': 'Question your actions by asking yourself whether you might be relying upon assumptions',
+                'comment': 'Yes! Consider whether you might be overconfident',
+            },
+            {
+                'key': 'Check assumptions by searching for evidence that may back them up or refute them',
+                'comment': 'Yes! You could search the Net for how often new drivers had accidents',
+            },
+            {
+                'key': 'Ask others who know you well to help you evaluate your thinking',
+                'comment': "Yes! Ask how's my driving?",
+            },
+            {
+                'key': 'Ask yourself how someone else who you respect might approach the same situation you are in so you push yourself out of your own perspective',
+                'comment': 'Yes! Ask someone what they did to make sure they drove safely after getting their license'
+
+            }
+        ]
+
+        return remedies
+
+    @staticmethod
     def get_mental_shortcuts(self):
         shortcuts = {
             'liking2': {

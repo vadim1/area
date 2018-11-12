@@ -6,10 +6,14 @@ from datetime import datetime
 from .models import Module2 as Module, Module2Form as ModuleForm
 from module1.models import Module1 as PreviousModule
 from decisions.views import load_json, load_module, base_restart, base_review, base_summary
-from decisions.utils import ViewHelper, ExampleStudent
+from decisions.utils import CheetahSheet, ExampleStudent, ViewHelper
 
 import datetime
 import json
+
+cheetah_sheet4 = CheetahSheet()
+cheetah_sheet4.num = 4
+cheetah_sheet4.title = "Biases At Work"
 
 """
 Ordered list of URLs for this Module
@@ -27,26 +31,11 @@ def navigation():
         reverse('module2_game2_instructions'),
         reverse('module2_game2_game'),
         reverse('module2_bias_shortcuts'),
-        reverse('module2_bias_action'),
-        reverse('module2_nylah_1'),
-        reverse('module2_nylah_2'),
-        reverse('module2_nylah_3'),
-        reverse('module2_nylah_4'),
-        reverse('module2_pin2_instructions'),
-        'pin2/2',
-        'pin3/instructions',
-        'pin3/2',
-        'pin3/3',
-        'pin4/instructions',
-        'pin4/2',
-        'pin4/3',
-        'pin4/4',
-        'cheetah/introduction',
-        'cheetah/2',
-        'cheetah/3',
-        'cheetah/4',
-        'eval',
-        'summary',
+        reverse('module2_bias_pro_con'),
+        reverse('module2_bias_remedies'),
+        reverse('module3_cheetah4_intro'),
+        reverse('module3_cheetah4_apply'),
+        reverse('module3_summary'),
     ]
 
     return urls
@@ -247,16 +236,39 @@ def cheetah_4(request):
     return render_page(request, module, parsed, context)
 
 @login_required
-def eval(request):
+def cheetah4_report(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
-    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
-
-    if request.method == 'POST':
-        return save_form(request, module, parsed)
+    module = ViewHelper.load_module(request, 'cheetah4_apply', Module)
 
     context = {
-
+        'cheetah_sheet': cheetah_sheet4,
+        'module': module,
+        'nav': parsed,
     }
+
+    if parsed['currentStep'] == 'cheetah3_email':
+        data = {}
+        if request.user.is_authenticated():
+            emails = [request.user.email]
+            subject = "AREA Module {0}: Own it: Apply to real life!".format(module.display_num())
+            template = 'module2/cheetah4/email.html'
+
+            try:
+                results = ViewHelper.send_html_email(emails, subject, template, context)
+                msg = "Email sent to {}. [Code {}]".format(request.user.email, results)
+            except Exception as e:
+                if hasattr(e, 'message'):
+                    print("Exception: " + e.message)
+                else:
+                    print("Exception: " + e)
+
+                msg = "Unable to send email. There was an internal server error. Try again later."
+        else:
+            msg = "User is not authenticated. Cannot send email."
+
+        data['message'] = msg
+        print("Email: {0} to {1}".format(data['message'], request.user.email))
+        return JsonResponse(data)
 
     return render_page(request, module, parsed, context)
 
@@ -316,8 +328,9 @@ def game2_game(request):
 
     context = {
         'biases': Module.get_biases(),
-        'num_questions': len(Module.get_game_questions()),
-        'questions': Module.get_game_questions().values(),
+        'display_mode': 'game2',
+        'num_questions': len(Module.get_game2_questions()),
+        'questions': Module.get_game2_questions().values(),
     }
 
     return render_page(request, module, parsed, context)
