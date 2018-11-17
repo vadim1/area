@@ -1,8 +1,15 @@
 {% extends 'decisions/base.html' %}
 {% load bootstrap %}
 {% load module_tags %}
-{% block title %}{% block h1 %}Module {{ module.display_num }} - Why Might We Develop Biases?{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Why Might We Develop Biases?
+{% endblock %}{% endblock %}
 {% block content %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
     <h2 class="center">
         Why Might We Develop Biases?
     </h2>
@@ -10,7 +17,9 @@
     {% include 'module2/map_content.html' with display_mode='Common Biases' %}
 
     <p>See why we need our biases? Researchers tell us we make 40,000 decisions every day!</p>
-    <p><span class="master_term_simple">Biases</span> are judgements or assumptions about a person, place or thing that is often based on past experience.</p>
+    <p><a class="master_term" href="#" data-toggle="tooltip" data-placement="top"
+          title="Assumptions and judgements that cut corners and save time in our decision-making but may block us from receiving new information or insight">Biases</a>
+        are judgements or assumptions about a person, place or thing that is often based on past experience.</p>
     <p>Our biases help us rely on what we think we know, or on the judgement of others who we like or trust.</p>
     <p>Get your quiz results to see how much biases impacted your decision making!</p>
 

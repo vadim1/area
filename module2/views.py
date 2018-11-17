@@ -1,11 +1,12 @@
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from datetime import datetime
 
 from .models import Module2 as Module, Module2Form as ModuleForm
 from module1.models import Module1 as PreviousModule
-from decisions.views import load_json, load_module, base_restart, base_review, base_summary
+from decisions.views import load_json, load_module, base_restart
 from decisions.utils import CheetahSheet, ExampleStudent, ViewHelper
 
 import datetime
@@ -15,10 +16,15 @@ cheetah_sheet4 = CheetahSheet()
 cheetah_sheet4.num = 4
 cheetah_sheet4.title = "Bias and Mental Shortcuts"
 
-"""
-Ordered list of URLs for this Module
-"""
+cheetah_sheet5 = CheetahSheet()
+cheetah_sheet5.num = 5
+cheetah_sheet5.title = "Bias Remedies"
+
+
 def navigation():
+    """
+    Ordered list of URLs for this Module
+    """
     urls = [
         reverse('module2_intro'),
         reverse('module2_review'),
@@ -30,22 +36,25 @@ def navigation():
         reverse('module2_game1_results'),
         reverse('module2_game2_instructions'),
         reverse('module2_game2_game'),
-        reverse('module3_cheetah4_intro'),
-        reverse('module3_cheetah4_sheet'),
+        reverse('module2_cheetah4_intro'),
+        reverse('module2_cheetah4_sheet'),
         reverse('module2_bias_shortcuts'),
         reverse('module2_bias_pro_con'),
         reverse('module2_bias_remedies'),
-        reverse('module3_cheetah4_apply'),
-        reverse('module3_summary'),
+        reverse('module2_bias_practice'),
+        reverse('module2_cheetah5_sheet'),
+        reverse('module2_cheetah5_apply'),
+        reverse('module2_summary'),
     ]
 
     return urls
 
-"""
-Default Page Controller
-"""
+
 @login_required
 def generic_page_controller(request):
+    """
+    Default Page Controller
+    """
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
 
@@ -54,10 +63,11 @@ def generic_page_controller(request):
 
     return render_page(request, module, parsed, {})
 
-"""
-Default Render Page Handler
-"""
+
 def render_page(request, module, parsed, context={}):
+    """
+    Default Render Page Handler
+    """
     context['module'] = module
     context['nav'] = parsed
     context['sample_student'] = ExampleStudent()
@@ -65,10 +75,11 @@ def render_page(request, module, parsed, context={}):
 
     return render(request, parsed['templatePath'], context)
 
-"""
-Default Form Save Handler
-"""
+
 def save_form(request, module, parsed):
+    """
+    Default Form Save Handler
+    """
     form = ModuleForm(request.POST, instance=module)
     if form.is_valid():
         form.save()
@@ -77,29 +88,84 @@ def save_form(request, module, parsed):
         print("Form on step: {0} did not validate".format(parsed['currentStep']))
         print(form.errors)
 
-"""
-Module Specific Controllers
-"""
+
 @login_required
-def cheetah4_report(request):
+def bias_remedies_practice(request):
+    """
+    Module Specific Controllers
+    """
     parsed = ViewHelper.parse_request_path(request, navigation())
-    module = ViewHelper.load_module(request, 'cheetah4_apply', Module)
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    # Add title to each question
+    game_questions = Module.get_bias_remedy_questions()
+    for title in game_questions.keys():
+        game_questions[title]['title'] = title
+
+    if request.method == 'POST':
+        answers = {}
+        if module.answers:
+            answers = load_json(module.answers)
+        for i in range(0, len(game_questions.values())):
+            index = str(i)
+            question_i = game_questions.values()[i]
+            attr_i = request.POST.get('answer[' + index + ']')
+            answers[question_i['title']] = attr_i
+        module.answers = json.dumps(answers)
+        module.biases = json.dumps(calculate_biases(game_questions, answers))
+        module.save()
+        return redirect(parsed['nextUrl'])
+    else:
+        ViewHelper.clear_game_answers(module)
+
+    context = {
+        'num_questions': len(game_questions),
+        'questions': game_questions.values(),
+    }
+
+    return render_page(request, module, parsed, context)
+
+
+@login_required
+def cheetah4_sheet(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    if request.method == 'POST':
+        module.my_bias = json.dumps(request.POST.getlist('my_bias[]'))
+        module.my_bias_impact = json.dumps(request.POST.getlist('my_bias_impact[]'))
+        return save_form(request, module, parsed)
+
+    context = {
+        'my_bias': ViewHelper.load_json(module.my_bias),
+        'my_bias_impact': ViewHelper.load_json(module.my_bias_impact),
+        'cheetah_sheet': cheetah_sheet4,
+    }
+    return render_page(request, module, parsed, context)
+
+
+@login_required
+def cheetah5_report(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, 'cheetah5_apply', Module)
 
     context = {
         'biases_results': ViewHelper.load_json(module.biases),
         'cheetah_sheet': cheetah_sheet4,
         'module': module,
         'my_bias': ViewHelper.load_json(module.my_bias),
+        'my_bias_impact': ViewHelper.load_json(module.my_bias_impact),
+        'my_bias_remedy': ViewHelper.load_json(module.my_bias_remedy),
         'nav': parsed,
         'questions': Module.get_game2_questions().values(),
     }
 
-    if parsed['currentStep'] == 'cheetah4_email':
+    if parsed['currentStep'] == 'cheetah5_email':
         data = {}
         if request.user.is_authenticated():
             emails = [request.user.email]
             subject = "AREA Module {0}: Own it: Apply to real life!".format(module.display_num())
-            template = 'module2/cheetah4/email.html'
+            template = 'module2/cheetah5/email.html'
 
             try:
                 results = ViewHelper.send_html_email(emails, subject, template, context)
@@ -120,20 +186,24 @@ def cheetah4_report(request):
 
     return render_page(request, module, parsed, context)
 
+
 @login_required
-def cheetah4_sheet(request):
+def cheetah5_sheet(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
 
     if request.method == 'POST':
-        module.my_bias = json.dumps(request.POST.getlist('my_bias[]'))
+        module.my_bias_impact = json.dumps(request.POST.getlist('my_bias_impact[]'))
+        module.my_bias_remedy = json.dumps(request.POST.getlist('my_bias_remedy[]'))
         return save_form(request, module, parsed)
 
     context = {
-        'my_bias': ViewHelper.load_json(module.my_bias),
-        'cheetah_sheet': cheetah_sheet4,
+        'my_bias_impact': ViewHelper.load_json(module.my_bias_impact),
+        'my_bias_remedy': ViewHelper.load_json(module.my_bias_remedy),
+        'cheetah_sheet': cheetah_sheet5,
     }
     return render_page(request, module, parsed, context)
+
 
 @login_required
 def game(request):
@@ -171,6 +241,7 @@ def game(request):
 
     return render_page(request, module, parsed, context)
 
+
 @login_required
 def game1_results(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
@@ -183,6 +254,7 @@ def game1_results(request):
     }
 
     return render_page(request, module, parsed, context)
+
 
 @login_required
 def game2_game(request):
@@ -200,21 +272,10 @@ def game2_game(request):
 
 
 @login_required
-def map(request):
-    parsed = ViewHelper.parse_request_path(request, navigation())
-    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
-
-    context = {
-        'display_mode': 'all',
-        'btn_label': 'Ready to make better decisions?',
-    }
-    return render_page(request, module, parsed, context)
-
-
-@login_required
 def restart(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     return base_restart(request, Module, parsed['prefix'])
+
 
 @login_required
 def review(request):
@@ -228,6 +289,19 @@ def review(request):
     }
 
     return render_page(request, module, parsed, context)
+
+
+@login_required
+def show_map(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    context = {
+        'display_mode': 'all',
+        'btn_label': 'Ready to make better decisions?',
+    }
+    return render_page(request, module, parsed, context)
+
 
 @login_required
 def summary(request):
@@ -243,10 +317,11 @@ def summary(request):
 
     return render_page(request, module, parsed, context)
 
-"""
-Module Specific Utilities
-"""
+
 def calculate_biases(game_questions, answers):
+    """
+    Module Specific Utilities
+    """
     biases = {}
     for i in range(0, len(game_questions.values())):
         question_i = game_questions.values()[i]
@@ -265,6 +340,7 @@ def calculate_biases(game_questions, answers):
             biases[bias]['biased'] += 1
         biases[bias]['ratio'] = int(float(biases[bias]['biased']) / float(biases[bias]['total']) * 100)
     return biases
+
 
 def load_previous_module(request):
     return load_module(request, PreviousModule)

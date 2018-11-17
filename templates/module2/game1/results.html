@@ -107,78 +107,9 @@
         Click on the biases below and read their definition. If the answer says 100% that means every time the bias
         appeared you fell for it.
     </p>
-    <table class="reveal center">
-        <tr>
-            <td colspan="2">
-                <div class="flip" id="optimism">
-                    <div class="front">
-                        <h2>Optimism Bias</h2>
-                    </div>
-                    <div class="back">
-                        <h3>Believing everything will turn out well</h3>
-                        <h2>{{ biases_results.optimism.ratio }}%</h2>
-                    </div>
-                </div>
-            </td>
-            <td colspan="2">
-                <div class="flip" id="projection">
-                    <div class="front">
-                        <h2>Projection Bias</h2>
-                    </div>
-                    <div class="back">
-                        <h3>Putting your own thoughts and desires onto others around you</h3>
-                        <h2>{{ biases_results.projection.ratio }}%</h2>
-                    </div>
-                </div>
-            </td>
-            <td colspan="2">
-                <div class="flip" id="liking">
-                    <div class="front">
-                        <h2>Liking Bias</h2>
-                    </div>
-                    <div class="back">
-                        <h3>Gravitating toward things and people we like</h3>
-                        <h2>{{ biases_results.liking.ratio }}%</h2>
-                    </div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <div class="flip" id="authority">
-                    <div class="front">
-                        <h2>Authority Bias</h2>
-                    </div>
-                    <div class="back">
-                        <h3>Tendency to take on the opinion of someone who is seen as an authority on a subject</h3>
-                        <h2>{{ biases_results.authority.ratio }}%</h2>
-                    </div>
-                </div>
-            </td>
-            <td colspan="2">
-                <div class="flip" id="planning">
-                    <div class="front">
-                        <h2>Planning Bias</h2>
-                    </div>
-                    <div class="back">
-                        <h3>Underestimating how long a task will take, even if you’ve done it before</h3>
-                        <h2>{{ biases_results.planning.ratio }}%</h2>
-                    </div>
-                </div>
-            </td>
-            <td colspan="2">
-                <div class="flip">
-                    <div class="front" id="social">
-                        <h2>Social Proof Bias</h2>
-                    </div>
-                    <div class="back">
-                        <h3>Following the crowd, letting your opinion be influenced by reputation</h3>
-                        <h2>{{ biases_results.social.ratio }}%</h2>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </table>
+
+    {% include 'module2/game1/table.html' %}
+
     <p class="space">
         Most of us think of 100% as a perfect score. That is an example of a mental shortcut.
     </p>

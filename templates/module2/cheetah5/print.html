@@ -1,0 +1,48 @@
+{% load module_tags static %}
+
+{% block content %}
+    <img src="{% get_static_url %}{% static 'decisions/img/cheetah_logo.png' %}"
+         style="float: left; margin-right: 15px;" width="60"/>
+    <h2>Cheetah Sheet {{ cheetah_sheet.num }}:<br/>{{ cheetah_sheet.title }}</h2>
+
+    {# From Cheetah Sheet 4 #}
+    <h3>Which biases might block you your decision-making?</h3>
+    <ul>
+        {% for myChoice in my_bias %}
+            {% for biases in module.get_biases %}
+                {% if myChoice == biases.key %}
+                    <li><span style="border-bottom: 1px solid black;">{{ biases.label }}</li>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+
+    {% include 'module2/cheetah5/form.html' with mode='print' %}
+
+    <hr noshade="noshade"/>
+    {# From Game1 #}
+    <h2>Mental Shortcuts and Bias</h2>
+    {% include 'module2/game1/table.html' %}
+
+    <hr noshade="noshade"/>
+    {# From Game2 #}
+    <h2>Spot Bias</h2>
+    <table>
+        <thead>
+        <tr>
+            <td><strong>Question</strong></td>
+            <td><strong>Bias</strong></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for question in questions %}
+            <tr>
+                <td>{{ question.question|safe }} {{ question.answer0|safe }}
+                <td>{{ question.bias|title }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

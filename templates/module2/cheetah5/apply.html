@@ -32,7 +32,7 @@
                 console.log('Sending email');
                 $.ajax({
                     type: 'POST',
-                    url: '{% url 'module3_cheetah4_email' %}',
+                    url: '{% url 'module2_cheetah5_email' %}',
                     data: form.serialize(),
                     success: function (data) {
                         if (data.message) {
@@ -57,5 +57,5 @@
     </div>
 
     {# This must be display: block, otherwise it will print an 'empty' page in Chrome #}
-    <iframe src="{% url 'module3_cheetah4_print' %}" style="display: block; height: 0px; width: 0px;" name="frame"></iframe>
+    <iframe src="{% url 'module2_cheetah5_print' %}" style="display: block; height: 0px; width: 0px;" name="frame"></iframe>
 {% endblock %}

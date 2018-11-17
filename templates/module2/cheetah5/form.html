@@ -1,0 +1,62 @@
+<h3>Here is the list you made of the three ways the biases may impact your decision-making:</h3>
+{% if mode == 'print' %}
+    <ul>
+        <li><span style="border-bottom: 1px solid black;">{{ my_bias_impact.0 }}</li>
+        <li><span style="border-bottom: 1px solid black;">{{ my_bias_impact.1 }}</li>
+        <li><span style="border-bottom: 1px solid black;">{{ my_bias_impact.2 }}</li>
+    </ul>
+{% else %}
+    <table class="table">
+        <tbody>
+        <tr>
+            <td width="5">1.</td>
+            <td><textarea name="my_bias_impact[]" class="auto-text-area">{{ my_bias_impact.0 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">2.</td>
+            <td><textarea name="my_bias_impact[]" class="auto-text-area">{{ my_bias_impact.1 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">3.</td>
+            <td><textarea name="my_bias_impact[]" class="auto-text-area">{{ my_bias_impact.2 }}</textarea></td>
+        </tr>
+        </tbody>
+    </table>
+{% endif %}
+
+{% if mode != 'print' %}
+    <p>Which Bias Remedies will help you beat bias?
+    <ul>
+        <li>Be more conscious and aware of your actions</li>
+        <li>Check for facts</li>
+        <li>Get a second opinion</li>
+        <li>Get feedback on your strengths and blind spots</li>
+    </ul>
+    </p>
+{% endif %}
+
+<h3>How will you use the Bias Remedies selected?</h3>
+{% if mode == 'print' %}
+    <ul>
+        <li><span style="border-bottom: 1px solid black;">{{ my_bias_remedy.0 }}</li>
+        <li><span style="border-bottom: 1px solid black;">{{ my_bias_remedy.1 }}</li>
+        <li><span style="border-bottom: 1px solid black;">{{ my_bias_remedy.2 }}</li>
+    </ul>
+{% else %}
+    <table class="table">
+        <tbody>
+        <tr>
+            <td width="5">1.</td>
+            <td><textarea name="my_bias_remedy[]" class="auto-text-area">{{ my_bias_remedy.0 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">2.</td>
+            <td><textarea name="my_bias_remedy[]" class="auto-text-area">{{ my_bias_remedy.1 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">3.</td>
+            <td><textarea name="my_bias_remedy[]" class="auto-text-area">{{ my_bias_remedy.2 }}</textarea></td>
+        </tr>
+        </tbody>
+    </table>
+{% endif %}

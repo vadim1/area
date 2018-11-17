@@ -5,107 +5,72 @@
 {% endblock %}{% endblock %}
 {% block content %}
     <style type="text/css">
-        #upsideDownside2 {
-            display: none;
-        }
-
-        #upsideDownside3 {
-            display: none;
-        }
-
         #next {
-            display: none;
-        }
-
-        .yesno {
-            font-size: 256px;
-            position: absolute;
-            top: 400px;
-            left: 40%;
-            z-index: 1000;
-        }
-
-        #yes {
-            color: green;
-            display: none;
-        }
-
-        #no {
-            color: red;
             display: none;
         }
 
         .results {
             font-size: 1.5em;
+            padding: 10px 0px 30px 0px;
         }
     </style>
 
-    <div id="yes" class="yesno">&#10003;</div>
-    <div id="no" class="yesno">&#10008;</div>
     <h2 class="center">
         What are the Upsides/Downsides?
     </h2>
-    <p>Here are a few of the statements from the quiz you just took. Which of the statements from the quiz do you think relied upon a bias that had an upside for you? Which had a downside? Choose all that apply</p>
-
+    <p>Here are a few of the statements from the quiz you just took. Read how bias has an upside and a downside by
+        clicking on both buttons.</p>
 
     <div id="upsideDownside1">
         <h3 id="question1">When you go down the cereal aisle, you automatically look for the cereal you want</h3>
+        <div id="results1" class="results"></div>
+
         <div class="center">
             <button id="upsideBtn1"
-                    onclick="showNext(1, '#upsideDownside2', 'Upside. Help you get what you want quickly'); return false;">
+                    onclick="showNext(1, '#upsideDownside2', 'Upside: Help you get what you want quickly'); return false;">
                 Upside
             </button>
             <span style="padding-left: 30px;"></span>
-            <button id="downsideBtn1" onclick="tryAgain('Try Again'); return false;">Downside</button>
+            <button id="downsideBtn1" onclick="showNext(1, '#upsideDownside2', 'Downside: Don’t see all of the choices in the aisle'); return false;">Downside</button>
         </div>
-        <span id="results1" class="results"></span>
     </div>
 
     <div id="upsideDownside2">
-        <h3 id="question2">When you head to school in the morning you don’t even think about the route you'll
-            take</h3>
+        <h3 id="question2">When you head to school in the morning you don’t even think about the route you’ll take</h3>
+        <div id="results2" class="results"></div>
+
         <div class="center">
             <button id="upsideBtn2"
-                    onclick="showNext(2, '#upsideDownside3', 'Upside. Knowing the route you can use the time to think about other things'); return false;">
+                    onclick="showNext(2, '#upsideDownside3', 'Upside: Knowing the route you can use the time to think about other things'); return false;">
                 Upside
             </button>
             <span style="padding-left: 30px;"></span>
-            <button id="downsideBtn2" onclick="tryAgain('Try Again'); return false;">Downside</button>
+            <button id="downsideBtn2" onclick="showNext(2, '#upsideDownside3', 'Downside: Don\'t fully notice your environment'); return false;">Downside</button>
         </div>
-        <span id="results2" class="results"></span>
     </div>
 
     <div id="upsideDownside3">
         <h3 id="question3">If you just passed your driver’s license test you think you’re a good driver</h3>
+        <div id="results3" class="results"></div>
+
         <div class="center">
-            <button id="upsideBtn3" onclick="tryAgain('Try Again'); return false;">Upside</button>
+            <button id="upsideBtn3" onclick="showNext(3, '#next', 'Upside: You understand and have been tested on the rules of the road'); return false;">Upside</button>
             <span style="padding-left: 30px;"></span>
             <button id="downsideBtn3"
-                    onclick="showNext(3, '#next', 'Downside. Overconfidence can be dangerous'); return false;">Downside
+                    onclick="showNext(3, '#next', 'Downside: Overconfidence can be dangerous'); return false;">Downside
             </button>
         </div>
-        <span id="results3" class="results"></span>
     </div>
 
     <script type="text/javascript">
         var fadeInMs = 2000;
         var fadeOutMs = 1000;
         function showNext(id, nextId, msg) {
-            // Show the check mark
-            $('#yes').fadeIn(fadeInMs).fadeOut(fadeOutMs);
-            // Hide the buttons
-            $('#upsideBtn' + id).hide();
-            $('#downsideBtn' + id).hide();
             // Show the message
             $('#results' + id).text(msg);
 
             // Show the next item
             $(nextId).show();
-        }
-
-        function tryAgain(msg) {
-            // Show the cross
-            $('#no').fadeIn(fadeInMs).fadeOut(fadeOutMs);
         }
     </script>
 

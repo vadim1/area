@@ -15,6 +15,8 @@ class Module2(BaseModule):
     opinions_reality = models.CharField(max_length=10, default='')
     perspective = models.TextField(default='')
     my_bias = models.TextField(default='')
+    my_bias_impact = models.TextField(default='')
+    my_bias_remedy = models.TextField(default='')
 
     evidence0 = models.CharField(max_length=255, default='')
     evidence1 = models.CharField(max_length=255, default='')
@@ -105,31 +107,37 @@ class Module2(BaseModule):
                 'key': 'authority',
                 'label': 'Authority Bias',
                 'action': 'This bias is less likely but might be at work if an authority figure in your life is favorable towards Ohio State.',
+                'definition': 'Tendency to take on the opinion of someone who is seen as an authority on a subject',
             },
             {
                 'key': 'liking',
                 'label': 'Liking Bias',
                 'action': 'This bias might be at work if you know someone who also likes it.',
+                'definition': 'Gravitating toward things and people we like',
             },
             {
                 'key': 'planning',
                 'label': 'Planning Bias',
                 'action': 'This bias is not relevant because it is about underestimating how long a task will take even if we have done it before.',
+                'definition': "Underestimating how long a task will take, even if you've done it before",
             },
             {
                 'key': 'optimism',
                 'label': 'Optimism Bias',
                 'action': "This bias about being overly optimistic isn't at work here.",
+                'definition': "Believing everything will turn out well",
             },
             {
                 'key': 'social',
                 'label': 'Social Proof',
                 'action': 'This bias is most relevant, because it is about being influenced by popularity.',
+                'definition': 'Following the crowd, letting your opinion be influenced by reputation',
             },
             {
                 'key': 'projection',
                 'label': 'Projection Bias',
                 'action': 'This bias is not relevant because it is about projecting your own thoughts and feelings onto others.',
+                'definition': 'Putting your own thoughts and desires onto others around you',
             },
         ]
 
@@ -162,6 +170,41 @@ class Module2(BaseModule):
         ]
 
         return remedies
+
+    @staticmethod
+    def get_bias_remedy_questions():
+        bias_remedy_questions = {
+            'remedy1': {
+                'question': 'Be more conscious and aware of your actions',
+                'answer0': 'Yes! Close attention breeds insight.',
+                'answer1': 'No! Do you use the radio or your phone? Both are distracting.',
+                'bias': 'remedy',
+                'bias_answer': 0,
+            },
+            'remedy2': {
+                'question': 'Check for facts',
+                'answer0': 'Yes! Find answers about new driver accidents.',
+                'answer1': 'No! Really? Knowledge is power',
+                'bias': 'remedy',
+                'bias_answer': 0,
+            },
+            'remedy3': {
+                'question': 'Get a second opinion',
+                'answer0': 'Yes! Learn from others how they stayed safe as new drivers.',
+                'answer1': 'No! Really? A second opinion may refined or change your thinking.',
+                'bias': 'remedy',
+                'bias_answer': 0,
+            },
+            'remedy4': {
+                'question': 'Get feedback on your strengths and blind spots',
+                'answer0': 'Yes! Who knows your blind spots?',
+                'answer1': 'No! Someone who knows you well may provide insight to improve your decision-making.',
+                'bias': 'remedy',
+                'bias_answer': 0,
+            },
+        }
+
+        return bias_remedy_questions
 
     @staticmethod
     def get_mental_shortcuts(self):
@@ -490,6 +533,8 @@ class Module2Form(ModelForm):
         self.fields['opinions_reality'].required = False
         self.fields['perspective'].required = False
         self.fields['my_bias'].required = False
+        self.fields['my_bias_impact'].required = False
+        self.fields['my_bias_remedy'].required = False
 
 
     class Meta:
@@ -498,6 +543,8 @@ class Module2Form(ModelForm):
                   'biases',
                   'more_facts',
                   'my_bias',
+                  'my_bias_impact',
+                  'my_bias_remedy',
                   'nylah_bias',
                   'opinions',
                   'opinions_important',
