@@ -24,7 +24,7 @@ urlpatterns = [
 
     # Cheetah Sheet
     url(r'^cheetah4/intro/$', views.generic_page_controller, name='module3_cheetah4_intro'),
-    #url(r'^cheetah4/sheet/?$', views.cheetah4_sheet, name='module3_cheetah4_sheet'),
+    url(r'^cheetah4/sheet/?$', views.cheetah4_sheet, name='module3_cheetah4_sheet'),
     url(r'^cheetah4/apply/?$', views.cheetah4_report, name='module3_cheetah4_apply'),
 
     url(r'^summary/?$', views.summary, name='module3_summary'),

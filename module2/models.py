@@ -14,6 +14,7 @@ class Module2(BaseModule):
     opinions_important = models.CharField(max_length=10, default='')
     opinions_reality = models.CharField(max_length=10, default='')
     perspective = models.TextField(default='')
+    my_bias = models.TextField(default='')
 
     evidence0 = models.CharField(max_length=255, default='')
     evidence1 = models.CharField(max_length=255, default='')
@@ -461,7 +462,7 @@ class Module2(BaseModule):
         pins = [
             'Mental Shortcuts',
             'Common Biases',
-            'Biases Remedies',
+            'Bias Remedies',
         ]
 
         return pins
@@ -488,6 +489,7 @@ class Module2Form(ModelForm):
         self.fields['opinions_important'].required = False
         self.fields['opinions_reality'].required = False
         self.fields['perspective'].required = False
+        self.fields['my_bias'].required = False
 
 
     class Meta:
@@ -495,6 +497,7 @@ class Module2Form(ModelForm):
         fields = ['answers',
                   'biases',
                   'more_facts',
+                  'my_bias',
                   'nylah_bias',
                   'opinions',
                   'opinions_important',

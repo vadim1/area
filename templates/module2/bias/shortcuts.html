@@ -12,7 +12,8 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('.no').click(function () {
-                alert('Try again!');
+                $('#yesNo').hide();
+                $('#explanation').show();
                 return false;
             });
             $('.yes').click(function () {
@@ -26,17 +27,21 @@
     <h2 class="center">
         The Upside and Downside of Mental Shortcuts
     </h2>
-    <p>As you can tell, biases work as mental shortcuts.</p>
-    <p>From the questions you just answered can you see biases have an upside and a downside?</p>
+    <p>Biases work as mental shortcuts.</p>
+    <p>Do you think biases can both work in your favor or at times block you?</p>
 
     <div class="space"></div>
 
     <div id="yesNo" class="center">
-        <button class="yes">Yes</button><span style="padding-left: 30px;"></span><button class="no">No</button>
+        <button class="yes">Yes</button>
+        <span style="padding-left: 30px;"></span>
+        <button class="no">No</button>
     </div>
 
     <div id="explanation">
-        <p>Biases help us cut corners in our thinking processes to help save time and effort in making judgments. Often they work well, but sometimes, they block us from receiving new information or insights. </p>
+        <p>Regardless of whether you clicked Yes or No biases are two sides of the same coin. Biases help us cut corners
+            in our thinking processes to help save time and effort in making judgments. Often they work well, but
+            sometimes, they block us from receiving new information or insights.</p>
         {% get_next_btn module "What are the Upsides/Downsides?" nav.nextUrl %}
     </div>
 

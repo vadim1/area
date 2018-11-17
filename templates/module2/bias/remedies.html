@@ -52,13 +52,13 @@
                 var buffer = "<h3>Bias Remedies</h3><ul>";
                 $("input[name='remedy[]']:checked").each(function () {
                     var val = $(this).val();
-                    buffer += '<li>' + keys[val] + '</li>';
+                    buffer += '<li>' + comments[val] + '</li>';
                     clicked++;
                 });
                 buffer += "</ul>";
                 $('#bias_remedies').html(buffer);
 
-                if (clicked == keys.length) {
+                if (clicked == comments.length) {
                     $('#next').show();
                 }
             }
@@ -66,7 +66,7 @@
             $('input[type=checkbox]').change(function() {
                if ($(this).is(':checked')) {
                    var val = $(this).val();
-                   alert(comments[val]);
+                   //alert(comments[val]);
                }
 
                refresh_list();

@@ -13,7 +13,7 @@ import json
 
 cheetah_sheet4 = CheetahSheet()
 cheetah_sheet4.num = 4
-cheetah_sheet4.title = "Biases At Work"
+cheetah_sheet4.title = "Bias and Mental Shortcuts"
 
 """
 Ordered list of URLs for this Module
@@ -30,10 +30,11 @@ def navigation():
         reverse('module2_game1_results'),
         reverse('module2_game2_instructions'),
         reverse('module2_game2_game'),
+        reverse('module3_cheetah4_intro'),
+        reverse('module3_cheetah4_sheet'),
         reverse('module2_bias_shortcuts'),
         reverse('module2_bias_pro_con'),
         reverse('module2_bias_remedies'),
-        reverse('module3_cheetah4_intro'),
         reverse('module3_cheetah4_apply'),
         reverse('module3_summary'),
     ]
@@ -80,173 +81,20 @@ def save_form(request, module, parsed):
 Module Specific Controllers
 """
 @login_required
-def cc_edit(request):
-    parsed = ViewHelper.parse_request_path(request, navigation())
-    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
-    # TODO: move to ViewHelper
-    module1 = load_previous_module(request)
-
-    if request.method == 'POST':
-        # Save Critical Concepts in the previous module
-        module1.decision = request.POST.get('decision')
-        module1.cc = json.dumps(request.POST.getlist('cc[]'))
-        module1.save()
-        return redirect(reverse('module3_cheetah_2'))
-
-    context = {
-        'cc': ViewHelper.load_json(module1.cc),
-        'module1': module1,
-    }
-
-    return render_page(request, module, parsed, context)
-
-@login_required
-def cheetah_2(request):
-    parsed = ViewHelper.parse_request_path(request, navigation())
-    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
-    # TODO: move to ViewHelper
-    module1 = load_previous_module(request)
-
-    context = {
-        'cc': ViewHelper.load_json(module1.cc),
-        'decision': module1.decision,
-    }
-
-    return render_page(request, module, parsed, context)
-
-@login_required
-def cheetah_3(request):
-    parsed = ViewHelper.parse_request_path(request, navigation())
-    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
-    # TODO: move to ViewHelper
-    module1 = load_previous_module(request)
-
-    back = parsed['previousUrl']
-    cc_num = int(request.GET.get('num', 0))
-    fact = ''
-    source = ''
-    bias = ''
-
-    sample_student_cheetah_data = Module.get_sample_student_cheetah_data()
-
-    if request.method == 'POST':
-        cc_num = int(request.POST.get('num'))
-        fact = request.POST['fact']
-        source = request.POST['source']
-        bias = request.POST['bias']
-        if cc_num == 0:
-            module.fact0 = fact
-            module.source0 = source
-            module.bias0 = bias
-        elif cc_num == 1:
-            module.fact1 = fact
-            module.source1 = source
-            module.bias1 = bias
-        elif cc_num == 2:
-            module.fact2 = fact
-            module.source2 = source
-            module.bias2 = bias
-        else:
-            raise Exception("Unexpected index: " + str(cc_num))
-
-        cc_num = cc_num + 1
-        if cc_num < len(sample_student_cheetah_data):
-            save_form(request, module, parsed)
-            return redirect(reverse('module3_cheetah_3') + '?num=' + str(cc_num))
-        else:
-            return save_form(request, module, parsed)
-
-    # GET
-    if cc_num > 0:
-        back = parsed['current'] + '?num=' + str(cc_num - 1)
-
-    if cc_num == 0:
-        fact = module.fact0
-        source = module.source0
-        bias = module.bias0
-    elif cc_num == 1:
-        fact = module.fact1
-        source = module.source1
-        bias = module.bias1
-    elif cc_num == 2:
-        fact = module.fact2
-        source = module.source2
-        bias = module.bias2
-
-    cc_json = ViewHelper.load_json(module1.cc)
-    # Your Critical Concept (from Module 1)
-    cc_current = cc_json[cc_num]
-    #print(cc_current)
-
-    context = {
-        'biases': module.get_biases(),
-        'back': back,
-        'bias': bias,
-        'cc': cc_json,
-        'cc_current': cc_current,
-        'decision': module1.decision,
-        'fact': fact,
-        'n': cc_num + 1,
-        'num': cc_num,
-        'sample_student_cheetah_data': sample_student_cheetah_data[cc_num],
-        'source': source,
-    }
-
-    return render_page(request, module, parsed, context)
-
-@login_required
-def cheetah_4(request):
-    parsed = ViewHelper.parse_request_path(request, navigation())
-    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
-    # TODO: move to ViewHelper
-    module1 = load_previous_module(request)
-
-    if request.method == 'POST':
-        return save_form(request, module, parsed)
-
-    mail_body = module1.decision_buddy + ',' + '%0D%0D' + \
-                'Please help me validate facts for a big decision: ' + module1.decision + '%0D%0D'
-    ccs = load_json(module1.cc)
-    mail_body += 'I have identified 3 Critical Concepts. For each one I need to collect facts and make sure that I am not falling prey to biases. Please help me work through verifying the facts for each Critical Concept.' + '%0D%0D' + \
-                 'Critical Concept: ' + ccs[0] + '%0D' + \
-                 'Fact: ' + module.fact0 + '%0D' + \
-                 'Source: ' + module.source0 + '%0D' + \
-                 'Bias: ' + module.bias0 + '%0D%0D' + \
-                 'Critical Concept: ' + ccs[1] + '%0D' + \
-                 'Fact: ' + module.fact1 + '%0D' + \
-                 'Source: ' + module.source1 + '%0D' + \
-                 'Bias: ' + module.bias1 + '%0D%0D' + \
-                 'Critical Concept: ' + ccs[2] + '%0D' + \
-                 'Fact: ' + module.fact2 + '%0D' + \
-                 'Source: ' + module.source2 + '%0D' + \
-                 'Bias: ' + module.bias2 + '%0D%0D' + \
-                 'Thank you!'
-    to = module1.decision_buddy_email + ',' + request.user.email
-
-    context = {
-        'subject': 'Decision Buddy - Help with fact finding',
-        'decision_buddy': module1.decision_buddy,
-        'decision_buddy_email': module1.decision_buddy_email,
-        'decision': module1.decision,
-        'cc': ViewHelper.load_json(module1.cc),
-        'mail_body': mail_body,
-        'to': to,
-    }
-
-    return render_page(request, module, parsed, context)
-
-@login_required
 def cheetah4_report(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, 'cheetah4_apply', Module)
 
     context = {
+        'biases_results': ViewHelper.load_json(module.biases),
         'cheetah_sheet': cheetah_sheet4,
         'module': module,
+        'my_bias': ViewHelper.load_json(module.my_bias),
         'nav': parsed,
+        'questions': Module.get_game2_questions().values(),
     }
 
-    if parsed['currentStep'] == 'cheetah3_email':
+    if parsed['currentStep'] == 'cheetah4_email':
         data = {}
         if request.user.is_authenticated():
             emails = [request.user.email]
@@ -270,6 +118,21 @@ def cheetah4_report(request):
         print("Email: {0} to {1}".format(data['message'], request.user.email))
         return JsonResponse(data)
 
+    return render_page(request, module, parsed, context)
+
+@login_required
+def cheetah4_sheet(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    if request.method == 'POST':
+        module.my_bias = json.dumps(request.POST.getlist('my_bias[]'))
+        return save_form(request, module, parsed)
+
+    context = {
+        'my_bias': ViewHelper.load_json(module.my_bias),
+        'cheetah_sheet': cheetah_sheet4,
+    }
     return render_page(request, module, parsed, context)
 
 @login_required
@@ -347,63 +210,6 @@ def map(request):
     }
     return render_page(request, module, parsed, context)
 
-@login_required
-def nylah_3(request):
-    parsed = ViewHelper.parse_request_path(request, navigation())
-    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
-
-    if request.method == 'POST':
-        return save_form(request, module, parsed)
-
-    context = {
-        'biases': ViewHelper.load_json(module.biases).keys(),
-    }
-    return render_page(request, module, parsed, context)
-
-@login_required
-def pin3_3(request):
-    parsed = ViewHelper.parse_request_path(request, navigation())
-    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
-
-    if request.method == 'POST':
-        module.more_facts = json.dumps(request.POST.getlist('more_facts[]'))
-        return save_form(request, module, parsed)
-
-    context = {
-        'selected_facts': ViewHelper.load_json(module.more_facts)
-    }
-
-    return render_page(request, module, parsed, context)
-
-@login_required
-def pin4_2(request):
-    parsed = ViewHelper.parse_request_path(request, navigation())
-    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
-
-    if request.method == 'POST':
-        module.perspective = json.dumps(request.POST.getlist('perspective[]'))
-        return save_form(request, module, parsed)
-
-    context = {
-        'selected_perspective': ViewHelper.load_json(module.perspective)
-    }
-
-    return render_page(request, module, parsed, context)
-
-@login_required
-def pin4_4(request):
-    parsed = ViewHelper.parse_request_path(request, navigation())
-    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
-
-    if request.method == 'POST':
-        module.opinions = json.dumps(request.POST.getlist('opinions[]'))
-        return save_form(request, module, parsed)
-
-    context = {
-        'selected_opinions': ViewHelper.load_json(module.opinions)
-    }
-
-    return render_page(request, module, parsed, context)
 
 @login_required
 def restart(request):

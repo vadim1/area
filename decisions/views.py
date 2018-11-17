@@ -13,7 +13,7 @@ import json
 
 from area_app.views.view import get_randomized_questions, compute_archetype
 
-import stripe
+#import stripe
 from django.urls import reverse
 
 def load_json(json_data):
