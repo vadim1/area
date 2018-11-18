@@ -29,9 +29,11 @@ def navigation():
         reverse('module2_intro'),
         reverse('module2_review'),
         reverse('module2_map'),
+        # Pin 1 - Mental Shortcuts
         reverse('module2_game1_instructions'),
         reverse('module2_game1_game'),
         reverse('module2_explain'),
+        # Pin 2 - Common Bias
         reverse('module2_bias'),
         reverse('module2_game1_results'),
         reverse('module2_game2_instructions'),
@@ -40,6 +42,7 @@ def navigation():
         reverse('module2_cheetah4_sheet'),
         reverse('module2_bias_shortcuts'),
         reverse('module2_bias_pro_con'),
+        # Pin 3 - Bias Remedies
         reverse('module2_bias_remedies'),
         reverse('module2_bias_practice'),
         reverse('module2_cheetah5_sheet'),
@@ -130,6 +133,8 @@ def bias_remedies_practice(request):
 def cheetah4_sheet(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+    # Used for rendering the previous module contents
+    module1 = load_previous_module(request)
 
     if request.method == 'POST':
         module.my_bias = json.dumps(request.POST.getlist('my_bias[]'))
@@ -137,6 +142,10 @@ def cheetah4_sheet(request):
         return save_form(request, module, parsed)
 
     context = {
+        'cc': ViewHelper.load_json(module1.cc),
+        'cc_occurred': ViewHelper.load_json(module1.cc_occurred),
+        'decision': module1.decision,
+        'decision_as_question': module1.decision_as_question,
         'my_bias': ViewHelper.load_json(module.my_bias),
         'my_bias_impact': ViewHelper.load_json(module.my_bias_impact),
         'cheetah_sheet': cheetah_sheet4,

@@ -1,17 +1,17 @@
 <h3>What is your decision problem?</h3>
 {% if mode == 'print' %}
-    <p style="border-bottom: 1px solid black;">{{ module.decision }}</p>
+    <p style="border-bottom: 1px solid black;">{{ decision }}</p>
 {% else %}
     <input type="text" name="decision" class="cc decision" size="80" placeholder="Type Your Decision Here"
-           value="{{ module.decision }}"/>
+           value="{{ decision }}"/>
 {% endif %}
 
 <h3>Reframe the decision problem as a question</h3>
 {% if mode == 'print' %}
-    <p style="border-bottom: 1px solid black;">{{ module.decision_as_question }}</p>
+    <p style="border-bottom: 1px solid black;">{{ decision_as_question }}</p>
 {% else %}
     <input type="text" name="decision_as_question" class="cc decision" size="80" placeholder="Type Your Question Here"
-           value="{{ module.decision_as_question }}"/>?
+           value="{{ decision_as_question }}"/>?
 {% endif %}
 
 <p>What are you solving for? Picture that you’ve already made the decision and its successful. What has happened?</p>

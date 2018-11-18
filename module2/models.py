@@ -270,7 +270,7 @@ class Module2(BaseModule):
                 'bias_answer': 0,
             },
             'liking1': {
-                'question': 'When I saw how good my friend looked with her new short haircut do you ...',
+                'question': 'When you saw how good your friend looked with her new short haircut do you ...',
                 'answer0': 'Decide to cut your hair the same way',
                 'answer1': 'Keep your own haircut style',
                 'bias': 'liking',
@@ -382,7 +382,7 @@ class Module2(BaseModule):
                 'bias_answer': 0,
             },
             'liking1': {
-                'question': 'When I saw how good my friend looked with her new short haircut',
+                'question': 'When you saw how good your friend looked with her new short haircut',
                 'answer0': 'I decided to get mine cut the same way',
                 'answer1': '...',
                 'bias': 'liking',

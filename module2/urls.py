@@ -9,24 +9,23 @@ urlpatterns = [
     url(r'^review/?$', views.review, name='module2_review'),
     url(r'^map/?$', views.show_map, name='module2_map'),
 
+    # Pin 1 - Mental Shortcuts
     url(r'^game1/instructions/?$', views.generic_page_controller, name='module2_game1_instructions'),
     url(r'^game1/game/?$', views.game, name='module2_game1_game'),
     url(r'^explain/?$', views.generic_page_controller, name='module2_explain'),
+    # Pin 2 - Common Biases
     url(r'^bias/?$', views.generic_page_controller, name='module2_bias'),
     url(r'^game1/results/?$', views.game1_results, name='module2_game1_results'),
-
     url(r'^game2/instructions/?$', views.generic_page_controller, name='module2_game2_instructions'),
     url(r'^game2/game/$', views.game2_game, name='module2_game2_game'),
-
     # Cheetah Sheet 4
     url(r'^cheetah4/intro/$', views.generic_page_controller, name='module2_cheetah4_intro'),
     url(r'^cheetah4/sheet/?$', views.cheetah4_sheet, name='module2_cheetah4_sheet'),
-
     url(r'^bias/shortcuts/$', views.generic_page_controller, name='module2_bias_shortcuts'),
     url(r'^bias/pro_con/$', views.generic_page_controller, name='module2_bias_pro_con'),
+    # Pin 3 - Bias Remedies
     url(r'^bias/remedies/$', views.generic_page_controller, name='module2_bias_remedies'),
     url(r'^bias/practice/$', views.bias_remedies_practice, name='module2_bias_practice'),
-
     # Cheetah Sheet 5
     url(r'^cheetah5/sheet/?$', views.cheetah5_sheet, name='module2_cheetah5_sheet'),
     url(r'^cheetah5/apply/?$', views.cheetah5_report, name='module2_cheetah5_apply'),
