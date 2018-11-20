@@ -172,6 +172,34 @@ class Module2(BaseModule):
         return remedies
 
     @staticmethod
+    def get_bias_authority_questions():
+        bias_authority_questions = {
+            'authority1': {
+                'question': 'Your mom tells you that you should take a photograph of your credit card in case you lose it. You take out your phone and snap a picture of it and send her a copy to keep.',
+                'answer0': 'Correct! Your mom is an authority figure.',
+                'answer1': 'No! Are you sure? Check again.',
+                'bias': 'authority',
+                'bias_answer': 0,
+            },
+            'authority2': {
+                'question': 'Your coach says you should just apply to safety schools and you follow his advice without question.',
+                'answer0': 'Correct! Your coach is an authority figure.',
+                'answer1': 'No! Are you sure? Check again.',
+                'bias': 'authority',
+                'bias_answer': 0,
+            },
+            'authority3': {
+                'question': 'Your friend tells you she wants your notes for Spanish and you share them with her',
+                'answer0': 'No! Are you sure? Check again.',
+                'answer1': 'Correct! Your friend is not an authority figure.',
+                'bias': 'authority',
+                'bias_answer': 1,
+            },
+        }
+
+        return bias_authority_questions
+
+    @staticmethod
     def get_bias_remedy_questions():
         bias_remedy_questions = {
             'remedy1': {

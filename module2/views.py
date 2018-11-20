@@ -37,7 +37,8 @@ def navigation():
         reverse('module2_bias'),
         reverse('module2_game1_results'),
         reverse('module2_game2_instructions'),
-        reverse('module2_game2_game'),
+        #reverse('module2_game2_game'),
+        reverse('module2_bias_authority'),
         reverse('module2_cheetah4_intro'),
         reverse('module2_cheetah4_sheet'),
         reverse('module2_bias_shortcuts'),
@@ -91,6 +92,13 @@ def save_form(request, module, parsed):
         print("Form on step: {0} did not validate".format(parsed['currentStep']))
         print(form.errors)
 
+@login_required
+def bias_authority_practice(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    return bias_yesno(request, parsed, module, Module.get_bias_authority_questions())
+
 
 @login_required
 def bias_remedies_practice(request):
@@ -100,8 +108,10 @@ def bias_remedies_practice(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
 
-    # Add title to each question
-    game_questions = Module.get_bias_remedy_questions()
+    return bias_yesno(request, parsed, module, Module.get_bias_remedy_questions())
+
+
+def bias_yesno(request, parsed, module, game_questions):
     for title in game_questions.keys():
         game_questions[title]['title'] = title
 

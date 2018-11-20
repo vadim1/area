@@ -17,7 +17,8 @@ urlpatterns = [
     url(r'^bias/?$', views.generic_page_controller, name='module2_bias'),
     url(r'^game1/results/?$', views.game1_results, name='module2_game1_results'),
     url(r'^game2/instructions/?$', views.generic_page_controller, name='module2_game2_instructions'),
-    url(r'^game2/game/$', views.game2_game, name='module2_game2_game'),
+    #url(r'^game2/game/$', views.game2_game, name='module2_game2_game'),
+    url(r'^bias/authority/$', views.bias_authority_practice, name='module2_bias_authority'),
     # Cheetah Sheet 4
     url(r'^cheetah4/intro/$', views.generic_page_controller, name='module2_cheetah4_intro'),
     url(r'^cheetah4/sheet/?$', views.cheetah4_sheet, name='module2_cheetah4_sheet'),

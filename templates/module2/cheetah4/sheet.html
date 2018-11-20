@@ -4,6 +4,24 @@
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
 
+            var minTextLength = 2;
+
+            function validate() {
+                var valid = true;
+
+                /* Scan each text field and ensure that it has at least min chars length */
+                return valid;
+            }
+
+            /* Validate the form and submit */
+            $('#completeBtn').click(function () {
+                var results = validate();
+                if (results) {
+                    $('form').submit();
+                }
+                return results;
+            });
+
             $('#showProfileBtn').click(function () {
                 /* Show modal */
                 $('.modal').css('display', 'block');

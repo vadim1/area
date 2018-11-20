@@ -1,0 +1,218 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Bias in Action Quiz{% endblock %}{% endblock %}
+{% block content %}
+    <style type="text/css">
+        .yes {
+            color: green;
+            display: none;
+            font-size: 2em;
+        }
+
+        .no {
+            color: red;
+            display: none;
+            font-size: 2em;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #eee;
+            margin: auto;
+            padding: 20px;
+            /* border: 1px solid #888888; */
+            width: 70%;
+        }
+
+        #pro_con {
+            background-color: #eee;
+        }
+
+    </style>
+
+    <script type="text/javascript">
+        var animation_direction = 'left';
+        var cycled_through_all_questions = false;
+        var fadeInMs = 2000;
+        var fadeOutMs = 1000;
+        var num_questions = {{ num_questions }};
+        var questions = {
+            {% for question in questions %}
+                '{{ forloop.counter }}': {
+                    'title': "{{ question.title }}",
+                    'question': "{{ question.question|safe }}",
+                    'answer0': "{{ question.answer0|safe }}",
+                    'answer1': "{{ question.answer1|safe }}",
+                    'bias_answer': {{ question.bias_answer }},
+                    'answered': false,
+                },
+            {% endfor %}
+        }
+        var question_num = 0;
+        var random_order = [];
+
+        for (i = 1; i <= num_questions; i++) {
+            random_order.push(i);
+        }
+        shuffle(random_order);
+
+        function next_question(isAfterSkip) {
+            if (!isAfterSkip) {
+                cycled_through_all_questions = false;
+            }
+            question_num++;
+            if (question_num >= num_questions) {
+                if (!cycled_through_all_questions) {
+                    question_num = 0;
+                    cycled_through_all_questions = true; // On next iteration through, done
+                    console.log("Cycled through all the questions");
+                } else {
+                    // Reached max num of questions and already cycled through
+                    $('#next').show();
+                    console.log("Show next button");
+                    return false;
+                }
+            }
+
+            var question_index = random_order[question_num];
+            if (questions[question_index]['answered'] == true) {
+                // Already answered
+                return next_question(true);
+            }
+
+            if (animation_direction == 'right') {
+                animation_direction = 'left';
+            } else {
+                animation_direction = 'right';
+            }
+
+            var question_index = random_order[question_num];
+            $('#question_index').text(question_index);
+            $('#question').text(questions[question_index]['question']);
+            //$('#answer0').text(questions[question_index]['answer0']);
+            //$('#answer1').text(questions[question_index]['answer1']);
+            if (animation_direction == 'right') {
+                $('#game').css('left', '60%');
+                $('#game').animate({'left': '30%'}, function () {
+                    $('#game').css('position', 'inherit');
+                });
+            } else {
+                $('#game').css('left', '0%');
+                $('#game').animate({'left': '30%'}, function () {
+                    $('#game').css('position', 'inherit');
+                });
+            }
+            return false;
+        }
+
+        function answer(actual_answer) {
+            var question_index = $('#question_index').text();
+            var expected_answer = questions[question_index]['bias_answer'];
+            var answer_index = 'answer' + actual_answer;
+            var checkmark = '&#10003;';
+            var cross = '&#10008;';
+
+            if (expected_answer == actual_answer) {
+                // correct answer
+                questions[question_index]['answered'] = true;
+                showModal(checkmark, questions[question_index][answer_index]);
+            } else {
+                // incorrect answer
+                showModal(cross, questions[question_index][answer_index]);
+            }
+
+            $('#answer_' + question_index).val(actual_answer);
+            return next_question();
+        }
+
+        function showModal(checkIcon, message) {
+            $('#checkIcon').html(checkIcon);
+            $('#message').html(message);
+            $('.modal').css('display', 'block');
+        }
+
+        function showYesNo(id) {
+            $(id).fadeIn(fadeInMs).fadeOut(fadeOutMs);
+        }
+
+        function shuffle(a) {
+            var j, x, i;
+            for (i = a.length; i; i--) {
+                j = Math.floor(Math.random() * i);
+                x = a[i - 1];
+                a[i - 1] = a[j];
+                a[j] = x;
+            }
+            return a;
+        }
+
+        $(document).ready(function () {
+            $('#game').width($('h2').width());
+            next_question(false);
+
+            $('#closeBtn').click(function () {
+                /* Hide modal */
+                $('.modal').css('display', 'none');
+                return false;
+            });
+
+            /* Clicking anywhere outside of the modal closes the modal */
+            /*$(window).click(function (e) {
+                $('.modal').css('display', 'none');
+                return false;
+            });*/
+        });
+    </script>
+
+    <h2 class="center">Bias in Action Quiz</h2>
+
+    <div id="pro_con" class="modal">
+        <div class="modal-content">
+            <p><span id="checkIcon" style="font-size: 75px;"></span><span id="message"></span></p>
+            <p class="center">
+                <button id="closeBtn">Click to Close</button>
+            </p>
+        </div>
+    </div>
+
+    <div style="height: 250px; margin-top: 30px;">
+        <p>The biases will appear one at a time. For each scenario, select whether the bias is applicable.</p>
+        <p>This is the definition of Authority Bias: <i>Tendency to take on the opinion of someone who is seen as an authority on a subject</i></p>
+        <p>Which of these statements is not representative of Authority Bias?</p>
+        <div id="game" style="position: absolute; font-size: 24px; text-align: center; overflow: visible">
+            <div id="question_wrapper">
+                <div id="question" style="font-weight: bold; text-align: center"></div>
+                <span id="question_index" style="display: none"></span>
+                <div id="answers" style="margin-left: 5%; margin-top: 20px;">
+                    <button onclick="$(this).blur(); return answer('0');" id="answer0">Yes</button>
+                    <button onclick="$(this).blur(); return answer('1');" id="answer1">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% for question in questions %}
+        <input type="hidden" name="answer[{{ forloop.counter0 }}]" id="answer_{{ forloop.counter }}" value=""/>
+    {% endfor %}
+
+    <div class="center">
+        <button id="next" type="button" style="display: none;"><a href="{{ nav.nextUrl }}">You Got Them All!</a></button>
+    </div>
+
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}
