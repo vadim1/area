@@ -110,36 +110,42 @@ class Module2(BaseModule):
                 'label': 'Authority Bias',
                 'action': 'This bias is less likely but might be at work if an authority figure in your life is favorable towards Ohio State.',
                 'definition': 'The tendency to take on the opinion of someone who is seen as an authority figure',
+                'cheetah4': 'Might you be impacted by an authority figure?',
             },
             {
                 'key': 'liking',
                 'label': 'Liking Bias',
                 'action': 'This bias might be at work if you know someone who also likes it.',
                 'definition': 'Gravitating toward things and people we like',
+                'cheetah4': 'Are you gravitating toward things and people you like?',
             },
             {
                 'key': 'planning',
                 'label': 'Planning Bias',
                 'action': 'This bias is not relevant because it is about underestimating how long a task will take even if we have done it before.',
                 'definition': "Underestimating how long a task will take, even if you've done it before",
+                'cheetah4': 'Might you be making an assumption about the time to complete a task?',
             },
             {
                 'key': 'optimism',
                 'label': 'Optimism Bias',
                 'action': "This bias about being overly optimistic isn't at work here.",
                 'definition': "Believing everything will turn out well",
+                'cheetah4': 'Might you be too optimistic?',
             },
             {
                 'key': 'social',
                 'label': 'Social Proof',
                 'action': 'This bias is most relevant, because it is about being influenced by popularity.',
                 'definition': 'Following the crowd, letting your opinion be influenced by reputation',
+                'cheetah4': 'Might you be swayed by the crowd?',
             },
             {
                 'key': 'projection',
                 'label': 'Projection Bias',
                 'action': 'This bias is not relevant because it is about projecting your own thoughts and feelings onto others.',
                 'definition': 'Putting your own thoughts and desires onto others around you',
+                'projection': 'Might you be assuming others agree with your opinion?',
             },
         ]
 

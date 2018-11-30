@@ -31,13 +31,21 @@
         <thead>
         <tr>
             <td><strong>Question</strong></td>
+            <td><strong>Answer</strong></td>
             <td><strong>Bias</strong></td>
         </tr>
         </thead>
         <tbody>
         {% for question in questions %}
             <tr>
-                <td>{{ question.question|safe }} {{ question.answer0|safe }}
+                <td>{{ question.question|safe }}</td>
+                <td>
+                    {% if question.bias_answer == 0 %}
+                        {{ question.answer0|safe }} {{ question.explanation0|safe }}
+                    {% else %}
+                        {{ question.answer1|safe }} {{ question.explanation1|safe }}
+                    {% endif %}
+                </td>
                 <td>{{ question.bias|title }}</td>
             </tr>
         {% endfor %}
