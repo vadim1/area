@@ -141,9 +141,9 @@
     {% endif %}
 
     <div style="height: 250px; margin-top: 30px;">
-        <div id="game" style="position: absolute; font-size: 24px; text-align: center; overflow: visible">
+        <div id="game" style="position: absolute; font-size: 18px; text-align: center; overflow: visible">
             <div id="question_wrapper">
-                <div id="question" style="font-size: xx-large; line-height: 1.5em; text-align: left"></div>
+                <div id="question" style="text-align: left"></div>
                 <span id="question_index" style="display: none"></span>
                 <div id="answers" style="margin-left: 5%; margin-top: 20px;">
                     <button onclick="$(this).blur(); return answer('0');" id="answer0"></button>
@@ -154,9 +154,9 @@
         </div>
     </div>
 
-    <a href="instructions" id="back" style="margin-top: 200px;">Back</a>
-
     {% for question in questions %}
         <input type="hidden" name="answer[{{ forloop.counter0 }}]" id="answer_{{ forloop.counter }}" value=""/>
     {% endfor %}
+
+    {% get_back_link module nav.previousUrl %}
 {% endblock %}

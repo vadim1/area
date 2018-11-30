@@ -21,8 +21,11 @@
     </h2>
     <div class="center" style="margin: 50px;">
     </div>
-    <p>Can you apply the names of the biases you just learned to real-life situations where they occur?</p>
-    <p>A scenario will pop up. Choose from the biases below to select which mental shortcut is at work.</p>
+    <p>Can you recognize the biases you just learned in real-life situations where they occur?</p>
+    <p>The biases and their
+        definitions will appear one at a time. For each scenario, follow the directions to select whether the bias is
+        applicable.</p>
+    <!--
     <p>
         If you get it right
         <span id="yes" class="yesno">&#10003;</span>
@@ -30,8 +33,9 @@
         <span id="no" class="yesno">&#10008;</span>
         will flash.
     </p>
+    -->
     <div class="center start">
-    {% get_next_btn module "Spot Bias" nav.nextUrl %}
+        {% get_next_btn module "Spot Bias" nav.nextUrl %}
     </div>
     {% get_back_link module nav.previousUrl %}
 {% endblock %}

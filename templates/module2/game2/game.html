@@ -1,57 +1,14 @@
 {% extends 'decisions/base.html' %}
-{% load bootstrap module_tags %}
-{% block title %}{% block h1 %}Module {{ module.display_num }} - Bias In Action Quiz{% endblock %}{% endblock %}
-{% block extra_head %}
-{% endblock %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - The Bias Game{% endblock %}{% endblock %}
 {% block content %}
     <style type="text/css">
-        #biases {
+        button {
+            height: inherit !important;
+            text-transform: none !important;
+            line-height: 120%;
             width: 100%;
-        }
-
-        #biases button {
-            cursor: pointer;
-            font-size: 100%;
-            line-height: 200%;
-            white-space: nowrap;
-            border-radius: 6px;
-            width: 150px;
-            text-align: center;
-            margin: 5px;
-        }
-
-        #question_div div {
-            color: black;
-        }
-
-        .noclick {
-            background-color: #ffc253;
-        }
-
-        .wrong {
-            background-color: #f2502a !important;
-        }
-
-        .right {
-            background-color: #1dcd9f !important;
-        }
-
-        .yesno {
-            font-size: 256px;
-            position: absolute;
-            top: 400px;
-            left: 40%;
-            z-index: 1000;
-        }
-
-        #yes {
-            color: green;
-            display: none;
-        }
-
-        #no {
-            color: red;
-            display: none;
         }
     </style>
     <script type="text/javascript">
@@ -60,36 +17,47 @@
                 '{{ forloop.counter }}': {
                     'title': "{{ question.title }}",
                     'question': "{{ question.question|safe }}",
-                {# only display the bias answer and not both #}
-                {% if question.bias_answer == 0 %}
-                    'bias_answer': "{{ question.answer0|safe }}",
-                {% else %}
-                    'bias_answer': "{{ question.answer1|safe }}",
-                {% endif %}
-                    'bias': "{{ question.bias }}",
-                    'answered': false,
+                    'answer0': "{{ question.answer0|safe }}",
+                    'answer1': "{{ question.answer1|safe }}",
+                    'bias_answer': "{{ question.bias_answer|safe }}",
+                    'explanation0': "{{ question.explanation0|safe }}",
+                    'explanation1': "{{ question.explanation1|safe }}",
+                    'definition': "{{ question.definition|safe }}",
                 },
             {% endfor %}
         }
 
-        function bias(key) {
-            var fadeInMs = 1000;
-            var fadeOutMs = 1000;
+        function answer(val) {
+            var question_ndx = $('#question_index').text();
+            // What should the answer be?
+            var expected = questions[question_ndx]['bias_answer'];
 
-            if (key == $('#bias').text()) {
-                //$('.jumbotron').switchClass('noclick', 'right', 200).switchClass('right', 'noclick', 200);
-                $('#yes').fadeIn(fadeInMs).fadeOut(fadeOutMs);
-                questions[$('#question_index').text()]['answered'] = true;
+            if (expected == val) {
+                // Increment our total correct
+                total_correct++;
+                updateCounter();
             } else {
-                //$('.jumbotron').switchClass('noclick', 'wrong', 200).switchClass('wrong', 'noclick', 200);
-                $('#no').fadeIn(fadeInMs).fadeOut(fadeOutMs);
+                // Show the error messsage
+                var explanation = questions[question_ndx]['explanation' + val];
+                alert(explanation);
             }
-            return next_question(false);
+
+            // Store the answer regardless of whether it was right or wrong
+            $('#answer_' + question_ndx).val(val);
+
+            // Show the next question
+            question_num++;
+            return next_question();
+        }
+
+        function updateCounter() {
+            $('#total_correct').text(total_correct);
         }
 
         var question_num = 0;
         var num_questions = {{ num_questions }};
-        var cycled_through_all_questions = false;
+        var animation_direction = 'left';
+        var total_correct = 0;
 
         function shuffle(a) {
             var j, x, i;
@@ -108,75 +76,79 @@
         }
         shuffle(random_order);
 
-        function next_question(isAfterSkip) {
-            if (!isAfterSkip) {
-                cycled_through_all_questions = false;
-            }
-            question_num++;
+        function next_question() {
+            $('#game').css('position', 'absolute');
+            console.log("question_num: " + question_num + " num_questions:" + num_questions);
+
             if (question_num >= num_questions) {
-                if (!cycled_through_all_questions) {
-                    question_num = 0;
-                    cycled_through_all_questions = true; // On next iteration through, done
-                    console.log("Cycled through all the questions");
-                } else {
-                    // Reached max num of questions and already cycled through
-                    $('#next').show();
-                    console.log("Show next button");
-                    return false;
-                }
+                console.log("Done with all questions. Form submit");
+                $('form:last').submit();
+                return true;
+                //return false;
             }
 
+            if (animation_direction == 'right') {
+                animation_direction = 'left';
+            } else {
+                animation_direction = 'right';
+            }
             var question_index = random_order[question_num];
-            if (questions[question_index]['answered'] == true) {
-                // Already answered
-                return next_question(true);
-            }
-
             $('#question_index').text(question_index);
             $('#question').text(questions[question_index]['question']);
-            $('#bias_answer').text(questions[question_index]['bias_answer']);
-            $('#bias').text(questions[question_index]['bias']);
-            //$('#ctr').text(question_num);
-            //$('#total').text(num_questions);
+            $('#answer0').text(questions[question_index]['answer0']);
+            $('#answer1').text(questions[question_index]['answer1']);
+            $('#definition').text(questions[question_index]['definition']);
+
+            if (animation_direction == 'right') {
+                $('#game').css('left', '60%');
+                $('#game').animate({'left': '30%'}, function () {
+                    $('#game').css('position', 'inherit');
+                });
+            } else {
+                $('#game').css('left', '0%');
+                $('#game').animate({'left': '30%'}, function () {
+                    $('#game').css('position', 'inherit');
+                });
+            }
             return false;
         }
 
         $(document).ready(function () {
+            console.log("Calling doc ready");
             $('#game').width($('h2').width());
-            next_question(false);
-        });
 
+            // Initialize
+            $('#total_correct').text(0);
+            $('#total_questions').text(num_questions);
+
+            next_question();
+        });
     </script>
-    <div id="yes" class="yesno">&#10003;</div>
-    <div id="no" class="yesno">&#10008;</div>
-    <h2 class="center">
-        Bias In Action Quiz
-    </h2>
-    <p class="center">
-        For each scenario, select the bias you think is most relevant.
-    </p>
-    <div class="jumbotron noclick" style="margin-top: 20px; border: 2px solid #f6653c;">
-        <div class="container" style="margin-top: -30px; margin-bottom: -10px;">
-            <div id="question_div" style="height: 100px;">
-                {% if display_mode == 'game2' %}
-                    {# Game2 renders the question and answer in one line unlike Game1 which has multiple answers #}
-                    <h3><span id="question">Question</span> <span id="bias_answer">Bias Answer</span></h3>
-                {% else %}
-                    <h3 id="question">Question</h3>
-                    <h3 id="bias_answer">Bias Answer</h3>
-                {% endif %}
-                <div id="question_index" style="display: none;"></div>
-                <div id="bias" style="display: none;"></div>
-            </div>
-            <div id="biases">
-                {% for bias in biases %}
-                    <button class="btn" onclick="return bias('{{ bias.key }}')">{{ bias.label }}</button>
-                {% endfor %}
+
+    <h2 class="center">The Bias Game</h2>
+
+    <div style="float: right; font-size: 1.5em;"><strong>Correct: </strong> <span id="total_correct"></span> / <span
+            id="total_questions"></span></div>
+
+    <div class="space" style="padding-top: 1px;"></div>
+    <div>
+        <div id="game" style="position: absolute; font-size: 18px; text-align: center; overflow: visible">
+            <div id="question_wrapper">
+                <div id="definition" style="text-align: left"></div>
+                <div id="question" style="text-align: left; padding-top: 20px;"></div>
+                <span id="question_index" style="display: none"></span>
+                <div id="answers" style="margin-left: 5%; margin-top: 20px;">
+                    <button onclick="$(this).blur(); return answer('0');" id="answer0"></button>
+                    <div>&nbsp;</div>
+                    <button onclick="$(this).blur(); return answer('1');" id="answer1"></button>
+                </div>
             </div>
         </div>
     </div>
-    <div class="center">
-        <button id="next" type="button" style="display: none;"><a href="{{ nav.nextUrl }}">You Got Them All!</a></button>
-    </div>
+
+    {% for question in questions %}
+        <input type="hidden" name="answer[{{ forloop.counter0 }}]" id="answer_{{ forloop.counter }}" value=""/>
+    {% endfor %}
+
     {% get_back_link module nav.previousUrl %}
 {% endblock %}

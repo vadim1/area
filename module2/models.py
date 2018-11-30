@@ -7,6 +7,8 @@ from decisions.models import Course, BaseModule
 
 class Module2(BaseModule):
     answers = models.TextField(default='')
+    # Game2 answers
+    answers2 = models.TextField(default='')
     biases = models.TextField(default='')
     more_facts = models.TextField(default='')
     nylah_bias = models.CharField(max_length=40, default='')
@@ -107,7 +109,7 @@ class Module2(BaseModule):
                 'key': 'authority',
                 'label': 'Authority Bias',
                 'action': 'This bias is less likely but might be at work if an authority figure in your life is favorable towards Ohio State.',
-                'definition': 'Tendency to take on the opinion of someone who is seen as an authority on a subject',
+                'definition': 'The tendency to take on the opinion of someone who is seen as an authority figure',
             },
             {
                 'key': 'liking',
@@ -387,104 +389,133 @@ class Module2(BaseModule):
 
     @staticmethod
     def get_game2_questions():
+        biases = Module2.get_biases()
+
         game2_questions = {
             'authority1': {
-                'question': 'When your mom asks you to do something',
-                'answer0': 'you do it automatically',
-                'answer1': '...',
+                'question': 'Which of these statements is a representative of Authority Bias?',
+                'answer0': 'Your friend tells you she wants your notes for Spanish and you share them with her',
+                'answer1': 'Your mom tells you that you should take a photograph of your credit card in case you lose it. You take out your phone and snap a picture of it and send her a copy to keep',
                 'bias': 'authority',
-                'bias_answer': 0,
+                'bias_answer': 1,
+                'explanation0': 'No, your friend is not an authority figure',
+                'explanation1': 'Yes your mom is an authority figure',
+                'definition': 'Authority Bias: ' + biases[0]['definition'],
             },
             'authority2': {
-                'question': 'Your aunt says you should just apply to safety schools',
-                'answer0': 'so you follow her advice without question',
-                'answer1': '...',
+                'question': 'Which of these statements is NOT representative of Authority Bias?',
+                'answer0': 'Your coach says you should just apply to safety schools and you follow his advice without question',
+                'answer1': 'On Facebook you see a video about not eating meat and you decide to be a vegetarian',
                 'bias': 'authority',
                 'bias_answer': 0,
+                'explanation0': 'Yes your coach is an authority figure',
+                'explanation1': 'No, Facebook is not an authority',
+                'definition': 'Authority Bias: ' + biases[0]['definition'],
             },
-            'authority3': {
-                'question': 'Your mom tells you that you should take a photograph of your credit card in case you lose it.',
-                'answer0': 'You take out your phone and snap a picture of it and send her a copy to keep',
-                'answer1': '...',
-                'bias': 'authority',
-                'bias_answer': 0,
-            },
+
             'liking1': {
-                'question': 'When you saw how good your friend looked with her new short haircut',
-                'answer0': 'I decided to get mine cut the same way',
-                'answer1': '...',
+                'question': 'Which of these statements is a representative of Liking Bias?',
+                'answer0': "When you saw how good your friend looked with her new short haircut you decided to get yours cut the same way.",
+                'answer1': "When Apple removed the home button on its latest phones you criticized the move even though you love their products.",
                 'bias': 'liking',
                 'bias_answer': 0,
+                'explanation0': "Yes, your friendship may be coloring your reaction",
+                'explanation1': "No, your brand loyalty did not cause you to overlook a change you didn't like",
+                'definition': 'Liking Bias: ' + biases[1]['definition'],
             },
             'liking2': {
-                'question': 'When you go down the cereal aisle',
-                'answer0': 'you automatically look for the cereal you want',
-                'answer1': '...',
+                'question': 'Which of these statements is NOT representative of Liking Bias?',
+                'answer0': "You like Apple products, especially the phones, so when Apple removed the home button on its latest phones you justified its move even though you found it annoying.",
+                'answer1': "When you go down the cereal aisle, you automatically look for the cereal you want.",
                 'bias': 'liking',
                 'bias_answer': 0,
+                'explanation0': "No, your brand loyalty caused you to justify a change you didn't like",
+                'explanation1': "Yes, the fact that you like the product helped you overlook other options.",
+                'definition': 'Liking Bias: ' + biases[1]['definition'],
             },
+
             'planning1': {
-                'question': 'When you head to school in the morning',
-                'answer0': 'you don\'t even think about the route you\'ll take',
-                'answer1': '...',
+                'question': 'Which of these statements is a representative of Planning Bias?',
+                'answer0': "You've saved up for a car and buy one without realizing that you also have to pay for car insurance and budget for gas.",
+                'answer1': "You have a science project due and you know the last one took forever so you leave plenty of time to do this latest one.",
                 'bias': 'planning',
                 'bias_answer': 0,
+                'explanation0': "Yes, this is an example of not properly estimating the full cost of have a car",
+                'explanation1': "No, you are being thoughtful about planning your time.",
+                'definition': 'Planning Bias: ' + biases[2]['definition'],
             },
             'planning2': {
-                'question': 'You have a lab report due. You know you only got partial credit when you didn\'t write in full sentences.',
-                'answer0': 'This time you read the report directions more carefully when you start to do the assignment',
-                'answer1': '...',
+                'question': 'Which of these statements is NOT representative of Planning Bias?',
+                'answer0': "You have a big math test in two days and you wait until the night before to begin studying.",
+                'answer1': "You know you have a doctor's appointment in an hour and it's a 15 minute drive and you leave 20 minutes early to get there on time.",
                 'bias': 'planning',
                 'bias_answer': 0,
+                'explanation0': "Yes this is an example of poor planning",
+                'explanation1': "No, you planned to be on-time",
+                'definition': 'Planning Bias: ' + biases[2]['definition'],
             },
-            'planning3': {
-                'question': 'You have a big math test in two days',
-                'answer0': 'and you wait until the night before to begin studying',
-                'answer1': '...',
-                'bias': 'planning',
-                'bias_answer': 0,
-            },
-            'projection1': {
-                'question': 'You see tickets for your favorite band playing a show nearby.',
-                'answer0': 'You get tickets for you and a friend',
-                'answer1': '...',
-                'bias': 'projection',
-                'bias_answer': 0,
-            },
-            'projection2': {
-                'question': 'You\'re school changes the dress code without warning.',
-                'answer0': ' You think it\'s unfair and you assume your friends do too',
-                'answer1': '...',
-                'bias': 'projection',
-                'bias_answer': 0,
-            },
+
             'optimism1': {
-                'question': 'If you just passed your driver\'s license test',
-                'answer0': 'you think you\'re a good driver',
-                'answer1': '...',
+                'question': 'Which of these statements is representative of Optimism Bias?',
+                'answer0': "Adults tell us about the risks of smoking, but you don't think you'll be negatively affected by it.",
+                'answer1': 'You apply for a summer internship and are nervous about your chances of being accepted',
                 'bias': 'optimism',
                 'bias_answer': 0,
+                'explanation0': "Yes, it is optimistic to think the risks don't apply",
+                'explanation1': 'No, this worry reflects the uncertainty of the situation',
+                'definition': 'Optimism Bias: ' + biases[3]['definition'],
             },
             'optimism2': {
-                'question': 'Adults tell us about the risks of smoking,',
-                'answer0': ' but I don\'t think I\'ll be negatively affected by it',
-                'answer1': '...',
+                'question': 'Which of these statements is NOT representative of Optimism Bias?',
+                'answer0': "When the fire alarm goes off you assume it is a false alarm.",
+                'answer1': "The weather forecast calls for rain even though it's sunny outside but you toss an umbrella in your backpack anyway",
                 'bias': 'optimism',
                 'bias_answer': 0,
+                'explanation0': "Yes this is optimistic",
+                'explanation1': "No, you don't want to be unrealistic",
+                'definition': 'Optimism Bias: ' + biases[3]['definition'],
             },
+
             'social1': {
-                'question': 'At school all of your friends are wearing a popular new brand of sneakers.',
-                'answer0': 'You need to get them too',
-                'answer1': '...',
+                'question': 'Which of these statements is representative of Social Proof Bias?',
+                'answer0': "At school all of your friends are wearing a popular new brand of sneakers. You need to get them too.",
+                'answer1': "Your favorite basketball player started endorsing sneakers that don't fit you well and so the ad has no impact on you",
                 'bias': 'social',
                 'bias_answer': 0,
+                'explanation0': "Yes, this is an example of being socially influenced",
+                'explanation1': 'No, you are not adapting your behavior based on what the player doing',
+                'definition': 'Social Proof Bias: ' + biases[4]['definition'],
             },
             'social2': {
-                'question': 'You overheard some kids are sneaking alcohol into a party you\'re going to',
-                'answer0': 'and you decide to go along with it.',
-                'answer1': '...',
+                'question': 'Which of these statements is NOT representative of Social Proof Bias?',
+                'answer0': "You overheard some kids are sneaking alcohol into a party you're going to and you decide to go along with it.",
+                'answer1': "A new Avenger movie is out but it got poor reviews. You don't care because you've liked the other Avenger flicks.",
                 'bias': 'social',
                 'bias_answer': 0,
+                'explanation0': "Yes, this is adapting your behavior to what others are doing",
+                'explanation1': "No, you aren't swayed by others opinions",
+                'definition': 'Social Proof Bias: ' + biases[4]['definition'],
+            },
+
+            'projection1': {
+                'question': 'Which of these statements is representative of Projection Bias?',
+                'answer0': "You think the quiz in history class is going to be easy but you ask your friend if she's worried.",
+                'answer1': "You see tickets for your favorite band playing a show nearby. You get tickets for you and a friend.",
+                'bias': 'projection',
+                'bias_answer': 1,
+                'explanation0': "No, you are not overestimating that your friend agrees with you",
+                'explanation1': 'Yes you are projecting your opinion onto someone else',
+                'definition': 'Projection Bias: ' + biases[5]['definition'],
+            },
+            'projection2': {
+                'question': 'Which of these statements is NOT representative of Projection Bias?',
+                'answer0': "You're school changes the dress code without warning. You think it's unfair and you assume your friends do too.",
+                'answer1': "You think it's important to vote but you don't want to assume your friends do.",
+                'bias': 'projection',
+                'bias_answer': 1,
+                'explanation0': "Yes, you are projecting your views onto others",
+                'explanation1': "No, you are being careful not to project your opinion onto your friends",
+                'definition': 'Projection Bias: ' + biases[5]['definition'],
             },
         }
 
@@ -553,6 +584,7 @@ class Module2Form(ModelForm):
         super(Module2Form, self).__init__(*args, **kwargs)
         # Not all fields are available all at once so set these to false for now
         self.fields['answers'].required = False
+        self.fields['answers2'].required = False
         self.fields['biases'].required = False
         self.fields['more_facts'].required = False
         self.fields['nylah_bias'].required = False
@@ -568,6 +600,7 @@ class Module2Form(ModelForm):
     class Meta:
         model = Module2
         fields = ['answers',
+                  'answers2',
                   'biases',
                   'more_facts',
                   'my_bias',

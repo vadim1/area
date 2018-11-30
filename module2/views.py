@@ -37,8 +37,8 @@ def navigation():
         reverse('module2_bias'),
         reverse('module2_game1_results'),
         reverse('module2_game2_instructions'),
-        #reverse('module2_game2_game'),
-        reverse('module2_bias_authority'),
+        reverse('module2_game2_game'),
+        #reverse('module2_bias_authority'),
         reverse('module2_cheetah4_intro'),
         reverse('module2_cheetah4_sheet'),
         reverse('module2_bias_shortcuts'),
@@ -229,6 +229,8 @@ def game(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
 
+    #print(parsed)
+
     attr = 'easy'  # For count-down timer
 
     # Add title to each question
@@ -248,7 +250,11 @@ def game(request):
         module.answers = json.dumps(answers)
         module.biases = json.dumps(calculate_biases(game_questions, answers))
         module.save()
-        return redirect(parsed['nextUrl'])
+
+        #print("Redirecting to: " + parsed['nextUrl'])
+        # TODO: figure out why we cannot calculate the nextUrl
+        return redirect(reverse('module2_explain'))
+        #return redirect(parsed['nextUrl'])
     else:
         ViewHelper.clear_game_answers(module)
 
@@ -279,6 +285,26 @@ def game1_results(request):
 def game2_game(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    # Add title to each question
+    game_questions = Module.get_game2_questions()
+    for title in game_questions.keys():
+        game_questions[title]['title'] = title
+
+    if request.method == 'POST':
+        answers = {}
+        if module.answers2:
+            answers = load_json(module.answers2)
+        for i in range(0, len(game_questions.values())):
+            index = str(i)
+            question_i = game_questions.values()[i]
+            attr_i = request.POST.get('answer[' + index + ']')
+            answers[question_i['title']] = attr_i
+        module.answers2 = json.dumps(answers)
+        module.save()
+        return redirect(parsed['nextUrl'])
+    else:
+        ViewHelper.clear_game_answers(module)
 
     context = {
         'biases': Module.get_biases(),
