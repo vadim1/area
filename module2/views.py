@@ -286,22 +286,21 @@ def game2_game(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
 
-    # Add title to each question
     game_questions = Module.get_game2_questions()
-    for title in game_questions.keys():
-        game_questions[title]['title'] = title
 
     if request.method == 'POST':
         answers = {}
-        if module.answers2:
-            answers = load_json(module.answers2)
-        for i in range(0, len(game_questions.values())):
+        for i in range(len(game_questions)):
             index = str(i)
-            question_i = game_questions.values()[i]
-            attr_i = request.POST.get('answer[' + index + ']')
-            answers[question_i['title']] = attr_i
+            ans = request.POST.get('answer[' + index + ']')
+            title = game_questions[i]['title']
+
+            # Store their answers
+            answers[title] = ans
+
         module.answers2 = json.dumps(answers)
         module.save()
+
         return redirect(parsed['nextUrl'])
     else:
         ViewHelper.clear_game_answers(module)
@@ -309,8 +308,7 @@ def game2_game(request):
     context = {
         'biases': Module.get_biases(),
         'display_mode': 'game2',
-        'num_questions': len(Module.get_game2_questions()),
-        'questions': Module.get_game2_questions().values(),
+        'questions': game_questions,
     }
 
     return render_page(request, module, parsed, context)

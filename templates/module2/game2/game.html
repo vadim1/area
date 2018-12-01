@@ -12,9 +12,9 @@
         }
     </style>
     <script type="text/javascript">
-        var questions = {
+        var questions = [
             {% for question in questions %}
-                '{{ forloop.counter }}': {
+                {
                     'title': "{{ question.title }}",
                     'question': "{{ question.question|safe }}",
                     'answer0': "{{ question.answer0|safe }}",
@@ -23,9 +23,13 @@
                     'explanation0': "{{ question.explanation0|safe }}",
                     'explanation1': "{{ question.explanation1|safe }}",
                     'definition': "{{ question.definition|safe }}",
-                },
+                {% if forloop.last %}
+                    }
+                {% else %}
+                    },
+                {% endif %}
             {% endfor %}
-        }
+        ];
 
         function answer(val) {
             var question_ndx = $('#question_index').text();
@@ -36,11 +40,11 @@
                 // Increment our total correct
                 total_correct++;
                 updateCounter();
-            } else {
-                // Show the error messsage
-                var explanation = questions[question_ndx]['explanation' + val];
-                alert(explanation);
             }
+
+            // Show the explanation regardless
+            var explanation = questions[question_ndx]['explanation' + val];
+            alert(explanation);
 
             // Store the answer regardless of whether it was right or wrong
             $('#answer_' + question_ndx).val(val);
@@ -55,26 +59,17 @@
         }
 
         var question_num = 0;
-        var num_questions = {{ num_questions }};
+        var num_questions = questions.length;
         var animation_direction = 'left';
         var total_correct = 0;
 
-        function shuffle(a) {
-            var j, x, i;
-            for (i = a.length; i; i--) {
-                j = Math.floor(Math.random() * i);
-                x = a[i - 1];
-                a[i - 1] = a[j];
-                a[j] = x;
-            }
-            return a;
-        }
-
         var random_order = [];
-        for (i = 1; i <= num_questions; i++) {
+        for (i = 0; i < num_questions; i++) {
             random_order.push(i);
         }
-        shuffle(random_order);
+
+        /* Per discussion with Cheryl on 12/1/2018, we will not randomize the questions */
+        //shuffle(random_order);
 
         function next_question() {
             $('#game').css('position', 'absolute');
@@ -94,7 +89,10 @@
             }
             var question_index = random_order[question_num];
             $('#question_index').text(question_index);
-            $('#question').text(questions[question_index]['question']);
+            var display_num = question_num;
+            display_num++;
+
+            $('#question').text(display_num + ". " + questions[question_index]['question']);
             $('#answer0').text(questions[question_index]['answer0']);
             $('#answer1').text(questions[question_index]['answer1']);
             $('#definition').text(questions[question_index]['definition']);
@@ -134,9 +132,9 @@
     <div>
         <div id="game" style="position: absolute; font-size: 18px; text-align: center; overflow: visible">
             <div id="question_wrapper">
-                <div id="definition" style="text-align: left"></div>
-                <div id="question" style="text-align: left; padding-top: 20px;"></div>
-                <span id="question_index" style="display: none"></span>
+                <p id="definition" style="text-align: left"></p>
+                <p id="question" style="text-align: left"></p>
+                <p id="question_index" style="display: none"></p>
                 <div id="answers" style="margin-left: 5%; margin-top: 20px;">
                     <button onclick="$(this).blur(); return answer('0');" id="answer0"></button>
                     <div>&nbsp;</div>
@@ -147,7 +145,7 @@
     </div>
 
     {% for question in questions %}
-        <input type="hidden" name="answer[{{ forloop.counter0 }}]" id="answer_{{ forloop.counter }}" value=""/>
+        <input type="hidden" name="answer[{{ forloop.counter0 }}]" id="answer_{{ forloop.counter0 }}" value=""/>
     {% endfor %}
 
     {% get_back_link module nav.previousUrl %}
