@@ -1,17 +1,58 @@
 {% extends 'decisions/base.html' %}
 {% load bootstrap %}
 {% load module_tags %}
-{% block title %}{% block h1 %}Module {{ module.display_num }} - The Bias Game{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Spot Bias{% endblock %}{% endblock %}
 {% block content %}
     <style type="text/css">
-        button {
+        #answer0, #answer1 {
             height: inherit !important;
             text-transform: none !important;
             line-height: 120%;
             width: 100%;
         }
+
+        .yes {
+            color: green;
+            display: none;
+            font-size: 2em;
+        }
+
+        .no {
+            color: red;
+            display: none;
+            font-size: 2em;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #eee;
+            margin: auto;
+            padding: 20px;
+            /* border: 1px solid #888888; */
+            width: 70%;
+        }
+
+        #pro_con {
+            background-color: #eee;
+        }
+
     </style>
     <script type="text/javascript">
+        var isModalOpen = false;
         var questions = [
             {% for question in questions %}
                 {
@@ -31,20 +72,32 @@
             {% endfor %}
         ];
 
+        var question_num = 0;
+        var num_questions = questions.length;
+        var animation_direction = 'left';
+        var total_correct = 0;
+
+        var random_order = [];
+        for (i = 0; i < num_questions; i++) {
+            random_order.push(i);
+        }
+
         function answer(val) {
             var question_ndx = $('#question_index').text();
             // What should the answer be?
             var expected = questions[question_ndx]['bias_answer'];
+            var explanation = questions[question_ndx]['explanation' + val];
 
             if (expected == val) {
                 // Increment our total correct
                 total_correct++;
                 updateCounter();
-            }
 
-            // Show the explanation regardless
-            var explanation = questions[question_ndx]['explanation' + val];
-            alert(explanation);
+                explanation = questions[question_ndx]['explanation' + expected];
+                showModal('&#10003;', explanation);
+            } else {
+                showModal('&#10008;', explanation);
+            }
 
             // Store the answer regardless of whether it was right or wrong
             $('#answer_' + question_ndx).val(val);
@@ -58,28 +111,17 @@
             $('#total_correct').text(total_correct);
         }
 
-        var question_num = 0;
-        var num_questions = questions.length;
-        var animation_direction = 'left';
-        var total_correct = 0;
-
-        var random_order = [];
-        for (i = 0; i < num_questions; i++) {
-            random_order.push(i);
-        }
-
-        /* Per discussion with Cheryl on 12/1/2018, we will not randomize the questions */
-        //shuffle(random_order);
-
         function next_question() {
             $('#game').css('position', 'absolute');
             console.log("question_num: " + question_num + " num_questions:" + num_questions);
 
             if (question_num >= num_questions) {
                 console.log("Done with all questions. Form submit");
-                $('form:last').submit();
-                return true;
-                //return false;
+                if (!isModalOpen) {
+                    $('form:last').submit();
+                    return true;
+                }
+                return false;
             }
 
             if (animation_direction == 'right') {
@@ -111,6 +153,14 @@
             return false;
         }
 
+        function showModal(checkIcon, message) {
+            $('#checkIcon').html(checkIcon);
+            $('#message').html(message);
+            $('.modal').css('display', 'block');
+
+            isModalOpen = true;
+        }
+
         $(document).ready(function () {
             console.log("Calling doc ready");
             $('#game').width($('h2').width());
@@ -120,10 +170,31 @@
             $('#total_questions').text(num_questions);
 
             next_question();
+
+            $('#closeBtn').click(function () {
+                if (question_num >= num_questions) {
+                    $('form:last').submit();
+                    return true;
+                } else {
+                    /* Hide modal */
+                    $('.modal').css('display', 'none');
+                    isModalOpen = false;
+                    return false;
+                }
+            });
         });
     </script>
 
-    <h2 class="center">The Bias Game</h2>
+    <h2 class="center">Spot Bias</h2>
+
+    <div id="pro_con" class="modal">
+        <div class="modal-content">
+            <p><span id="checkIcon" style="font-size: 75px;"></span><span id="message"></span></p>
+            <p class="center">
+                <button id="closeBtn">Click to Close</button>
+            </p>
+        </div>
+    </div>
 
     <div style="float: right; font-size: 1.5em;"><strong>Correct: </strong> <span id="total_correct"></span> / <span
             id="total_questions"></span></div>
@@ -132,7 +203,6 @@
     <div>
         <div id="game" style="position: absolute; font-size: 18px; text-align: center; overflow: visible">
             <div id="question_wrapper">
-                <p id="definition" style="text-align: left"></p>
                 <p id="question" style="text-align: left"></p>
                 <p id="question_index" style="display: none"></p>
                 <div id="answers" style="margin-left: 5%; margin-top: 20px;">

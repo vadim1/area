@@ -1,0 +1,120 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap module_tags static %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Results!{% endblock %}{% endblock %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+    <script type="text/javascript" src="{% static 'decisions/js/jquery.flip.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var clicks = [];
+            clicks['optimism'] = 0;
+            clicks['projection'] = 0;
+            clicks['liking'] = 0;
+            clicks['authority'] = 0;
+            clicks['planning'] = 0;
+            clicks['social'] = 0;
+
+            $(".flip").flip({
+                trigger: 'click'
+            });
+
+            $('.back').css('display', 'block');
+            $('#optimism').click(function () {
+                clicks['optimism']++;
+                showNext();
+            });
+            $('#projection').click(function () {
+                clicks['projection']++;
+                showNext();
+            });
+            $('#liking').click(function () {
+                clicks['liking']++;
+                showNext();
+            });
+            $('#authority').click(function () {
+                clicks['authority']++;
+                showNext();
+            });
+            $('#planning').click(function () {
+                clicks['planning']++;
+                showNext();
+            });
+            $('#social').click(function () {
+                clicks['social']++;
+                showNext();
+            });
+
+            function showNext() {
+                for (var key in clicks) {
+                    if (clicks[key] == 0) {
+                        console.log(key + " is still not clicked. Skipping");
+                        return false;
+                    }
+                }
+
+                // Everything has been clicked, show the next button
+                console.log('All items have been clicked at least once');
+                $('#nextBtnSection').css('display', 'block');
+            }
+        });
+    </script>
+    <style type="text/css">
+        .reveal {
+            width: 100%;
+        }
+
+        .reveal td {
+            text-align: center;
+            width: 30%;
+            padding: 5px;
+        }
+
+        .front, .flip {
+            height: 150px;
+        }
+
+        .reveal img {
+            height: 120px;
+        }
+
+        .back {
+            display: none;
+        }
+
+        .back p {
+            display: inline-block;
+            vertical-align: middle;;
+            line-height: normal;
+        }
+
+        .front h2, .back h3 {
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .back h3 {
+            padding-top: 30px;
+            cursor: pointer;
+        }
+
+        #nextBtnSection {
+            display: none;
+        }
+    </style>
+    <h2 class="center">Results!</h2>
+    <p>
+        Below are your quiz results for how well you recognized each bias. This time 100% means that every time you
+        answered a quiz question about the bias you got the answer CORRECT!
+    </p>
+    <p>
+    At the end of the module you will be able to email yourself your individual answers.
+    </p>
+
+    {% include 'module2/game1/table.html' %}
+
+    <div id="nextBtnSection">
+        {% get_next_btn module "Tell Me More" nav.nextUrl %}
+    </div>
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

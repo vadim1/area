@@ -4,6 +4,13 @@
 {% block title %}{% block h1 %}Module {{ module.display_num }} - Bias Quiz{% endblock %}{% endblock %}
 {% block content %}
     <style type="text/css">
+        #answer0, #answer1, #answer2, #answer3 {
+            height: inherit !important;
+            text-transform: none !important;
+            line-height: 120%;
+            width: 100%;
+        }
+
         .yes {
             color: green;
             display: none;
@@ -46,53 +53,68 @@
     </style>
 
     <script type="text/javascript">
-        var animation_direction = 'left';
-        var cycled_through_all_questions = false;
-        var fadeInMs = 2000;
-        var fadeOutMs = 1000;
-        var num_questions = {{ num_questions }};
-        var questions = {
+        var isModalOpen = false;
+        var questions = [
             {% for question in questions %}
-                '{{ forloop.counter }}': {
+                {
                     'title': "{{ question.title }}",
                     'question': "{{ question.question|safe }}",
                     'answer0': "{{ question.answer0|safe }}",
                     'answer1': "{{ question.answer1|safe }}",
-                    'bias_answer': {{ question.bias_answer }},
-                    'answered': false,
-                },
+                    'answer2': "{{ question.answer2|safe }}",
+                    'answer3': "{{ question.answer3|safe }}",
+                    'bias_answer': "{{ question.bias_answer|safe }}",
+                    'definition': "{{ question.definition|safe }}",
+                    'explanation': "{{ question.explanation|safe }}"
+                {% if forloop.last %}
+                    }
+                {% else %}
+                    },
+                {% endif %}
             {% endfor %}
-        }
-        var question_num = 0;
-        var random_order = [];
+        ];
 
-        for (i = 1; i <= num_questions; i++) {
+        var question_num = 0;
+        var num_questions = questions.length;
+        var animation_direction = 'left';
+        var random_order = [];
+        for (i = 0; i < num_questions; i++) {
             random_order.push(i);
         }
-        shuffle(random_order);
 
-        function next_question(isAfterSkip) {
-            if (!isAfterSkip) {
-                cycled_through_all_questions = false;
+        function answer(val) {
+            var question_ndx = $('#question_index').text();
+            // What should the answer be?
+            var expected = questions[question_ndx]['bias_answer'];
+            var explanation = questions[question_ndx]['explanation' + val];
+
+            // Store the answer regardless of whether it was right or wrong
+            $('#answer_' + question_ndx).val(val);
+
+            if (expected == val) {
+                explanation = questions[question_ndx]['explanation' + expected];
+                showModal('&#10003;', explanation);
+
+                // Show next question
+                question_num++;
+                return next_question();
+            } else {
+                showModal('&#10008;', explanation);
+                return false;
             }
-            question_num++;
+        }
+
+        function next_question() {
+            $('#game').css('position', 'absolute');
+            console.log("question_num: " + question_num + " num_questions:" + num_questions);
+
             if (question_num >= num_questions) {
-                if (!cycled_through_all_questions) {
-                    question_num = 0;
-                    cycled_through_all_questions = true; // On next iteration through, done
-                    console.log("Cycled through all the questions");
-                } else {
-                    // Reached max num of questions and already cycled through
-                    $('#next').show();
-                    console.log("Show next button");
-                    return false;
+                console.log("Done with all questions. Form submit");
+                if (!isModalOpen) {
+                    $('form:last').submit();
+                    return true;
                 }
-            }
-
-            var question_index = random_order[question_num];
-            if (questions[question_index]['answered'] == true) {
-                // Already answered
-                return next_question(true);
+                return false;
             }
 
             if (animation_direction == 'right') {
@@ -100,12 +122,14 @@
             } else {
                 animation_direction = 'right';
             }
-
             var question_index = random_order[question_num];
             $('#question_index').text(question_index);
+            var display_num = question_num;
+            display_num++;
+
             $('#question').text(questions[question_index]['question']);
-            //$('#answer0').text(questions[question_index]['answer0']);
-            //$('#answer1').text(questions[question_index]['answer1']);
+            $('#definition').text(questions[question_index]['definition']);
+
             if (animation_direction == 'right') {
                 $('#game').css('left', '60%');
                 $('#game').animate({'left': '30%'}, function () {
@@ -120,46 +144,12 @@
             return false;
         }
 
-        function answer(val) {
-            var question_index = $('#question_index').text();
-            var expected_answer = questions[question_index]['bias_answer'];
-
-            if (expected_answer == val) {
-                // correct answer
-                //showYesNo('#yes');
-                questions[question_index]['answered'] = true;
-                //alert(questions[question_index]['answer0']);
-                showModal('&#10003;', questions[question_index]['answer0']);
-            } else {
-                // incorrect answer
-                //showYesNo('#no');
-                //alert(questions[question_index]['answer1']);
-                showModal('&#10008;', questions[question_index]['answer1']);
-            }
-
-            $('#answer_' + question_index).val(val);
-            return next_question();
-        }
-
         function showModal(checkIcon, message) {
             $('#checkIcon').html(checkIcon);
             $('#message').html(message);
             $('.modal').css('display', 'block');
-        }
 
-        function showYesNo(id) {
-            $(id).fadeIn(fadeInMs).fadeOut(fadeOutMs);
-        }
-
-        function shuffle(a) {
-            var j, x, i;
-            for (i = a.length; i; i--) {
-                j = Math.floor(Math.random() * i);
-                x = a[i - 1];
-                a[i - 1] = a[j];
-                a[j] = x;
-            }
-            return a;
+            isModalOpen = true;
         }
 
         $(document).ready(function () {
@@ -167,20 +157,20 @@
             next_question(false);
 
             $('#closeBtn').click(function () {
-                /* Hide modal */
-                $('.modal').css('display', 'none');
-                return false;
+                if (question_num >= num_questions) {
+                    $('form:last').submit();
+                    return true;
+                } else {
+                    /* Hide modal */
+                    $('.modal').css('display', 'none');
+                    isModalOpen = false;
+                    return false;
+                }
             });
-
-            /* Clicking anywhere outside of the modal closes the modal */
-            /*$(window).click(function (e) {
-                $('.modal').css('display', 'none');
-                return false;
-            });*/
         });
     </script>
 
-    <h2>Practice Bias Remedies</h2>
+    <h2 class="center">Practice Bias Remedies</h2>
 
     <div id="pro_con" class="modal">
         <div class="modal-content">
@@ -191,16 +181,21 @@
         </div>
     </div>
 
-    <div style="height: 250px; margin-top: 30px;">
-        <p>For the following statement, pick whether these remedies will help you or not:</p>
-        <h3>You just passed your driver’s license test and you think you’re a good driver.</h3>
+    <div style="height: 500px; margin-top: 30px;">
+        <p>Below is a statement that beats <span id="definition"></span></p>
         <div id="game" style="position: absolute; font-size: 24px; text-align: center; overflow: visible">
             <div id="question_wrapper">
                 <div id="question" style="font-weight: bold; text-align: center"></div>
                 <span id="question_index" style="display: none"></span>
+                <p style="text-align: left;">How does it work? From the Bias Remedies below choose which action corresponds with the statement above.</p>
                 <div id="answers" style="margin-left: 5%; margin-top: 20px;">
-                    <button onclick="$(this).blur(); return answer('0');" id="answer0">Yes</button>
-                    <button onclick="$(this).blur(); return answer('1');" id="answer1">No</button>
+                    <button onclick="$(this).blur(); return answer('0');" id="answer0">Be more conscious and aware of your actions</button>
+                    <div>&nbsp;</div>
+                    <button onclick="$(this).blur(); return answer('1');" id="answer1">Check for facts</button>
+                    <div>&nbsp;</div>
+                    <button onclick="$(this).blur(); return answer('2');" id="answer2">Get a second opinion</button>
+                    <div>&nbsp;</div>
+                    <button onclick="$(this).blur(); return answer('3');" id="answer3">Get feedback on your strengths and blind spots</button>
                 </div>
             </div>
         </div>

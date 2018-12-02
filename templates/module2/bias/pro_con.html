@@ -13,65 +13,183 @@
             font-size: 1.5em;
             padding: 10px 0px 30px 0px;
         }
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #eee;
+            margin: auto;
+            padding: 20px;
+            /* border: 1px solid #888888; */
+            width: 70%;
+        }
+
+        #pro_con {
+            background-color: #eee;
+        }
     </style>
 
     <h2 class="center">
         What are the Upsides/Downsides?
     </h2>
+
+    <div id="pro_con" class="modal">
+        <div class="modal-content">
+            <p><span id="checkIcon" style="font-size: 75px;"></span><span id="message"></span></p>
+            <p class="center">
+                <button id="closeBtn">Click to Close</button>
+            </p>
+        </div>
+    </div>
+
     <p>Here are a few of the statements from the quiz you just took. Read how bias has an upside and a downside by
         clicking on both buttons.</p>
 
-    <div id="upsideDownside1">
-        <h3 id="question1">When you go down the cereal aisle, you automatically look for the cereal you want</h3>
-        <div id="results1" class="results"></div>
-
-        <div class="center">
-            <button id="upsideBtn1"
-                    onclick="showNext(1, '#upsideDownside2', 'Upside: Help you get what you want quickly'); return false;">
-                Upside
-            </button>
-            <span style="padding-left: 30px;"></span>
-            <button id="downsideBtn1" onclick="showNext(1, '#upsideDownside2', 'Downside: Don’t see all of the choices in the aisle'); return false;">Downside</button>
-        </div>
-    </div>
-
-    <div id="upsideDownside2">
-        <h3 id="question2">When you head to school in the morning you don’t even think about the route you’ll take</h3>
-        <div id="results2" class="results"></div>
-
-        <div class="center">
-            <button id="upsideBtn2"
-                    onclick="showNext(2, '#upsideDownside3', 'Upside: Knowing the route you can use the time to think about other things'); return false;">
-                Upside
-            </button>
-            <span style="padding-left: 30px;"></span>
-            <button id="downsideBtn2" onclick="showNext(2, '#upsideDownside3', 'Downside: Don\'t fully notice your environment'); return false;">Downside</button>
-        </div>
-    </div>
-
-    <div id="upsideDownside3">
-        <h3 id="question3">If you just passed your driver’s license test you think you’re a good driver</h3>
-        <div id="results3" class="results"></div>
-
-        <div class="center">
-            <button id="upsideBtn3" onclick="showNext(3, '#next', 'Upside: You understand and have been tested on the rules of the road'); return false;">Upside</button>
-            <span style="padding-left: 30px;"></span>
-            <button id="downsideBtn3"
-                    onclick="showNext(3, '#next', 'Downside: Overconfidence can be dangerous'); return false;">Downside
-            </button>
+    <div>
+        <div id="game" style="position: absolute; font-size: 18px; text-align: center; overflow: visible">
+            <div id="question_wrapper">
+                <p id="question" style="text-align: left"></p>
+                <p id="question_index" style="display: none"></p>
+                <div id="answers" style="margin-left: 5%; margin-top: 20px;">
+                    <button onclick="$(this).blur(); return answer('0');" id="answer0"></button>
+                    <button onclick="$(this).blur(); return answer('1');" id="answer1"></button>
+                </div>
+            </div>
         </div>
     </div>
 
     <script type="text/javascript">
-        var fadeInMs = 2000;
-        var fadeOutMs = 1000;
-        function showNext(id, nextId, msg) {
-            // Show the message
-            $('#results' + id).text(msg);
+        var isModalOpen = false;
+        var questions = [
+            {
+                "question": "When you go down the cereal aisle, you automatically look for the cereal you want",
+                "upside": "Upside: Help you get what you want quickly",
+                "downside": "Downside: Don’t see all of the choices in the aisle",
+                "answer0": "",
+                "answer1": ""
+            },
+            {
+                "question": "When you head to school in the morning you don’t even think about the route you’ll take",
+                "upside": "Upside: Knowing the route you can use the time to think about other things",
+                "downside": "Downside: Don't fully notice your environment",
+                "answer0": "",
+                "answer1": ""
+            },
+            {
+                "question": "If you just passed your driver’s license test you think you’re a good driver",
+                "upside": "Upside: You understand and have been tested on the rules of the road",
+                "downside": "Downside: Overconfidence can be dangerous",
+                "answer0": "",
+                "answer1": ""
+            }
+        ];
 
-            // Show the next item
-            $(nextId).show();
+        var question_num = 0;
+        var num_questions = questions.length;
+        var animation_direction = 'left';
+        var random_order = [];
+        for (i = 0; i < num_questions; i++) {
+            random_order.push(i);
         }
+
+        function showModal(checkIcon, message) {
+            $('#checkIcon').html(checkIcon);
+            $('#message').html(message);
+            $('.modal').css('display', 'block');
+
+            isModalOpen = true;
+        }
+
+        function answer(val) {
+            var question_ndx = $('#question_index').text();
+
+            // Show the message
+            if (val == '0') {
+                showModal('&nbsp;', questions[question_ndx]['upside']);
+                questions[question_ndx]['answer0'] = val;
+            } else {
+                showModal('&nbsp;', questions[question_ndx]['downside']);
+                questions[question_ndx]['answer1'] = val;
+            }
+
+            // Did we click both buttons already?
+            if (questions[question_ndx]['answer0'] != '' &&
+                questions[question_ndx]['answer1'] != ''
+            ) {
+                // Show next question
+                question_num++;
+                return next_question();
+            } else {
+                // Keep the focus on the current question
+                return false;
+            }
+        }
+
+        function next_question() {
+            $('#game').css('position', 'absolute');
+
+            if (question_num >= num_questions) {
+                console.log("Done with all questions. Form submit");
+                if (!isModalOpen) {
+                    $('form:last').submit();
+                    return true;
+                }
+                return false;
+            }
+
+            if (animation_direction == 'right') {
+                animation_direction = 'left';
+            } else {
+                animation_direction = 'right';
+            }
+            var question_index = random_order[question_num];
+            $('#question_index').text(question_index);
+            $('#question').text(questions[question_index]['question']);
+            $('#answer0').text("Upside");
+            $('#answer1').text("Downside");
+
+            if (animation_direction == 'right') {
+                $('#game').css('left', '60%');
+                $('#game').animate({'left': '30%'}, function () {
+                    $('#game').css('position', 'inherit');
+                });
+            } else {
+                $('#game').css('left', '0%');
+                $('#game').animate({'left': '30%'}, function () {
+                    $('#game').css('position', 'inherit');
+                });
+            }
+            return false;
+        }
+
+        $(document).ready(function () {
+            next_question();
+
+            $('#closeBtn').click(function () {
+                if (question_num >= num_questions) {
+                    $('form:last').submit();
+                    return true;
+                } else {
+                    /* Hide modal */
+                    $('.modal').css('display', 'none');
+                    isModalOpen = false;
+                    return false;
+                }
+            });
+        });
     </script>
 
     {% get_next_btn module "Bias Remedies" nav.nextUrl %}

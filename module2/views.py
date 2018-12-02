@@ -38,7 +38,7 @@ def navigation():
         reverse('module2_game1_results'),
         reverse('module2_game2_instructions'),
         reverse('module2_game2_game'),
-        #reverse('module2_bias_authority'),
+        reverse('module2_game2_results'),
         reverse('module2_cheetah4_intro'),
         reverse('module2_cheetah4_sheet'),
         reverse('module2_bias_shortcuts'),
@@ -108,7 +108,14 @@ def bias_remedies_practice(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
 
-    return bias_yesno(request, parsed, module, Module.get_bias_remedy_questions())
+    if request.method == 'POST':
+        return redirect(parsed['nextUrl'])
+
+    context = {
+        'questions': Module.get_bias_remedy_questions(),
+    }
+
+    return render_page(request, module, parsed, context)
 
 
 def bias_yesno(request, parsed, module, game_questions):
@@ -309,6 +316,58 @@ def game2_game(request):
         'biases': Module.get_biases(),
         'display_mode': 'game2',
         'questions': game_questions,
+    }
+
+    return render_page(request, module, parsed, context)
+
+@login_required
+def game2_results(request):
+    parsed = ViewHelper.parse_request_path(request, navigation())
+    module = ViewHelper.load_module(request, parsed['currentStep'], Module)
+
+    # Get the list of questions
+    game_questions = Module.get_game2_questions()
+    # Get our answers
+    answers2 = ViewHelper.load_json(module.answers2)
+    # Store our results
+    biases = {}
+
+    for i in range(len(game_questions)):
+        title = game_questions[i]['title']
+        bias = game_questions[i]['bias']
+        expected = game_questions[i]['bias_answer']
+
+        # Initialize
+        if bias not in biases:
+            biases[bias] = {
+                'total': 0,
+                'biased': 0,
+                'ratio': 0,
+            }
+
+        biases[bias]['total'] += 1
+
+        # Did we answer it?
+        actual = -1
+        if title in answers2:
+            actual = answers2.get(title)
+            if not actual:
+                actual = -1
+            else:
+                actual = int(actual)
+
+
+        if expected == actual:
+            # We answered it correctly
+            biases[bias]['biased'] += 1
+
+        # Calculate the 'ratio' e.g. the total correct
+        biases[bias]['ratio'] = int(float(biases[bias]['biased']) / float(biases[bias]['total']) * 100)
+
+    print(biases)
+
+    context = {
+        'biases_results': biases,
     }
 
     return render_page(request, module, parsed, context)
