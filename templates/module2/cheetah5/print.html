@@ -28,25 +28,28 @@
     {# From Game2 #}
     <h2>Spot Bias</h2>
     <table>
-        <thead>
-        <tr>
-            <td><strong>Question</strong></td>
-            <td><strong>Answer</strong></td>
-            <td><strong>Bias</strong></td>
-        </tr>
-        </thead>
         <tbody>
         {% for question in questions %}
             <tr>
-                <td>{{ question.question|safe }}</td>
                 <td>
+                    <strong>{{ question.question|safe }}</strong><br />
+                    <strong>Correct Answer: </strong>
                     {% if question.bias_answer == 0 %}
-                        {{ question.answer0|safe }} {{ question.explanation0|safe }}
+                        {{ question.answer0|safe }}<br />{{ question.explanation0|safe }}
                     {% else %}
-                        {{ question.answer1|safe }} {{ question.explanation1|safe }}
+                        {{ question.answer1|safe }}<br />{{ question.explanation1|safe }}
+                    {% endif %}
+                    <br />
+                    <strong>Incorrect Answer: </strong>
+                    {% if question.bias_answer != 0 %}
+                        {{ question.answer0|safe }}<br />{{ question.explanation0|safe }}
+                    {% else %}
+                        {{ question.answer1|safe }}<br />{{ question.explanation1|safe }}
                     {% endif %}
                 </td>
-                <td>{{ question.bias|title }}</td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
             </tr>
         {% endfor %}
         </tbody>
