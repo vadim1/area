@@ -183,7 +183,7 @@ def cheetah5_report(request):
         'my_bias_impact': ViewHelper.load_json(module.my_bias_impact),
         'my_bias_remedy': ViewHelper.load_json(module.my_bias_remedy),
         'nav': parsed,
-        'questions': Module.get_game2_questions().values(),
+        'questions': Module.get_game2_questions(),
     }
 
     if parsed['currentStep'] == 'cheetah5_email':
