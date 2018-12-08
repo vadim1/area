@@ -236,10 +236,6 @@ def game(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
 
-    #print(parsed)
-
-    attr = 'easy'  # For count-down timer
-
     # Add title to each question
     game_questions = Module.get_game_questions()
     for title in game_questions.keys():
@@ -266,7 +262,6 @@ def game(request):
         ViewHelper.clear_game_answers(module)
 
     context = {
-        'attr': attr,
         'num_questions': len(game_questions),
         'questions': game_questions.values(),
     }

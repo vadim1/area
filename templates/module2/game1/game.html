@@ -1,7 +1,7 @@
 {% extends 'decisions/base.html' %}
 {% load bootstrap %}
 {% load module_tags %}
-{% block title %}{% block h1 %}Module {{ module.display_num }} - Bias Quiz{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Bias Game{% endblock %}{% endblock %}
 {% block content %}
     <style type="text/css">
         #clock {
@@ -129,6 +129,8 @@
             next_question();
         });
     </script>
+
+    <h2 class="center">Bias Game</h2>
 
     {% if attr == 'easy' %}
         <div class="center">
