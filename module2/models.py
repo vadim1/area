@@ -261,7 +261,7 @@ class Module2(BaseModule):
             },
 
             {
-                'question': "Your friend has done something that isn't sitting well with you but you gave her a pass so you decide to check-in with your big sister to ask her how she would think about the situation and whether you might be overlooking the friend's action because you like her.",
+                'question': "Your friend has done something that isn't sitting well with you but you don't say anything so you decide to check-in with your big sister to ask her if you're overlooking the friend's action because you like her.",
                 'answer0': '',
                 'answer1': '',
                 'answer2': '',
