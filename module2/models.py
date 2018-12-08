@@ -145,7 +145,7 @@ class Module2(BaseModule):
                 'label': 'Projection Bias',
                 'action': 'This bias is not relevant because it is about projecting your own thoughts and feelings onto others.',
                 'definition': 'Putting your own thoughts and desires onto others around you',
-                'projection': 'Might you be assuming others agree with your opinion?',
+                'cheetah4': 'Might you be assuming others agree with your opinion?',
             },
         ]
 
