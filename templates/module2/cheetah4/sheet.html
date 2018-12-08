@@ -1,4 +1,5 @@
 {% extends 'modules/cheetah/sheet.html' %}
+{% load static %}
 {% block cheetah_content %}
     <script type="text/javascript">
         $(document).ready(function () {
@@ -110,7 +111,9 @@
 
     <div id="pro_con" class="modal">
         <div class="modal-content">
-            {% include 'module1/cheetah3/form.html' with mode='print' %}
+            <img src="{% static 'decisions/img/cheetah_logo.png' %}" style="float: left; margin-right: 15px;" width="60"/>
+            <h2>Cheetah Sheet 3: Define Success and Critical Concepts</h2>
+            {% include 'module1/cheetah3/form.html' with mode='modal' %}
 
             <p class="center">
                 <button id="closeBtn">Click to Close</button>
