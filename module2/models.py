@@ -19,6 +19,7 @@ class Module2(BaseModule):
     my_bias = models.TextField(default='')
     my_bias_impact = models.TextField(default='')
     my_bias_remedy = models.TextField(default='')
+    my_remedy = models.TextField(default='')
 
     evidence0 = models.CharField(max_length=255, default='')
     evidence1 = models.CharField(max_length=255, default='')
@@ -155,26 +156,21 @@ class Module2(BaseModule):
     def get_bias_remedies():
         remedies = [
             {
-                'key': 'Be more conscious and aware of your actions',
-                'comment': 'Yes! Pay close attention to whether you do things like make a full stop at stop signs, or need to hit the brake hard when you approach a red light',
+                'key': 'conscious',
+                'label': 'Be more conscious and aware of your actions',
             },
             {
-                'key': 'Question your actions by asking yourself whether you might be relying upon assumptions',
-                'comment': 'Yes! Consider whether you might be overconfident',
+                'key': 'facts',
+                'label': 'Check for facts',
             },
             {
-                'key': 'Check assumptions by searching for evidence that may back them up or refute them',
-                'comment': 'Yes! You could search the Net for how often new drivers had accidents',
+                'key': 'opinion',
+                'label': 'Get a second opinion',
             },
             {
-                'key': 'Ask others who know you well to help you evaluate your thinking',
-                'comment': "Yes! Ask how's my driving?",
+                'key': 'feedback',
+                'label': "Get feedback on your strengths and blind spots",
             },
-            {
-                'key': 'Ask yourself how someone else who you respect might approach the same situation you are in so you push yourself out of your own perspective',
-                'comment': 'Yes! Ask someone what they did to make sure they drove safely after getting their license'
-
-            }
         ]
 
         return remedies

@@ -182,6 +182,7 @@ def cheetah5_report(request):
         'my_bias': ViewHelper.load_json(module.my_bias),
         'my_bias_impact': ViewHelper.load_json(module.my_bias_impact),
         'my_bias_remedy': ViewHelper.load_json(module.my_bias_remedy),
+        'my_remedy': ViewHelper.load_json(module.my_remedy),
         'nav': parsed,
         'questions': Module.get_game2_questions(),
     }
@@ -221,11 +222,13 @@ def cheetah5_sheet(request):
     if request.method == 'POST':
         module.my_bias_impact = json.dumps(request.POST.getlist('my_bias_impact[]'))
         module.my_bias_remedy = json.dumps(request.POST.getlist('my_bias_remedy[]'))
+        module.my_remedy = json.dumps(request.POST.getlist('my_remedy[]'))
         return save_form(request, module, parsed)
 
     context = {
         'my_bias_impact': ViewHelper.load_json(module.my_bias_impact),
         'my_bias_remedy': ViewHelper.load_json(module.my_bias_remedy),
+        'my_remedy': ViewHelper.load_json(module.my_remedy),
         'cheetah_sheet': cheetah_sheet5,
     }
     return render_page(request, module, parsed, context)

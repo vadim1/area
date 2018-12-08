@@ -24,15 +24,32 @@
     </table>
 {% endif %}
 
-{% if mode != 'print' %}
-    <p>Which Bias Remedies will help you beat bias?
+<h3>Which Bias Remedies will help you beat bias?</h3>
+{% if mode == 'print' %}
     <ul>
-        <li>Be more conscious and aware of your actions</li>
-        <li>Check for facts</li>
-        <li>Get a second opinion</li>
-        <li>Get feedback on your strengths and blind spots</li>
+    {% for myChoice in my_remedy %}
+        {% for remedy in module.get_bias_remedies %}
+            {% if myChoice == remedy.key %}
+                <li><span style="border-bottom: 1px solid black;">{{ remedy.label }}</li>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
     </ul>
-    </p>
+{% else %}
+<div id="why_options">
+    {% for remedy in module.get_bias_remedies %}
+        <div>
+            <label>
+                {% if remedy.key in my_remedy %}
+                    <input type="checkbox" name="my_remedy[]" value="{{ remedy.key }}" checked="checked"/>
+                {% else %}
+                    <input type="checkbox" name="my_remedy[]" value="{{ remedy.key }}"/>
+                {% endif %}
+                <span>{{ remedy.label }}</span>
+            </label>
+        </div>
+    {% endfor %}
+</div>
 {% endif %}
 
 <h3>How will you use the Bias Remedies selected?</h3>
