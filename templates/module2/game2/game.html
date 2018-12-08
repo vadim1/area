@@ -13,14 +13,12 @@
 
         .yes {
             color: green;
-            display: none;
-            font-size: 2em;
+            font-size: 75px;
         }
 
         .no {
             color: red;
-            display: none;
-            font-size: 2em;
+            font-size: 75px;
         }
     </style>
     <script type="text/javascript">
@@ -66,10 +64,10 @@
                 updateCounter();
 
                 explanation = questions[question_ndx]['explanation' + expected];
-                showModal('&#10003;', explanation);
+                showModal('&#10003;', 'yes', explanation);
             } else {
                 explanation = 'OOPS! ' + questions[question_ndx]['explanation' + val];
-                showModal('&#10008;', explanation);
+                showModal('&#10008;', 'no', explanation);
             }
 
             // Store the answer regardless of whether it was right or wrong
@@ -126,8 +124,9 @@
             return false;
         }
 
-        function showModal(checkIcon, message) {
+        function showModal(checkIcon, className, message) {
             $('#checkIcon').html(checkIcon);
+            $('#checkIcon').attr('class', className);
             $('#message').html(message);
             $('.modal').css('display', 'block');
 
@@ -162,7 +161,7 @@
 
     <div class="modal">
         <div class="modal-content">
-            <p><span id="checkIcon" style="font-size: 75px;"></span><span id="message"></span></p>
+            <p><span id="checkIcon"></span><span id="message"></span></p>
             <p class="center">
                 <button id="closeBtn">Click to Close</button>
             </p>

@@ -13,14 +13,12 @@
 
         .yes {
             color: green;
-            display: none;
-            font-size: 2em;
+            font-size: 75px;
         }
 
         .no {
             color: red;
-            display: none;
-            font-size: 2em;
+            font-size: 75px;
         }
     </style>
 
@@ -65,13 +63,13 @@
 
             if (expected == val) {
                 explanation = questions[question_ndx]['explanation' + expected];
-                showModal('&#10003;', explanation);
+                showModal('&#10003;', 'yes', explanation);
 
                 // Show next question
                 question_num++;
                 return next_question();
             } else {
-                showModal('&#10008;', explanation);
+                showModal('&#10008;', 'no', explanation);
                 return false;
             }
         }
@@ -116,8 +114,9 @@
             return false;
         }
 
-        function showModal(checkIcon, message) {
+        function showModal(checkIcon, className, message) {
             $('#checkIcon').html(checkIcon);
+            $('#checkIcon').attr('class', className);
             $('#message').html(message);
             $('.modal').css('display', 'block');
 
