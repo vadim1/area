@@ -1,7 +1,7 @@
 {% extends 'decisions/base.html' %}
 {% load bootstrap %}
 {% load module_tags %}
-{% block title %}{% block h1 %}Module {{ module.display_num }} - Bias Quiz{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Practicing Bias Remedies{% endblock %}{% endblock %}
 {% block content %}
     <style type="text/css">
         #answer0, #answer1, #answer2, #answer3 {
@@ -35,7 +35,10 @@
                     'answer3': "{{ question.answer3|safe }}",
                     'bias_answer': "{{ question.bias_answer|safe }}",
                     'definition': "{{ question.definition|safe }}",
-                    'explanation': "{{ question.explanation|safe }}"
+                    'explanation0': "{{ question.explanation0|safe }}",
+                    'explanation1': "{{ question.explanation1|safe }}",
+                    'explanation2': "{{ question.explanation2|safe }}",
+                    'explanation3': "{{ question.explanation3|safe }}"
                 {% if forloop.last %}
                     }
                 {% else %}
@@ -141,7 +144,7 @@
         });
     </script>
 
-    <h2 class="center">Practice Bias Remedies</h2>
+    <h2 class="center">Practicing Bias Remedies</h2>
 
     <div class="modal">
         <div class="modal-content">
