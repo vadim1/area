@@ -4,46 +4,37 @@ from django.db import models
 from django.forms import ModelForm
 
 from decisions.models import Course, BaseModule
+from simple_history.models import HistoricalRecords
 
 class Module2(BaseModule):
     answers = models.TextField(default='')
     # Game2 answers
     answers2 = models.TextField(default='')
     biases = models.TextField(default='')
-    more_facts = models.TextField(default='')
-    nylah_bias = models.CharField(max_length=40, default='')
-    opinions = models.TextField(default='')
-    opinions_important = models.CharField(max_length=10, default='')
-    opinions_reality = models.CharField(max_length=10, default='')
-    perspective = models.TextField(default='')
     my_bias = models.TextField(default='')
     my_bias_impact = models.TextField(default='')
     my_bias_remedy = models.TextField(default='')
     my_remedy = models.TextField(default='')
 
-    evidence0 = models.CharField(max_length=255, default='')
-    evidence1 = models.CharField(max_length=255, default='')
-    evidence2 = models.CharField(max_length=255, default='')
-    fact0 = models.CharField(max_length=255, default='')
-    source0 = models.CharField(max_length=255, default='')
-    bias0 = models.CharField(max_length=255, default='')
-    fact1 = models.CharField(max_length=255, default='')
-    source1 = models.CharField(max_length=255, default='')
-    bias1 = models.CharField(max_length=255, default='')
-    fact2 = models.CharField(max_length=255, default='')
-    source2 = models.CharField(max_length=255, default='')
-    bias2 = models.CharField(max_length=255, default='')
-
     @staticmethod
     def num():
         return 2
 
+    # For the time being only save the cheetah sheet answers
+    # If you have to add/remove fields from this list, make sure to re-run
+    # ./manage.py makemigrations && ./manage.py migrate to update the history model
+    excluded_fields = [
+        'step',
+        'completed_on',
+    ]
+    history = HistoricalRecords(excluded_fields=excluded_fields)
+
     def save_without_historical_record(self, *args, **kwargs):
-        #self.skip_history_when_saving = True
-        #try:
-        ret = self.save(*args, **kwargs)
-        #finally:
-            #del self.skip_history_when_saving
+        self.skip_history_when_saving = True
+        try:
+            ret = self.save(*args, **kwargs)
+        finally:
+            del self.skip_history_when_saving
         return ret
 
     # Used to display the number to the user
@@ -567,44 +558,6 @@ class Module2(BaseModule):
 
         return game2_questions
 
-
-    def get_more_facts(self):
-        more_facts = [
-            'The student to teacher ratio',
-            'Graduation rates',
-            'Tuition',
-            'Housing',
-            'Average SAT/ACT Scores',
-            'Financial Aid',
-        ]
-
-        return more_facts
-
-    def get_opinions(self):
-        opinions = [
-            'The weather is in Ohio and Maine',
-            'How interesting the classes are',
-            'Whether the professors are good',
-            'How hard it is to get into classes',
-            'How nice the dorms are',
-            'How the food is',
-            'How much homework there is',
-            'Is there a Greek life',
-        ]
-
-        return opinions
-
-    def get_perspective(self):
-        perspective = [
-            'Allows you to learn someone/something\'s story in their own words',
-            'Promotes empathy',
-            'Promotes understanding',
-            'Builds your Self Awareness',
-            'Focuses on what motivates the person/organization',
-        ]
-
-        return perspective
-
     @staticmethod
     def pins():
         pins = [
@@ -632,15 +585,10 @@ class Module2Form(ModelForm):
         self.fields['answers'].required = False
         self.fields['answers2'].required = False
         self.fields['biases'].required = False
-        self.fields['more_facts'].required = False
-        self.fields['nylah_bias'].required = False
-        self.fields['opinions'].required = False
-        self.fields['opinions_important'].required = False
-        self.fields['opinions_reality'].required = False
-        self.fields['perspective'].required = False
         self.fields['my_bias'].required = False
         self.fields['my_bias_impact'].required = False
         self.fields['my_bias_remedy'].required = False
+        self.fields['my_remedy'].required = False
 
 
     class Meta:
@@ -648,13 +596,8 @@ class Module2Form(ModelForm):
         fields = ['answers',
                   'answers2',
                   'biases',
-                  'more_facts',
                   'my_bias',
                   'my_bias_impact',
                   'my_bias_remedy',
-                  'nylah_bias',
-                  'opinions',
-                  'opinions_important',
-                  'opinions_reality',
-                  'perspective',
+                  'my_remedy',
                   ]
