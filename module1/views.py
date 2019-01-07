@@ -203,6 +203,8 @@ def cheetah3_sheet(request):
     context = {
         'cc': ViewHelper.load_json(module.cc),
         'cc_occurred': ViewHelper.load_json(module.cc_occurred),
+        'decision': module.decision,
+        'decision_as_question': module.decision_as_question,
         'cheetah_sheet': cheetah_sheet3,
     }
     return render_page(request, module, parsed, context)

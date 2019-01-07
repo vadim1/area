@@ -1,3 +1,6 @@
+# 2.0.0
+* Release module 3
+
 # 1.2.0
 * Change hardcoded copyright year to be dynamic
 

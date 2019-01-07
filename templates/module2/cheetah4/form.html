@@ -1,0 +1,50 @@
+<h3>Which biases might block you your decision-making?</h3>
+{% if mode == 'print' %}
+    <ul>
+    {% for myChoice in my_bias %}
+        {% for biases in module.get_biases %}
+            {% if myChoice == biases.key %}
+                <li><span style="border-bottom: 1px solid black;">{{ biases.label }}</li>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+    </ul>
+{% else %}
+<div id="why_options">
+    {% for biases in module.get_biases %}
+        <div>
+            <label>
+                {% if biases.key in my_bias %}
+                    <input type="checkbox" name="my_bias[]" value="{{ biases.key }}" checked="checked"/>
+                {% else %}
+                    <input type="checkbox" name="my_bias[]" value="{{ biases.key }}"/>
+                {% endif %}
+                <span>
+                    <a class="master_term" href="#" data-toggle="tooltip" data-placement="top"
+                       title="{{ biases.definition }}">{{ biases.label }}</a> : {{ biases.cheetah4 }}</span>
+            </label>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<h3>List two ways the biases may impact your decision-making:</h3>
+{% if mode == 'print' %}
+    <ul>
+        <li><span style="border-bottom: 1px solid black;">{{ my_bias_impact.0 }}</li>
+        <li><span style="border-bottom: 1px solid black;">{{ my_bias_impact.1 }}</li>
+    </ul>
+{% else %}
+    <table class="table">
+        <tbody>
+        <tr>
+            <td width="5">1.</td>
+            <td><textarea name="my_bias_impact[]" class="auto-text-area">{{ my_bias_impact.0 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">2.</td>
+            <td><textarea name="my_bias_impact[]" class="auto-text-area">{{ my_bias_impact.1 }}</textarea></td>
+        </tr>
+        </tbody>
+    </table>
+{% endif %}

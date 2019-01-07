@@ -1,10 +1,10 @@
 {% extends 'decisions/base.html' %}
 {% load bootstrap %}
 {% load module_tags %}
-{% block title %}{% block h1 %}Module {{ module.display_num }} - Spot Bias{% endblock %}{% endblock %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Practicing Bias Remedies{% endblock %}{% endblock %}
 {% block content %}
     <style type="text/css">
-        #answer0, #answer1 {
+        #answer0, #answer1, #answer2, #answer3 {
             height: inherit !important;
             text-transform: none !important;
             line-height: 120%;
@@ -21,6 +21,7 @@
             font-size: 75px;
         }
     </style>
+
     <script type="text/javascript">
         var isModalOpen = false;
         var questions = [
@@ -30,10 +31,14 @@
                     'question': "{{ question.question|safe }}",
                     'answer0': "{{ question.answer0|safe }}",
                     'answer1': "{{ question.answer1|safe }}",
+                    'answer2': "{{ question.answer2|safe }}",
+                    'answer3': "{{ question.answer3|safe }}",
                     'bias_answer': "{{ question.bias_answer|safe }}",
+                    'definition': "{{ question.definition|safe }}",
                     'explanation0': "{{ question.explanation0|safe }}",
                     'explanation1': "{{ question.explanation1|safe }}",
-                    'definition': "{{ question.definition|safe }}",
+                    'explanation2': "{{ question.explanation2|safe }}",
+                    'explanation3': "{{ question.explanation3|safe }}"
                 {% if forloop.last %}
                     }
                 {% else %}
@@ -45,8 +50,6 @@
         var question_num = 0;
         var num_questions = questions.length;
         var animation_direction = 'left';
-        var total_correct = 0;
-
         var random_order = [];
         for (i = 0; i < num_questions; i++) {
             random_order.push(i);
@@ -56,30 +59,22 @@
             var question_ndx = $('#question_index').text();
             // What should the answer be?
             var expected = questions[question_ndx]['bias_answer'];
-            var explanation = '';
-
-            if (expected == val) {
-                // Increment our total correct
-                total_correct++;
-                updateCounter();
-
-                explanation = questions[question_ndx]['explanation' + expected];
-                showModal('&#10003;', 'yes', explanation);
-            } else {
-                explanation = 'OOPS! ' + questions[question_ndx]['explanation' + val];
-                showModal('&#10008;', 'no', explanation);
-            }
+            var explanation = questions[question_ndx]['explanation' + val];
 
             // Store the answer regardless of whether it was right or wrong
             $('#answer_' + question_ndx).val(val);
 
-            // Show the next question
-            question_num++;
-            return next_question();
-        }
+            if (expected == val) {
+                explanation = questions[question_ndx]['explanation' + expected];
+                showModal('&#10003;', 'yes', explanation);
 
-        function updateCounter() {
-            $('#total_correct').text(total_correct);
+                // Show next question
+                question_num++;
+                return next_question();
+            } else {
+                showModal('&#10008;', 'no', explanation);
+                return false;
+            }
         }
 
         function next_question() {
@@ -105,9 +100,7 @@
             var display_num = question_num;
             display_num++;
 
-            $('#question').text(display_num + ". " + questions[question_index]['question']);
-            $('#answer0').text(questions[question_index]['answer0']);
-            $('#answer1').text(questions[question_index]['answer1']);
+            $('#question').text(questions[question_index]['question']);
             $('#definition').text(questions[question_index]['definition']);
 
             if (animation_direction == 'right') {
@@ -134,14 +127,8 @@
         }
 
         $(document).ready(function () {
-            console.log("Calling doc ready");
             $('#game').width($('h2').width());
-
-            // Initialize
-            $('#total_correct').text(0);
-            $('#total_questions').text(num_questions);
-
-            next_question();
+            next_question(false);
 
             $('#closeBtn').click(function () {
                 if (question_num >= num_questions) {
@@ -157,39 +144,43 @@
         });
     </script>
 
-    <h2 class="center">Spot Bias</h2>
+    <h2 class="center">Practicing Bias Remedies</h2>
 
     <div class="modal">
         <div class="modal-content">
-            <p><span id="checkIcon"></span><span id="message"></span></p>
+            <p><span id="checkIcon" style="font-size: 75px;"></span><span id="message"></span></p>
             <p class="center">
                 <button id="closeBtn">Click to Close</button>
             </p>
         </div>
     </div>
 
-    <div style="float: right; font-size: 1.5em;"><strong>Correct: </strong> <span id="total_correct"></span> / <span
-            id="total_questions"></span></div>
-
-    <div class="space" style="padding-top: 1px;"></div>
-    <div>
-        <div id="game" style="position: absolute; font-size: 18px; text-align: center; overflow: visible">
+    <div style="height: 500px; margin-top: 30px;">
+        <p>Below is a statement that beats <span id="definition"></span></p>
+        <div id="game" style="position: absolute; font-size: 24px; text-align: center; overflow: visible">
             <div id="question_wrapper">
-                <p id="definition" style="text-align: left"></p>
-                <p id="question" style="text-align: left"></p>
-                <p id="question_index" style="display: none"></p>
+                <div id="question" style="font-weight: bold; text-align: center"></div>
+                <span id="question_index" style="display: none"></span>
+                <p style="text-align: left;">How does it work? From the Bias Remedies below choose which action corresponds with the statement above.</p>
                 <div id="answers" style="margin-left: 5%; margin-top: 20px;">
-                    <button onclick="$(this).blur(); return answer('0');" id="answer0"></button>
+                    <button onclick="$(this).blur(); return answer('0');" id="answer0">Be more conscious and aware of your actions</button>
                     <div>&nbsp;</div>
-                    <button onclick="$(this).blur(); return answer('1');" id="answer1"></button>
+                    <button onclick="$(this).blur(); return answer('1');" id="answer1">Check for facts</button>
+                    <div>&nbsp;</div>
+                    <button onclick="$(this).blur(); return answer('2');" id="answer2">Get a second opinion</button>
+                    <div>&nbsp;</div>
+                    <button onclick="$(this).blur(); return answer('3');" id="answer3">Get feedback on your strengths and blind spots</button>
                 </div>
             </div>
         </div>
     </div>
 
     {% for question in questions %}
-        <input type="hidden" name="answer[{{ forloop.counter0 }}]" id="answer_{{ forloop.counter0 }}" value=""/>
+        <input type="hidden" name="answer[{{ forloop.counter0 }}]" id="answer_{{ forloop.counter }}" value=""/>
     {% endfor %}
 
+    <div class="center">
+        <button id="next" type="button" style="display: none;"><a href="{{ nav.nextUrl }}">You Got Them All!</a></button>
+    </div>
     {% get_back_link module nav.previousUrl %}
 {% endblock %}

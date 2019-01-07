@@ -1,0 +1,37 @@
+{% extends 'modules/cheetah/sheet.html' %}
+{% block cheetah_content %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
+    <style type="text/css">
+        #why_options div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: large;
+            border: 1px solid #dddddd;
+            width: 100%;
+            padding: 5px;
+        }
+
+        :checked + span {
+            font-weight: bold;
+        }
+    </style>
+
+    <p>Now that you’ve seen Bias Remedies in action, let’s try it yourself!</p>
+
+    {% include 'module2/cheetah5/form.html' %}
+
+    <h3 class="center">There's no wrong time to make the right decision!</h3>
+
+    <div class="space"></div>
+
+    <div class="center">
+        <button id="completeBtn" value="Complete Cheetah Sheet">Complete Cheetah Sheet</button>
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap %}
+{% load module_tags %}
+{% block title %}{% block h1 %}Module {{ module.display_num }} - Bias Remedies
+{% endblock %}{% endblock %}
+{% block content %}
+    <h2 class="center">
+        Bias Remedies
+    </h2>
+
+    {% include 'module2/map_content.html' with display_mode='Bias Remedies' %}
+
+    <p>Since biases have an upside and a downside let’s practice and consider how to limit their
+        downside and keep bias from blocking your decision-making. </p>
+
+    {% get_next_btn module "Let's Practice" nav.nextUrl %}
+    {% get_back_link module nav.previousUrl %}
+{% endblock %}

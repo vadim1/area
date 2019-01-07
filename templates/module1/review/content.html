@@ -1,16 +1,32 @@
 {% load module_tags %}
 {% get_module_badge 2 %}
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+
 <p>You have learned:</p>
 <ul>
     <li>Self-awareness about the different kinds of decisions made every day.</li>
-    <li>Decision Toolkit Skills: Your <span class="master_term_simple">Vision of Success</span> and <span class="master_term_simple">Critical Concepts</span>.</li>
-    <li>Confidence to make better decisions.</li>
+    <li>Decision Toolkit Skills: Your <a class="master_term" href="#" data-toggle="tooltip" data-placement="top"
+                                         title="What must happen in the outcome of the decision for you to know that the decision was successful">Vision of Success</a>
+        and <a class="master_term" href="#" data-toggle="tooltip" data-placement="top"
+               title="Critical Concepts are the one, two or three things that you need to solve for to get to your Vision of Success">Critical
+            Concepts</a>.
+    </li>
+    <li>Confidence that you can frame your decisions.</li>
 </ul>
 
 <p>You have identified:</p>
 <ul>
     <li>A decision you want to make.</li>
-    <li>Your <span class="master_term_simple">Vision of Success</span> and your <span class="master_term_simple">Critical Concepts</span>.</li>
-    <li>A Decision Buddy, {{ decision_buddy }}, to support you.</li>
+    <li>Your <a class="master_term" href="#" data-toggle="tooltip" data-placement="top"
+                title="What must happen in the outcome of the decision for you to know that the decision was successful">Vision of Success</a> and your <a
+            class="master_term" href="#" data-toggle="tooltip" data-placement="top"
+            title="Critical Concepts are the one, two or three things that you need to solve for to get to your Vision of Success">Critical
+        Concepts</a>.
+    </li>
+    <li>A Decision Buddy, <strong><em>{{ decision_buddy }}</em></strong>, to support you.</li>
 </ul>

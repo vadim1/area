@@ -1,0 +1,79 @@
+<h3>Here is the list you made of the three ways the biases may impact your decision-making:</h3>
+{% if mode == 'print' %}
+    <ul>
+        <li><span style="border-bottom: 1px solid black;">{{ my_bias_impact.0 }}</li>
+        <li><span style="border-bottom: 1px solid black;">{{ my_bias_impact.1 }}</li>
+        <li><span style="border-bottom: 1px solid black;">{{ my_bias_impact.2 }}</li>
+    </ul>
+{% else %}
+    <table class="table">
+        <tbody>
+        <tr>
+            <td width="5">1.</td>
+            <td><textarea name="my_bias_impact[]" class="auto-text-area">{{ my_bias_impact.0 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">2.</td>
+            <td><textarea name="my_bias_impact[]" class="auto-text-area">{{ my_bias_impact.1 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">3.</td>
+            <td><textarea name="my_bias_impact[]" class="auto-text-area">{{ my_bias_impact.2 }}</textarea></td>
+        </tr>
+        </tbody>
+    </table>
+{% endif %}
+
+<h3>Which Bias Remedies will help you beat bias?</h3>
+{% if mode == 'print' %}
+    <ul>
+    {% for myChoice in my_remedy %}
+        {% for remedy in module.get_bias_remedies %}
+            {% if myChoice == remedy.key %}
+                <li><span style="border-bottom: 1px solid black;">{{ remedy.label }}</li>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+    </ul>
+{% else %}
+<div id="why_options">
+    {% for remedy in module.get_bias_remedies %}
+        <div>
+            <label>
+                {% if remedy.key in my_remedy %}
+                    <input type="checkbox" name="my_remedy[]" value="{{ remedy.key }}" checked="checked"/>
+                {% else %}
+                    <input type="checkbox" name="my_remedy[]" value="{{ remedy.key }}"/>
+                {% endif %}
+                <span>{{ remedy.label }}</span>
+            </label>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<h3>How will you use the Bias Remedies selected?</h3>
+{% if mode == 'print' %}
+    <ul>
+        <li><span style="border-bottom: 1px solid black;">{{ my_bias_remedy.0 }}</li>
+        <li><span style="border-bottom: 1px solid black;">{{ my_bias_remedy.1 }}</li>
+        <li><span style="border-bottom: 1px solid black;">{{ my_bias_remedy.2 }}</li>
+    </ul>
+{% else %}
+    <table class="table">
+        <tbody>
+        <tr>
+            <td width="5">1.</td>
+            <td><textarea name="my_bias_remedy[]" class="auto-text-area">{{ my_bias_remedy.0 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">2.</td>
+            <td><textarea name="my_bias_remedy[]" class="auto-text-area">{{ my_bias_remedy.1 }}</textarea></td>
+        </tr>
+        <tr>
+            <td width="5">3.</td>
+            <td><textarea name="my_bias_remedy[]" class="auto-text-area">{{ my_bias_remedy.2 }}</textarea></td>
+        </tr>
+        </tbody>
+    </table>
+{% endif %}
