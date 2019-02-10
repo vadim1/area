@@ -1,3 +1,8 @@
+# 2.1.0
+* Disable module 4 and STRIPE (not used)
+* Display TOU before showing the list of modules
+* Add `has_tou` flag in `area_app_user`
+
 # 2.0.0
 * Release module 3
 

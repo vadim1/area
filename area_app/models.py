@@ -8,6 +8,8 @@ class User(AbstractUser):
     school = models.CharField(max_length=256)
     grade = models.CharField(max_length=8)
     dream_director = models.CharField(max_length=256, null=True, blank=True)
+    # Terms of Use is empty by default
+    has_tou = models.BooleanField(default=False, help_text='Designates whether user sees the Terms of Use message.', verbose_name='terms of use')
 
     def __str__(self):
         return self.first_name + " " + self.last_name + " (" + self.email + ")"
