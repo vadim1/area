@@ -1,3 +1,8 @@
+# 4.0.0
+* Add domain whitelist
+  * Add admin form to be able to whitelist a domain
+  * Add table for whitelist rules
+
 # 3.0.0
 * Add access limits
   * Switch from `login_required` to custom decorator `active_user_required` which checks whether the user has exceeded the limits
