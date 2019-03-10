@@ -11,6 +11,8 @@ from student_class.models import StudentClass
 
 from decisions.utils import ViewHelper
 
+from decisions.decorator import active_user_required
+
 from datetime import datetime
 import json
 
@@ -61,7 +63,8 @@ def load_module(request, module_class, step=''):
         module.answers_json = None
     return module
 
-@login_required
+# @login_required
+@active_user_required
 def home(request):
     request.session['start'] = '/decisions'
     request.session['partner'] = 'fp'

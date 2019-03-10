@@ -4,7 +4,9 @@
   * Schema updates to add the override, counter and max limit
   * Add util method to update the view counter
   * Add the `limit_reached` page
+  * Redirect to `limit_reached` on home page if limits have been reached
 * Fix issue with module 2 and 3 admins not rendering the add/edit forms
+* Per Cheryl, display the restart link regardless of status
 
 # 2.1.0
 * Disable module 4 and STRIPE (not used)
