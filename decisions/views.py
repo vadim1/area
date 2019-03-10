@@ -135,6 +135,12 @@ def checkout(request):
         print("Redirecting back to /decisions")
         return redirect(reverse('decisions_home'))
 
+def limit_reached(request):
+    """
+    Dislay the limit reached message when the user limit has been reached
+    """
+    return render(request, 'decisions/base/limit_reached.html', {})
+
 def tour(request):
     """
     Tour page to show only once when user first signs up

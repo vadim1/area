@@ -575,8 +575,8 @@ class Module2(BaseModule):
         return to_return
 
     class Meta:
-        verbose_name = 'Module 2 Data'
-        verbose_name_plural = 'Module 2 Data'
+        verbose_name = "Module 3 Data - Introduction to Mental Shortcuts"
+        verbose_name_plural = "Module 3 Data - Introduction to Mental Shortcuts"
 
 class Module2Form(ModelForm):
     def __init__(self, *args, **kwargs):

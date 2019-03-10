@@ -1,3 +1,11 @@
+# 3.0.0
+* Add access limits
+  * Switch from `login_required` to custom decorator `active_user_required` which checks whether the user has exceeded the limits
+  * Schema updates to add the override, counter and max limit
+  * Add util method to update the view counter
+  * Add the `limit_reached` page
+* Fix issue with module 2 and 3 admins not rendering the add/edit forms
+
 # 2.1.0
 * Disable module 4 and STRIPE (not used)
 * Display TOU before showing the list of modules

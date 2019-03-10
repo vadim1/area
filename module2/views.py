@@ -9,6 +9,8 @@ from module1.models import Module1 as PreviousModule
 from decisions.views import load_json, load_module, base_restart
 from decisions.utils import CheetahSheet, ExampleStudent, ViewHelper
 
+from decisions.decorator import active_user_required
+
 import datetime
 import json
 
@@ -54,7 +56,7 @@ def navigation():
     return urls
 
 
-@login_required
+@active_user_required
 def generic_page_controller(request):
     """
     Default Page Controller
@@ -92,7 +94,7 @@ def save_form(request, module, parsed):
         print("Form on step: {0} did not validate".format(parsed['currentStep']))
         print(form.errors)
 
-@login_required
+@active_user_required
 def bias_authority_practice(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
@@ -100,7 +102,7 @@ def bias_authority_practice(request):
     return bias_yesno(request, parsed, module, Module.get_bias_authority_questions())
 
 
-@login_required
+@active_user_required
 def bias_remedies_practice(request):
     """
     Module Specific Controllers
@@ -146,7 +148,7 @@ def bias_yesno(request, parsed, module, game_questions):
     return render_page(request, module, parsed, context)
 
 
-@login_required
+@active_user_required
 def cheetah4_sheet(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
@@ -170,7 +172,7 @@ def cheetah4_sheet(request):
     return render_page(request, module, parsed, context)
 
 
-@login_required
+@active_user_required
 def cheetah5_report(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, 'cheetah5_apply', Module)
@@ -214,7 +216,7 @@ def cheetah5_report(request):
     return render_page(request, module, parsed, context)
 
 
-@login_required
+@active_user_required
 def cheetah5_sheet(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
@@ -234,7 +236,7 @@ def cheetah5_sheet(request):
     return render_page(request, module, parsed, context)
 
 
-@login_required
+@active_user_required
 def game(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
@@ -272,7 +274,7 @@ def game(request):
     return render_page(request, module, parsed, context)
 
 
-@login_required
+@active_user_required
 def game1_results(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
@@ -286,7 +288,7 @@ def game1_results(request):
     return render_page(request, module, parsed, context)
 
 
-@login_required
+@active_user_required
 def game2_game(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
@@ -318,7 +320,7 @@ def game2_game(request):
 
     return render_page(request, module, parsed, context)
 
-@login_required
+@active_user_required
 def game2_results(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
@@ -371,13 +373,13 @@ def game2_results(request):
     return render_page(request, module, parsed, context)
 
 
-@login_required
+@active_user_required
 def restart(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     return base_restart(request, Module, parsed['prefix'])
 
 
-@login_required
+@active_user_required
 def review(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
@@ -391,7 +393,7 @@ def review(request):
     return render_page(request, module, parsed, context)
 
 
-@login_required
+@active_user_required
 def show_map(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
@@ -403,7 +405,7 @@ def show_map(request):
     return render_page(request, module, parsed, context)
 
 
-@login_required
+@active_user_required
 def summary(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
@@ -411,6 +413,8 @@ def summary(request):
     if request.method == 'POST':
         module.completed_on = datetime.datetime.now()
         module.save()
+        # Increment the access counter
+        ViewHelper.update_view_counter(request.user)
         return redirect(reverse('decisions_home'))
 
     context = {}

@@ -96,3 +96,6 @@ run
 .DS_Store
 area_method
 */.DS_Store/*
+docs/RELEASES.md
+TO_IGNORE/*
+static/

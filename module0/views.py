@@ -9,6 +9,8 @@ from decisions.views import base_restart, base_review
 from decisions.utils import CheetahSheet, ViewHelper
 from area_app.views.view import get_randomized_questions, compute_archetype
 
+from decisions.decorator import active_user_required
+
 import datetime
 import json
 
@@ -38,7 +40,7 @@ def navigation():
 """
 Default Page Controller
 """
-@login_required
+@active_user_required
 def generic_page_controller(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
@@ -74,7 +76,7 @@ def save_form(request, module, parsed):
 """
 Module Specific Controllers
 """
-@login_required
+@active_user_required
 def cheetah1_report(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
@@ -112,7 +114,7 @@ def cheetah1_report(request):
 
     return render_page(request, module, parsed, context)
 
-@login_required
+@active_user_required
 def cheetah1_sheet(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
@@ -128,7 +130,7 @@ def cheetah1_sheet(request):
     }
     return render_page(request, module, parsed, context)
 
-@login_required
+@active_user_required
 def game1_game(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module0 = ViewHelper.load_module(request, parsed['currentStep'], Module)
@@ -173,7 +175,7 @@ def game1_game(request):
         'nav': parsed,
     })
 
-@login_required
+@active_user_required
 def map(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
@@ -184,7 +186,7 @@ def map(request):
     }
     return render_page(request, module, parsed, context)
 
-@login_required
+@active_user_required
 def summary(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
     module = ViewHelper.load_module(request, parsed['currentStep'], Module)
@@ -192,12 +194,14 @@ def summary(request):
     if request.method == 'POST':
         module.completed_on = datetime.datetime.now()
         module.save()
+        # Increment the access counter
+        ViewHelper.update_view_counter(request.user)
         return redirect(reverse('decisions_home'))
 
     context = {}
     return render_page(request, module, parsed, context)
 
-@login_required
+@active_user_required
 def restart(request):
     parsed = ViewHelper.parse_request_path(request, navigation())
 
