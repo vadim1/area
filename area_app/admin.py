@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import User
 
-class AreaAppUserAdmin(admin.ModelAdmin):
+class AreaAppUserAdmin(UserAdmin):
     fieldsets = (
         ('Personal Information', {
             'fields': (('first_name', 'last_name'), 'email', 'password', 'last_login', 'date_joined')
