@@ -2,6 +2,8 @@
 * Add domain whitelist
   * Add admin form to be able to whitelist a domain
   * Add table for whitelist rules
+* Remove redirect to /decisions/tour, redirect directly to /decisions/
+* Change FP sign up form from to `FutureProjectSignupForm` `SignupWithNameForm`
 
 # 3.0.0
 * Add access limits

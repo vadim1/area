@@ -108,7 +108,7 @@ def home(request):
         #    print(ce)
 
     return render(request, 'decisions/intro.html', {
-        'form': forms.FutureProjectSignupForm,
+        'form': forms.SignupWithNameForm,
         'module0': module0,
         'module1': module1,
         'module2': module2,
