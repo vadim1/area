@@ -26,6 +26,7 @@
     <form class="signup" id="signup_form" method="post">
         {% csrf_token %}
         {{ form|bootstrap }}
+        <p>Password must be at least 8 characters and consists of numbers and letters.</p>
         {% if redirect_field_value %}
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
         {% endif %}
