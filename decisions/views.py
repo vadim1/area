@@ -80,7 +80,7 @@ def home(request):
         student_classes = StudentClass.objects.filter(instructor=request.user)
     # If it's the first time, take them to the tour
     if not course.intro_on:
-        return redirect('/decisions/tour')
+        return redirect('/decisions/')
 
     if request.method == 'POST':
         request.user.has_tou = True
