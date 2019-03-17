@@ -94,7 +94,7 @@ def home(request):
         return handle_answers(request)
     login_form = None
     if partner == 'fp':
-        login_form = forms.FutureProjectSignupForm
+        login_form = forms.SignupWithNameForm
     questions_yes = ''
     if 'questions_yes' in request.session:
         questions_yes = request.session['questions_yes']

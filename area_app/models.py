@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+import re
 
 class User(AbstractUser):
     phone_number = models.CharField(max_length=32, null=True, blank=True)
@@ -50,7 +51,6 @@ class User(AbstractUser):
 
     label.allow_tags = True
 
-
 class QuestionModel(models.Model):
     question = models.CharField(max_length=256, default='')
     answer_yes = models.CharField(max_length=256, null=True)
@@ -95,7 +95,6 @@ class ArchType(models.Model):
     arch = models.ForeignKey(ArchetypesModel)
     weight = models.FloatField(default=0)
 
-
 class Question(models.Model):
     user = models.ForeignKey(User, null=True)
     session_key = models.CharField(max_length=40, null=True)
@@ -125,3 +124,42 @@ class CriticalConcepts(models.Model):
     concept1 = models.CharField(max_length=256, default='')
     concept2 = models.CharField(max_length=256, default='')
     concept3 = models.CharField(max_length=256, default='')
+
+class WhitelistDomain(models.Model):
+    # Domain Name to whitelist e.g. hotmail.com
+    domain_name = models.CharField(max_length=256, null=True, blank=True, help_text='Email domain to whitelist')
+    # By default, whether to allow override access for anyone registering using this domain
+    access_override = models.BooleanField(default=False, help_text='When true, ignore the max limit')
+    # Set the max limit for those registering for this domain
+    max_limit = models.IntegerField(default=3, help_text='Maximum access limit per user')
+    # Is the rule active?
+    is_active = models.BooleanField(default=True, help_text='Is this whitelist rule active?')
+
+    @staticmethod
+    def apply_whitelist(user):
+        """
+        Should we apply the whitelist when creating the user or not?
+        :param user:
+        :return: user
+        """
+        if user:
+            # Get the user's current email and parse out the domain
+            domain = re.search("@[\w.]+", user.email)
+            print("** WHITELIST: Found {0}".format(domain.group()))
+
+            whitelists = WhitelistDomain.objects.filter(domain_name=domain.group())
+            if whitelists:
+                whitelist = whitelists.first()
+                if whitelist.is_active == False:
+                    print("** WHITELIST: Rule is not active. Skipping rule")
+                    return user
+
+                # Apply the whitelist
+                if whitelist.access_override == True:
+                    user.access_override = whitelist.access_override
+                    print("** WHITELIST: Applying access_override to user")
+                if whitelist.max_limit > 0:
+                    user.max_limit = whitelist.max_limit
+                    print("** WHITELIST: Applying max_limit: {0}".format(whitelist.max_limit))
+
+        return user

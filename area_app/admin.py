@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User
+from .models import User, WhitelistDomain
 
 class AreaAppUserAdmin(UserAdmin):
     fieldsets = (
@@ -19,4 +19,16 @@ class AreaAppUserAdmin(UserAdmin):
     readonly_fields = ('last_login', 'date_joined',)
     search_fields = ['first_name', 'last_name', 'email']
 
+class WhitelistDomainAdmin(admin.ModelAdmin):
+    fieldsets = (
+        ('Domain Info', {
+            'fields': ('domain_name', 'is_active')
+        }),
+        ('Access Limits', {
+            'fields': ('access_override', 'max_limit')
+        }),
+    )
+    list_display = ('domain_name', 'access_override', 'max_limit', 'is_active')
+
 admin.site.register(User, AreaAppUserAdmin)
+admin.site.register(WhitelistDomain, WhitelistDomainAdmin)

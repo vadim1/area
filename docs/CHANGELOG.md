@@ -1,3 +1,11 @@
+# 4.0.0
+* Add domain whitelist
+  * Add admin form to be able to whitelist a domain
+  * Add table for whitelist rules
+* Remove redirect to /decisions/tour, redirect directly to /decisions/
+* Change FP sign up form from to `FutureProjectSignupForm` `SignupWithNameForm`
+* Add password help text w/c specifies the min 8 chars plus mix of number and letters
+
 # 3.0.0
 * Add access limits
   * Switch from `login_required` to custom decorator `active_user_required` which checks whether the user has exceeded the limits

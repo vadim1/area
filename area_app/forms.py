@@ -5,16 +5,23 @@ from django.utils.translation import ugettext_lazy as _
 from django.forms import CharField, Form, ChoiceField, EmailField, PasswordInput
 
 from area_app.constants import GRADES, DREAM_DIRECTORS
-from .models import Question
+from .models import Question, WhitelistDomain
 
 
 class SignupWithNameForm(Form):
     first_name = CharField(max_length=40, label='First Name')
     last_name = CharField(max_length=40, label='Last Name')
 
+    def __init__(self, *args, **kwargs):
+        super(Form, self).__init__(*args, **kwargs)
+        #print(self.fields)
+        self.fields['password1'].help_text = 'Password must be at least 8 characters and consists of numbers and letters.'
+
     def signup(self, request, user):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
+        # Apply the whitelist rules if any for the given domain
+        user = WhitelistDomain.apply_whitelist(user)
         user.save()
         Question.fill_in_user(user, request.session.session_key)
         return user
@@ -41,6 +48,8 @@ class FutureProjectSignupForm(SignupWithNameForm):
         user.school = self.cleaned_data['school']
         user.grade = self.cleaned_data['grade']
         user.dream_director = self.cleaned_data['dream_director']
+        # Apply the whitelist rules if any for the given domain
+        user = WhitelistDomain.apply_whitelist(user)
         user.save()
         Question.fill_in_user(user, request.session.session_key)
         return user
