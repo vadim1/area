@@ -4,6 +4,7 @@
   * Add table for whitelist rules
 * Remove redirect to /decisions/tour, redirect directly to /decisions/
 * Change FP sign up form from to `FutureProjectSignupForm` `SignupWithNameForm`
+* Add password help text w/c specifies the min 8 chars plus mix of number and letters
 
 # 3.0.0
 * Add access limits

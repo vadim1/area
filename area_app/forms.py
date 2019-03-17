@@ -12,6 +12,11 @@ class SignupWithNameForm(Form):
     first_name = CharField(max_length=40, label='First Name')
     last_name = CharField(max_length=40, label='Last Name')
 
+    def __init__(self, *args, **kwargs):
+        super(Form, self).__init__(*args, **kwargs)
+        #print(self.fields)
+        self.fields['password1'].help_text = 'Password must be at least 8 characters and consists of numbers and letters.'
+
     def signup(self, request, user):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
