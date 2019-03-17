@@ -78,8 +78,12 @@ def home(request):
     student_classes = None
     if request.user.is_staff:
         student_classes = StudentClass.objects.filter(instructor=request.user)
-    # If it's the first time, take them to the tour
+    # Prior to 2019-03-17, the behavior was to take them to the tour page
+    # Now, we just load the course info and redirect them to the decisions page
     if not course.intro_on:
+        course = Course.load_course(request)
+        course.intro_on = datetime.now()
+        course.save()
         return redirect('/decisions/')
 
     if request.method == 'POST':
@@ -153,7 +157,7 @@ def tour(request):
         course = Course.load_course(request)
         course.intro_on = datetime.now()
         course.save()
-        return redirect('/decisions')
+        return redirect(reverse('decisions_home'))
     return render(request, 'decisions/tour.html', {
     })
 
