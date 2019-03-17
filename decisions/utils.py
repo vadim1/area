@@ -6,7 +6,7 @@ import hashlib
 import json
 import re
 
-from .models import Course
+from .models import Course, User
 from .parser import parse_request_path
 
 class CheetahSheet:
@@ -180,3 +180,15 @@ class ViewHelper:
         email_results = msg.send()
         print("In send_html_email after send. results: {}".format(email_results))
         return email_results
+
+    @staticmethod
+    def update_view_counter(user=None):
+        if user:
+            user_list = User.objects.filter(email=user.email)
+            if user_list:
+                current_user = user_list.first()
+                if current_user:
+                    print("Updating access_counter {0} for {1} {2}".format(current_user.access_counter,
+                                                                           current_user.id, current_user.email))
+                    current_user.access_counter = current_user.access_counter + 1
+                    current_user.save()

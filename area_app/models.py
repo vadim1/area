@@ -8,6 +8,15 @@ class User(AbstractUser):
     school = models.CharField(max_length=256)
     grade = models.CharField(max_length=8)
     dream_director = models.CharField(max_length=256, null=True, blank=True)
+    # Terms of Use is empty by default
+    has_tou = models.BooleanField(default=False, help_text='Designates whether user sees the Terms of Use message.', verbose_name='terms of use')
+
+    # When set to true, ignore the maximum limit
+    access_override = models.BooleanField(default=False, help_text='When true, ignore the max limit')
+    # Maximum limit per user
+    max_limit = models.IntegerField(default=3, help_text='Maximum access limit per user')
+    # Current attempts for the user. When they finish, increment this limit
+    access_counter = models.IntegerField(default=0, help_text='Number of current attempts')
 
     def __str__(self):
         return self.first_name + " " + self.last_name + " (" + self.email + ")"
@@ -17,6 +26,27 @@ class User(AbstractUser):
 
     def name(self):
         return self.first_name + " " + self.last_name
+
+    # https://medium.com/@MicroPyramid/custom-decorators-to-check-user-roles-and-permissions-in-django-ece6b8a98d9d
+    def is_allowed_access(self):
+        # Are we a super user?
+        if self.is_superuser == True:
+            print('** LIMIT OK: {0} is a super user'.format(self.email))
+            return True
+
+        # Did we check the override? If so, allow the user
+        if self.access_override == True:
+            print('** LIMIT OK: {0} has override set to true'.format(self.email))
+            return True
+
+        # No the override is not checked, check whether the current counter exceeds the limit
+        if self.access_counter < self.max_limit:
+            print('** LIMIT OK: {0} counter is less than limit {1} < {2}'.format(self.email, self.access_counter, self.max_limit))
+            return True
+        else:
+            print('** LIMIT NOT OK: {0} counter is greater than limit {1} >= {2}'.format(self.email, self.access_counter, self.max_limit))
+            return False
+
 
     label.allow_tags = True
 

@@ -10,7 +10,7 @@
                     {{ module.display_num }}{{ module_label }}</a>
             {% endif %}
         {% endwith %}
-        {% if user.is_staff %}(<a href="/{{ module.num }}/restart">Restart</a>){% endif %}
+        (<a href="/{{ module.num }}/restart">Restart</a>)
     </h3>
     </div>
     {% if module.completed_on %}

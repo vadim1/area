@@ -221,3 +221,30 @@ user=root
 ```
 3. Update log file permissions as needed: `chmod 666 /home/ubuntu/area/django.log`
 4. Start up service: `sudo supervisorctl start area_app`
+
+# Troubleshooting
+## Failed building wheel for mysqlclient
+
+```
+    clang -fno-strict-aliasing -fno-common -dynamic -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/Tk.framework/Versions/8.5/Headers -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -Dversion_info=(1,3,13,'final',0) -D__version__=1.3.13 -I/usr/local/Cellar/mysql@5.7/5.7.23/include/mysql -I/usr/local/Cellar/python@2/2.7.15_1/Frameworks/Python.framework/Versions/2.7/include/python2.7 -c _mysql.c -o build/temp.macosx-10.13-x86_64-2.7/_mysql.o
+    clang -bundle -undefined dynamic_lookup -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk build/temp.macosx-10.13-x86_64-2.7/_mysql.o -L/usr/local/Cellar/mysql@5.7/5.7.23/lib -lmysqlclient -lssl -lcrypto -o build/lib.macosx-10.13-x86_64-2.7/_mysql.so
+    ld: library not found for -lssl
+    clang: error: linker command failed with exit code 1 (use -v to see invocation)
+    error: command 'clang' failed with exit status 1
+```
+
+1. Make sure xcode and openssl is installed
+```
+brew install openssl
+xcode-select --install
+```
+2. Set the `LD_LIBRARY_PATH`:
+```
+export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib
+```
+3. Re-install
+```
+pip install mysqlclient
+```
+
+Ref: https://github.com/brianmario/mysql2/issues/795#issuecomment-337006164

@@ -6,10 +6,12 @@ from .models import Course
 from module0.models import Module0
 from module1.models import Module1
 from module2.models import Module2
-from module3.models import Module3
+#from module3.models import Module3
 from student_class.models import StudentClass
 
 from decisions.utils import ViewHelper
+
+from decisions.decorator import active_user_required
 
 from datetime import datetime
 import json
@@ -61,8 +63,8 @@ def load_module(request, module_class, step=''):
         module.answers_json = None
     return module
 
-
-@login_required
+# @login_required
+@active_user_required
 def home(request):
     request.session['start'] = '/decisions'
     request.session['partner'] = 'fp'
@@ -71,7 +73,7 @@ def home(request):
     module0 = ViewHelper.load_module(request, '', Module0)
     module1 = ViewHelper.load_module(request, '', Module1)
     module2 = ViewHelper.load_module(request, '', Module2)
-    module3 = ViewHelper.load_module(request, '', Module3)
+    #module3 = ViewHelper.load_module(request, '', Module3)
 
     student_classes = None
     if request.user.is_staff:
@@ -81,29 +83,32 @@ def home(request):
         return redirect('/decisions/tour')
 
     if request.method == 'POST':
-        token = request.POST.get('stripeToken')
-        print("token: " + token)
-        stripe.api_key = settings.STRIPE_SECRET_KEY
+        request.user.has_tou = True
+        request.user.save()
+        print(request.user.email + " accepted terms of use")
 
-        try:
-            charge = stripe.Charge.create(
-                amount = 999,
-                currency = "usd",
-                source = token,
-                description = "Subscription for Module 2"
-            )
+        #token = request.POST.get('stripeToken')
+        #print("token: " + token)
+        #stripe.api_key = settings.STRIPE_SECRET_KEY
 
-            print("Stripe charge id: " + charge.id)
-        except stripe.error.CardError as ce:
-            print("Exception")
-            print(ce)
+        #try:
+        #    charge = stripe.Charge.create(
+        #        amount = 999,
+        #        currency = "usd",
+        #        source = token,
+        #        description = "Subscription for Module 2"
+        #    )
+        #    print("Stripe charge id: " + charge.id)
+        #except stripe.error.CardError as ce:
+        #    print("Exception")
+        #    print(ce)
 
     return render(request, 'decisions/intro.html', {
         'form': forms.FutureProjectSignupForm,
         'module0': module0,
         'module1': module1,
         'module2': module2,
-        'module3': module3,
+        #'module3': module3,
         'student_classes': student_classes,
         'my_classes': StudentClass.my_classes(course),
         'open_classes': StudentClass.open_classes(course),
@@ -132,6 +137,12 @@ def checkout(request):
     else:
         print("Redirecting back to /decisions")
         return redirect(reverse('decisions_home'))
+
+def limit_reached(request):
+    """
+    Dislay the limit reached message when the user limit has been reached
+    """
+    return render(request, 'decisions/base/limit_reached.html', {})
 
 def tour(request):
     """
