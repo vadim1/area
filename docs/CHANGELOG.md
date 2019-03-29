@@ -1,3 +1,11 @@
+# 4.0.2
+* Bug fix. pop-up dialog in module 1 does not close properly due to issue with CSS. `0/cheetah1/sheet`
+* Bug fix. `decision` and `decision_as_question` not passed in when printing the results in `1/cheetah3/print`
+* Update SSL certificate
+
+# 4.0.1
+* Move password help text to form instead of app since it did not exist on FP server
+
 # 4.0.0
 * Add domain whitelist
   * Add admin form to be able to whitelist a domain

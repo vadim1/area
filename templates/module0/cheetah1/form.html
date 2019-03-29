@@ -1,6 +1,6 @@
 <input type="hidden" name="cheetahAnswers" id="cheetahAnswers" value=""/>
 <p class="question">Can you think of how you can use your
-    <a href="#{{ module.archetype }}" data-toggle="modal" class="master_term_simple">{{ module.archetype|title }}</a>'s
+    <a href="#{{ module.archetype }}" class="master_term_simple link_{{ module.archetype }}">{{ module.archetype|title }}</a>'s
     strengths in the future?</p>
 {% if mode == 'print' %}
     <ul>
@@ -23,7 +23,7 @@
 {% endif %}
 
 <p class="question">What can you do to prevent your
-    <a href="#{{ module.archetype }}" data-toggle="modal" class="master_term_simple">{{ module.archetype|title }}</a>'s
+    <a href="#{{ module.archetype }}" class="master_term_simple link_{{ module.archetype }}">{{ module.archetype|title }}</a>'s
     blind spots from hurting future decisions?</p>
 {% if mode == 'print' %}
     <ul>
@@ -46,9 +46,9 @@
 {% endif %}
 
 <p class="question">How might other PSPs ( {% for profile in module.profiles %}{% if profile.id != module.archetype %}
-    <a href="#{{ profile.id }}" data-toggle="modal" class="master_term_simple">{{ profile.id|title }}</a>
-{% endif %}{% endfor %}) interact more effectively with your PSP ( <a href="#{{ module.archetype }}" data-toggle="modal"
-                                                                      class="master_term_simple">{{ module.archetype|title }}</a>)?
+    <a href="#{{ profile.id }}" class="master_term_simple link_{{ profile.id }}">{{ profile.id|title }}</a>
+{% endif %}{% endfor %}) interact more effectively with your PSP ( <a href="#{{ module.archetype }}"
+                                                                      class="master_term_simple link_{{ module.archetype }}">{{ module.archetype|title }}</a>)?
 </p>
 {% if mode == 'print' %}
     <ul>

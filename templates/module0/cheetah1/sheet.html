@@ -1,6 +1,42 @@
 {% extends 'modules/cheetah/sheet.html' %}
 {% block cheetah_content %}
     <style type="text/css">
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #eee;
+            margin: auto;
+            padding: 20px;
+            /* border: 1px solid #888888; */
+            width: 70%;
+        }
+
+        .pro_con {
+            background-color: #eee;
+        }
+
+        .pro_con p {
+            font-size: 1em;
+        }
+
+        .table .cheetahQuestions {
+            width: 60%;
+            margin-top: 10px;
+        }
+
         .question {
             color: #1e2846;
             font-size: 18px;
@@ -33,6 +69,39 @@
 
                 return valid;
             }
+
+            {% for profile in module.profiles %}
+            $('.link_{{ profile.id }}').click(function() {
+                $('#modal_{{ profile.id }}').css('display', 'block');
+                return false;
+            });
+            {% endfor %}
+
+            $('#closeBtn').click(function () {
+                /* Hide modal */
+                $('.modal').css('display', 'none');
+                return false;
+            });
+
+            /* Validate the form and submit */
+            $('#completeBtn').click(function () {
+                var results = validate();
+                if (results) {
+                    $('form').submit();
+                }
+                return results;
+            });
+
+            /* Force the redirect back to the previous page */
+            $('#back').click(function () {
+                window.location.href = $(this).attr('href');
+            });
+
+            /* Clicking anywhere outside of the modal closes the modal */
+            $(window).click(function (e) {
+                $('.modal').css('display', 'none');
+                return false;
+            });
         })
     </script>
 
@@ -44,24 +113,21 @@
     <div class="space"></div>
 
     {% for profile in module.profiles %}
-        <div id="{{ profile.id }}" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content -->
-                <div class="modal-content">
-                    <div class="modal-header center">
-                        <button type="button" data-dismiss="modal">Click to Close</button>
-                    </div>
-                    <div class="modal-body">
-                        <div>{% with 'module0/archetype/'|add:profile.id|add:'.html' as path %}
-                            {% include path with archetype=profile.id display_mode='all' %}{% endwith %}
-                        </div>
-                    </div>
-                    <div class="modal-footer center">
-                        <button type="button" data-dismiss="modal">Click to Close</button>
-                    </div>
-                </div>
+    <div id="modal_{{ profile.id }}" class="modal pro_con">
+        <div class="modal-content">
+            <p class="center">
+                <button id="closeBtn">Click to Close</button>
+            </p>
+
+            <div>{% with 'module0/archetype/'|add:profile.id|add:'.html' as path %}
+                {% include path with archetype=profile.id display_mode='all' %}{% endwith %}
             </div>
+
+            <p class="center">
+                <button id="closeBtn">Click to Close</button>
+            </p>
         </div>
+    </div>
     {% endfor %}
 
     {% include 'module0/cheetah1/form.html' %}

@@ -161,6 +161,8 @@ def cheetah3_report(request):
         'cc': ViewHelper.load_json(module.cc),
         'cc_occurred': ViewHelper.load_json(module.cc_occurred),
         'cheetah_sheet': cheetah_sheet3,
+        'decision': module.decision,
+        'decision_as_question': module.decision_as_question,
         'module': module,
         'nav': parsed,
         'questions': module.game1_questions,
