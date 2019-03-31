@@ -2,14 +2,12 @@
 <div class="row">
     <div class="col-xs-10 col-sm-10" style="margin-top: 0;">
     <h3>
-        {% with 'Module '|add:module.display_num|add:' : '|add:module.name as module_label %}
-            {% if module.completed_on %}
-                Module {{ module.display_num }}{{ module_label }}
-            {% else %}
-                <a href="/{{ module.num }}/{% if module.step %}{{ module.step }}{% endif %}">Module
-                    {{ module.display_num }}{{ module_label }}</a>
-            {% endif %}
-        {% endwith %}
+        {# display_url and display_label are set in decisions/templatetags/module_tags #}
+        {% if module.completed_on %}
+            {{ module.display_label }}
+        {% else %}
+            <a href="{{ module.display_url }}">{{ module.display_label }}</a>
+        {% endif %}
         (<a href="/{{ module.num }}/restart">Restart</a>)
     </h3>
     </div>

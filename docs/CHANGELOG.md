@@ -1,3 +1,6 @@
+# 4.0.3
+* Bug fix. module.step url needs to be reversed, otherwise it'll return a 404 when coming back to the module
+
 # 4.0.2
 * Bug fix. pop-up dialog in module 1 does not close properly due to issue with CSS. `0/cheetah1/sheet`
 * Bug fix. `decision` and `decision_as_question` not passed in when printing the results in `1/cheetah3/print`

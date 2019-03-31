@@ -1,4 +1,5 @@
 from django import template
+from django.urls import reverse
 from django.templatetags import static
 
 register = template.Library()
@@ -19,6 +20,12 @@ def get_module_badge(badge_label):
 
 @register.inclusion_tag('decisions/snippets/module_link.html')
 def get_module_link(moduleObj, userObj):
+    #
+    moduleObj.display_label = "Module {0} : {1}".format(moduleObj.display_num(), moduleObj.name())
+    # Build out the url to reverse
+    to_reverse = "module{0}_{1}".format(moduleObj.num(), moduleObj.step)
+    moduleObj.display_url = reverse(to_reverse)
+
     return { 'module': moduleObj, 'user': userObj }
 
 @register.inclusion_tag('decisions/snippets/back_link.html')
