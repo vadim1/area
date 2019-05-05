@@ -1,6 +1,7 @@
 from django import template
 from django.urls import reverse
 from django.templatetags import static
+from django.core.urlresolvers import NoReverseMatch
 
 register = template.Library()
 
@@ -23,8 +24,17 @@ def get_module_link(moduleObj, userObj):
     #
     moduleObj.display_label = "Module {0} : {1}".format(moduleObj.display_num(), moduleObj.name())
     # Build out the url to reverse
-    to_reverse = "module{0}_{1}".format(moduleObj.num(), moduleObj.step)
-    moduleObj.display_url = reverse(to_reverse)
+    if moduleObj.step != "":
+      to_reverse = "module{0}_{1}".format(moduleObj.num(), moduleObj.step)
+      try:
+        moduleObj.display_url = reverse(to_reverse)
+      except NoReverseMatch:
+        print("Unable to reverse: {0}".format(to_reverse))
+        moduleObj.display_url = "/{0}/".format(moduleObj.num())
+    else:
+      # Default to module number
+      print("Using default module link")
+      moduleObj.display_url = "/{0}/".format(moduleObj.num())
 
     return { 'module': moduleObj, 'user': userObj }
 
