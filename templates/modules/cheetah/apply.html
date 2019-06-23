@@ -1,0 +1,68 @@
+{% extends 'decisions/base.html' %}
+{% load bootstrap module_tags static %}
+{% block title %}Module {{ module.display_num }} - Own It: Apply To Real Life!{% endblock %}
+{% block content %}
+    <h2 class="center">Own It: Apply To Real Life!</h2>
+    {% block content_body %}
+    <style type="text/css">
+        #actions {
+            width: 300px;
+        }
+
+        .actionIcon {
+            float: left;
+            padding-bottom: 35px;
+            width: 50px;
+        }
+
+        .actionLabel {
+            margin-left: 80px;
+            padding-top: 10px;
+        }
+    </style>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#emailReport').click(function() {
+            if (confirm('Do you agree with the terms of use?')) {
+                 var form = $(this).closest('form');
+                console.log('Sending email');
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url email_url %}',
+                    data: form.serialize(),
+                    success: function (data) {
+                        if (data.message) {
+                            alert(data.message);
+                        }
+                    }
+                });
+            }
+        });
+        $('#printReport').click(function() {
+                if (confirm('Do you agree with the terms of use?')) {
+                    frames['frame'].print();
+                }
+                return false;
+        });
+    });
+    </script>
+    <h3>{{ apply_title }}</h3>
+
+    <div id="actions">
+        <img src="{% get_static_url %}{% static 'decisions/img/printer.png' %}" class="actionIcon"/>
+        <p class="actionLabel"><a id="printReport">Print a copy</a></p>
+
+        <div style="clear: both;"></div>
+
+        <img src="{% get_static_url %}{% static 'decisions/img/email.png' %}" class="actionIcon"/>
+        <p class="actionLabel"><a id="emailReport">Send me an email</a></p>
+    </div>
+
+    {# This must be display: block, otherwise it will print an 'empty' page in Chrome #}
+    <iframe src="{% url print_url %}" style="display: block; height: 0px; width: 0px;" name="frame"></iframe>
+    {% endblock %}
+    <div>{% include 'terms_of_use.html' %}</div>
+
+    {% block next_btn %}{% get_next_btn module "Review What You've Learned" nav.nextUrl %}{% endblock %}
+    {% block previous_btn %}{% get_back_link module nav.previousUrl %}{% endblock %}
+{% endblock %}

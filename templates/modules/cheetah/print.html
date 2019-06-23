@@ -1,0 +1,7 @@
+{% load module_tags static %}
+<img src="{% get_static_url %}{% static 'decisions/img/cheetah_logo.png' %}" style="float: left; margin-right: 15px;" width="60"/>
+{% block title %}
+    <h2>Cheetah Sheet {{ cheetah_sheet_num }}:<br/>{{ cheetah_sheet_title }}</h2>
+{% endblock %}
+{% block content %}{% endblock %}
+{% block copyright %}{% include 'terms_of_use.html' with mode='print' %}{% endblock %}

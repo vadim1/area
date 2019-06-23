@@ -1,3 +1,8 @@
+# 5.0.0
+* Create base template for cheetah sheet `apply` and `print`
+* Add terms of use in the cheetah sheets `apply` and `print`
+* Switch to `decisive` from `fp` subdomain
+
 # 4.0.3
 * Bug fix. module.step url needs to be reversed, otherwise it'll return a 404 when coming back to the module
 
