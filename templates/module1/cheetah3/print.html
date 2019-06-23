@@ -1,8 +1,11 @@
+{% extends 'modules/cheetah/print.html' %}
 {% load module_tags static %}
-
+{% block title %}
+    {% define 'cheetah_sheet_num' cheetah_sheet.num %}
+    {% define 'cheetah_sheet_title' cheetah_sheet.title %}
+    {{ block.super }}
+{% endblock %}
 {% block content %}
-    <img src="{% get_static_url %}{% static 'decisions/img/cheetah_logo.png' %}" style="float: left; margin-right: 15px;" width="60"/>
-    <h2>Cheetah Sheet {{ cheetah_sheet.num }}:<br/>{{ cheetah_sheet.title }}</h2>
     {% include 'module1/cheetah3/form.html' with mode='print' %}
 
     <hr noshade="noshade"/>

@@ -10,7 +10,11 @@ class Course(models.Model):
     current_module = models.IntegerField(null=False, default=0)
 
     def __str__(self):
-        return "FP: " + str(self.user)
+        try:
+          return "FP: " + str(self.user)
+        except UnicodeEncodeError as e:
+          print e
+          return "FP: Unicode error"
 
     class Meta:
         verbose_name = "Course Taker"

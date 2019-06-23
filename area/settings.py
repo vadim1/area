@@ -23,7 +23,7 @@ SECRET_KEY = 'XXX'
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['app.areamethod.com', 'fp.areamethod.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['app.areamethod.com', 'fp.areamethod.com', 'decisive.areamethod.com', '127.0.0.1', 'localhost']
 INTERNAL_IPS = ['127.0.0.1', 'localhost']
 
 # Application definition
