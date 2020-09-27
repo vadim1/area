@@ -170,7 +170,7 @@ class Module2(BaseModule):
     def get_bias_authority_questions():
         bias_authority_questions = {
             'authority1': {
-                'question': 'Your mom tells you that you should take a photograph of your credit card in case you lose it. You take out your phone and snap a picture of it and send her a copy to keep.',
+                'question': 'Your mom tells you to get a flu shot and you put it on your to-do list to take care of it right away.',
                 'answer0': 'Correct! Your mom is an authority figure.',
                 'answer1': 'No! Are you sure? Check again.',
                 'bias': 'authority',
@@ -184,7 +184,7 @@ class Module2(BaseModule):
                 'bias_answer': 0,
             },
             'authority3': {
-                'question': 'Your friend tells you she wants your notes for Spanish and you share them with her',
+                'question': "Your friend asks you to write a positive book review for her book which you haven't read and you do so",
                 'answer0': 'No! Are you sure? Check again.',
                 'answer1': 'Correct! Your friend is not an authority figure.',
                 'bias': 'authority',
@@ -200,7 +200,7 @@ class Module2(BaseModule):
 
         bias_remedy_questions = [
             {
-                'question': "You have a science project due and you know the last one took forever so you leave plenty of time to do this latest one",
+                'question': "Your taxes are due in a month and you start now because last year you recall feeling anxious about getting them done on time.",
                 'answer0': '',
                 'answer1': '',
                 'answer2': '',
@@ -232,7 +232,7 @@ class Module2(BaseModule):
             },
 
             {
-                'question': "Your working on your senior year schedule with your guidance counselor and think its pretty good but you decide to check it with a student who is senior now to ask if its too heavy a load.",
+                'question': "You're working on a schedule for a new project with a colleague and you think it's pretty good but you decide to check it with someone who did a similar project recently to ask if its realistic.",
                 'answer0': '',
                 'answer1': '',
                 'answer2': '',
@@ -248,7 +248,7 @@ class Module2(BaseModule):
             },
 
             {
-                'question': "Your friend has done something that isn't sitting well with you but you don't say anything so you decide to check-in with your big sister to ask her if you're overlooking the friend's action because you like her.",
+                'question': "Your friend has done something that isn't sitting well with you but you don't say anything so you decide to check-in with your older sister to ask her if you're overlooking the friend's action because you like her.",
                 'answer0': '',
                 'answer1': '',
                 'answer2': '',
@@ -284,9 +284,9 @@ class Module2(BaseModule):
                 'bias_answer': 0,
             },
             'optimism1': {
-                'question': 'If you just passed your driver\'s license test, do you...',
-                'answer0': 'Believe you are an above average driver',
-                'answer1': 'Think that\'s silly, how could you be?',
+                'question': "You're meeting a friend for dinner at a local restaurant. Do you...",
+                'answer0': 'Show up at the appointed time and ask for a table',
+                'answer1': 'Make a reservation to book a table',
                 'bias': 'optimism',
                 'bias_answer': 0,
             },
@@ -344,15 +344,15 @@ class Module2(BaseModule):
                 'bias_answer': 0,
             },
             'planning1': {
-                'question': 'You have a lab report due in two days. You know you only got partial credit when you didn\'t write in full sentences, do you...',
-                'answer0': 'Look at the directions when you start to do it',
-                'answer1': 'Read the directions now because each lab is a different experiment',
+                'question': 'You know you only have an hour before your next meeting. Do you...',
+                'answer0': 'Fit in a quick errand',
+                'answer1': 'Read over the agenda to prepare',
                 'bias': 'planning',
                 'bias_answer': 0,
             },
             'planning2': {
-                'question': 'When you look at your homework list, do you...',
-                'answer0': 'Start at the top and work on assignments until they are complete or you run out of time',
+                'question': 'When you look at your to do list, do you...',
+                'answer0': 'Start at the top and work on your to do list until they are complete or you run out of time',
                 'answer1': 'Go over the entire list and plan your time',
                 'bias': 'planning',
                 'bias_answer': 0,
@@ -365,15 +365,15 @@ class Module2(BaseModule):
                 'bias_answer': 0,
             },
             'social1': {
-                'question': 'At school all of your friends are wearing a popular new brand of sneakers. Do you...',
-                'answer0': 'Save up for your own pair, too',
-                'answer1': 'Stick with your regular shoes, they\'re fine',
+                'question': 'Your neighborhood is circulating a petition to have a speed bump put on your block to slow down traffic. The names on the list are public. Do you...',
+                'answer0': "You put your name on the list even though you're fine without the speed bump",
+                'answer1': 'You skip the petition',
                 'bias': 'social',
                 'bias_answer': 0,
             },
             'social2': {
-                'question': 'You overheard some kids are sneaking alcohol into a party you\'re going to. Do you...',
-                'answer0': 'Drink some, because it\'s easier to go along',
+                'question': 'Your group is complaining about a new team member and they ask you your opinion. Do you...',
+                'answer0': 'You go along and echo their thoughts',
                 'answer1': 'Going along with the crowd isn\'t a factor in your decision',
                 'bias': 'social',
                 'bias_answer': 0,
@@ -393,14 +393,14 @@ class Module2(BaseModule):
                 'bias_answer': 0,
             },
             'authority2': {
-                'question': 'Your aunt says you should just apply to safety schools. Do you...',
-                'answer0': 'Follow her advice without questioning it',
-                'answer1': 'Check with your guidance counselor',
+                'question': "Your boss tells you to move ahead with the project even though the rest of the team isn't up to speed. Do you...",
+                'answer0': 'You follow her advice',
+                'answer1': 'You check in with your colleagues',
                 'bias': 'authority',
                 'bias_answer': 0,
             },
             'projection2': {
-                'question': 'You\'re school changes the dress code without warning. Do you...',
+                'question': 'Your town bans retailers from providing free bags at checkout',
                 'answer0': 'You think it\'s unfair and assume your friends do too',
                 'answer1': 'You ask around to see how other people feel about the new rule',
                 'bias': 'projection',
@@ -435,8 +435,8 @@ class Module2(BaseModule):
             },
             {
                 'question': "Which of these statements DOESN'T represent Authority Bias?",
-                'answer0': 'Your coach says you should just apply to safety schools and you follow his advice without question',
-                'answer1': 'On Facebook you see a video about not eating meat and you decide to be a vegetarian',
+                'answer0': 'Your supervisor tells you to apply for an open position and you do it',
+                'answer1': 'You see a documentary video about not eating meat and you decide to be a vegetarian',
                 'bias': 'authority',
                 'bias_answer': 1,
                 'explanation0': 'Your coach is an authority figure',
@@ -469,7 +469,7 @@ class Module2(BaseModule):
             {
                 'question': 'Which of these statements IS representative of Planning Bias?',
                 'answer0': "You've saved up for a car and buy one without realizing that you also have to pay for car insurance and budget for gas.",
-                'answer1': "You have a science project due and you know the last one took forever so you leave plenty of time to do this latest one.",
+                'answer1': "Your taxes are due in a month and you start now because last year you recall feeling anxious about getting them done on time.",
                 'bias': 'planning',
                 'bias_answer': 0,
                 'explanation0': "Yes, this is an example of not properly estimating the full cost of have a car",
@@ -479,7 +479,7 @@ class Module2(BaseModule):
             },
             {
                 'question': "Which of these statements DOESN'T represent Planning Bias?",
-                'answer0': "You have a big math test in two days and you wait until the night before to begin studying.",
+                'answer0': "You have a big presentation in two days and you wait until the night before to begin.",
                 'answer1': "You know you have a doctor's appointment in an hour and it's a 15 minute drive and you leave 20 minutes early to get there on time.",
                 'bias': 'planning',
                 'bias_answer': 1,
@@ -490,8 +490,8 @@ class Module2(BaseModule):
             },
             {
                 'question': 'Which of these statements IS representative of Optimism Bias?',
-                'answer0': "Adults tell us about the risks of smoking, but you don't think you'll be negatively affected by it.",
-                'answer1': 'You apply for a summer internship and are nervous about your chances of being accepted',
+                'answer0': "Health providers warn of too much sodium, but you don't think you'll be negatively affected by putting a little extra salt on your food.",
+                'answer1': "You've applied for a promotion and are nervous about your chances of being accepted and rehearse for your interviews.",
                 'bias': 'optimism',
                 'bias_answer': 0,
                 'explanation0': "Yes, it is optimistic to think the risks don't apply",
@@ -512,7 +512,7 @@ class Module2(BaseModule):
             },
             {
                 'question': 'Which of these statements IS representative of Social Proof Bias?',
-                'answer0': "At school all of your friends are wearing a popular new brand of sneakers. You need to get them too.",
+                'answer0': "At school all of your friends have started counting their steps. You start too",
                 'answer1': "Your favorite basketball player started endorsing sneakers that don't fit you well and so the ad has no impact on you",
                 'bias': 'social',
                 'bias_answer': 0,
@@ -523,7 +523,7 @@ class Module2(BaseModule):
             },
             {
                 'question': "Which of these statements DOESN'T represent Social Proof Bias?",
-                'answer0': "You overheard some kids are sneaking alcohol into a party you're going to and you decide to go along with it.",
+                'answer0': "You're a vegetarian but your friends all want to go to BBQ. You go along and don't say anything.",
                 'answer1': "A new Avenger movie is out but it got poor reviews. You don't care because you've liked the other Avenger flicks.",
                 'bias': 'social',
                 'bias_answer': 1,
@@ -534,7 +534,7 @@ class Module2(BaseModule):
             },
             {
                 'question': 'Which of these statements IS representative of Projection Bias?',
-                'answer0': "You think the quiz in history class is going to be easy but you ask your friend if she's worried.",
+                'answer0': "You figure your friend would rather live near the downtown like you, but before you check the apartment listings, you double check with her.",
                 'answer1': "You see tickets for your favorite band playing a show nearby. You get tickets for you and a friend.",
                 'bias': 'projection',
                 'bias_answer': 1,
@@ -545,7 +545,7 @@ class Module2(BaseModule):
             },
             {
                 'question': "Which of these statements DOESN'T represent Projection Bias?",
-                'answer0': "You're school changes the dress code without warning. You think it's unfair and you assume your friends do too.",
+                'answer0': "You're having dessert and make two bowls of ice cream even though you didn't ask your friend if he wanted some.",
                 'answer1': "You think it's important to vote but you don't want to assume your friends do.",
                 'bias': 'projection',
                 'bias_answer': 1,
