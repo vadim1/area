@@ -386,7 +386,7 @@ class Module2(BaseModule):
                 'bias_answer': 0,
             },
             'planning3': {
-                'question': 'You have a big math test in two days. Do you...',
+                'question': 'You have a big presentation in two days. Do you...',
                 'answer0': 'Start studying tonight so you have time to ask for help tomorrow',
                 'answer1': 'Figure starting tomorrow will be enough time to prepare',
                 'bias': 'planning',
@@ -394,8 +394,8 @@ class Module2(BaseModule):
             },
             'authority2': {
                 'question': "Your boss tells you to move ahead with the project even though the rest of the team isn't up to speed. Do you...",
-                'answer0': 'You follow her advice',
-                'answer1': 'You check in with your colleagues',
+                'answer0': 'Follow her advice',
+                'answer1': 'Check in with your colleagues',
                 'bias': 'authority',
                 'bias_answer': 0,
             },
@@ -424,7 +424,7 @@ class Module2(BaseModule):
         game2_questions = [
             {
                 'question': 'Which of these statements IS representative of Authority Bias?',
-                'answer0': 'Your friend tells you she wants your notes for Spanish and you share them with her',
+                'answer0': "Your friend asks you to write a positive book review for her book which you haven't read and you do so",
                 'answer1': 'Your mom tells you that you should take a photograph of your credit card in case you lose it. You take out your phone and snap a picture of it and send her a copy to keep',
                 'bias': 'authority',
                 'bias_answer': 1,
@@ -512,7 +512,7 @@ class Module2(BaseModule):
             },
             {
                 'question': 'Which of these statements IS representative of Social Proof Bias?',
-                'answer0': "At school all of your friends have started counting their steps. You start too",
+                'answer0': "All of your friends have started counting their steps. You start too",
                 'answer1': "Your favorite basketball player started endorsing sneakers that don't fit you well and so the ad has no impact on you",
                 'bias': 'social',
                 'bias_answer': 0,
