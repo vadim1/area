@@ -19,6 +19,9 @@ class User(AbstractUser):
     # Current attempts for the user. When they finish, increment this limit
     access_counter = models.IntegerField(default=0, help_text='Number of current attempts')
 
+    # 2020-10-06: add an organization column. Matches area_app/forms.py
+    organization = models.CharField(max_length=40, default='', help_text='User organization if set')
+
     def __str__(self):
         return self.first_name + " " + self.last_name + " (" + self.email + ")"
 

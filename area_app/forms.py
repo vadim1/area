@@ -13,6 +13,7 @@ from .models import Question, WhitelistDomain
 class SignupWithNameForm(Form):
     first_name = CharField(max_length=40, label='First Name')
     last_name = CharField(max_length=40, label='Last Name')
+    organization = CharField(max_length=40, label='Organization', required=True)
 
     def send_welcome_email(self, user):
         emails = [user.email]
@@ -33,6 +34,8 @@ class SignupWithNameForm(Form):
     def signup(self, request, user):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
+	# 2020-10-06: add organization field
+        user.organization = self.cleaned_data['organization']
         # Apply the whitelist rules if any for the given domain
         user = WhitelistDomain.apply_whitelist(user)
         user.save()
