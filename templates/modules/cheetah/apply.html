@@ -49,6 +49,12 @@
     <h3>{{ apply_title }}</h3>
 
     <div id="actions">
+	{% if 'module2' in email_url %}
+        <img src="{% get_static_url %}{% static 'decisions/img/form.png' %}" class="actionIcon"/>
+        <p class="actionLabel"><a href="https://forms.gle/ZjJTwf1JV1oZUntm6" target="_blank">Evaluate your growth</a></p>
+        <div style="clear: both;"></div>
+	{% endif %}
+
         <img src="{% get_static_url %}{% static 'decisions/img/printer.png' %}" class="actionIcon"/>
         <p class="actionLabel"><a id="printReport">Print a copy</a></p>
 

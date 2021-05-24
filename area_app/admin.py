@@ -5,7 +5,7 @@ from .models import User, WhitelistDomain
 class AreaAppUserAdmin(UserAdmin):
     fieldsets = (
         ('Personal Information', {
-            'fields': (('first_name', 'last_name'), 'email', 'password', 'last_login', 'date_joined')
+            'fields': (('first_name', 'last_name'), 'email', 'organization', 'password', 'last_login', 'date_joined')
         }),
         ('Access Limits', {
             'fields': ('access_override', 'access_counter', 'max_limit')
@@ -14,10 +14,11 @@ class AreaAppUserAdmin(UserAdmin):
             'fields': ('has_tou', 'is_active', 'is_staff', 'is_superuser')
         })
     )
+    list_display = ('email', 'first_name', 'last_name', 'organization')
     list_filter = ('is_active', 'is_staff', 'is_superuser', 'access_counter')
-    ordering = ['first_name', 'last_name', 'email']
+    ordering = ['first_name', 'last_name', 'email', 'organization']
     readonly_fields = ('last_login', 'date_joined',)
-    search_fields = ['first_name', 'last_name', 'email']
+    search_fields = ['first_name', 'last_name', 'email', 'organization']
 
 class WhitelistDomainAdmin(admin.ModelAdmin):
     fieldsets = (

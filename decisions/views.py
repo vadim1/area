@@ -90,6 +90,7 @@ def home(request):
         request.user.has_tou = True
         request.user.save()
         print(request.user.email + " accepted terms of use")
+        return redirect(reverse('take_survey'))
 
         #token = request.POST.get('stripeToken')
         #print("token: " + token)
@@ -118,6 +119,19 @@ def home(request):
         'open_classes': StudentClass.open_classes(course),
         'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
     })
+
+@active_user_required
+def take_survey(request):
+    #try:
+       #request.user.has_tou = True
+       #request.user.save()
+       #print(request.user.email + " accepted terms of use")
+    #except:
+       #print("Exception")
+
+    survey = "https://forms.gle/WLQVCbvLUnZVa9rA7"
+    return redirect(survey)
+
 
 def checkout(request):
     if request.method == 'POST':

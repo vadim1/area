@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^terms_conditions/?$', views.terms_conditions, name='Terms and Conditions'),
     url(r'^checkout/?$', views.checkout, name='Checkout'),
     url(r'^limit_reached/?$', views.limit_reached, name='decisions_limit_reached'),
+    url(r'^take_survey/?$', views.take_survey, name='take_survey'),
 ]

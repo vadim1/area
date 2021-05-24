@@ -3,6 +3,8 @@ from django.contrib.auth import authenticate, get_user_model, password_validatio
 from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import ugettext_lazy as _
 from django.forms import CharField, Form, ChoiceField, EmailField, PasswordInput
+from decisions.utils import ViewHelper
+
 
 from area_app.constants import GRADES, DREAM_DIRECTORS
 from .models import Question, WhitelistDomain
@@ -11,14 +13,36 @@ from .models import Question, WhitelistDomain
 class SignupWithNameForm(Form):
     first_name = CharField(max_length=40, label='First Name')
     last_name = CharField(max_length=40, label='Last Name')
+    organization = CharField(max_length=40, label='Organization', required=True)
+
+    def send_welcome_email(self, user):
+        emails = [user.email]
+        subject = "Welcome to Decisive!"
+        template = 'account/email/welcome_email.html'
+        context = None
+
+        try:
+            results = ViewHelper.send_html_email(emails, subject, template, context)
+            msg = "Email sent to {}. [Code {}]".format(user.email, results)
+            print(msg)
+        except Exception as e:
+            if hasattr(e, 'message'):
+                print(e.message)
+            else:
+                print(e)
 
     def signup(self, request, user):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
+	# 2020-10-06: add organization field
+        user.organization = self.cleaned_data['organization']
         # Apply the whitelist rules if any for the given domain
         user = WhitelistDomain.apply_whitelist(user)
         user.save()
         Question.fill_in_user(user, request.session.session_key)
+        # 2020-09-27: send welcome email with pre-questionnaire
+        self.send_welcome_email(user)
+
         return user
 
 
